@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+!/public/images/sampul.png
+/public/images/*
 /storage/*.key
 /vendor
 .env
