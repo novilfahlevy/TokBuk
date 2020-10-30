@@ -1,0 +1,9 @@
+.select2-selection__rendered {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.deleted {
+  display: none !important;
+}
