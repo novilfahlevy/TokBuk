@@ -168,4 +168,10 @@ class BukuController extends Controller
         Buku::destroy($id);
         return redirect()->route('buku', ['id' => $id]);
     }
+
+    public function logs()
+    {
+        $logs = LogBuku::all();
+        return view('buku_admin.logs', compact('logs'));
+    }
 }

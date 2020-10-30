@@ -30,6 +30,7 @@ Route::delete('datauser/{id}', 'UserController@destroy')->name('user.destroy');
 
 //buku
 Route::get('/databuku', 'BukuController@index')->name('buku');
+Route::get('databuku/logs', 'BukuController@logs')->name('buku.logs');
 Route::get('databuku/{id}/detail', 'BukuController@detail')->name('buku.detail');
 Route::get('databuku/create', 'BukuController@create')->name('buku.create');
 Route::post('databuku/store', 'BukuController@store')->name('buku.store');
