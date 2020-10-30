@@ -82,7 +82,7 @@
           var form = $(this).parent();
           Swal.fire({
               title: 'Apakah anda yakin ingin menghapus data tersebut?',
-              text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut?",
+              text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
