@@ -58,8 +58,11 @@ Buku
                                             <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
-                                      <div class="btn-group">
+                                    <div class="btn-group">
                                         <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}" class="btn btn-sm btn-primary text-white" title="Detail Data"><i class="fa fa-eye"></i></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route( 'buku.tambah' ,['id' => $b->id]) }}" class="btn btn-sm btn-success text-white" title="Tambah Jumlah Buku"><i class="fas fa-plus"></i></i></a>
                                     </div>
                                   </td>
                               </tr>

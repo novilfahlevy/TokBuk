@@ -51,7 +51,9 @@ class BukuController extends Controller
             'id_kategori' => 'required',
             'id_pemasok' => 'required',
             'id_lokasi' => 'required',
+            'harga' => 'required',
             'harga_jual' => 'required',
+            'harga_beli' => 'required',
             'jumlah' => 'required'
 
         ]);
@@ -170,5 +172,34 @@ class BukuController extends Controller
     {
         $logs = LogBuku::all();
         return view('buku_admin.logs', compact('logs'));
+    }
+
+    public function tambahjml($id)
+    {
+        $buku = Buku::where('id', $id)->first();
+        return view('buku_admin.tambahjumlah', compact('buku'));
+    }
+
+    public function tambahstore(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'harga_jual' => 'required',
+            'harga_beli' => 'required',
+            'jumlah' => 'required'
+        ]);
+        $buku = Buku::where('id', $id);
+        $logb = LogBuku::create([
+            'id_buku' => $buku->id,
+            'id_user' => auth()->user()->id,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'jumlah' => $request->jumlah,
+            'status' => 'Penambahan'
+
+        ]);
+
+        $buku->update([
+            'jumlah' => $buku->first()->jumlah + $request->jumlah
+        ]);
     }
 }
