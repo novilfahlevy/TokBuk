@@ -99,9 +99,10 @@ class BukuController extends Controller
         $penerbit = Penerbit::all();
         $kategori = Kategori::all();
         $Pemasok = Pemasok::all();
+        $lokasi = Lokasi::all();
         $buku = Buku::where('id', $id)->first();
 
-        return view('buku_admin.edit', compact('penulis', 'penerbit', 'kategori', 'Pemasok', 'buku'));
+        return view('buku_admin.edit', compact('penulis', 'penerbit', 'kategori', 'Pemasok', 'buku', 'lokasi'));
     }
 
     public function update(Request $request, $id)
@@ -114,11 +115,9 @@ class BukuController extends Controller
             'id_penerbit' => 'required',
             'id_kategori' => 'required',
             'id_pemasok' => 'required',
+            'id_lokasi' => 'required',
             'tahun_terbit' => 'required',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
-            'lokasi' => 'required',
-            'jumlah' => 'required',
+            'harga' => 'required'
         ]);
 
         if ( $request->sampul ) {
@@ -137,11 +136,9 @@ class BukuController extends Controller
             'id_penerbit' => $request->id_penerbit,
             'id_kategori' => $request->id_kategori,
             'id_pemasok' => $request->id_pemasok,
+            'id_lokasi' => $request->id_lokasi,
             'tahun_terbit' => $request->tahun_terbit,
-            'harga_beli' => $request->harga_beli,
-            'harga_jual' => $request->harga_jual,
-            'lokasi' => $request->lokasi,
-            'jumlah' => $request->jumlah
+            'harga' => $request->harga
 
         ]);
 
