@@ -29,8 +29,8 @@ Riwayat Penambahan dan Pembelian Buku
                                     <thead style="">
                                         <tr>
                                             <th>No</th>
-                                            <th>ISBN</th>
-                                            <th>Judul</th>
+                                            <th>Tanggal</th>
+                                            <th>Judul Buku</th>
                                             <th>Ditangani Oleh</th>
                                             <th>Harga Jual</th>
                                             <th>Harga Beli</th>
@@ -42,7 +42,7 @@ Riwayat Penambahan dan Pembelian Buku
                                       @foreach ($logs as $b)
                                       <tr>
                                       <td>{{$loop->index+1}}</td>
-                                      <td>{{$b->buku->isbn}}</td>
+                                      <td>{{$b->created_at}}</td>
                                       <td>{{$b->buku->judul}}</td>
                                       <td>{{$b->user->name}}</td>
                                       <td>Rp {{$b->harga_jual}}</td>
