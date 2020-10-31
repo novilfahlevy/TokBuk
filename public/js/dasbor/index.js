@@ -33,7 +33,7 @@ $.ajax({
             ticks: {
               beginAtZero: true,
               callback(value) {
-                return `Rp ${value}`;
+                return `Rp ${new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(value)}`;
               }
             }
           }]
