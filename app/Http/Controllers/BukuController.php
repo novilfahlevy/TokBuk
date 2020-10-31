@@ -170,7 +170,7 @@ class BukuController extends Controller
 
     public function logs()
     {
-        $logs = LogBuku::all();
+        $logs = LogBuku::orderBy('created_at', 'DESC')->get();
         return view('buku_admin.logs', compact('logs'));
     }
 
