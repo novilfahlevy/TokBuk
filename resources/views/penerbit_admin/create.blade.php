@@ -15,6 +15,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Form Tambah Penerbit</h4>
+                            <div class="card-header-form">
+                                <a href="{{ route('penerbit') }}" class="btn btn-primary" title="Kembali">
+                                  <i class="fas fa-chevron-left"></i>
+                                </a>
+                              </div>
                         </div>
                                 <div class="card-body">
                                     <form action="{{ route('penerbit.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
@@ -47,7 +52,7 @@
                                             </div>
                                             </div>
                                         
-                                        <button class="btn btn-primary" type="submit">Simpan Data</button>
+                                        <button class="btn btn-primary" type="submit">Simpan</button>
                                     </form>
                                 </div>
 

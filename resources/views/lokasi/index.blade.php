@@ -49,7 +49,7 @@ Lokasi Buku
                                                 'nama' => $l->nama
                                             ]));
                                         @endphp
-                                        <button type="button" class="btn btn-sm btn-info text-white edit-lokasi" data-lokasi="{{ $dataLokasi }}" data-toggle="modal" data-target="#editLokasiModal">
+                                        <button type="button" class="btn btn-sm btn-info text-white edit-lokasi" data-lokasi="{{ $dataLokasi }}" data-toggle="modal" data-target="#editLokasiModal" title="Edit Data">
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
                                     </div>
@@ -57,7 +57,7 @@ Lokasi Buku
                                         <form method="post" class="delete_form " action="{{route('lokasi.destroy',$l['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  ><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  title="Hapus Data"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
                                   </td>

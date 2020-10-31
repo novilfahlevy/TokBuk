@@ -25,7 +25,14 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="card">
-                                    <div class="card-header"><h4>Tambah Jumlah Buku</h4></div>
+                                    <div class="card-header">
+                                        <h4>Tambah Jumlah Buku</h4>
+                                        <div class="card-header-form">
+                                            <a href="{{ route('buku') }}" class="btn btn-primary" title="Kembali">
+                                              <i class="fas fa-chevron-left"></i>
+                                            </a>
+                                          </div>
+                                    </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -71,8 +78,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <button class="btn btn-primary" type="submit">Tambah Jumlah</button>
+                                            
+                                            <button class="btn btn-primary" type="submit">Simpan</button>
                                         </div>
                                     </div>
                                 </form>

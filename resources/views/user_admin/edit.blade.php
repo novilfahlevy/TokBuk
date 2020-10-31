@@ -1,7 +1,7 @@
 @extends('layouts.partials.app')
 
 @section('title')
-    Ubah Data Pengguna
+    Edit Pengguna
 @endsection
 
 @section('content')
@@ -9,12 +9,17 @@
         <div class="main-content" style="min-height: 116px;">
             <section class="section">
                 <div class="section-header">
-                    <h1>Ubah Data Pengguna</h1>
+                    <h1>Edit Pengguna</h1>
                 </div>
                 <div class="section-body">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Form Ubah Data Pengguna</h4>
+                            <h4>Form Edit Pengguna</h4>
+                            <div class="card-header-form">
+                                <a href="{{ route('user') }}" class="btn btn-primary" title="Kembali">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('user.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
@@ -66,7 +71,7 @@
                                         <textarea type="text" class="form-control" required name="alamat"  style="height:215px">{{$user->alamat}}</textarea>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" type="submit">Ubah</button>
+                                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                             </form>
                         </div>
                     </div>

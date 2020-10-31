@@ -16,7 +16,7 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="card border-dark mb-3" style="max-width: 50rem; height:450px">
-                                                <div class="card-header"><h4>Foto Cover Depan</h4></div>
+                                                <div class="card-header"><h4>Sampul Buku</h4></div>
                                                 <div class="card-body text-dark">
                                                     <td><img src="{{ asset('images/buku/'.$buku->sampul) }}" alt="" style="width:100%; height:100%;"></td>
                                                 </div>
@@ -24,7 +24,14 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="card">
-                                                <div class="card-header"><h4>Detail Buku</h4></div>
+                                                <div class="card-header">
+                                                    <h4>Data Buku</h4>
+                                                    <div class="card-header-form">
+                                                        <a href="{{ route('buku') }}" class="btn btn-primary" title="Kembali">
+                                                          <i class="fas fa-chevron-left"></i>
+                                                        </a>
+                                                      </div>
+                                                </div>
                                                 <div class="card-body">
                                                     <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Judul</div>

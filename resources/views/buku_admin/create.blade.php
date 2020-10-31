@@ -25,11 +25,18 @@
                                                     <input type="file" class="form-control validate" id="inputgambar"required name="sampul" value="{{isset($insert) ? $insert->sampul : ''}}" >
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit" style="width: 100%">Simpan Data</button>
+                                            <button class="btn btn-primary" type="submit" style="width: 100%">Simpan</button>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="card">
-                                                <div class="card-header"><h4>Data Buku</h4></div>
+                                                <div class="card-header">
+                                                    <h4>Data Buku</h4>
+                                                    <div class="card-header-form">
+                                                        <a href="{{ route('buku') }}" class="btn btn-primary" title="Kembali">
+                                                          <i class="fas fa-chevron-left"></i>
+                                                        </a>
+                                                      </div>
+                                                </div>
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-6">

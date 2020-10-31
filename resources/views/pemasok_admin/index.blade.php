@@ -54,13 +54,13 @@ Pemasok Buku
                                       <td>{{$s->telepon}}</td>
                                   <td>
                                       <div class="btn-group">
-                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('pemasok.edit',  ['id' => $s["id"]]) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('pemasok.edit',  ['id' => $s["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form method="post" class="delete_form " action="{{route('pemasok.destroy',$s['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  ><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data"  ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
                                   </td>

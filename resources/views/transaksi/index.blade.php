@@ -58,13 +58,13 @@ Transaksi Penjualan
                                                             @method('DELETE')
                                                             @csrf
                                                             <button class="btn btn-sm btn-danger" id="btn-delete"><i
-                                                                class="fa fa-trash"></i></button>
+                                                                class="fa fa-trash" title="Hapus Data"></i></button>
                                                             </form>
                                                         </div>
                                                         <div class="btn-group">
                                                             <a href="{{ route('transaksi.detail', $t->id) }}"
-                                                                class="btn btn-sm btn-success text-white">
-                                                                <i class="fas fa-file"></i>
+                                                                class="btn btn-sm btn-primary text-white" title="Detail Data">
+                                                                <i class="fas fa-eye"></i>
                                                             </a>
                                                         </div>
                                                     </td>

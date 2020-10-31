@@ -17,7 +17,7 @@ Tambah Transaksi
           <div class="card-header">
             <h4>Form Tambah Transaksi</h4>
             <div class="card-header-form">
-              <a href="{{ route('transaksi') }}" class="btn btn-primary">
+              <a href="{{ route('transaksi') }}" class="btn btn-primary" title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </div>

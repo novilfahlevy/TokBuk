@@ -15,6 +15,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Form Tambah Pengguna</h4>
+                            <div class="card-header-form">
+                                <a href="{{ route('user') }}" class="btn btn-primary" title="Kembali">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </div>
                         </div>
                                 <div class="card-body">
                                     <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
@@ -71,13 +76,13 @@
                                                     Konfirmasi Password
                                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                                     <br/>
-                                                    
+
                                                     Alamat
                                                     <textarea type="text" class="form-control" required name="alamat" value="{{ old('alamat') }}" style="height:215px"></textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary" type="submit">Tambah</button>
+                                        <button class="btn btn-primary" type="submit">Simpan</button>
                                     </form>
                                 </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.partials.app')
 
 @section('title')
-    Ubah Penerbit
+    Edit Penerbit
 @endsection
 
 @section('content')
@@ -15,6 +15,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Form Edit Penerbit</h4>
+                            <div class="card-header-form">
+                                <a href="{{ route('penerbit') }}" class="btn btn-primary" title="Kembali">
+                                  <i class="fas fa-chevron-left"></i>
+                                </a>
+                              </div>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('penerbit.update', ['id' => $penerbit->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
@@ -42,7 +47,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             Alamat
-                                            <textarea type="text" class="form-control" required name="alamat"  style="height:215px">{{$penerbit->alamat}}</textarea>
+                                            <textarea type="text" class="form-control" name="alamat"  style="height:215px">{{$penerbit->alamat}}</textarea>
                                         </div>
                                     </div>
                                     </div>

@@ -67,13 +67,13 @@ class KategoriController extends Controller
 			DB::commit();
 			return redirect()->route('kategori')->with([
 				'type' => 'success',
-				'message' => 'Berhasil menghapus buku'
+				'message' => 'Berhasil menghapus kategori'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('kategori')->with([
 				'type' => 'danger',
-				'message' => 'Gagal menghapus buku'
+				'message' => 'Gagal menghapus kategori'
 			]);
 		}
     }

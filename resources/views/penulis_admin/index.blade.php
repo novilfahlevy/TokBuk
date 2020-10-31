@@ -31,7 +31,7 @@ Penulis Buku
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h3 class="modal-title" id="exampleModalLabel">Tambah Penulis</h3>
+                                        <h4 class="modal-title" id="exampleModalLabel">Tambah Penulis</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
@@ -43,7 +43,7 @@ Penulis Buku
                                                 <label for="recipient-name" class="col-form-label"><h6>Nama Penulis</h6></label>
                                                 <input type="text" class="form-control" required name="nama" value="{{ old('nama') }}" >
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Tambah</button>
+                                            <button class="btn btn-primary" type="submit">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
@@ -66,13 +66,13 @@ Penulis Buku
                                             <td>{{$p->nama}}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                                 </div>
                                                 <div class="btn-group">
                                                     <form method="post" class="delete_form " action="{{route('penulis.destroy',$p['id'])}}">
                                                     @method('DELETE')
                                                     @csrf
-                                                        <button  class="btn btn-sm btn-danger" id="btn-delete"  ><i class="fa fa-trash"></i></button>
+                                                        <button  class="btn btn-sm btn-danger" id="btn-delete"  title="Hapus data"><i class="fa fa-trash"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -82,7 +82,7 @@ Penulis Buku
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel">Ubah Penulis</h3>
+                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Penulis</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -95,7 +95,7 @@ Penulis Buku
                                                                     <label for="recipient-name" class="col-form-label"><h6>Nama Penulis</h6></label>
                                                                     <input type="text" class="form-control" required name="nama" value="{{$p->nama}}" >
                                                                 </div>
-                                                                <button class="btn btn-primary" type="submit">Ubah</button>
+                                                                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                                                             </form>
                                                         </div>
                                                     </div>

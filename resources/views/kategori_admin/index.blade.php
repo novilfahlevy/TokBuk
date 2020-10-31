@@ -31,7 +31,7 @@ Kategori Buku
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h3 class="modal-title" id="exampleModalLabel">Tambah Kategori</h3>
+                                  <h4 class="modal-title" id="exampleModalLabel">Tambah Kategori</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -40,10 +40,10 @@ Kategori Buku
                                     <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
                                       <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label"><h6>Kategori*</h6></label>
+                                        <label for="recipient-name" class="col-form-label"><h6>Kategori</h6></label>
                                         <input type="text" class="form-control" required name="nama" value="{{ old('nama') }}" >
                                       </div>
-                                      <button class="btn btn-primary" type="submit">Tambah</button>
+                                      <button class="btn btn-primary" type="submit">Simpan</button>
                                     </form>
                                   </div>
                               </div>
@@ -67,13 +67,13 @@ Kategori Buku
                                         <td>{{$j->nama}}</td>
                                         <td>
                                           <div class="btn-group">
-                                            <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$j->id}}"><i class="fas fa-pencil-alt"></i></a>
+                                            <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$j->id}}"><i class="fas fa-pencil-alt" title="Edit Data"></i></a>
                                           </div>
                                           <div class="btn-group">
                                             <form method="post" class="delete_form " action="{{route('kategori.destroy',$j['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                              <button  class="btn btn-sm btn-danger" id="btn-delete"  ><i class="fa fa-trash"></i></button>
+                                              <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
                                             </form>
                                           </div>
                                         </td>
@@ -82,7 +82,7 @@ Kategori Buku
                                           <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                               <div class="modal-header">
-                                                <h3 class="modal-title" id="exampleModalLabel">Ubah Kategori</h3>
+                                                <h4 class="modal-title" id="exampleModalLabel">Edit Kategori</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -92,10 +92,10 @@ Kategori Buku
                                               {{ csrf_field() }}
                                               {{ method_field('PUT') }}
                                                 <div class="form-group">
-                                                  <label for="recipient-name" class="col-form-label"><h6>Kategori*</h6></label>
+                                                  <label for="recipient-name" class="col-form-label"><h6>Kategori</h6></label>
                                                   <input type="text" class="form-control" required name="nama" value="{{$j->nama}}" >
                                                 </div>
-                                                <button class="btn btn-primary" type="submit">Ubah</button>
+                                                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                                               </form>
                                             </div>
                                           </div>
