@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buku;
+use App\LogBuku;
 use App\Transaksi;
 use App\User;
 use Carbon\Carbon;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    protected $now;
+
     /**
      * Create a new controller instance.
      *
@@ -18,7 +21,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
+        $this->now = Carbon::now();
     }
 
     /**
@@ -31,8 +35,35 @@ class HomeController extends Controller
         $pengguna = User::count();
 		$judulBuku = Buku::count();
         $buku = (int) Buku::sum('jumlah');
-		$transaksi = Transaksi::where(DB::raw('MONTH(created_at)'), Carbon::now()->month)->count();
+		$transaksi = Transaksi::where(DB::raw('MONTH(created_at)'), $this->now->month)->count();
         
         return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi'));
+    }
+
+    public function chart()
+    {
+        $label = collect(range(1, $this->now->daysInMonth))->map(function($day) {
+            return 'Hari ke-' . $day;
+        });
+
+        $pendapatan = Transaksi::where(DB::raw('MONTH(created_at)'), $this->now->month)
+            ->select(DB::raw('SUM(total_harga) AS total_harga'))
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->get();
+
+        $pengeluaran = LogBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
+            ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'bulan' => $this->now->monthName,
+                'label' => $label,
+                'pendapatan' => $pendapatan,
+                'pengeluaran' => $pengeluaran
+            ]
+        ]);
     }
 }
