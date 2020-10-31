@@ -29,21 +29,21 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="nama">Nama Pemasok*</label>
+                                                    Nama Pemasok*
                                                     <input type="text" class="form-control" required id="nama" name="nama" value="{{ old('nama') }}" >
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="telepon">Telepon*</label>
+                                                    Telepon*
                                                     <input type="number" class="form-control" required id="telepon" name="telepon" value="{{ old('telepon') }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="email">Email*</label>
+                                                    Email*
                                                     <input type="email" class="form-control" required id="email" name="email" value="{{ old('email') }}" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="alamat">Alamat Pemasok*</label>
+                                                    Alamat Pemasok*
                                                     <textarea type="text" class="form-control" required id="alamat" name="alamat" value="{{ old('alamat') }}" style="height:215px"></textarea>
                                                 </div>
                                             </div>
