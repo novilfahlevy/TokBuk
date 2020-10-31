@@ -56,7 +56,7 @@ function initNumbers() {
   trs.toArray().forEach((tr, i) => $(tr).find('#number').text(i + 1));
 }
 
-$('button#tambahBuku').on('click', function() {
+function tambahBuku() {
   const selectClass = uniqueClass(32);
 
   const bukuTr = $(`
@@ -82,7 +82,9 @@ $('button#tambahBuku').on('click', function() {
 
   initNumbers();
   getAllBooks(selectClass);
-});
+}
+
+$('button#tambahBuku').on('click', tambahBuku);
 
 $('form#formTransaksi').on('submit', function(event) {
   $('#hasilRespon').val(JSON.stringify(getAllBooksData()));
@@ -134,3 +136,5 @@ $(document).on('change', function(event) {
     $('#totalSemuaHarga').text(format(getTotalHarga()));
   }
 });
+
+tambahBuku();
