@@ -21,7 +21,7 @@
                       <h4>Total Pengguna</h4>
                     </div>
                     <div class="card-body">
-                      {{ $pengguna }}
+                      {{ number_format($pengguna) }}
                     </div>
                   </div>
                 </div>
@@ -36,7 +36,7 @@
                       <h4>Total Judul Buku</h4>
                     </div>
                     <div class="card-body">
-                      {{ $judulBuku }}
+                      {{ number_format($judulBuku) }}
                     </div>
                   </div>
                 </div>
@@ -51,7 +51,7 @@
                       <h4>Total Buku</h4>
                     </div>
                     <div class="card-body">
-                      {{ $buku }}
+                      {{ number_format($buku) }}
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
                       <h4>Transaksi Bulan Ini</h4>
                     </div>
                     <div class="card-body">
-                      {{ $transaksi }}
+                      {{ number_format($transaksi) }}
                     </div>
                   </div>
                 </div>
