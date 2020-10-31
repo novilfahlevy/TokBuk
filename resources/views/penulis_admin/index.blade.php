@@ -40,7 +40,7 @@ Penulis Buku
                                         <form action="{{ route('penulis.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label"><h6>Nama Penulis*</h6></label>
+                                                <label for="recipient-name" class="col-form-label"><h6>Nama Penulis</h6></label>
                                                 <input type="text" class="form-control" required name="nama" value="{{ old('nama') }}" >
                                             </div>
                                             <button class="btn btn-primary" type="submit">Tambah</button>
@@ -92,7 +92,7 @@ Penulis Buku
                                                             {{ csrf_field() }}
                                                             {{ method_field('PUT') }}
                                                                 <div class="form-group">
-                                                                    <label for="recipient-name" class="col-form-label"><h6>Nama Penulis*</h6></label>
+                                                                    <label for="recipient-name" class="col-form-label"><h6>Nama Penulis</h6></label>
                                                                     <input type="text" class="form-control" required name="nama" value="{{$p->nama}}" >
                                                                 </div>
                                                                 <button class="btn btn-primary" type="submit">Ubah</button>

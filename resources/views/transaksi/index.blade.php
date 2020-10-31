@@ -49,8 +49,8 @@ Transaksi Penjualan
                                                     <td scope="row">{{$loop->index+1}}</td>
                                                     <td>{{ $t->created_at }}</td>
                                                     <td>{{ $t->user()->withTrashed()->first()->name }}</td>
-                                                    <td>Rp {{ $t->total_harga }}</td>
-                                                    <td>Rp {{ $t->uang_pembeli }}</td>
+                                                    <td>Rp {{ number_format($t->total_harga) }}</td>
+                                                    <td>Rp {{ number_format($t->uang_pembeli) }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "

@@ -48,16 +48,16 @@ Penerbit Buku
                                       <td>{{$p->nama}}</td>
                                   <td>
                                       <div class="btn-group">
-                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('penerbit.edit',  ['id' => $p["id"]]) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('penerbit.edit',  ['id' => $p["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form method="post" class="delete_form " action="{{route('penerbit.destroy',$p['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  ><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
-                                    <a type="submit" class="btn btn-sm btn-success text-white" href="{{ route('penerbit.detail',  ['id' => $p["id"]]) }}"><i class="fas fa-file"></i></a>
+                                    <a type="submit" class="btn btn-sm btn-primary text-white" href="{{ route('penerbit.detail',  ['id' => $p["id"]]) }}" title="Detail Data"><i class="fas fa-eye"></i></a>
                                   </td>
                               </tr>
                                   @endforeach

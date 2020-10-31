@@ -132,10 +132,10 @@ $(".custom-file-input").on("change", function() {
                                         {{ method_field('PUT') }}
                                           <div class="row">
                                             <div class="col-sm-4">
-                                                <div class="card border-dark mb-3" style="max-width: 50rem; height:520px">
+                                                <div class="card border-dark mb-3" style="max-width: 50rem; height:500px">
                                                     <div class="card-header"><h4>Sampul Buku</h4></div>
                                                     <div class="card-body text-dark">
-                                                        <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:80%;" /><br/><br/>
+                                                        <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:315px;" /><br/><br/>
                                                         <small>Sampul Buku (abaikan jika tidak ingin mengubah)</small>
                                                         <input type="file" id="inputgambar" name="sampul" class="form-control validate" value="{{$buku->sampul}}"/>
                                                     </div>

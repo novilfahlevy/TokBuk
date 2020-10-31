@@ -7,7 +7,7 @@
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
           <div class="section-header">
-                <h1>Dashboard</h1>
+            <h1>Dashboard</h1>
           </div>
           <div class="section-body">
             <div class="row">
@@ -21,7 +21,7 @@
                       <h4>Total Pengguna</h4>
                     </div>
                     <div class="card-body">
-                      {{ $pengguna }}
+                      {{ number_format($pengguna) }}
                     </div>
                   </div>
                 </div>
@@ -36,7 +36,7 @@
                       <h4>Total Judul Buku</h4>
                     </div>
                     <div class="card-body">
-                      {{ $judulBuku }}
+                      {{ number_format($judulBuku) }}
                     </div>
                   </div>
                 </div>
@@ -51,7 +51,7 @@
                       <h4>Total Buku</h4>
                     </div>
                     <div class="card-body">
-                      {{ $buku }}
+                      {{ number_format($buku) }}
                     </div>
                   </div>
                 </div>
@@ -66,8 +66,18 @@
                       <h4>Transaksi Bulan Ini</h4>
                     </div>
                     <div class="card-body">
-                      {{ $transaksi }}
+                      {{ number_format($transaksi) }}
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Pendapatan dan Pengeluaran Per Hari Bulan Ini (<span id="bulan"></span>)</h4>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="transaksi" width="400" height="200"></canvas>
                   </div>
                 </div>
               </div>
@@ -77,3 +87,12 @@
     </div>
   </div>
 @endsection
+
+@push('js')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+  <script src="{{ asset('js/dasbor/index.js') }}"></script>
+@endpush
+
+@push('css')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+@endpush

@@ -1,4 +1,5 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
+const format = number => new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(number);
 
 function uniqueClass(length) {
   var result = '';
@@ -22,7 +23,7 @@ function getAllBooks(selectClass) {
 
           tr.data('buku-id', buku.id);
 
-          tr.find('.harga').text(`Rp ${buku.harga}`);
+          tr.find('.harga').text(`Rp ${format(buku.harga)}`);
           tr.find('.harga').data('harga', buku.harga);
 
           tr.find('.jumlah-buku-input').attr('max', buku.jumlah);
@@ -31,10 +32,10 @@ function getAllBooks(selectClass) {
           tr.find('.jumlah-buku-label').text(buku.jumlah);
           tr.find('.jumlah-buku-label').data('jumlah', buku.jumlah);
 
-          tr.find('.total-harga').text(`Rp ${buku.harga}`);
+          tr.find('.total-harga').text(`Rp ${format(buku.harga)}`);
           tr.find('.total-harga').data('total-harga', buku.harga);
 
-          $('#totalSemuaHarga').text(getTotalHarga());
+          $('#totalSemuaHarga').text(format(getTotalHarga()));
 
           return data.text;
         }
@@ -128,8 +129,8 @@ $(document).on('change', function(event) {
   if ( target.prop('tagName') === 'INPUT' && target.hasClass('jumlah-buku-input') ) {
     const tr = target.parent().parent();
     const totalHarga = parseInt(tr.find('.harga').data('harga'), 10) * target.val();
-    tr.find('.total-harga').text(`Rp ${totalHarga}`);
+    tr.find('.total-harga').text(`Rp ${format(totalHarga)}`);
     tr.find('.total-harga').data('total-harga', totalHarga);
-    $('#totalSemuaHarga').text(getTotalHarga());
+    $('#totalSemuaHarga').text(format(getTotalHarga()));
   }
 });

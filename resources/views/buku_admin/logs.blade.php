@@ -46,10 +46,10 @@ Riwayat Penambahan dan Pembelian Buku
                                       <td>{{$b->created_at}}</td>
                                       <td>{{$b->buku()->withTrashed()->first()->judul}}</td>
                                       <td>{{$b->user()->withTrashed()->first()->name}}</td>
-                                      <td>Rp. {{$b->harga_jual}},00</td>
-                                      <td>Rp. {{$b->harga_beli}},00</td>
+                                      <td>Rp {{number_format($b->harga_jual)}}</td>
+                                      <td>Rp {{number_format($b->harga_beli)}}</td>
                                       <td>{{$b->jumlah}}</td>
-                                      <td>Rp. {{$b->harga_jual * $b->jumlah}},00</td>
+                                      <td>Rp {{number_format($b->harga_jual * $b->jumlah)}}</td>
                                       <td>
                                         <div class="badge badge-{{ $b->status === 'Baru' ? 'success' : 'primary' }}">
                                           {{$b->status}}

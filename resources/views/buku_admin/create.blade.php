@@ -20,7 +20,7 @@
                                             <div class="card border-dark mb-3" style="max-width: 50rem; height:500px">
                                                 <div class="card-header"><h4>Sampul Buku</h4></div>
                                                 <div class="card-body text-dark">
-                                                    <img src="http://placehold.it/" id="showgambar"alt="" style="width:100%; height:80%;"><br/><br/>
+                                                    <img src="" id="showgambar"alt="" style="width:100%; height:315px;"><br/><br/>
                                                     <small>Sampul Buku</small>
                                                     <input type="file" class="form-control validate" id="inputgambar"required name="sampul" value="{{isset($insert) ? $insert->sampul : ''}}" >
                                                 </div>
