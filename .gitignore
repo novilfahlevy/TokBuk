@@ -4,6 +4,7 @@
 /public/images/buku/*
 !/public/images/buku/sampul.png
 /storage/*.key
+/storage/framework/laravel-excel/*
 /vendor
 .env
 .env.backup
