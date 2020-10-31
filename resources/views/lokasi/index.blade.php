@@ -75,57 +75,51 @@ Lokasi Buku
     </div>
   </div>
 
-  <div class="modal" tabindex="-1" role="dialog" id="createLokasiModal">
+  <div class="modal fade bs-example-modal-lg-" tabindex="-1" role="dialog" id="createLokasiModal">
     <form action="{{ route('lokasi.store') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+          <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambah Lokasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                  <h4 class="modal-title" id="exampleModalLabel">Tambah Lokasi</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
               </div>
               <div class="modal-body">
-                <div class="form-group mb-0">
-                    <label for="lokasi">Nama Lokasi</label>
-                    <input type="text" class="form-control" id="lokasi" name="lokasi">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"><h6>Lokasi</h6></label>
+                  <input type="text" class="form-control" id="lokasi" name="lokasi">
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button class="btn btn-primary" type="submit">Simpan</button>
               </div>
             </div>
         </div>
-    </form>
-  </div>
+      </form>
+    </div>
 
-  <div class="modal" tabindex="-1" role="dialog" id="editLokasiModal">
+  <div class="modal fade bs-example-modal-lg-" tabindex="-1" role="dialog" id="editLokasiModal">
     <form action="{{ route('lokasi.update', 'id') }}" method="POST">
         @csrf @method('PUT')
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambah Lokasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title" id="exampleModalLabel">Edit Lokasi</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
-                </button>
+                  </button>
               </div>
               <div class="modal-body">
-                <div class="form-group mb-0">
-                    <label for="lokasi">Nama Lokasi</label>
-                    <input type="text" class="form-control" id="lokasi" name="lokasi">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"><h6>Lokasi</h6></label>
+                  <input type="text" class="form-control" id="lokasi" name="lokasi">
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
               </div>
             </div>
         </div>
-    </form>
-  </div>
+      </form>
+    </div>
 @endsection
 
 @push('js')
