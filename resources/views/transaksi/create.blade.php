@@ -28,13 +28,28 @@ Tambah Transaksi
               <input type="hidden" id="hasilRespon" name="transaksi" hidden>
               <div class="form-group">
                 <label for="uangPembeli">Uang pembeli</label>
-                <input type="number" class="form-control" id="uangPembeli" name="uangPembeli" value="0">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                  </div>
+                  <input type="number" class="form-control" id="uangPembeli" name="uangPembeli" value="0">
+                  @error('uangPembeli')
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between align-items-center">
                   <label for="buku" class="mb-2">Buku yang ingin dibeli</label>
                   <h6 class="mb-0 mr-2">Total Rp <span id="totalSemuaHarga">0</span></h6>
                 </div>
+                @error('bukuDibeli')
+                  <span class="invalid-feedback d-block my-2" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
                 <div class="table-responsive">
                   <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                     <thead>

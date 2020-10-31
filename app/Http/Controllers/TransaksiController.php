@@ -38,11 +38,12 @@ class TransaksiController extends Controller
 			$uangPembeli = $request->uangPembeli;
 			$transaksi = json_decode($request->transaksi);
 
+			if ( $transaksi->totalHarga <= 0 && !count($transaksi->buku) ) {
+				return redirect()->route('transaksi.create')->withErrors(['bukuDibeli' => 'Mohon pilih paling tidak satu buku yang ingin dibeli']);
+			}
+
 			if ( $uangPembeli < $transaksi->totalHarga ) {
-				return redirect()->route('transaksi.create')->with([
-					'message' => 'Uang anda tidak mencukupi.',
-					'type' => 'danger'
-				]);
+				return redirect()->route('transaksi.create')->withErrors(['uangPembeli' => 'Nominal uang pembeli tidak mencukupi']);
 			}
 
 			$transaksiBaru = Transaksi::create([
