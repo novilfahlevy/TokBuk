@@ -81,4 +81,5 @@ Route::post('transaksi/store', 'TransaksiController@store')->name('transaksi.sto
 Route::get('transaksi/edit/{id}', 'TransaksiController@edit')->name('transaksi.edit');
 Route::put('transaksi/update/{id}', 'TransaksiController@update')->name('transaksi.update');
 Route::get('transaksi/{id}/detail', 'TransaksiController@detail')->name('transaksi.detail');
+Route::get('transaksi/export', 'TransaksiController@export')->name('transaksi.export');
 Route::delete('transaksi/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');

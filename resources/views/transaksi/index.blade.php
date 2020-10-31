@@ -19,7 +19,10 @@ Transaksi Penjualan
                                 <div class="card-header">
                                     <h4>Daftar Transaksi Penjualan</h4>
                                     <div class="card-header-action">
-                                        <div class="col-md-3 col-sm-3 col-xs-4 text-right">
+                                        <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
+                                            <a href="{{ route('transaksi.export') }}" class="btn btn-sm btn-success mr-3" title="Export Data">
+                                                <i class="fas fa-file-export"></i>
+                                            </a>
                                             <a href="{{ route('transaksi.create') }}" class="btn btn-sm btn-primary" title="Tambah Data">
                                                 <i class="fas fa-plus"></i>
                                             </a>

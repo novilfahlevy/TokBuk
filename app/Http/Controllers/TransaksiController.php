@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\DetailTransaksi;
+use App\Exports\TransaksiExport;
 use App\Transaksi;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
@@ -103,5 +105,10 @@ class TransaksiController extends Controller
 				'type' => 'danger'
 			]);
 		}
+	}
+
+	public function export()
+	{
+		return Excel::download(new TransaksiExport, 'transaksi.xlsx');
 	}
 }
