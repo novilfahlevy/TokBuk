@@ -14,14 +14,15 @@ Profil
         <div class="content-body table">
           <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
-              @if ( ($message = Session::get('message')) && ($type = Session::get('type')) )
+              {{-- @if ( ($message = Session::get('message')) && ($type = Session::get('type')) )
                 <div class="alert alert-{{ $type }} alert-dismissible fade show">
                   {{ $message }}
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-             @endif
+             @endif --}}
+             @include('layouts.flash-alert')
             <div class="row">
               <div class="col-md-6">
             <div class="card">

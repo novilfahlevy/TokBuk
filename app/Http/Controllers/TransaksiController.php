@@ -68,13 +68,13 @@ class TransaksiController extends Controller
 			DB::commit();
 
 			return redirect()->route('transaksi')->with([
-				'message' => 'Transaksi berhasil dibuat.',
+				'message' => 'Transaksi Berhasil Dibuat.',
 				'type' => 'success'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('transaksi.create')->with([
-				'message' => 'Gagal membuat transaksi, silahkan coba lagi.',
+				'message' => 'Gagal Membuat Transaksi, Silahkan Coba Lagi.',
 				'type' => 'danger'
 			]);
 		}
@@ -96,13 +96,13 @@ class TransaksiController extends Controller
 			$transaksi->delete();
 			DB::commit();
 			return redirect()->route('transaksi')->with([
-				'message' => 'Berhasil menghapus transaksi',
+				'message' => 'Berhasil Menghapus Transaksi',
 				'type' => 'success'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('transaksi')->with([
-				'message' => 'Gagal menghapus transaksi',
+				'message' => 'Gagal Menghapus Transaksi',
 				'type' => 'danger'
 			]);
 		}
