@@ -35,7 +35,7 @@ Route::get('databuku/{id}/tambah', 'BukuController@tambahjml')->name('buku.tamba
 Route::get('databuku/{id}/detail', 'BukuController@detail')->name('buku.detail');
 Route::get('databuku/create', 'BukuController@create')->name('buku.create');
 Route::post('databuku/store', 'BukuController@store')->name('buku.store');
-Route::post('databuku/tambahstore', 'BukuController@tambahstore')->name('buku.tambahstore');
+Route::post('databuku/tambahstore/{id}', 'BukuController@tambahstore')->name('buku.tambahstore');
 Route::get('databuku/{id}', 'BukuController@edit')->name('buku.edit');
 Route::put('databuku/{id}/update', 'BukuController@update')->name('buku.update');
 Route::delete('databuku/{id}', 'BukuController@destroy')->name('buku.destroy');

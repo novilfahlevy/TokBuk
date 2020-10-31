@@ -11,8 +11,6 @@
                     <h1>Tambah Buku</h1>
                 </div>
                 <div class="section-body">
-                    <h6>Bila ada tanda <span class="text-danger">*</span> Input tidak boleh dikosongkan.</h6>
-                    <br>
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <form action="{{ route('buku.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
@@ -23,7 +21,7 @@
                                                 <div class="card-header"><h4>Sampul Buku</h4></div>
                                                 <div class="card-body text-dark">
                                                     <img src="http://placehold.it/" id="showgambar"alt="" style="width:100%; height:80%;"><br/><br/>
-                                                    <small>Sampul Buku*</small>
+                                                    <small>Sampul Buku</small>
                                                     <input type="file" class="form-control validate" id="inputgambar"required name="sampul" value="{{isset($insert) ? $insert->sampul : ''}}" >
                                                 </div>
                                             </div>
@@ -35,15 +33,15 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            ISBN*
+                                                            ISBN
                                                             <input type="number" class="form-control" required name="isbn" value="{{ old('isbn') }}" >
                                                             <br/>
 
-                                                            Judul Buku*
+                                                            Judul Buku
                                                             <input type="text" class="form-control" required name="judul" value="{{ old('judul') }}" >
                                                             <br/>
 
-                                                            Kategori*
+                                                            Kategori
                                                             <select required name="id_kategori" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true">
                                                                 <option value=''>- Pilih -</option>
                                                                 @foreach($kategori as $jen)
@@ -52,7 +50,7 @@
                                                             </select>
                                                             <br/>
 
-                                                            Penulis*
+                                                            Penulis
                                                             <select required name="id_penulis" class="form-control" value="{{ old('id_penulis') }}" data-live-search="true">
                                                                 <option value=''>- Pilih -</option>
                                                                 @foreach($penulis as $pel)
@@ -61,7 +59,7 @@
                                                             </select>
 
                                                             <br/>
-                                                            Penerbit*
+                                                            Penerbit
                                                             <select required name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
                                                                 <option value=''>- Pilih -</option>
                                                                 @foreach($penerbit as $per)     
@@ -70,7 +68,7 @@
                                                             </select>
 
                                                             <br/>
-                                                            Pemasok*
+                                                            Pemasok
                                                             <select required name="id_pemasok" class="form-control" value="{{ old('id_pemasok') }}" data-live-search="true">
                                                                 <option value=''>- Pilih -</option>
                                                                 @foreach($Pemasok as $sup)     
@@ -80,11 +78,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                Tahun Terbit Buku*
+                                                                Tahun Terbit Buku
                                                                 <input type="number" class="form-control" required name="tahun_terbit" value="{{ old('tahun_terbit') }}" >
                                                                  <br/>
 
-                                                                Lokasi Buku*
+                                                                Lokasi Buku
                                                                 <select required name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
                                                                     <option value=''>- Pilih -</option>
                                                                     @foreach($lokasi as $lok)
@@ -93,20 +91,35 @@
                                                                 </select>
                                                                 <br/>
 
-                                                                Harga Beli Dari Pemasok*
-                                                                <input type="number" class="form-control" required name="harga_beli" value="{{ old('harga_beli') }}" >
+                                                                Harga Jual Dari Pemasok (per buku)
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                                                                    </div>
+                                                                    <input type="number" class="form-control" required id="hargaJual" name="harga_jual" value="{{ old('harga_jual') }}" >
+                                                                </div>
                                                                 <br/>
 
-                                                                Harga Jual Dari Pemasok*
-                                                                <input type="number" class="form-control" required name="harga_jual" value="{{ old('harga_jual') }}" >
+                                                                Jumlah Stok
+                                                                <input type="number" class="form-control" required id="jumlah" name="jumlah" value="{{ old('jumlah') }}" >
                                                                 <br/>
 
-                                                                Harga Buku*
-                                                                <input type="number" class="form-control" required name="harga" value="{{ old('harga') }}" >
+                                                                Harga Beli
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                                                                    </div>
+                                                                    <input type="number" class="form-control" required id="hargaBeli" name="harga_beli" value="{{ old('harga_beli') }}" >
+                                                                </div>
                                                                 <br/>
 
-                                                                Jumlah Stok*
-                                                                <input type="number" class="form-control" required name="jumlah" value="{{ old('jumlah') }}" >
+                                                                Harga Buku
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                                                                    </div>
+                                                                    <input type="number" class="form-control" required name="harga" value="{{ old('harga') }}" >
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -126,6 +139,10 @@
 
 @section('js')
 <script type="text/javascript">
+
+    $('#jumlah').on('keyup', function() {
+        $('#hargaBeli').val($('#hargaJual').val() * $(this).val());
+    });
 
       function readURL(input) {
         if (input.files && input.files[0]) {

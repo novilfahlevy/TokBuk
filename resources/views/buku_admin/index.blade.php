@@ -12,6 +12,7 @@ Buku
           </div>
           <div class="section-body">
             <div class="content-body table">
+                @include('layouts.flash-alert')
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
