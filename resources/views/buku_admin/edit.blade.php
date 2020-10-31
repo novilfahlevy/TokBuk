@@ -127,18 +127,16 @@ $(".custom-file-input").on("change", function() {
                     <h1>Ubah Data Buku</h1>
                 </div>
                 <div class="section-body">
-                                    <h6>Bila ada tanda <span class="text-danger">*</span> Input tidak boleh dikosongkan.</h6>
-                                    <br>
                                     <form action="{{ route('buku.update', ['id' => $buku->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
                                           <div class="row">
                                             <div class="col-sm-4">
-                                                <div class="card border-dark mb-3" style="max-width: 50rem; height:520px">
-                                                    <div class="card-header"><h4>Foto Cover Depan</h4></div>
+                                                <div class="card border-dark mb-3" style="max-width: 50rem; height:500px">
+                                                    <div class="card-header"><h4>Sampul Buku</h4></div>
                                                     <div class="card-body text-dark">
-                                                        <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:80%;" /><br/><br/>
-                                                        <small>Sampul Buku* (abaikan jika tidak ingin mengubah)</small>
+                                                        <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:315px;" /><br/><br/>
+                                                        <small>Sampul Buku (abaikan jika tidak ingin mengubah)</small>
                                                         <input type="file" id="inputgambar" name="sampul" class="form-control validate" value="{{$buku->sampul}}"/>
                                                     </div>
                                                 </div>
@@ -150,15 +148,15 @@ $(".custom-file-input").on("change", function() {
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                ISBN*
+                                                                ISBN
                                                                 <input type="number" class="form-control" required name="isbn" value="{{ $buku->isbn }}" >
                                                                 <br/>
     
-                                                                Judul Buku*
+                                                                Judul Buku
                                                                 <input type="text" class="form-control" required name="judul" value="{{ $buku->judul }}" >
                                                                 <br/>
     
-                                                                Kategori*
+                                                                Kategori
                                                                 <select required name="id_kategori" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true"> 
                                                                     <option value=''>- Pilih -</option>
                                                                     @foreach($kategori as $jen)
@@ -167,7 +165,7 @@ $(".custom-file-input").on("change", function() {
                                                                 </select>
                                                                 <br/>
     
-                                                                Penulis*
+                                                                Penulis
                                                                 <select required name="id_penulis" class="form-control" value="{{ old('id_penulis') }}"data-live-search="true">
                                                                     <option value='' >- Pilih -</option>
                                                                     @foreach($penulis as $pel)
@@ -176,7 +174,7 @@ $(".custom-file-input").on("change", function() {
                                                                 </select>
                                                                 <br/>
 
-                                                                Penerbit*
+                                                                Penerbit
                                                                 <select required name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
                                                                     <option value=''>- Pilih -</option>
                                                                     @foreach($penerbit as $per)     
@@ -186,7 +184,7 @@ $(".custom-file-input").on("change", function() {
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    Pemasok*
+                                                                    Pemasok
                                                                     <select required name="id_pemasok" class="form-control" value="{{ old('id_pemasok') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($Pemasok as $sup)     
@@ -195,11 +193,11 @@ $(".custom-file-input").on("change", function() {
                                                                     </select>
                                                                     <br/>
                                                                     
-                                                                    Tahun Terbit Buku*
+                                                                    Tahun Terbit Buku
                                                                     <input type="number" class="form-control" required name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
                                                                     <br/>
     
-                                                                    Lokasi Buku*
+                                                                    Lokasi Buku
                                                                     <select required name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($lokasi as $lok)     
@@ -208,8 +206,13 @@ $(".custom-file-input").on("change", function() {
                                                                     </select>
                                                                     <br/>
     
-                                                                    Harga*
+                                                                    Harga Buku
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="basic-addon1">Rp</span>
+                                                                        </div>
                                                                     <input type="number" class="form-control" required name="harga" value="{{ $buku->harga }}" >
+                                                                    </div>
                                                                     
                                                                 </div>
                                                             </div>

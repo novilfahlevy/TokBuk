@@ -67,13 +67,13 @@ class PenulisController extends Controller
 			DB::commit();
 			return redirect()->route('penulis')->with([
 				'type' => 'success',
-				'message' => 'Berhasil menghapus buku'
+				'message' => 'Berhasil menghapus penulis'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('penulis')->with([
 				'type' => 'danger',
-				'message' => 'Gagal menghapus buku'
+				'message' => 'Gagal menghapus Penulis'
 			]);
 		}
     }

@@ -17,17 +17,15 @@
                             <h4>Form Ubah Data Pengguna</h4>
                         </div>
                         <div class="card-body">
-                            <h6>Bila ada tanda <span class="text-danger">*</span> Input tidak boleh dikosongkan.</h6>
-                            <br><br>
                             <form action="{{ route('user.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            Nama*
+                                            Nama
                                             <input type="text" class="form-control" required name="name" value="{{$user->name}}" ><br/>
-                                            Username*
+                                            Username
                                             <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="{{$user->username}}" >
                                             @error('username')
                                                 <span class="invalid-feedback" role="alert">
@@ -35,7 +33,7 @@
                                                 </span>
                                             @enderror
                                             <br/>
-                                            Posisi*
+                                            Posisi
                                             <select name="posisi" class="form-control" value="{{ old('posisi') }}">
                                                 @if ($user->posisi == "Admin")
                                                     <option value="Admin" selected>Admin</option>
@@ -52,8 +50,8 @@
                                                 @endif
                                             </select>
                                             <br/>
-                                            E-Mail*
-                                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="{{$user->email}}" >
+                                            E-Mail
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="{{$user->email}}" >
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -62,9 +60,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        Telepon*
+                                        Telepon
                                         <input type="number" class="form-control" required name="telepon" value="{{$user->telepon}}" ><br/>
-                                        Alamat*
+                                        Alamat
                                         <textarea type="text" class="form-control" required name="alamat"  style="height:215px">{{$user->alamat}}</textarea>
                                     </div>
                                 </div>

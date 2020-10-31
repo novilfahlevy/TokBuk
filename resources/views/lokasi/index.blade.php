@@ -31,9 +31,9 @@ Lokasi Buku
                                 <table id="table-index" class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                                     <thead style="">
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Nama</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

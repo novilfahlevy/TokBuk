@@ -51,7 +51,6 @@ Route::group(['middleware' => 'auth'], function() {
 
   //penerbit
   Route::get('/penerbit', 'PenerbitController@index')->name('penerbit');
-  Route::get('/penerbit/{id}/detail', 'PenerbitController@detail')->name('penerbit.detail');
   Route::get('penerbit/create', 'PenerbitController@create')->name('penerbit.create');
   Route::post('penerbit/store', 'PenerbitController@store')->name('penerbit.store');
   Route::get('penerbit/{id}', 'PenerbitController@edit')->name('penerbit.edit');
