@@ -1,8 +1,8 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
-    <div class="sidebar-brand mt-2 mb-3">
+    <div class="sidebar-brand mt-2 mb-5">
         <a href="{{route('home')}}" class="site_title">
-          <img src="{{ asset('assets/img/logo.png') }}" alt="logo thortech project" class="img-fluid" style="height: 4em">
+          <img src="{{ asset('assets/img/logo.png') }}" alt="logo thortech project" class="img-fluid img-thumbnail mt-3 shadow-light rounded-pill px-4 py-2" style="height: 5em">
       </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
