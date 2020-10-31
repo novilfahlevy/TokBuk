@@ -62,9 +62,9 @@ Detail Transaksi
                   @foreach ($transaksi->detail as $t)
                     <tr>
                       <th>{{ $loop->index + 1 }}</th>
-                      <th>{{ $t->buku->judul }}</th>
+                      <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
                       <th>{{ $t->jumlah }}</th>
-                      <th>Rp {{ $t->buku->harga }}</th>
+                      <th>Rp {{ $t->buku()->withTrashed()->first()->harga }}</th>
                       <th>Rp {{ $t->harga }}</th>
                     </tr>
                   @endforeach

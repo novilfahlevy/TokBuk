@@ -12,6 +12,7 @@ Buku
           </div>
           <div class="section-body">
             <div class="content-body table">
+                @include('layouts.flash-alert')
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
@@ -44,7 +45,7 @@ Buku
                                       <td>{{$loop->index+1}}</td>
                                       <td>{{$b->isbn}}</td>
                                       <td>{{$b->judul}}</td>
-                                      <td>{{$b->Kategori->nama}}</td>
+                                      <td>{{$b->kategori ? $b->kategori->nama : '-'}}</td>
                                       <td>{{$b->jumlah}}</td>
                                       <td>Rp. {{$b->harga}},00</td>
                                   <td>

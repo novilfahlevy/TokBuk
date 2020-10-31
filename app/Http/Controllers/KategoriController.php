@@ -36,7 +36,7 @@ class KategoriController extends Controller
             return redirect()->route('kategori')->with(['message' => 'Berhasil Menambah Kategori', 'type' => 'success']);
         } else {
 
-            return redirect()->route('kategori')->with(['message' => 'Gagal Menambah Kategori', 'type' => 'error']);
+            return redirect()->route('kategori')->with(['message' => 'Gagal Menambah Kategori', 'type' => 'danger']);
         }
     }
 
@@ -53,7 +53,7 @@ class KategoriController extends Controller
         if($update == true) {
             return redirect()->route('kategori')->with(['message' => 'Berhasil Mengubah Kategori', 'type' => 'success']);
         } else {
-            return redirect()->route('kategori')->with(['message' => 'Gagal Mengubah Kategori', 'type' => 'error']);
+            return redirect()->route('kategori')->with(['message' => 'Gagal Mengubah Kategori', 'type' => 'danger']);
         }
     }
 
@@ -65,13 +65,13 @@ class KategoriController extends Controller
 			Buku::where('id_kategori', $id)->update(['id_kategori' => null]);
 			$kategori->delete();
 			DB::commit();
-			return redirect()->route('kategori')->with('alert', [
+			return redirect()->route('kategori')->with([
 				'type' => 'success',
 				'message' => 'Berhasil menghapus buku'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
-			return redirect()->route('kategori')->with('alert', [
+			return redirect()->route('kategori')->with([
 				'type' => 'danger',
 				'message' => 'Gagal menghapus buku'
 			]);

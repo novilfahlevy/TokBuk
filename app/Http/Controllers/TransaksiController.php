@@ -84,7 +84,7 @@ class TransaksiController extends Controller
 	{
 		return response()->json([
 			'status' => 200,
-			'buku' => Buku::all()
+			'buku' => Buku::where('jumlah', '>=', 1)->get()
 		]);
 	}
 

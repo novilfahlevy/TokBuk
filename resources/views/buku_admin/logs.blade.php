@@ -32,9 +32,10 @@ Riwayat Penambahan dan Pembelian Buku
                                             <th>Tanggal</th>
                                             <th>Judul Buku</th>
                                             <th>Ditangani Oleh</th>
-                                            <th>Harga Jual</th>
+                                            <th>Harga Jual / Buku</th>
                                             <th>Harga Beli</th>
                                             <th>Jumlah</th>
+                                            <th>Total Harga</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -43,11 +44,12 @@ Riwayat Penambahan dan Pembelian Buku
                                       <tr>
                                       <td>{{$loop->index+1}}</td>
                                       <td>{{$b->created_at}}</td>
-                                      <td>{{$b->buku->judul}}</td>
-                                      <td>{{$b->user->name}}</td>
+                                      <td>{{$b->buku()->withTrashed()->first()->judul}}</td>
+                                      <td>{{$b->user()->withTrashed()->first()->name}}</td>
                                       <td>Rp {{$b->harga_jual}}</td>
                                       <td>Rp {{$b->harga_beli}}</td>
                                       <td>{{$b->jumlah}}</td>
+                                      <td>Rp {{$b->harga_jual * $b->jumlah}}</td>
                                       <td>
                                         <div class="badge badge-{{ $b->status === 'Baru' ? 'success' : 'primary' }}">
                                           {{$b->status}}

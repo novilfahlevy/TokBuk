@@ -14,14 +14,7 @@ Lokasi Buku
             <div class="content-body table">
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
-                        @if ( $alert = Session::get('alert') )
-                            <div class="alert alert-{{ $alert['type'] }} alert-dismissible fade show">
-                                {{ $alert['message'] }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
+                        @include('layouts.flash-alert')
                         <div class="card">
                             <div class="card-header">
                                 <h4>Daftar Lokasi Buku</h4>

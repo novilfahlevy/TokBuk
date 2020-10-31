@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Buku;
 use App\Penulis;
 use App\Penerbit;
@@ -10,6 +11,10 @@ use App\Kategori;
 use App\Pemasok;
 use App\Lokasi;
 use App\LogBuku;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
@@ -59,7 +64,7 @@ class BukuController extends Controller
         ]);
         
         $sampul = $request->file('sampul');
-        $get_name = $sampul->getClientOriginalName();
+        $get_name = Str::random(32) . '.' . $sampul->getClientOriginalExtension();
         $sampul->move(public_path('images/buku/'), $get_name);
 
         $buku = Buku::create([
@@ -91,7 +96,7 @@ class BukuController extends Controller
         if($buku == true ){
             return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Buku', 'type' => 'success']);
         } else {
-            return redirect()->route('buku')->with(['message' => 'Gagal Menambah Buku', 'type' => 'error']);
+            return redirect()->route('buku')->with(['message' => 'Gagal Menambah Buku', 'type' => 'danger']);
         }
     }
 
@@ -122,13 +127,15 @@ class BukuController extends Controller
             'harga' => 'required'
         ]);
 
-        if ( $request->sampul ) {
-            $sampul = $request->file('sampul');
-            $get_name = $sampul->getClientOriginalName();
-            $sampul->move(public_path('images/buku/'), $get_name);
-          }
+        $buku = Buku::where('id', $id);
 
-          $buku = Buku::where('id', $id);
+        if ( $request->sampul ) {
+            $sampulLama = $buku->first()->sampul;
+            $sampul = $request->file('sampul');
+            $get_name = explode('.', $sampulLama)[0] . '.' . $sampul->getClientOriginalExtension();
+            $sampul->move(public_path('images/buku/'), $get_name);
+            Storage::disk('public')->delete('images/buku/' . $sampulLama);
+          }
 
           $update = $buku->update([
             'sampul' => $request->sampul ? $get_name : $buku->first()->sampul,
@@ -147,7 +154,7 @@ class BukuController extends Controller
         if($update == true) {
             return redirect()->route('buku')->with(['message' => 'Berhasil Mengubah Data Buku', 'type' => 'success']);
         } else {
-            return redirect()->route('buku')->with(['message' => 'Gagal Mengubah Data Buku', 'type' => 'error']);
+            return redirect()->route('buku')->with(['message' => 'Gagal Mengubah Data Buku', 'type' => 'danger']);
         }
     }
 
@@ -164,8 +171,15 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
-        Buku::destroy($id);
-        return redirect()->route('buku', ['id' => $id]);
+        $buku = Buku::find($id);
+        $sampul = $buku->sampul;
+        if ( $buku->delete() ) {
+            if ( $sampul !== 'sampul.png' ) {
+                Storage::disk('public')->delete('images/buku/' . $sampul);
+            }
+            return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Data Buku', 'type' => 'success']);
+        }
+        return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Data Buku, Silahkan coba lagi', 'type' => 'danger']);
     }
 
     public function logs()
@@ -187,19 +201,31 @@ class BukuController extends Controller
             'harga_beli' => 'required',
             'jumlah' => 'required'
         ]);
-        $buku = Buku::where('id', $id);
-        $logb = LogBuku::create([
-            'id_buku' => $buku->id,
-            'id_user' => auth()->user()->id,
-            'harga_beli' => $request->harga_beli,
-            'harga_jual' => $request->harga_jual,
-            'jumlah' => $request->jumlah,
-            'status' => 'Penambahan'
+        
+        DB::beginTransaction();
 
-        ]);
+        try {
+            $buku = Buku::where('id', $id);
+            
+            $logb = LogBuku::create([
+                'id_buku' => $buku->first()->id,
+                'id_user' => auth()->user()->id,
+                'harga_beli' => $request->harga_beli,
+                'harga_jual' => $request->harga_jual,
+                'jumlah' => $request->jumlah,
+                'status' => 'Penambahan'
+            ]);
 
-        $buku->update([
-            'jumlah' => $buku->first()->jumlah + $request->jumlah
-        ]);
+            $buku->update([
+                'jumlah' => $buku->first()->jumlah + $request->jumlah
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Jumlah Buku', 'type' => 'success']);
+        } catch ( Exception $e ) {
+            DB::rollBack();
+            return redirect()->route('buku.tambahstore')->with(['message' => 'Gagal Menambah Jumlah Buku, Silahkan coba lagi', 'type' => 'danger']);
+        }
     }
 }

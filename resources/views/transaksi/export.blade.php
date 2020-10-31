@@ -14,9 +14,9 @@
       <tr>
         <td>{{$loop->index+1}}</td>
         <td>{{ $t->created_at }}</td>
-        <td>{{ $t->buku->judul }}</td>
+        <td>{{ $t->buku()->withTrashed()->first()->judul }}</td>
         <td>{{ $t->jumlah }}</td>
-        <td>Rp {{ $t->buku->harga }}</td>
+        <td>Rp {{ $t->buku()->withTrashed()->first()->harga }}</td>
         <td>Rp {{ $t->transaksi ? $t->transaksi->total_harga : '-' }}</td>
       </tr>
     @endforeach
