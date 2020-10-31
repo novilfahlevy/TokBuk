@@ -47,11 +47,11 @@ class PenerbitController extends Controller
         }
     }
 
-    public function detail($id)
-    {
-        $penerbit = Penerbit::where('id', $id)->first();
-        return view('penerbit_admin.detail', compact('penerbit'));
-    }
+    // public function detail($id)
+    // {
+    //     $penerbit = Penerbit::where('id', $id)->first();
+    //     return view('penerbit_admin.detail', compact('penerbit'));
+    // }
 
     public function edit($id)
     {

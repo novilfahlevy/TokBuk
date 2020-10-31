@@ -10,6 +10,7 @@ Penerbit Buku
           <div class="section-header">
                 <h1>Penerbit Buku</h1>
           </div>
+        </section>
           <div class="section-body">
             <div class="content-body table">
                 <div class="row">
@@ -57,9 +58,40 @@ Penerbit Buku
                                             <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
-                                    <a type="submit" class="btn btn-sm btn-primary text-white" href="{{ route('penerbit.detail',  ['id' => $p["id"]]) }}" title="Detail Data"><i class="fas fa-eye"></i></a>
+                                    <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}"><i class="fa fa-eye"></i></a>
                                   </td>
                               </tr>
+                              
+                              {{-- modal --}}
+                              <div class="modal fade bs-example-modal-lg-{{$p->id}}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLabel">Detail Penerbit</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12" style="text-align: left;">
+                                                <h6>Nama</h6>
+                                                <label for="">{{$p->nama}}</label>
+                                                <hr>
+                                                <h6>Alamat</h6>
+                                                <label for="">{{!!$p->alamat ? $p->alamat : '-'}}</label>
+                                                <hr>
+                                                <h6>E-Mail</h6>
+                                                <label for="">{{!!$p->email ? $p->email : '-'}}</label>
+                                                <hr>
+                                                <h6>Telepon</h6>
+                                                <label for="">{{!!$p->telepon ? $p->telepon : '-'}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                                   @endforeach
                                     </tbody>
                                 </table>
@@ -69,7 +101,7 @@ Penerbit Buku
                 </div>
             </div>
         </div>
-        </section>
+        {{-- </section> --}}
     </div>
   </div>
 @endsection
