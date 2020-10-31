@@ -16,8 +16,8 @@
         <td>{{ $t->created_at }}</td>
         <td>{{ $t->buku()->withTrashed()->first()->judul }}</td>
         <td>{{ $t->jumlah }}</td>
-        <td>Rp {{ $t->buku()->withTrashed()->first()->harga }}</td>
-        <td>Rp {{ $t->transaksi ? $t->transaksi->total_harga : '-' }}</td>
+        <td>Rp {{ number_format($t->buku()->withTrashed()->first()->harga) }}</td>
+        <td>Rp {{ number_format($t->transaksi()->withTrashed()->first()->total_harga) }}</td>
       </tr>
     @endforeach
   </tbody>

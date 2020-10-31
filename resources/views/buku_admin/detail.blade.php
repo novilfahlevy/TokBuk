@@ -66,7 +66,7 @@
                                                     <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Harga (Per buku)</div>
                                                         <div class="col-1 text-right">:</div>
-                                                        <div class="col-lg-6 col-5">Rp. {{$buku->harga}},00</div>
+                                                        <div class="col-lg-6 col-5">Rp. {{number_format($buku->harga)}}</div>
                                                     </div>
                                                     <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Jumlah Stok Buku Saat ini</div>

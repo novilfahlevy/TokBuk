@@ -35,15 +35,15 @@ Detail Transaksi
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Uang Pembeli</h6>
-                  <p>Rp {{ $transaksi->uang_pembeli }}</p>
+                  <p>Rp {{ number_format($transaksi->uang_pembeli) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Total Harga</h6>
-                  <p>Rp {{ $transaksi->total_harga }}</p>
+                  <p>Rp {{ number_format($transaksi->total_harga) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Kembalian</h6>
-                  <p>Rp {{ $transaksi->uang_pembeli - $transaksi->total_harga }}</p>
+                  <p>Rp {{ number_format($transaksi->uang_pembeli - $transaksi->total_harga) }}</p>
                 </div>
               </div>
             </div>
@@ -64,8 +64,8 @@ Detail Transaksi
                       <th>{{ $loop->index + 1 }}</th>
                       <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
                       <th>{{ $t->jumlah }}</th>
-                      <th>Rp {{ $t->buku()->withTrashed()->first()->harga }}</th>
-                      <th>Rp {{ $t->harga }}</th>
+                      <th>Rp {{ number_format($t->buku()->withTrashed()->first()->harga) }}</th>
+                      <th>Rp {{ number_format($t->harga) }}</th>
                     </tr>
                   @endforeach
                 </tbody>
