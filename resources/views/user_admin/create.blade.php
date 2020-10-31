@@ -17,16 +17,15 @@
                             <h4>Form Tambah Pengguna</h4>
                         </div>
                                 <div class="card-body">
-                                    <h6>Bila ada tanda <span class="text-danger">*</span> Input tidak boleh dikosongkan.</h6>
-                                    <br><br>
                                     <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Nama*
-                                                    <input type="text" class="form-control" required name="name" value="{{ old('name') }}" ><br/>
-                                                    Username*
+                                                    Nama
+                                                    <input type="text" class="form-control" required name="name" value="{{ old('name') }}" >
+                                                    <br/>
+                                                    Username
                                                     <input type="text" class="form-control @error('username') is-invalid @enderror" required name="username" value="{{ old('username') }}">
                                                     @error('username')
                                                             <span class="invalid-feedback" role="alert">
@@ -34,14 +33,17 @@
                                                             </span>
                                                     @enderror
                                                     <br/>
-                                                    Posisi*
+
+                                                    Posisi
                                                     <select name="posisi" class="form-control">
                                                         <option value=''>--- Pilih Posisi ---</option>
                                                         <option value="Admin">Admin</option>
                                                         <option value="Operator">Operator</option>
                                                         <option value="Kasir">Kasir</option>
-                                                    </select><br/>
-                                                    E-Mail*
+                                                    </select>
+                                                    <br/>
+
+                                                    E-Mail
                                                     <input type="email" class="form-control @error('email') is-invalid @enderror" required name="email" value="{{ old('email') }}">
                                                     @error('email')
                                                             <span class="invalid-feedback" role="alert">
@@ -49,7 +51,7 @@
                                                             </span>
                                                     @enderror
                                                     <br/>
-                                                    Telepon*
+                                                    Telepon
                                                     <input type="number" class="form-control" required name="telepon" value="{{ old('telepon') }}">
                                                 </div>
                                                 
@@ -57,7 +59,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Password*
+                                                    Password
                                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                                         @error('password')
                                                             <span class="invalid-feedback" role="alert">
@@ -65,10 +67,12 @@
                                                             </span>
                                                         @enderror
                                                         <br/>
-                                                    Confirm Password*
+
+                                                    Konfirmasi Password
                                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                                     <br/>
-                                                    Alamat*
+                                                    
+                                                    Alamat
                                                     <textarea type="text" class="form-control" required name="alamat" value="{{ old('alamat') }}" style="height:215px"></textarea>
                                                 </div>
                                             </div>
