@@ -49,17 +49,20 @@ Buku
                                       <td>Rp. {{$b->harga}},00</td>
                                   <td>
                                       <div class="btn-group">
-                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('buku.edit',  ['id' => $b["id"]]) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('buku.edit',  ['id' => $b["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form method="post" class="delete_form " action="{{route('buku.destroy',$b['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  ><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
-                                      <div class="btn-group">
-                                        <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}" class="btn btn-sm btn-primary text-white"><i class="fa fa-eye"></i></i></a>
+                                    <div class="btn-group">
+                                        <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}" class="btn btn-sm btn-primary text-white" title="Detail Data"><i class="fa fa-eye"></i></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route( 'buku.tambah' ,['id' => $b->id]) }}" class="btn btn-sm btn-success text-white" title="Tambah Jumlah Buku"><i class="fas fa-plus"></i></i></a>
                                     </div>
                                   </td>
                               </tr>
