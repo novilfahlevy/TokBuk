@@ -20,12 +20,12 @@ class LokasiController extends Controller
 	{
 		$lokasi = $request->lokasi;
 		if ( Lokasi::create(['nama' => $lokasi]) ) {
-			return redirect()->route('lokasi')->with('alert', [
+			return redirect()->route('lokasi')->with([
 				'type' => 'success',
 				'message' => 'Berhasil menambah buku'
 			]);
 		}
-		return redirect()->route('lokasi')->with('alert', [
+		return redirect()->route('lokasi')->with([
 			'type' => 'danger',
 			'message' => 'Gagal menambah buku'
 		]);
@@ -35,12 +35,12 @@ class LokasiController extends Controller
 	{
 		$lokasi = Lokasi::find($id);
 		if ( $lokasi->update(['nama' => $request->lokasi]) ) {
-			return redirect()->route('lokasi')->with('alert', [
+			return redirect()->route('lokasi')->with([
 				'type' => 'success',
 				'message' => 'Berhasil mengedit buku'
 			]);
 		}
-		return redirect()->route('lokasi')->with('alert', [
+		return redirect()->route('lokasi')->with([
 			'type' => 'danger',
 			'message' => 'Gagal mengedit buku'
 		]);
@@ -54,13 +54,13 @@ class LokasiController extends Controller
 			Buku::where('id_lokasi', $id)->update(['id_lokasi' => null]);
 			$lokasi->delete();
 			DB::commit();
-			return redirect()->route('lokasi')->with('alert', [
+			return redirect()->route('lokasi')->with([
 				'type' => 'success',
 				'message' => 'Berhasil menghapus buku'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
-			return redirect()->route('lokasi')->with('alert', [
+			return redirect()->route('lokasi')->with([
 				'type' => 'danger',
 				'message' => 'Gagal menghapus buku'
 			]);

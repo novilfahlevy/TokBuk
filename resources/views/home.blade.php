@@ -10,7 +10,7 @@
                 <h1>Dashboard</h1>
           </div>
           <div class="section-body">
-          <h2>Welcome {{auth()->user()->name}}</h2>
+          
           </div>
       </section>
     </div>

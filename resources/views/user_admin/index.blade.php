@@ -15,7 +15,7 @@ Pengguna
             <div class="content-body table">
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
-                        @include('layouts.flash-messages')
+                        @include('layouts.flash-alert')
                         <div class="card">
                             <div class="card-header">
                                 <h4>Pengguna</h4>

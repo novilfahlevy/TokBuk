@@ -45,7 +45,7 @@ Buku
                                       <td>{{$loop->index+1}}</td>
                                       <td>{{$b->isbn}}</td>
                                       <td>{{$b->judul}}</td>
-                                      <td>{{$b->Kategori->nama}}</td>
+                                      <td>{{$b->kategori ? $b->kategori->nama : '-'}}</td>
                                       <td>{{$b->jumlah}}</td>
                                       <td>Rp. {{$b->harga}},00</td>
                                   <td>

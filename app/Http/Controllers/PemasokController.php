@@ -47,7 +47,7 @@ class PemasokController extends Controller
             return redirect()->route('pemasok')->with(['message' => 'Berhasil Menambah Pemasok', 'type' => 'success']);
         } else {
 
-            return redirect()->route('pemasok')->with(['message' => 'Gagal Menambah Pemasok', 'type' => 'error']);
+            return redirect()->route('pemasok')->with(['message' => 'Gagal Menambah Pemasok', 'type' => 'danger']);
         }
     }
 
@@ -76,7 +76,7 @@ class PemasokController extends Controller
         if($update == true) {
             return redirect()->route('pemasok')->with(['message' => 'Berhasil Mengubah Pemasok', 'type' => 'success']);
         } else {
-            return redirect()->route('pemasok')->with(['message' => 'Gagal Mengubah Pemasok', 'type' => 'error']);
+            return redirect()->route('pemasok')->with(['message' => 'Gagal Mengubah Pemasok', 'type' => 'danger']);
         }
     }
 

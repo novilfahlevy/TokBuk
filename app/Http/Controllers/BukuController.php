@@ -96,7 +96,7 @@ class BukuController extends Controller
         if($buku == true ){
             return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Buku', 'type' => 'success']);
         } else {
-            return redirect()->route('buku')->with(['message' => 'Gagal Menambah Buku', 'type' => 'error']);
+            return redirect()->route('buku')->with(['message' => 'Gagal Menambah Buku', 'type' => 'danger']);
         }
     }
 
@@ -154,7 +154,7 @@ class BukuController extends Controller
         if($update == true) {
             return redirect()->route('buku')->with(['message' => 'Berhasil Mengubah Data Buku', 'type' => 'success']);
         } else {
-            return redirect()->route('buku')->with(['message' => 'Gagal Mengubah Data Buku', 'type' => 'error']);
+            return redirect()->route('buku')->with(['message' => 'Gagal Mengubah Data Buku', 'type' => 'danger']);
         }
     }
 
@@ -171,8 +171,13 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
-        Buku::destroy($id);
-        return redirect()->route('buku', ['id' => $id]);
+        $buku = Buku::find($id);
+        $sampul = $buku->sampul;
+        if ( $buku->delete() ) {
+            Storage::disk('public')->delete('images/buku/' . $sampul);
+            return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Data Buku', 'type' => 'success']);
+        }
+        return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Data Buku, Silahkan coba lagi', 'type' => 'danger']);
     }
 
     public function logs()

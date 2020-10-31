@@ -44,8 +44,8 @@ Riwayat Penambahan dan Pembelian Buku
                                       <tr>
                                       <td>{{$loop->index+1}}</td>
                                       <td>{{$b->created_at}}</td>
-                                      <td>{{$b->buku->judul}}</td>
-                                      <td>{{$b->user->name}}</td>
+                                      <td>{{$b->buku()->withTrashed()->first()->judul}}</td>
+                                      <td>{{$b->user()->withTrashed()->first()->name}}</td>
                                       <td>Rp {{$b->harga_jual}}</td>
                                       <td>Rp {{$b->harga_beli}}</td>
                                       <td>{{$b->jumlah}}</td>
