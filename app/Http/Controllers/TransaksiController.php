@@ -108,8 +108,8 @@ class TransaksiController extends Controller
 		}
 	}
 
-	public function export()
+	public function export(Request $request)
 	{
-		return Excel::download(new TransaksiExport, 'transaksi.xlsx');
+		return Excel::download(new TransaksiExport($request->mulai, $request->sampai), 'transaksi.xlsx');
 	}
 }

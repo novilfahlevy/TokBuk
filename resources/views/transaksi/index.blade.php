@@ -20,9 +20,9 @@ Transaksi Penjualan
                                     <h4>Daftar Transaksi Penjualan</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <a href="{{ route('transaksi.export') }}" class="btn btn-sm btn-success mr-3" title="Export Data">
+                                            <button type="button" class="btn btn-sm btn-success mr-3" data-toggle="modal" data-target="#exportModal" title="Export Data">
                                                 <i class="fas fa-file-export"></i>
-                                            </a>
+                                            </button>
                                             <a href="{{ route('transaksi.create') }}" class="btn btn-sm btn-primary" title="Tambah Data">
                                                 <i class="fas fa-plus"></i>
                                             </a>
@@ -81,4 +81,38 @@ Transaksi Penjualan
         </section>
     </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" id="exportModal">
+    <form action="{{ route('transaksi.export') }}" method="POST">
+        @csrf
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tambah Lokasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group mb-0">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="mulai">Dari tanggal</label>
+                            <input type="date" class="form-control" id="mulai" name="mulai">
+                        </div>
+                        <div class="col-6">
+                            <label for="sampai">Sampai tanggal</label>
+                            <input type="date" class="form-control" id="sampai" name="sampai">
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Export</button>
+              </div>
+            </div>
+        </div>
+    </form>
+  </div>
 @endsection
