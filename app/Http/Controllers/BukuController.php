@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Buku;
+use App\Exports\LogBukuExport;
 use App\Penulis;
 use App\Penerbit;
 use App\Kategori;
@@ -227,5 +228,10 @@ class BukuController extends Controller
             DB::rollBack();
             return redirect()->route('buku.tambahstore')->with(['message' => 'Gagal Menambah Jumlah Buku, Silahkan coba lagi', 'type' => 'danger']);
         }
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new LogBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
     }
 }
