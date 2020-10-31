@@ -174,7 +174,9 @@ class BukuController extends Controller
         $buku = Buku::find($id);
         $sampul = $buku->sampul;
         if ( $buku->delete() ) {
-            Storage::disk('public')->delete('images/buku/' . $sampul);
+            if ( $sampul !== 'sampul.png' ) {
+                Storage::disk('public')->delete('images/buku/' . $sampul);
+            }
             return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Data Buku', 'type' => 'success']);
         }
         return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Data Buku, Silahkan coba lagi', 'type' => 'danger']);
