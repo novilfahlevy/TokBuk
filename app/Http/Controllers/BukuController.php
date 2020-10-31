@@ -133,8 +133,8 @@ class BukuController extends Controller
             $sampulLama = $buku->first()->sampul;
             $sampul = $request->file('sampul');
             $get_name = explode('.', $sampulLama)[0] . '.' . $sampul->getClientOriginalExtension();
-            $sampul->move(public_path('images/buku/'), $get_name);
             Storage::disk('public')->delete('images/buku/' . $sampulLama);
+            $sampul->move(public_path('images/buku/'), $get_name);
           }
 
           $update = $buku->update([
