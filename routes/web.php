@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('databuku/{id}', 'BukuController@edit')->name('buku.edit');
   Route::put('databuku/{id}/update', 'BukuController@update')->name('buku.update');
   Route::delete('databuku/{id}', 'BukuController@destroy')->name('buku.destroy');
+  Route::post('databuku/export', 'BukuController@export')->name('logbuku.export');
 
 
   //penulis
@@ -83,6 +84,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('transaksi/edit/{id}', 'TransaksiController@edit')->name('transaksi.edit');
   Route::put('transaksi/update/{id}', 'TransaksiController@update')->name('transaksi.update');
   Route::get('transaksi/{id}/detail', 'TransaksiController@detail')->name('transaksi.detail');
-  Route::get('transaksi/export', 'TransaksiController@export')->name('transaksi.export');
+  Route::post('transaksi/export', 'TransaksiController@export')->name('transaksi.export');
   Route::delete('transaksi/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');
 });

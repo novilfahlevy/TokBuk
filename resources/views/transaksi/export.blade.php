@@ -3,21 +3,22 @@
     <tr>
       <th>No</th>
       <th>Tanggal</th>
-      <th>Judul Buku</th>
-      <th>Jumlah</th>
-      <th>Harga Per Buku</th>
+      <th>Jumlah Buku</th>
       <th>Total Harga</th>
+      <th>Uang Pembeli</th>
+      <th>Kembalian</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($transaksi as $t)
       <tr>
-        <td>{{$loop->index+1}}</td>
+        <td>{{ $loop->index + 1 }}</td>
         <td>{{ $t->created_at }}</td>
-        <td>{{ $t->buku()->withTrashed()->first()->judul }}</td>
-        <td>{{ $t->jumlah }}</td>
-        <td>Rp {{ number_format($t->buku()->withTrashed()->first()->harga) }}</td>
-        <td>Rp {{ number_format($t->transaksi()->withTrashed()->first()->total_harga) }}</td>
+        <td>{{ $t->jumlah_buku }}</td>
+        <td>Rp {{ number_format($t->total_harga) }}</td>
+        <td>Rp {{ number_format($t->uang_pembeli) }}</td>
+        <td>Rp {{ number_format($t->uang_pembeli - $t->total_harga) }}</td>
+        <td></td>
       </tr>
     @endforeach
   </tbody>
