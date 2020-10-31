@@ -4,7 +4,8 @@ $.ajax({
   method: 'GET',
   error: error => console.log(error),
   success: ({ data }) => {
-    const { label, pendapatan, pengeluaran } = data;
+    const { bulan, label, pendapatan, pengeluaran } = data;
+    $('#bulan').text(bulan);
     new Chart(ctx, {
       type: 'line',
       data: {

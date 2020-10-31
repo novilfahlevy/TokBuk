@@ -74,7 +74,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Pendapatan dan Pengeluaran Per Hari Bulan Ini</h4>
+                    <h4>Pendapatan dan Pengeluaran Per Hari Bulan Ini (<span id="bulan"></span>)</h4>
                   </div>
                   <div class="card-body">
                     <canvas id="transaksi" width="400" height="200"></canvas>
