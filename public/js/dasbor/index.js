@@ -5,7 +5,10 @@ $.ajax({
   error: error => console.log(error),
   success: ({ data }) => {
     const { bulan, label, pendapatan, pengeluaran } = data;
+
+    $('#loading').hide();
     $('#bulan').text(bulan);
+
     new Chart(ctx, {
       type: 'line',
       data: {
