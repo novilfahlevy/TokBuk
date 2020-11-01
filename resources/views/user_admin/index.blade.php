@@ -54,7 +54,7 @@ Pengguna
                                                 <td>{{$u->email}}</td>
                                                 <td>
                                                     @if (auth()->user()->id == $u->id)
-                                                    Me
+                                                    Saya
                                                     @else 
                                                     <div class="btn-group">
                                                         <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
