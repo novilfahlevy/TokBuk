@@ -38,6 +38,17 @@ function getAllBooks(selectClass) {
           $('#totalSemuaHarga').text(format(getTotalHarga()));
 
           return data.text;
+        },
+        templateResult: function(data) {
+          if ( data.id ) {
+            const buku = JSON.parse(atob(data.id));
+            return $(`
+              <span class="d-flex align-items-center">
+                <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
+                ${buku.judul.slice(0, 30)}${buku.judul.length > 30 ? '...' : ''}
+              </span>
+            `);
+          }
         }
       });
       data.buku.map(buku => {
