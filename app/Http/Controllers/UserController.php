@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = $this->user->get();
+        $users = $this->user->orderBy(DB::raw('CASE WHEN id = ' . auth()->user()->id . ' THEN 0 ELSE 1 END'))->get();
         return view('user_admin.index', compact('users'));
     }
 
