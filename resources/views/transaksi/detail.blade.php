@@ -27,7 +27,7 @@ Detail Transaksi
               <div class="row">
                 <div class="col-lg-2">
                   <h6 class="mb-1">Ditangani Oleh</h6>
-                  <p>{{ $transaksi->user->name }}</p>
+                  <p>{{ $transaksi->user()->withTrashed()->first()->name }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Tanggal Transaksi</h6>
