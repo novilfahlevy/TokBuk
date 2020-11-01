@@ -83,7 +83,7 @@ class TransaksiController extends Controller
 
 			DB::commit();
 
-			return redirect()->route('transaksi')->with([
+			return redirect()->route('transaksi.detail', ['id' => $transaksiBaru->id])->with([
 				'message' => 'Transaksi Berhasil Dibuat.',
 				'type' => 'success'
 			]);
