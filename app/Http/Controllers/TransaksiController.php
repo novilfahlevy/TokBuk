@@ -15,7 +15,23 @@ class TransaksiController extends Controller
 {
 	public function index()
 	{
-		$transaksi = Transaksi::orderBy('created_at', 'DESC')->get();
+		$transaksi = Transaksi::join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
+			->select([
+				'transaksi.created_at',
+				DB::raw('SUM(dt.jumlah) AS jumlah_buku'),
+				'transaksi.total_harga',
+				'transaksi.uang_pembeli',
+				'transaksi.id'
+			])
+			->groupBy([
+				'transaksi.created_at',
+				'transaksi.total_harga', 
+				'transaksi.uang_pembeli',
+				'transaksi.id'
+			])
+			->orderBy('created_at', 'DESC')
+			->get();
+
 		return view('transaksi.index', compact('transaksi'));
 	}
 

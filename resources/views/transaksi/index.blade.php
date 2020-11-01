@@ -36,21 +36,23 @@ Transaksi Penjualan
                                             <thead style="">
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Tanggal</th>
-                                                    <th scope="col">Ditangani Oleh</th>
-                                                    <th scope="col">Total Harga</th>
-                                                    <th scope="col">Uang Pembeli</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Jumlah Buku</th>
+                                                    <th>Total Harga</th>
+                                                    <th>Uang Pembeli</th>
+                                                    <th>Kembalian</th>
                                                     <th scope="col"></th>
-                                                </tr>
+                                                </tr
                                             </thead>
                                             <tbody>
                                                 @foreach ($transaksi as $t)
                                                 <tr>
                                                     <td scope="row">{{$loop->index+1}}</td>
                                                     <td>{{ $t->created_at }}</td>
-                                                    <td>{{ $t->user()->withTrashed()->first()->name }}</td>
+                                                    <td>{{ $t->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($t->total_harga) }}</td>
                                                     <td>Rp {{ number_format($t->uang_pembeli) }}</td>
+                                                    <td>Rp {{ number_format($t->uang_pembeli - $t->total_harga) }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "
