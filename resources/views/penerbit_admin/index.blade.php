@@ -40,7 +40,7 @@ Penerbit Buku
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Penerbit</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

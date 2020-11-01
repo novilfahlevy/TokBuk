@@ -36,7 +36,7 @@ Buku
                                             <th>Kategori</th>
                                             <th>Jumlah</th>
                                             <th>Harga</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

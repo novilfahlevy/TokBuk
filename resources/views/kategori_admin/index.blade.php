@@ -57,7 +57,7 @@ Kategori Buku
                                         <tr>
                                           <th>No</th>
                                           <th>Kategori</th>
-                                          <th>Aksi</th>
+                                          <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

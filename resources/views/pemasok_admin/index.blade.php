@@ -42,7 +42,7 @@ Pemasok Buku
                                             <th>Alamat</th>
                                             <th>E-Mail</th>
                                             <th>Telepon</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

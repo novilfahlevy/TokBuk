@@ -34,7 +34,7 @@ Pengguna
                                             <th>Username</th>
                                             <th>Posisi</th>
                                             <th>E-Mail</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -56,7 +56,7 @@ Penulis Buku
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Penulis</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
