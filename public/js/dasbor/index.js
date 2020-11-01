@@ -44,4 +44,10 @@ $.ajax({
       }
     });    
   }
-})
+});
+
+channelBind('transaksi.created', 'transaksi.created', function(data) {
+  $('#jumlahTransaksi').text(
+    new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(data.jumlahTransaksi)
+  );
+});
