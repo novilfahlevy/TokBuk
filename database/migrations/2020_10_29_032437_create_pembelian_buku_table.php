@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogBukuTable extends Migration
+class CreatePembelianBukuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLogBukuTable extends Migration
      */
     public function up()
     {
-        Schema::create('log_buku', function (Blueprint $table) {
+        Schema::create('pembelian_buku', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_buku');
             $table->foreign('id_buku')->references('id')->on('buku');  
@@ -34,6 +34,6 @@ class CreateLogBukuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_buku');
+        Schema::dropIfExists('pembelian_buku');
     }
 }

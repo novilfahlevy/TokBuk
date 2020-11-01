@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Buku;
 use App\Events\UpdateDasborEvent;
-use App\Exports\LogBukuExport;
+use App\Exports\PembelianBukuExport;
 use App\Penulis;
 use App\Penerbit;
 use App\Kategori;
 use App\Pemasok;
 use App\Lokasi;
-use App\LogBuku;
+use App\PembelianBuku;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -20,14 +20,14 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
-    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Pemasok $Pemasok, Lokasi $lokasi, LogBuku $logbuku)
+    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Pemasok $Pemasok, Lokasi $lokasi, PembelianBuku $pembelianbuku)
     {
         $this->buku = $buku;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->kategori = $kategori;
         $this->lokasi = $lokasi;
-        $this->logbuku = $logbuku;
+        $this->pembelianbuku = $pembelianbuku;
     }
     public function index()
     {
@@ -84,7 +84,7 @@ class BukuController extends Controller
 
             
         ]);
-        $logbuku = LogBuku::create([
+        $pembelianbuku = PembelianBuku::create([
             'id_buku' => $buku->id,
             'id_user' => auth()->user()->id,
             'harga_jual' => $request->harga_jual,
@@ -187,7 +187,7 @@ class BukuController extends Controller
 
     public function logs()
     {
-        $logs = LogBuku::orderBy('created_at', 'DESC')->get();
+        $logs = PembelianBuku::orderBy('created_at', 'DESC')->get();
         return view('buku_admin.logs', compact('logs'));
     }
 
@@ -210,7 +210,7 @@ class BukuController extends Controller
         try {
             $buku = Buku::where('id', $id);
             
-            $logb = LogBuku::create([
+            $logb = PembelianBuku::create([
                 'id_buku' => $buku->first()->id,
                 'id_user' => auth()->user()->id,
                 'harga_beli' => $request->harga_beli,
@@ -236,6 +236,6 @@ class BukuController extends Controller
 
     public function export(Request $request)
     {
-        return Excel::download(new LogBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
+        return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
     }
 }

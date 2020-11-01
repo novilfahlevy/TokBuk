@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\LogBuku;
+use App\PembelianBuku;
 use App\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
@@ -39,7 +39,7 @@ class UpdateDasborEvent implements ShouldBroadcast
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();
 
-        $pengeluaran = LogBuku::where(DB::raw('MONTH(created_at)'), $now->month)
+        $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $now->month)
             ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();

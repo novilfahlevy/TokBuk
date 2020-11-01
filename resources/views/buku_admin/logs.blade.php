@@ -73,7 +73,7 @@ Riwayat Penambahan dan Pembelian Buku
   </div>
 
   <div class="modal" tabindex="-1" role="dialog" id="exportModal">
-    <form action="{{ route('logbuku.export') }}" method="POST">
+    <form action="{{ route('pembelianbuku.export') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">

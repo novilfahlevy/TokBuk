@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buku;
-use App\LogBuku;
+use App\PembelianBuku;
 use App\Transaksi;
 use App\User;
 use Carbon\Carbon;
@@ -51,7 +51,7 @@ class HomeController extends Controller
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();
 
-        $pengeluaran = LogBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
+        $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
             ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();

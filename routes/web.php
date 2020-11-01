@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('databuku/{id}', 'BukuController@edit')->name('buku.edit');
   Route::put('databuku/{id}/update', 'BukuController@update')->name('buku.update');
   Route::delete('databuku/{id}', 'BukuController@destroy')->name('buku.destroy');
-  Route::post('databuku/export', 'BukuController@export')->name('logbuku.export');
+  Route::post('databuku/export', 'BukuController@export')->name('pembelianbuku.export');
 
 
   //penulis

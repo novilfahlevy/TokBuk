@@ -48,9 +48,9 @@ class Buku extends Model
         return $this->belongsTo(Lokasi::class, 'id_lokasi');
     }
 
-    public function logbuku()
+    public function pembelian()
     {
-        return $this->hasMany(LogBuku::class, 'id_buku');
+        return $this->hasMany(PembelianBuku::class, 'id_buku');
     }
 
     use SoftDeletes;    

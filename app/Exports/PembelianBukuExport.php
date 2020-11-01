@@ -2,11 +2,11 @@
 
 namespace App\Exports;
 
-use App\LogBuku;
+use App\PembelianBuku;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class LogBukuExport implements FromView
+class PembelianBukuExport implements FromView
 {
 	private $mulai;
 	private $sampai;
@@ -22,7 +22,7 @@ class LogBukuExport implements FromView
 	*/
 	public function view(): View
 	{
-		$buku = LogBuku::where(function($query) {
+		$buku = PembelianBuku::where(function($query) {
 			$query->whereDate('created_at', '>=', $this->mulai)->whereDate('created_at', '<=', $this->sampai);
 		})
 		->get();
