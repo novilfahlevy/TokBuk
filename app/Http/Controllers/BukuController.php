@@ -153,9 +153,9 @@ class BukuController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('buku')->with(['message' => 'Berhasil Mengubah Data Buku', 'type' => 'success']);
+            return redirect()->route('buku')->with(['message' => 'Berhasil Mengedit Buku', 'type' => 'success']);
         } else {
-            return redirect()->route('buku')->with(['message' => 'Gagal Mengubah Data Buku', 'type' => 'danger']);
+            return redirect()->route('buku')->with(['message' => 'Gagal Mengedit Buku', 'type' => 'danger']);
         }
     }
 
@@ -178,9 +178,9 @@ class BukuController extends Controller
             if ( $sampul !== 'sampul.png' ) {
                 Storage::disk('public')->delete('images/buku/' . $sampul);
             }
-            return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Data Buku', 'type' => 'success']);
+            return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Buku', 'type' => 'success']);
         }
-        return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Data Buku, Silahkan coba lagi', 'type' => 'danger']);
+        return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Buku, Silahkan coba lagi', 'type' => 'danger']);
     }
 
     public function logs()
@@ -226,7 +226,7 @@ class BukuController extends Controller
             return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Jumlah Buku', 'type' => 'success']);
         } catch ( Exception $e ) {
             DB::rollBack();
-            return redirect()->route('buku.tambahstore')->with(['message' => 'Gagal Menambah Jumlah Buku, Silahkan coba lagi', 'type' => 'danger']);
+            return redirect()->route('buku.tambahstore')->with(['message' => 'Gagal Menambah Jumlah Buku', 'type' => 'danger']);
         }
     }
 

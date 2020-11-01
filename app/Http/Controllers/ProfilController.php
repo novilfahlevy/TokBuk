@@ -35,13 +35,13 @@ class ProfilController extends Controller
 
 		if ( $user->update($request->all()) ) {
 			return redirect()->route('profil')->with([
-				'message' => 'Profil anda berhasil diganti.', 
+				'message' => 'Profil Anda Berhasil Diganti.', 
 				'type' => 'success'
 			]);
 		}
 
 		return redirect()->route('profil')->with([
-			'message' => 'Gagal mengganti profil anda, silahkan coba lagi.', 
+			'message' => 'Gagal Mengganti Profil Anda, Silahkan Coba Lagi.', 
 			'type' => 'danger'
 		]);
 	}
@@ -63,16 +63,16 @@ class ProfilController extends Controller
 		if ( Hash::check($request->passwordLama, $user->password) ) {
 			if ( $user->update(['password' => Hash::make($request->password)]) ) {
 				return redirect()->route('profil')->with([
-					'message' => 'Password anda berhasil diganti.', 
+					'message' => 'Password Anda Berhasil Diganti.', 
 					'type' => 'success'
 				]);
 			}
 			return redirect()->route('profil')->withErrors([
-				'message' => 'Gagal mengganti password, silahkan coba lagi.',
+				'message' => 'Gagal Mengganti Password, Silahkan Coba Lagi.',
 				'type' => 'danger'
 			]);
 		}
 
-		return redirect()->route('profil')->withErrors(['passwordLama' => 'Password lama anda tidak tepat']);
+		return redirect()->route('profil')->withErrors(['passwordLama' => 'Password Lama Anda Tidak Tepat']);
 	}
 }

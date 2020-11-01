@@ -81,9 +81,9 @@ class UserController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('user')->with(['message' => 'Berhasil Mengubah Data Pengguna', 'type' => 'success']);
+            return redirect()->route('user')->with(['message' => 'Berhasil Mengedit Pengguna', 'type' => 'success']);
         } else {
-            return redirect()->route('user')->with(['message' => 'Gagal Mengubah Data Pengguna', 'type' => 'danger']);
+            return redirect()->route('user')->with(['message' => 'Gagal Mengedit Pengguna', 'type' => 'danger']);
         }
     }
 

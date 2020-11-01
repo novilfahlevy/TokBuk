@@ -22,12 +22,12 @@ class LokasiController extends Controller
 		if ( Lokasi::create(['nama' => $lokasi]) ) {
 			return redirect()->route('lokasi')->with([
 				'type' => 'success',
-				'message' => 'Berhasil menambah buku'
+				'message' => 'Berhasil Menambah Lokasi'
 			]);
 		}
 		return redirect()->route('lokasi')->with([
 			'type' => 'danger',
-			'message' => 'Gagal menambah buku'
+			'message' => 'Gagal Menambah Lokasi'
 		]);
 	}
 
@@ -37,12 +37,12 @@ class LokasiController extends Controller
 		if ( $lokasi->update(['nama' => $request->lokasi]) ) {
 			return redirect()->route('lokasi')->with([
 				'type' => 'success',
-				'message' => 'Berhasil mengedit buku'
+				'message' => 'Berhasil Mengedit Lokasi'
 			]);
 		}
 		return redirect()->route('lokasi')->with([
 			'type' => 'danger',
-			'message' => 'Gagal mengedit buku'
+			'message' => 'Gagal Mengedit Lokasi'
 		]);
 	}
 
@@ -56,13 +56,13 @@ class LokasiController extends Controller
 			DB::commit();
 			return redirect()->route('lokasi')->with([
 				'type' => 'success',
-				'message' => 'Berhasil menghapus buku'
+				'message' => 'Berhasil Menghapus Lokasi'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('lokasi')->with([
 				'type' => 'danger',
-				'message' => 'Gagal menghapus buku'
+				'message' => 'Gagal Menghapus Lokasi'
 			]);
 		}
 	}

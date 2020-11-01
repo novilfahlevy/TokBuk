@@ -51,9 +51,9 @@ class KategoriController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('kategori')->with(['message' => 'Berhasil Mengubah Kategori', 'type' => 'success']);
+            return redirect()->route('kategori')->with(['message' => 'Berhasil Mengedit Kategori', 'type' => 'success']);
         } else {
-            return redirect()->route('kategori')->with(['message' => 'Gagal Mengubah Kategori', 'type' => 'danger']);
+            return redirect()->route('kategori')->with(['message' => 'Gagal Mengedit Kategori', 'type' => 'danger']);
         }
     }
 
@@ -67,13 +67,13 @@ class KategoriController extends Controller
 			DB::commit();
 			return redirect()->route('kategori')->with([
 				'type' => 'success',
-				'message' => 'Berhasil menghapus kategori'
+				'message' => 'Berhasil Menghapus Kategori'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('kategori')->with([
 				'type' => 'danger',
-				'message' => 'Gagal menghapus kategori'
+				'message' => 'Gagal Menghapus Kategori'
 			]);
 		}
     }

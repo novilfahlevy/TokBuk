@@ -74,9 +74,9 @@ class PemasokController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('pemasok')->with(['message' => 'Berhasil Mengubah Pemasok', 'type' => 'success']);
+            return redirect()->route('pemasok')->with(['message' => 'Berhasil Mengedit Pemasok', 'type' => 'success']);
         } else {
-            return redirect()->route('pemasok')->with(['message' => 'Gagal Mengubah Pemasok', 'type' => 'danger']);
+            return redirect()->route('pemasok')->with(['message' => 'Gagal Mengedit Pemasok', 'type' => 'danger']);
         }
     }
 
@@ -91,7 +91,7 @@ class PemasokController extends Controller
 			return redirect()->route('pemasok')->with(['message' => 'Berhasil Menghapus Pemasok', 'type' => 'success']);
 		} catch ( Exception $e ) {
 			DB::rollBack();
-			return redirect()->route('pemasok')->with(['message' => 'gagal Menghapus Pemasok', 'type' => 'danger']);
+			return redirect()->route('pemasok')->with(['message' => 'Gagal Menghapus Pemasok', 'type' => 'danger']);
 		}
 	}
 }

@@ -73,9 +73,9 @@ class PenerbitController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('penerbit')->with(['message' => 'Berhasil Mengubah Penerbit', 'type' => 'success']);
+            return redirect()->route('penerbit')->with(['message' => 'Berhasil Mengedit Penerbit', 'type' => 'success']);
         } else {
-            return redirect()->route('penerbit')->with(['message' => 'Gagal Mengubah Penerbit', 'type' => 'danger']);
+            return redirect()->route('penerbit')->with(['message' => 'Gagal Mengedit Penerbit', 'type' => 'danger']);
         }
     }
 

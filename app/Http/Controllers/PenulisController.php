@@ -51,9 +51,9 @@ class PenulisController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('penulis')->with(['message' => 'Berhasil Mengubah Nama Penulis', 'type' => 'success']);
+            return redirect()->route('penulis')->with(['message' => 'Berhasil Mengedit Penulis', 'type' => 'success']);
         } else {
-            return redirect()->route('penulis')->with(['message' => 'Gagal Mengubah Nama Penulis', 'type' => 'danger']);
+            return redirect()->route('penulis')->with(['message' => 'Gagal Mengedit Penulis', 'type' => 'danger']);
         }
     }
     
@@ -67,13 +67,13 @@ class PenulisController extends Controller
 			DB::commit();
 			return redirect()->route('penulis')->with([
 				'type' => 'success',
-				'message' => 'Berhasil menghapus penulis'
+				'message' => 'Berhasil Menghapus Penulis'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			return redirect()->route('penulis')->with([
 				'type' => 'danger',
-				'message' => 'Gagal menghapus Penulis'
+				'message' => 'Gagal Menghapus Penulis'
 			]);
 		}
     }
