@@ -33,7 +33,7 @@ class UpdateTransaksiEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['transaksi.created'];
+        return ['transaksi'];
     }
 
     public function broadcastAs()

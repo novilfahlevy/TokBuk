@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\DetailTransaksi;
+use App\Events\UpdateDasborEvent;
 use App\Events\UpdateTransaksiEvent;
 use App\Exports\TransaksiExport;
 use App\Transaksi;
@@ -84,7 +85,7 @@ class TransaksiController extends Controller
 
 			DB::commit();
 
-			event(new UpdateTransaksiEvent(Transaksi::count()));
+			event(new UpdateDasborEvent());
 
 			return redirect()->route('transaksi.detail', ['id' => $transaksiBaru->id])->with([
 				'message' => 'Transaksi Berhasil Dibuat.',

@@ -57,12 +57,12 @@
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
   <script>
-    const pusher = new Pusher(pusher.appKey, {
+    const pusher = new Pusher(window.pusher.appKey, {
       cluster: 'ap1'
     });
 
-    function channelBind(channel, event, callback) {
-      const channel = pusher.subscribe(channel);
+    const channelBind = (channelName, event, callback) => {
+      const channel = pusher.subscribe(channelName);
       channel.bind(event, callback);
     }
   </script>

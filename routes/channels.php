@@ -15,6 +15,6 @@ Broadcast::channel('my-channel', function ($user, $id) {
     return true;
 });
 
-Broadcast::channel('transaksi.created', function ($user, $id) {
+Broadcast::channel('dasbor', function() {
     return true;
 });

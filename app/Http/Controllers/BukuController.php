@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Buku;
+use App\Events\UpdateDasborEvent;
 use App\Exports\LogBukuExport;
 use App\Penulis;
 use App\Penerbit;
@@ -95,6 +96,7 @@ class BukuController extends Controller
        
 
         if($buku == true ){
+            event(new UpdateDasborEvent());
             return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Buku', 'type' => 'success']);
         } else {
             return redirect()->route('buku')->with(['message' => 'Gagal Menambah Buku', 'type' => 'danger']);
@@ -222,6 +224,8 @@ class BukuController extends Controller
             ]);
 
             DB::commit();
+
+            event(new UpdateDasborEvent());
 
             return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Jumlah Buku', 'type' => 'success']);
         } catch ( Exception $e ) {
