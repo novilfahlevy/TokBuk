@@ -24,24 +24,10 @@ class TransaksiExport implements FromView
 	*/
 	public function view(): View
 	{
-		$transaksi = Transaksi::join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
-			->where(function($query) {
-				$query->whereDate('transaksi.created_at', '>=', $this->mulai)->whereDate('transaksi.created_at', '<=', $this->sampai);
-			})
-			->select([
-				'transaksi.created_at',
-				DB::raw('SUM(dt.jumlah) AS jumlah_buku'),
-				'transaksi.total_harga',
-				'transaksi.uang_pembeli',
-				'transaksi.id'
-			])
-			->groupBy([
-				'transaksi.created_at',
-				'transaksi.total_harga', 
-				'transaksi.uang_pembeli',
-				'transaksi.id'
-			])
-			->get();
+		$transaksi = DetailTransaksi::where(function($query) {
+			$query->whereDate('created_at', '>=', $this->mulai)->whereDate('created_at', '<=', $this->sampai);
+		})
+		->get();
 
 		return view('transaksi.export', [
 			'transaksi' => $transaksi

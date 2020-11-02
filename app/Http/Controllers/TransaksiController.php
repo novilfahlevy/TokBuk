@@ -20,13 +20,15 @@ class TransaksiController extends Controller
 	{
 		$transaksi = Transaksi::join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
 			->select([
+				'transaksi.kode',
 				'transaksi.created_at',
 				DB::raw('SUM(dt.jumlah) AS jumlah_buku'),
 				'transaksi.total_harga',
 				'transaksi.uang_pembeli',
 				'transaksi.id'
-			])
-			->groupBy([
+				])
+				->groupBy([
+				'transaksi.kode',
 				'transaksi.created_at',
 				'transaksi.total_harga', 
 				'transaksi.uang_pembeli',

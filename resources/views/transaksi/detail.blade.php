@@ -68,8 +68,8 @@ Detail Transaksi
                       <th>{{ $loop->index + 1 }}</th>
                       <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
                       <th>{{ $t->jumlah }}</th>
-                      <th>Rp {{ number_format($t->buku()->withTrashed()->first()->harga) }}</th>
                       <th>Rp {{ number_format($t->harga) }}</th>
+                      <th>Rp {{ number_format($t->jumlah * $t->harga) }}</th>
                     </tr>
                   @endforeach
                 </tbody>
