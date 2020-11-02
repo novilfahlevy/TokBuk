@@ -36,6 +36,7 @@ Pembelian Buku
                                             <thead style="">
                                                 <tr>
                                                     <th scope="col">#</th>
+                                                    <th>Kode</th>
                                                     <th>Tanggal</th>
                                                     <th>Ditangani Oleh</th>
                                                     <th>Pemasok</th>
@@ -48,15 +49,16 @@ Pembelian Buku
                                                 @foreach ($pembelian as $p)
                                                 <tr>
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
+                                                    <td>{{ $p->kode }}</td>
                                                     <td>{{ $p->created_at }}</td>
                                                     <td>{{ $p->user()->withTrashed()->first()->name }}</td>
                                                     <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
                                                     <td>Rp {{ number_format($p->harga_beli) }}</td>
                                                     <td>Rp {{ number_format($p->total_harga_jual) }}</td>
                                                     <td>
-                                                        {{-- <div class="btn-group">
+                                                        <div class="btn-group">
                                                             <form method="post" class="delete_form "
-                                                            action="{{route('transaksi.destroy',$t->id)}}">
+                                                            action="{{route('pembelian-buku.destroy',$p->id)}}">
                                                             @method('DELETE')
                                                             @csrf
                                                             <button class="btn btn-sm btn-danger" id="btn-delete"><i
@@ -64,11 +66,11 @@ Pembelian Buku
                                                             </form>
                                                         </div>
                                                         <div class="btn-group">
-                                                            <a href="{{ route('transaksi.detail', $t->id) }}"
+                                                            <a href="{{ route('pembelian-buku.detail', $p->id) }}"
                                                                 class="btn btn-sm btn-primary text-white" title="Detail Data">
                                                                 <i class="fas fa-eye"></i>
                                                             </a>
-                                                        </div> --}}
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @endforeach

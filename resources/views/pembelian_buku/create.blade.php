@@ -17,7 +17,7 @@ Tambah Pembelian Buku
           <div class="card-header">
             <h4>Form Tambah Pembelian Buku</h4>
             <div class="card-header-form">
-              <a href="{{ route('transaksi') }}" class="btn btn-primary" title="Kembali">
+              <a href="{{ route('pembelian-buku') }}" class="btn btn-primary" title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </div>
@@ -25,7 +25,7 @@ Tambah Pembelian Buku
           <div class="card-body">
             <form action="{{ route('pembelian-buku.store') }}" method="POST" id="pembelianBuku">
               @csrf
-              <input type="hidden" id="hasilRespon" name="pembelianBuku" hidden>
+              <input type="hidden" id="hasilRespon" name="bukuYangDibeli" hidden>
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">

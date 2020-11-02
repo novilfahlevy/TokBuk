@@ -8,13 +8,15 @@ use App\DetailPembelianBuku;
 use App\Pemasok;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PembelianBuku extends Model
 {
     // use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'pembelian_buku';
-    protected $fillable = ['tanggal', 'id_user', 'id_pemasok', 'total_harga_jual', 'harga_beli'];
+    protected $fillable = ['kode', 'id_user', 'id_pemasok', 'total_harga_jual', 'harga_beli'];
 
     public function detail()
     {
@@ -23,11 +25,11 @@ class PembelianBuku extends Model
 
     public function pemasok()
     {
-        return $this->hasOne(Pemasok::class, 'id_pemasok');
+        return $this->hasOne(Pemasok::class, 'id', 'id_pemasok');
     }
 
     public function user()
     {
-        return $this->hasOne(User::class, 'id_user');
+        return $this->hasOne(User::class, 'id', 'id_user');
     }
 }

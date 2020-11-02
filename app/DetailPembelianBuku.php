@@ -12,7 +12,7 @@ class DetailPembelianBuku extends Model
     
     public function buku()
     {
-        return $this->hasOne(Buku::class, 'id_buku');
+        return $this->hasOne(Buku::class, 'id', 'id_buku');
     }
     
     public function pembelian()

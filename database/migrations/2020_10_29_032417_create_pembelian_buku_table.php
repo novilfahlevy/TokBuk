@@ -15,12 +15,14 @@ class CreatePembelianBukuTable extends Migration
     {
         Schema::create('pembelian_buku', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode', 12);
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');  
             $table->unsignedBigInteger('id_pemasok');
             $table->foreign('id_pemasok')->references('id')->on('pemasok');
             $table->integer('total_harga_jual');
             $table->integer('harga_beli');  
+            $table->softDeletes();
             $table->timestamps();
         });
     }

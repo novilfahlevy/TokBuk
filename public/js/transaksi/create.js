@@ -1,5 +1,5 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(number);
+const format = number => new Intl.NumberFormat('id-ID').format(number);
 
 function uniqueClass(length) {
   var result = '';

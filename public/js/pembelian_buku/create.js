@@ -1,5 +1,5 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(number);
+const format = number => new Intl.NumberFormat('id-ID').format(number);
 
 function uniqueClass(length) {
   var result = '';
@@ -100,7 +100,7 @@ function tambahBuku() {
 
 $('button#tambahBuku').on('click', tambahBuku);
 
-$('form#pembelianBuku').on('submit', function(event) {
+$('form#pembelianBuku').on('submit', function() {
   $('#hasilRespon').val(JSON.stringify(getAllBooksData()));
   $(this).submit();
 });
@@ -116,14 +116,14 @@ function getAllBooksData() {
         isbn: $(buku).find('.isbn').val(),
         judul: $(buku).find('.judul').val(),
         jumlah: parseInt($(buku).find('.jumlah-buku-input').val(), 10),
-        harga: $(buku).find('.total-harga').data('total-harga')
+        harga: $(buku).find('.harga-per-buku').val()
       }
     }
     return {
       status: 'Penambahan',
       idBuku: $(buku).data('buku-id'),
       jumlah: parseInt($(buku).find('.jumlah-buku-input').val(), 10),
-      harga: $(buku).find('.total-harga').data('total-harga')
+      harga: $(buku).find('.harga-per-buku').val()
     }
   });
 
@@ -134,13 +134,16 @@ function getAllBooksData() {
 }
 
 function getTotalHarga() {
-  return $('#bukuContainer tr:not(.deleted)').toArray().reduce((total, buku) => {
-    return total += $(buku).find('.total-harga').data('total-harga');
+  return $('#bukuContainer tr:not(.deleted)').toArray()
+  .filter(buku => !!$(buku).find('.total-harga').data('total-harga'))
+  .reduce((total, buku) => {
+    const totalHarga = $(buku).find('.total-harga').data('total-harga');
+    return total += totalHarga;
   }, 0);
 }
 
 function setTotalHarga() {
-  $('#totalSemuaHarga').html(getTotalHarga());
+  $('#totalSemuaHarga').html(format(getTotalHarga()));
 }
 
 // Propogate Event

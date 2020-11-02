@@ -15,10 +15,10 @@ class CreateBukuTable extends Migration
     {
         Schema::create('buku', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('sampul');
+            $table->string('sampul')->nullable();
             $table->string('isbn');
             $table->string('judul');
-            $table->year('tahun_terbit');
+            $table->year('tahun_terbit')->nullable();
             $table->unsignedBigInteger('id_penulis')->nullable();
             $table->foreign('id_penulis')->references('id')->on('penulis');
             $table->unsignedBigInteger('id_penerbit')->nullable();
@@ -29,7 +29,7 @@ class CreateBukuTable extends Migration
             $table->foreign('id_pemasok')->references('id')->on('pemasok');  
             $table->unsignedBigInteger('id_lokasi')->nullable();
             $table->foreign('id_lokasi')->references('id')->on('lokasi');  
-            $table->integer('harga');
+            $table->integer('harga')->nullable();
             $table->string('jumlah');
             $table->softDeletes();
             $table->timestamps();

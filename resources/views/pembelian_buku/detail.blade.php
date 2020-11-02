@@ -1,7 +1,7 @@
 @extends('layouts.partials.app')
 
 @section('title')
-Detail Transaksi
+Detail Pembelian Buku
 @endsection
 
 @section('content')
@@ -9,15 +9,15 @@ Detail Transaksi
   <div class="main-content" style="min-height: 116px;">
     <section class="section">
       <div class="section-header">
-        <h1>Detail Transaksi</h1>
+        <h1>Detail Pembelian Buku</h1>
       </div>
       <div class="section-body">
         @include('layouts.flash-alert')
         <div class="card">
           <div class="card-header">
-            <h4>Data Transaksi</h4>
+            <h4>Data Pembelian Buku</h4>
             <div class="card-header-form">
-              <a href="{{ route('transaksi') }}" class="btn btn-primary">
+              <a href="{{ route('pembelian-buku') }}" class="btn btn-primary">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </div>
@@ -26,24 +26,28 @@ Detail Transaksi
             <div class="form-group">
               <div class="row">
                 <div class="col-lg-2">
+                  <h6 class="mb-1">Kode</h6>
+                  <p>{{ $pembelian->kode }}</p>
+                </div>
+                <div class="col-lg-2">
+                  <h6 class="mb-1">Tanggal</h6>
+                  <p>{{ $pembelian->created_at }}</p>
+                </div>
+                <div class="col-lg-2">
                   <h6 class="mb-1">Ditangani Oleh</h6>
-                  <p>{{ $transaksi->user()->withTrashed()->first()->name }}</p>
+                  <p>{{ $pembelian->user()->withTrashed()->first()->name }}</p>
                 </div>
                 <div class="col-lg-2">
-                  <h6 class="mb-1">Tanggal Transaksi</h6>
-                  <p>{{ $transaksi->created_at }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Uang Pembeli</h6>
-                  <p>Rp {{ number_format($transaksi->uang_pembeli) }}</p>
+                  <h6 class="mb-1">Harga Beli</h6>
+                  <p>Rp {{ number_format($pembelian->harga_beli) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Total Harga</h6>
-                  <p>Rp {{ number_format($transaksi->total_harga) }}</p>
+                  <p>Rp {{ number_format($pembelian->total_harga_jual) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Kembalian</h6>
-                  <p>Rp {{ number_format($transaksi->uang_pembeli - $transaksi->total_harga) }}</p>
+                  <p>Rp {{ number_format($pembelian->harga_beli - $pembelian->total_harga_jual) }}</p>
                 </div>
               </div>
             </div>
@@ -56,16 +60,22 @@ Detail Transaksi
                     <th scope="col">Jumlah</th>
                     <th scope="col">Harga Per Buku</th>
                     <th scope="col">Total Harga</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($transaksi->detail as $t)
+                  @foreach ($pembelian->detail as $p)
                     <tr>
-                      <th>{{ $loop->index + 1 }}</th>
-                      <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
-                      <th>{{ $t->jumlah }}</th>
-                      <th>Rp {{ number_format($t->buku()->withTrashed()->first()->harga) }}</th>
-                      <th>Rp {{ number_format($t->harga) }}</th>
+                      <td>{{ $loop->index + 1 }}</td>
+                      <td>{{ $p->buku()->withTrashed()->first()->judul }}</td>
+                      <td>{{ $p->jumlah }}</td>
+                      <td>Rp {{ number_format($p->harga_jual) }}</td>
+                      <td>Rp {{ number_format($p->harga_jual * $p->jumlah) }}</td>
+                      <td>
+                        <div class="badge badge-{{ $p->status === 'Baru' ? 'success' : 'primary' }}">
+                          {{$p->status}}
+                        </div>
+                      </td>
                     </tr>
                   @endforeach
                 </tbody>

@@ -11,6 +11,7 @@ use App\Transaksi;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
@@ -65,6 +66,7 @@ class TransaksiController extends Controller
 			}
 
 			$transaksiBaru = Transaksi::create([
+				'kode' => strtoupper(Str::random(12)),
 				'id_user' => auth()->user()->id,
 				'uang_pembeli' => $uangPembeli,
 				'total_harga' => $transaksi->totalHarga
