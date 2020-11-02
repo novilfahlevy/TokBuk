@@ -17,6 +17,9 @@ Detail Pembelian Buku
           <div class="card-header">
             <h4>Data Pembelian Buku</h4>
             <div class="card-header-form">
+              <a href="{{ route('pembelian-buku.faktur', $pembelian->id) }}" title="Cetak Faktur" class="btn btn-success mr-2">
+                <i class="fas fa-file-invoice"></i>
+              </a>
               <a href="{{ route('pembelian-buku') }}" class="btn btn-primary">
                 <i class="fas fa-chevron-left"></i>
               </a>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\DetailPembelianBuku;
-use App\Events\UpdateDasborEvent;
 use App\Exports\PembelianBukuExport;
 use App\Pemasok;
 use App\PembelianBuku;
@@ -14,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class PembelianBukuController extends Controller
 {
@@ -147,6 +147,12 @@ class PembelianBukuController extends Controller
 
 	public function export(Request $request)
 	{
-		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
+		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian_buku.xlsx');
+	}
+
+	public function faktur($id)
+	{
+		$pembelian = PembelianBuku::find($id);
+		return PDF::loadView('pembelian_buku.faktur', compact('pembelian'))->download('faktur_pembelian_buku.pdf');
 	}
 }
