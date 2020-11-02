@@ -20,11 +20,11 @@ Pembelian Buku
                                     <h4>Daftar Pembelian Buku</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" title="Filter Data">
-                                                <i class="fas fa-filter"></i>
-                                            </button>
                                             <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" title="Export Data">
                                                 <i class="fas fa-file-export"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" title="Filter Data">
+                                                <i class="fas fa-filter"></i>
                                             </button>
                                             <a href="{{ route('pembelian-buku.create') }}" class="btn btn-sm btn-primary" title="Tambah Pembelian Buku">
                                                 <i class="fas fa-plus"></i>
@@ -140,11 +140,11 @@ Pembelian Buku
                     <div class="row">
                         <div class="col-6">
                             <label for="mulai">Dari tanggal</label>
-                            <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->get('mulai') }}">
+                            <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->pull('mulai') }}">
                         </div>
                         <div class="col-6">
                             <label for="sampai">Sampai tanggal</label>
-                            <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->get('sampai') }}">
+                            <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->pull('sampai') }}">
                         </div>
                     </div>
                 </div>

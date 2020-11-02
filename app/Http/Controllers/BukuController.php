@@ -73,11 +73,11 @@ class BukuController extends Controller
         }
 
         if ( $request->tahunTerbitDari ) {
-            $buku->whereDate('tahun_terbit', $request->tahunTerbitDari);
+            $buku->where('tahun_terbit', '>=', $request->tahunTerbitDari);
         }
         
         if ( $request->tahunTerbitSampai ) {
-            $buku->whereDate('tahun_terbit', $request->tahunTerbitSampai);
+            $buku->where('tahun_terbit', '<=', $request->tahunTerbitSampai);
         }
 
         $buku = $buku->get();

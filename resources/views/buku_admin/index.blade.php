@@ -93,13 +93,20 @@ Buku
             </div>
             <div class="modal-body">
                 <div class="row">
+                    @php
+                        $kategoriId = session()->pull('kategori');
+                        $penulisId = session()->pull('penulis');
+                        $penerbitId = session()->pull('penerbit');
+                        $pemasokId = session()->pull('pemasok');
+                        $lokasiId = session()->pull('lokasi');
+                    @endphp
                     <div class="col-6">
                         <div class="form-group mb-2">
                             <label for="kategori">Kategori</label>
                             <select name="kategori" id="kategori" class="form-control">
                                 <option value="" selected>Semua</option>
                                 @foreach ($kategori as $k)
-                                    <option value="{{ $k->id }}" {{ session()->get('kategori') == $k->id ? 'selected' : '' }}>{{ $k->nama }}</option>
+                                    <option value="{{ $k->id }}" {{ $kategoriId == $k->id ? 'selected' : '' }}>{{ $k->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -110,7 +117,7 @@ Buku
                             <select name="penerbit" id="penerbit" class="form-control">
                                 <option value="" selected>Semua</option>
                                 @foreach ($penerbit as $p)
-                                    <option value="{{ $p->id }}" {{ session()->get('penerbit') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    <option value="{{ $p->id }}" {{ $penerbitId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -121,7 +128,7 @@ Buku
                             <select name="penulis" id="penulis" class="form-control">
                                 <option value="" selected>Semua</option>
                                 @foreach ($penulis as $p)
-                                    <option value="{{ $p->id }}" {{ session()->get('penulis') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    <option value="{{ $p->id }}" {{ $penulisId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -132,7 +139,7 @@ Buku
                             <select name="pemasok" id="pemasok" class="form-control">
                                 <option value="" selected>Semua</option>
                                 @foreach ($pemasok as $p)
-                                    <option value="{{ $p->id }}" {{ session()->get('pemasok') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -143,7 +150,7 @@ Buku
                             <select name="lokasi" id="lokasi" class="form-control">
                                 <option value="" selected>Semua</option>
                                 @foreach ($lokasi as $l)
-                                    <option value="{{ $l->id }}" {{ session()->get('lokasi') == $l->id ? 'selected' : '' }}>{{ $l->nama }}</option>
+                                    <option value="{{ $l->id }}" {{ $lokasiId == $l->id ? 'selected' : '' }}>{{ $l->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -151,13 +158,13 @@ Buku
                     <div class="col-6">
                         <div class="form-group mb-2">
                             <label for="tahunTerbitDari">Tahun terbit dari</label>
-                            <input type="number" id="tahunTerbitDari" name="tahunTerbitDari" class="form-control" pattern="/0-9/" value="{{ session()->get('tahunTerbitDari') }}">
+                            <input type="number" id="tahunTerbitDari" name="tahunTerbitDari" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitDari') }}">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-2">
                             <label for="tahunTerbitSampai">Tahun terbit sampai</label>
-                            <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->get('tahunTerbitSampai') }}">
+                            <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitSampai') }}">
                         </div>
                     </div>
                 </div>
