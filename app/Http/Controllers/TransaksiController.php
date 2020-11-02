@@ -24,14 +24,14 @@ class TransaksiController extends Controller
 				'transaksi.created_at',
 				DB::raw('SUM(dt.jumlah) AS jumlah_buku'),
 				'transaksi.total_harga',
-				'transaksi.uang_pembeli',
+				'transaksi.bayar',
 				'transaksi.id'
 			])
 			->groupBy([
 				'transaksi.kode',
 				'transaksi.created_at',
 				'transaksi.total_harga', 
-				'transaksi.uang_pembeli',
+				'transaksi.bayar',
 				'transaksi.id'
 			]);
 	}
@@ -77,21 +77,21 @@ class TransaksiController extends Controller
 		DB::beginTransaction();
 
 		try {
-			$uangPembeli = $request->uangPembeli;
+			$bayar = $request->bayar;
 			$transaksi = json_decode($request->transaksi);
 
 			if ( $transaksi->totalHarga <= 0 && !count($transaksi->buku) ) {
 				return redirect()->route('transaksi.create')->withErrors(['bukuDibeli' => 'Mohon pilih paling tidak satu buku yang ingin dibeli']);
 			}
 
-			if ( $uangPembeli < $transaksi->totalHarga ) {
-				return redirect()->route('transaksi.create')->withErrors(['uangPembeli' => 'Nominal uang pembeli tidak mencukupi']);
+			if ( $bayar < $transaksi->totalHarga ) {
+				return redirect()->route('transaksi.create')->withErrors(['bayar' => 'Nominal uang pembeli tidak mencukupi']);
 			}
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => strtoupper(Str::random(12)),
 				'id_user' => auth()->user()->id,
-				'uang_pembeli' => $uangPembeli,
+				'bayar' => $bayar,
 				'total_harga' => $transaksi->totalHarga
 			]);
 

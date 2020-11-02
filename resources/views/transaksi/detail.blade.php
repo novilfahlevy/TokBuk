@@ -37,12 +37,8 @@ Detail Transaksi
                   <p>{{ $transaksi->created_at }}</p>
                 </div>
                 <div class="col-lg-2">
-                  <h6 class="mb-1">Ditangani Oleh</h6>
-                  <p>{{ $transaksi->user()->withTrashed()->first()->name }}</p>
-                </div>
-                <div class="col-lg-2">
                   <h6 class="mb-1">Bayar</h6>
-                  <p>Rp {{ number_format($transaksi->uang_pembeli) }}</p>
+                  <p>Rp {{ number_format($transaksi->bayar) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Total Harga</h6>
@@ -50,7 +46,7 @@ Detail Transaksi
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Kembalian</h6>
-                  <p>Rp {{ number_format($transaksi->uang_pembeli - $transaksi->total_harga) }}</p>
+                  <p>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga) }}</p>
                 </div>
               </div>
             </div>

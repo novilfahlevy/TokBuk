@@ -18,7 +18,7 @@ class CreateTransaksiTable extends Migration
             $table->string('kode', 12);
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->integer('uang_pembeli');
+            $table->integer('bayar');
             $table->integer('total_harga');
             $table->softDeletes();
             $table->timestamps();

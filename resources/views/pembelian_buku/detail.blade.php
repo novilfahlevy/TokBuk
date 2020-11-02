@@ -37,11 +37,7 @@ Detail Pembelian Buku
                   <p>{{ $pembelian->created_at }}</p>
                 </div>
                 <div class="col-lg-2">
-                  <h6 class="mb-1">Ditangani Oleh</h6>
-                  <p>{{ $pembelian->user()->withTrashed()->first()->name }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Harga Beli</h6>
+                  <h6 class="mb-1">Bayar</h6>
                   <p>Rp {{ number_format($pembelian->harga_beli) }}</p>
                 </div>
                 <div class="col-lg-2">
@@ -60,8 +56,8 @@ Detail Pembelian Buku
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Judul</th>
-                    <th scope="col">Jumlah</th>
                     <th scope="col">Harga Per Buku</th>
+                    <th scope="col">Jumlah</th>
                     <th scope="col">Total Harga</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -71,8 +67,8 @@ Detail Pembelian Buku
                     <tr>
                       <td>{{ $loop->index + 1 }}</td>
                       <td>{{ $p->buku()->withTrashed()->first()->judul }}</td>
-                      <td>{{ $p->jumlah }}</td>
                       <td>Rp {{ number_format($p->harga_jual) }}</td>
+                      <td>{{ $p->jumlah }}</td>
                       <td>Rp {{ number_format($p->harga_jual * $p->jumlah) }}</td>
                       <td>
                         <div class="badge badge-{{ $p->status === 'Baru' ? 'success' : 'primary' }}">
