@@ -35,6 +35,8 @@ class PembelianBukuController extends Controller
 			$pembelian->whereDate('created_at', '<=', $request->sampai);
 		}
 
+		session($request->except('_token'));
+
 		$pembelian = $pembelian->orderBy('created_at', 'DESC')->get();
 
 		return view('pembelian_buku.index', compact('pembelian'));

@@ -138,11 +138,11 @@ Transaksi Penjualan
                         <div class="row">
                             <div class="col-6">
                                 <label for="mulai">Dari tanggal</label>
-                                <input type="date" class="form-control" id="mulai" name="mulai">
+                                <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->get('mulai') }}">
                             </div>
                             <div class="col-6">
                                 <label for="sampai">Sampai tanggal</label>
-                                <input type="date" class="form-control" id="sampai" name="sampai">
+                                <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->get('sampai') }}">
                             </div>
                         </div>
                     </div>

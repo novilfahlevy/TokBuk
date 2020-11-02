@@ -20,7 +20,7 @@ Buku
                                 <h4>Data Buku</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                {{-- <a class="btn btn-sm btn-success mr-2" href="{{route('buku.logs')}}" title="Riwayat Penambahan Buku"><i class="fas fa-list"></i></a> --}}
+                                <button type="button" class="btn btn-sm btn-warning" title="FilterData" data-toggle="modal" data-target="#filterModal"><i class="fas fa-filter"></i></button>
                                 {{-- <a class="btn btn-sm btn-primary" href="{{route('buku.create')}}" title="Tambah Data"><i class="fas fa-plus"></i></a> --}}
                                 </div>
                             </div>
@@ -79,4 +79,95 @@ Buku
         </section>
     </div>
   </div>
+
+  <div class="modal" tabindex="-1" role="dialog" id="filterModal">
+    <form action="{{ route('buku.filter') }}" method="POST">
+        @csrf
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filter Data Buku</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="kategori">Kategori</label>
+                            <select name="kategori" id="kategori" class="form-control">
+                                <option value="" selected>Semua</option>
+                                @foreach ($kategori as $k)
+                                    <option value="{{ $k->id }}" {{ session()->get('kategori') == $k->id ? 'selected' : '' }}>{{ $k->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="penerbit">Penerbit</label>
+                            <select name="penerbit" id="penerbit" class="form-control">
+                                <option value="" selected>Semua</option>
+                                @foreach ($penerbit as $p)
+                                    <option value="{{ $p->id }}" {{ session()->get('penerbit') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="penulis">Penulis</label>
+                            <select name="penulis" id="penulis" class="form-control">
+                                <option value="" selected>Semua</option>
+                                @foreach ($penulis as $p)
+                                    <option value="{{ $p->id }}" {{ session()->get('penulis') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="pemasok">Pemasok</label>
+                            <select name="pemasok" id="pemasok" class="form-control">
+                                <option value="" selected>Semua</option>
+                                @foreach ($pemasok as $p)
+                                    <option value="{{ $p->id }}" {{ session()->get('pemasok') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mb-2">
+                            <label for="lokasi">Lokasi</label>
+                            <select name="lokasi" id="lokasi" class="form-control">
+                                <option value="" selected>Semua</option>
+                                @foreach ($lokasi as $l)
+                                    <option value="{{ $l->id }}" {{ session()->get('lokasi') == $l->id ? 'selected' : '' }}>{{ $l->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="tahunTerbitDari">Tahun terbit dari</label>
+                            <input type="number" id="tahunTerbitDari" name="tahunTerbitDari" class="form-control" pattern="/0-9/" value="{{ session()->get('tahunTerbitDari') }}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="tahunTerbitSampai">Tahun terbit sampai</label>
+                            <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->get('tahunTerbitSampai') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+            </div>
+        </div>
+    </form>
+</div>
 @endsection

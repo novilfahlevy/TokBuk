@@ -85,11 +85,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                Tahun Terbit Buku
+                                                                Tahun Terbit
                                                                 <input type="number" class="form-control" required name="tahun_terbit" value="{{ old('tahun_terbit') }}" >
                                                                  <br/>
 
-                                                                Lokasi Buku
+                                                                Lokasi
                                                                 <select required name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
                                                                     <option value=''>- Pilih -</option>
                                                                     @foreach($lokasi as $lok)

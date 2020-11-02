@@ -87,11 +87,11 @@
                                                                     </select>
                                                                     <br/> --}}
                                                                     
-                                                                    Tahun Terbit Buku
+                                                                    Tahun Terbit
                                                                     <input type="number" class="form-control" required name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
                                                                     <br/>
     
-                                                                    Lokasi Buku
+                                                                    Lokasi
                                                                     <select required name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($lokasi as $lok)     
@@ -100,7 +100,7 @@
                                                                     </select>
                                                                     <br/>
     
-                                                                    Harga Buku
+                                                                    Harga
                                                                     <div class="input-group">
                                                                         <div class="input-group-prepend">
                                                                             <span class="input-group-text" id="basic-addon1">Rp</span>

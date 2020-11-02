@@ -54,6 +54,8 @@ class TransaksiController extends Controller
 			$transaksi->whereDate('transaksi.created_at', '<=', $request->sampai);
 		}
 
+		session($request->except('_token'));
+
 		$transaksi = $transaksi->orderBy('created_at', 'DESC')->get();
 
 		return view('transaksi.index', compact('transaksi'));

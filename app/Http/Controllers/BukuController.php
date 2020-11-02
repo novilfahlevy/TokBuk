@@ -12,6 +12,7 @@ use App\Penerbit;
 use App\Kategori;
 // use App\Pemasok;
 use App\Lokasi;
+use App\Pemasok;
 use App\PembelianBuku;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +21,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
-    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
+    public function __construct(Buku $buku, Penulis $penulis, Pemasok $pemasok, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
     {
         $this->buku = $buku;
         $this->penulis = $penulis;
+        $this->pemasok = $pemasok;
         $this->penerbit = $penerbit;
         $this->kategori = $kategori;
         $this->lokasi = $lokasi;
@@ -32,9 +34,58 @@ class BukuController extends Controller
     public function index()
     {
         $buku = $this->buku->get();
-        $penulis = $this->buku->get();
-        return view('buku_admin.index', compact('buku', 'penulis'));
+        $penulis = $this->penulis->get();
+        $pemasok = $this->pemasok->get();
+        $penerbit = $this->penerbit->get();
+        $kategori = $this->kategori->get();
+        $lokasi = $this->lokasi->get();
+
+        return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi', 'pemasok'));
     }
+
+    public function filter(Request $request)
+	{
+		$buku = Buku::select('*');
+        $penulis = $this->penulis->get();
+        $pemasok = $this->pemasok->get();
+        $penerbit = $this->penerbit->get();
+        $kategori = $this->kategori->get();
+        $lokasi = $this->lokasi->get();
+		
+        if ( $request->kategori ) {
+            $buku->where('id_kategori', $request->kategori);
+        }
+
+        if ( $request->penerbit ) {
+            $buku->where('id_penerbit', $request->penerbit);
+        }
+
+        if ( $request->penulis ) {
+            $buku->where('id_penulis', $request->penulis);
+        }
+
+        if ( $request->pemasok ) {
+            $buku->where('id_pemasok', $request->pemasok);
+        }
+
+        if ( $request->lokasi ) {
+            $buku->where('id_lokasi', $request->lokasi);
+        }
+
+        if ( $request->tahunTerbitDari ) {
+            $buku->whereDate('tahun_terbit', $request->tahunTerbitDari);
+        }
+        
+        if ( $request->tahunTerbitSampai ) {
+            $buku->whereDate('tahun_terbit', $request->tahunTerbitSampai);
+        }
+
+        $buku = $buku->get();
+        
+        session($request->except('_token'));
+
+		return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi', 'pemasok'));
+	}
     
     public function create()
     {

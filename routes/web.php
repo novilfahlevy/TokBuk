@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 
   //buku
   Route::get('/databuku', 'BukuController@index')->name('buku');
+  Route::post('/databuku', 'BukuController@filter')->name('buku.filter');
   Route::get('databuku/logs', 'BukuController@logs')->name('buku.logs');
   Route::get('databuku/{id}/tambah', 'BukuController@tambahjml')->name('buku.tambah');
   Route::get('databuku/{id}/detail', 'BukuController@detail')->name('buku.detail');
