@@ -38,5 +38,15 @@ class UsersTableSeeder extends Seeder
             'alamat' => 'Jl. Pohon Cemara',
             'password' => bcrypt('123123')
         ]);
+        
+        App\User::create([
+            'name' => 'Novil Fahlevy',
+            'username' => 'novilfahlevy',
+            'posisi' => 'Admin',
+            'email' => 'novilfreon@gmail.com',
+            'telepon' => '089609233200',
+            'alamat' => 'Jl. Langsat',
+            'password' => bcrypt('123123')
+        ]);
     }
 }
