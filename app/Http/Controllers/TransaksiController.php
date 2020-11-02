@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Buku;
 use App\DetailTransaksi;
 use App\Events\UpdateDasborEvent;
-use App\Events\UpdateTransaksiEvent;
 use App\Exports\TransaksiExport;
 use App\Transaksi;
 use Exception;
@@ -13,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class TransaksiController extends Controller
 {
@@ -156,5 +156,11 @@ class TransaksiController extends Controller
 	public function export(Request $request)
 	{
 		return Excel::download(new TransaksiExport($request->mulai, $request->sampai), 'transaksi.xlsx');
+	}
+
+	public function struk($id)
+	{
+		$transaksi = Transaksi::find($id);
+		return PDF::loadView('transaksi.struk', compact('transaksi'))->download('struk_transaksi.pdf');
 	}
 }

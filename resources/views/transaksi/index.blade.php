@@ -43,7 +43,7 @@ Transaksi Penjualan
                                                     <th>Tanggal</th>
                                                     <th>Jumlah Buku</th>
                                                     <th>Total Harga</th>
-                                                    <th>Uang Pembeli</th>
+                                                    <th>Bayar</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
