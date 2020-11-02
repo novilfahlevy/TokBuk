@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function() {
 
   //transaksi
   Route::get('transaksi', 'TransaksiController@index')->name('transaksi');
+  Route::post('transaksi', 'TransaksiController@filter')->name('transaksi.filter');
   Route::get('transaksi/create', 'TransaksiController@create')->name('transaksi.create');
   Route::post('transaksi/store', 'TransaksiController@store')->name('transaksi.store');
   Route::get('transaksi/edit/{id}', 'TransaksiController@edit')->name('transaksi.edit');

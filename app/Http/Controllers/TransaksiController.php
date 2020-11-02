@@ -16,9 +16,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
-	public function index()
+	public function getTransaksi()
 	{
-		$transaksi = Transaksi::join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
+		return Transaksi::join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
 			->select([
 				'transaksi.kode',
 				'transaksi.created_at',
@@ -26,16 +26,35 @@ class TransaksiController extends Controller
 				'transaksi.total_harga',
 				'transaksi.uang_pembeli',
 				'transaksi.id'
-				])
-				->groupBy([
+			])
+			->groupBy([
 				'transaksi.kode',
 				'transaksi.created_at',
 				'transaksi.total_harga', 
 				'transaksi.uang_pembeli',
 				'transaksi.id'
-			])
-			->orderBy('created_at', 'DESC')
-			->get();
+			]);
+	}
+
+	public function index()
+	{
+		$transaksi = $this->getTransaksi()->orderBy('created_at', 'DESC')->get();
+		return view('transaksi.index', compact('transaksi'));
+	}
+
+	public function filter(Request $request)
+	{
+		$transaksi = $this->getTransaksi();
+
+		if ( $request->mulai ) {
+			$transaksi->whereDate('transaksi.created_at', '>=', $request->mulai);
+		}
+		
+		if ( $request->sampai ) {
+			$transaksi->whereDate('transaksi.created_at', '<=', $request->sampai);
+		}
+
+		$transaksi = $transaksi->orderBy('created_at', 'DESC')->get();
 
 		return view('transaksi.index', compact('transaksi'));
 	}
