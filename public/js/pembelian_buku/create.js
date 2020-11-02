@@ -169,7 +169,7 @@ $(document).on('click', function(event) {
   const target = $(event.target);
   if ( target.prop('tagName') === 'BUTTON' && target.hasClass('hapus-buku') ) {
     target.parent().parent().addClass('deleted');
-    $('#totalSemuaHarga').text(getTotalHarga());
+    $('#totalSemuaHarga').text(format(getTotalHarga()));
     initNumbers();
   }
 });
