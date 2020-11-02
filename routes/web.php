@@ -92,5 +92,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('pembelian-buku/{id}/detail', 'PembelianBukuController@detail')->name('pembelian-buku.detail');
   Route::get('pembelian-buku/create', 'PembelianBukuController@create')->name('pembelian-buku.create');
   Route::post('pembelian-buku/store', 'PembelianBukuController@store')->name('pembelian-buku.store');
+  Route::post('pembelian-buku/export', 'PembelianBukuController@export')->name('pembelian-buku.export');
   Route::delete('pembelian-buku/{id}', 'PembelianBukuController@destroy')->name('pembelian-buku.destroy');
 });

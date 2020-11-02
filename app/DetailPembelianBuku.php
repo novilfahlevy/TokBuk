@@ -17,6 +17,6 @@ class DetailPembelianBuku extends Model
     
     public function pembelian()
     {
-        return $this->belongsTo(User::class, 'id_pembelian_buku');
+        return $this->belongsTo(PembelianBuku::class, 'id_pembelian_buku', 'id');
     }
 }

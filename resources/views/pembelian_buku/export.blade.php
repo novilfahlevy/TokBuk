@@ -2,22 +2,32 @@
   <thead>
     <tr>
       <th>No</th>
+      <th>Kode</th>
       <th>Tanggal</th>
-      <th>Jumlah Buku</th>
+      <th>ISBN</th>
+      <th>Judul Buku</th>
+      <th>Harga Per Buku</th>
+      <th>Jumlah</th>
       <th>Total Harga</th>
-      <th>Uang Pembeli</th>
-      <th>Kembalian</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($transaksi as $t)
+    @foreach ($pembelian as $p)
+      @php
+        $pembelianParent = $p->pembelian()->withTrashed()->first();
+        $buku = $p->buku()->withTrashed()->first();
+      @endphp
       <tr>
         <td>{{ $loop->index + 1 }}</td>
-        <td>{{ $t->created_at }}</td>
-        <td>{{ $t->jumlah_buku }}</td>
-        <td>Rp {{ number_format($t->total_harga) }}</td>
-        <td>Rp {{ number_format($t->uang_pembeli) }}</td>
-        <td>Rp {{ number_format($t->uang_pembeli - $t->total_harga) }}</td>
+        <td>{{ $pembelianParent->kode }}</td>
+        <td>{{ $pembelianParent->created_at }}</td>
+        <td>{{ $buku->isbn }}</td>
+        <td>{{ $buku->judul }}</td>
+        <td>Rp {{ number_format($p->harga_jual) }}</td>
+        <td>{{ number_format($p->jumlah) }}</td>
+        <td>Rp {{ number_format($p->harga_jual * $p->jumlah) }}</td>
+        <td>{{ $p->status }}</td>
         <td></td>
       </tr>
     @endforeach

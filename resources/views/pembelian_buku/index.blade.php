@@ -20,9 +20,9 @@ Pembelian Buku
                                     <h4>Daftar Pembelian Buku</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            {{-- <button type="button" class="btn btn-sm btn-success mr-3" data-toggle="modal" data-target="#exportModal" title="Export Data">
+                                            <button type="button" class="btn btn-sm btn-success mr-3" data-toggle="modal" data-target="#exportModal" title="Export Data">
                                                 <i class="fas fa-file-export"></i>
-                                            </button> --}}
+                                            </button>
                                             <a href="{{ route('pembelian-buku.create') }}" class="btn btn-sm btn-primary" title="Tambah Pembelian Buku">
                                                 <i class="fas fa-plus"></i>
                                             </a>
@@ -86,13 +86,13 @@ Pembelian Buku
     </div>
 </div>
 
-{{-- <div class="modal" tabindex="-1" role="dialog" id="exportModal">
-    <form action="{{ route('transaksi.export') }}" method="POST">
+<div class="modal" tabindex="-1" role="dialog" id="exportModal">
+    <form action="{{ route('pembelian-buku.export') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Export Data Transaksi</h5>
+                <h5 class="modal-title">Export Data Pembelian Buku</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -119,5 +119,5 @@ Pembelian Buku
             </div>
         </div>
     </form>
-  </div> --}}
+  </div>
 @endsection

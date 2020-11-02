@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use App\DetailPembelianBuku;
 use App\Events\UpdateDasborEvent;
+use App\Exports\PembelianBukuExport;
 use App\Pemasok;
 use App\PembelianBuku;
 use Error;
@@ -12,6 +13,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PembelianBukuController extends Controller
 {
@@ -122,5 +124,10 @@ class PembelianBukuController extends Controller
 				'type' => 'danger'
 			]);
 		}
+	}
+
+	public function export(Request $request)
+	{
+		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
 	}
 }

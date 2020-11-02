@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\DetailPembelianBuku;
 use App\PembelianBuku;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -22,11 +23,11 @@ class PembelianBukuExport implements FromView
 	*/
 	public function view(): View
 	{
-		// $buku = PembelianBuku::where(function($query) {
-		// 	$query->whereDate('created_at', '>=', $this->mulai)->whereDate('created_at', '<=', $this->sampai);
-		// })
-		// ->get();
+		$pembelian = DetailPembelianBuku::where(function($query) {
+			$query->whereDate('created_at', '>=', $this->mulai)->whereDate('created_at', '<=', $this->sampai);
+		})
+		->get();
 
-		// return view('buku_admin.logs-export', compact('buku'));
+		return view('pembelian_buku.export', compact('pembelian'));
 	}
 }
