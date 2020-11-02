@@ -40,6 +40,10 @@ class PembelianBukuController extends Controller
 		$idPemasok = $request->idPemasok;
 		$bukuYangDibeli = json_decode($request->bukuYangDibeli);
 
+		if ( $hargaBeli < $bukuYangDibeli->totalHarga ) {
+			return redirect()->route('pembelian-buku.create')->withErrors(['hargaBeli' => 'Biaya untuk membeli pasokan buku dibawah kurang']);
+		}
+
 		DB::beginTransaction();
 
 		try {
