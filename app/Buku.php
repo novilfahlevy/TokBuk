@@ -18,7 +18,7 @@ class Buku extends Model
         'id_penulis',
         'id_penerbit',
         'id_kategori',
-        'id_pemasok',
+        // 'id_pemasok',
         'id_lokasi',
         'harga',
         'jumlah'
@@ -38,10 +38,10 @@ class Buku extends Model
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 
-    public function Pemasok()
-    {
-        return $this->belongsTo(Pemasok::class, 'id_pemasok');
-    }
+    // public function Pemasok()
+    // {
+    //     return $this->belongsTo(Pemasok::class, 'id_pemasok');
+    // }
 
     public function lokasi()
     {
