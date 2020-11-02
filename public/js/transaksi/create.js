@@ -1,6 +1,8 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
 const format = number => new Intl.NumberFormat('id-ID').format(number);
 
+let bukuCache = [];
+
 function uniqueClass(length) {
   var result = '';
   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -11,49 +13,64 @@ function uniqueClass(length) {
   return result;
 }
 
+function fillJsSelect2Options(selectClass, initCallback) {
+  initJsSelect2(selectClass, {
+    templateSelection: function(data) {
+      const buku = JSON.parse(atob(data.id));
+      const tr = $(`tr[data-select-class=${selectClass}]`);
+
+      tr.data('buku-id', buku.id);
+
+      tr.find('.harga').text(`Rp ${format(buku.harga)}`);
+      tr.find('.harga').data('harga', buku.harga);
+
+      tr.find('.jumlah-buku-input').attr('max', buku.jumlah);
+      tr.find('.jumlah-buku-input').val(1);
+
+      tr.find('.jumlah-buku-label').text(buku.jumlah);
+      tr.find('.jumlah-buku-label').data('jumlah', buku.jumlah);
+
+      tr.find('.total-harga').text(`Rp ${format(buku.harga)}`);
+      tr.find('.total-harga').data('total-harga', buku.harga);
+
+      $('#totalSemuaHarga').text(format(getTotalHarga()));
+
+      return data.text;
+    },
+    templateResult: function(data) {
+      if ( data.id ) {
+        const buku = JSON.parse(atob(data.id));
+        return $(`
+          <span class="d-flex align-items-center">
+            <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
+            ${buku.judul.slice(0, 30)}${buku.judul.length > 30 ? '...' : ''}
+          </span>
+        `);
+      }
+    }
+  });
+  initCallback();
+}
+
 function getAllBooks(selectClass) {
+  if ( bukuCache.length ) {
+    fillJsSelect2Options(selectClass, () => {
+      bukuCache.map(option => $(`.${selectClass}`).append(option));
+    });
+    return;
+  }
+
   $.ajax({
     method: 'GET',
     url: `${BASEURL}/api/transaksi/buku`,
     success: function(data) {
-      initJsSelect2(selectClass, {
-        templateSelection: function(data) {
-          const buku = JSON.parse(atob(data.id));
-          const tr = $(`tr[data-select-class=${selectClass}]`);
-
-          tr.data('buku-id', buku.id);
-
-          tr.find('.harga').text(`Rp ${format(buku.harga)}`);
-          tr.find('.harga').data('harga', buku.harga);
-
-          tr.find('.jumlah-buku-input').attr('max', buku.jumlah);
-          tr.find('.jumlah-buku-input').val(1);
-
-          tr.find('.jumlah-buku-label').text(buku.jumlah);
-          tr.find('.jumlah-buku-label').data('jumlah', buku.jumlah);
-
-          tr.find('.total-harga').text(`Rp ${format(buku.harga)}`);
-          tr.find('.total-harga').data('total-harga', buku.harga);
-
-          $('#totalSemuaHarga').text(format(getTotalHarga()));
-
-          return data.text;
-        },
-        templateResult: function(data) {
-          if ( data.id ) {
-            const buku = JSON.parse(atob(data.id));
-            return $(`
-              <span class="d-flex align-items-center">
-                <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
-                ${buku.judul.slice(0, 30)}${buku.judul.length > 30 ? '...' : ''}
-              </span>
-            `);
-          }
-        }
-      });
-      data.buku.map(buku => {
-        const data = btoa(JSON.stringify(buku));
-        $(`.${selectClass}`).append(`<option value="${data}">${buku.judul}</option>`);
+      fillJsSelect2Options(selectClass, () => {
+        data.buku.map(buku => {
+          const data = btoa(JSON.stringify(buku));
+          const option = `<option value="${data}">${buku.judul}</option>`;
+          $(`.${selectClass}`).append(option);
+          bukuCache.push(option);
+        });
       });
     },
     error: function(error) {
