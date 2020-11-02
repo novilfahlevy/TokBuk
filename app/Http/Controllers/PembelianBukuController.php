@@ -83,7 +83,7 @@ class PembelianBukuController extends Controller
 
 			DB::commit();
 
-			event(new UpdateDasborEvent);
+			// event(new UpdateDasborEvent);
 
 			return redirect()->route('pembelian-buku.detail', ['id' => $pembelianBuku->id])->with([
 				'type' => 'success',
