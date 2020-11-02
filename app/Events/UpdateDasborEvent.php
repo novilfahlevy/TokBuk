@@ -39,17 +39,18 @@ class UpdateDasborEvent implements ShouldBroadcast
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();
 
-        $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $now->month)
-            ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
-            ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+        // $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $now->month)
+        //     ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
+        //     ->groupBy(DB::raw('DATE(created_at)'))
+        //     ->get();
 
         $this->jumlahTransaksi = Transaksi::count();
         $this->chart = [
             'bulan' => $now->monthName,
             'label' => $label,
             'pendapatan' => $pendapatan,
-            'pengeluaran' => $pengeluaran
+            'pengeluaran' => []
+            // 'pengeluaran' => $pengeluaran
         ];
     }
 

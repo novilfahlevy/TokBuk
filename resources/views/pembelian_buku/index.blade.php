@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Transaksi Penjualan
+Pembelian Buku
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Transaksi Penjualan
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
             <div class="section-header">
-                <h1>Transaksi Penjualan</h1>
+                <h1>Pembelian Buku</h1>
             </div>
             <div class="section-body">
                 <div class="content-body table">
@@ -17,13 +17,13 @@ Transaksi Penjualan
                             @include('layouts.flash-alert')
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Daftar Transaksi Penjualan</h4>
+                                    <h4>Daftar Pembelian Buku</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <button type="button" class="btn btn-sm btn-success mr-3" data-toggle="modal" data-target="#exportModal" title="Export Data">
+                                            {{-- <button type="button" class="btn btn-sm btn-success mr-3" data-toggle="modal" data-target="#exportModal" title="Export Data">
                                                 <i class="fas fa-file-export"></i>
-                                            </button>
-                                            <a href="{{ route('transaksi.create') }}" class="btn btn-sm btn-primary" title="Tambah Data">
+                                            </button> --}}
+                                            <a href="{{ route('pembelian-buku.create') }}" class="btn btn-sm btn-primary" title="Tambah Pembelian Buku">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
@@ -37,24 +37,24 @@ Transaksi Penjualan
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th>Tanggal</th>
-                                                    <th>Jumlah Buku</th>
-                                                    <th>Total Harga</th>
-                                                    <th>Uang Pembeli</th>
-                                                    <th>Kembalian</th>
+                                                    <th>Ditangani Oleh</th>
+                                                    <th>Pemasok</th>
+                                                    <th>Harga Beli</th>
+                                                    <th>Harga Jual</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($transaksi as $t)
+                                                @foreach ($pembelian as $p)
                                                 <tr>
-                                                    <td scope="row">{{$loop->index+1}}</td>
-                                                    <td>{{ $t->created_at }}</td>
-                                                    <td>{{ $t->jumlah_buku }}</td>
-                                                    <td>Rp {{ number_format($t->total_harga) }}</td>
-                                                    <td>Rp {{ number_format($t->uang_pembeli) }}</td>
-                                                    <td>Rp {{ number_format($t->uang_pembeli - $t->total_harga) }}</td>
+                                                    <td scope="row">{{ $loop->index + 1 }}</td>
+                                                    <td>{{ $p->created_at }}</td>
+                                                    <td>{{ $p->user()->withTrashed()->first()->name }}</td>
+                                                    <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
+                                                    <td>Rp {{ number_format($p->harga_beli) }}</td>
+                                                    <td>Rp {{ number_format($p->total_harga_jual) }}</td>
                                                     <td>
-                                                        <div class="btn-group">
+                                                        {{-- <div class="btn-group">
                                                             <form method="post" class="delete_form "
                                                             action="{{route('transaksi.destroy',$t->id)}}">
                                                             @method('DELETE')
@@ -68,7 +68,7 @@ Transaksi Penjualan
                                                                 class="btn btn-sm btn-primary text-white" title="Detail Data">
                                                                 <i class="fas fa-eye"></i>
                                                             </a>
-                                                        </div>
+                                                        </div> --}}
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -84,7 +84,7 @@ Transaksi Penjualan
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="exportModal">
+{{-- <div class="modal" tabindex="-1" role="dialog" id="exportModal">
     <form action="{{ route('transaksi.export') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
@@ -117,5 +117,5 @@ Transaksi Penjualan
             </div>
         </div>
     </form>
-  </div>
+  </div> --}}
 @endsection

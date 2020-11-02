@@ -2,21 +2,32 @@
 
 namespace App;
 
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\DetailPembelianBuku;
+use App\Pemasok;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PembelianBuku extends Model
 {
-    protected $table = 'pembelian_buku';
-    protected $fillable = ['id_buku', 'id_user', 'harga_jual', 'harga_beli', 'jumlah', 'status'];
+    // use HasFactory;
 
-    
-    public function buku()
+    protected $table = 'pembelian_buku';
+    protected $fillable = ['tanggal', 'id_user', 'id_pemasok', 'total_harga_jual', 'harga_beli'];
+
+    public function detail()
     {
-        return $this->belongsTo(Buku::class, 'id_buku');
+        return $this->hasMany(DetailPembelianBuku::class, 'id_pembelian_buku');
     }
-    
+
+    public function pemasok()
+    {
+        return $this->hasOne(Pemasok::class, 'id_pemasok');
+    }
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasOne(User::class, 'id_user');
     }
 }

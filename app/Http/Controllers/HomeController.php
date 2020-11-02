@@ -51,10 +51,10 @@ class HomeController extends Controller
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();
 
-        $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
-            ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
-            ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+        // $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
+        //     ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
+        //     ->groupBy(DB::raw('DATE(created_at)'))
+        //     ->get();
 
         return response()->json([
             'status' => 200,
@@ -62,7 +62,8 @@ class HomeController extends Controller
                 'bulan' => $this->now->monthName,
                 'label' => $label,
                 'pendapatan' => $pendapatan,
-                'pengeluaran' => $pengeluaran
+                'pengeluaran' => []
+                // 'pengeluaran' => $pengeluaran
             ]
         ]);
     }

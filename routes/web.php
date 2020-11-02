@@ -86,4 +86,9 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('transaksi/{id}/detail', 'TransaksiController@detail')->name('transaksi.detail');
   Route::post('transaksi/export', 'TransaksiController@export')->name('transaksi.export');
   Route::delete('transaksi/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');
+
+  //pembelian buku
+  Route::get('pembelian-buku', 'PembelianBukuController@index')->name('pembelian-buku');
+  Route::get('pembelian-buku/create', 'PembelianBukuController@create')->name('pembelian-buku.create');
+  Route::post('pembelian-buku/store', 'PembelianBukuController@store')->name('pembelian-buku.store');
 });

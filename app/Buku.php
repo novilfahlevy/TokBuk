@@ -50,7 +50,7 @@ class Buku extends Model
 
     public function pembelian()
     {
-        return $this->hasMany(PembelianBuku::class, 'id_buku');
+        return $this->hasMany(DetailPembelianBuku::class, 'id_buku');
     }
 
     use SoftDeletes;    

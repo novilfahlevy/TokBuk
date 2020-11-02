@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePembelianBukuTable extends Migration
+class CreateDetailPembelianBukuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreatePembelianBukuTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembelian_buku', function (Blueprint $table) {
+        Schema::create('detail_pembelian_buku', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_pembelian_buku');
+            $table->foreign('id_pembelian_buku')->references('id')->on('pembelian_buku');  
             $table->unsignedBigInteger('id_buku');
-            $table->foreign('id_buku')->references('id')->on('buku');  
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_buku')->references('id')->on('buku');
             $table->integer('harga_jual');
-            $table->integer('harga_beli');
             $table->integer('jumlah');
             $table->enum('status', ['Penambahan', 'Baru']);
             $table->timestamps();
@@ -34,6 +33,6 @@ class CreatePembelianBukuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembelian_buku');
+        Schema::dropIfExists('detail_pembelian_buku');
     }
 }

@@ -43,6 +43,12 @@
           </a>
         </li>
 
+        <li class="nav-item  {{Request::segment(1)=='pembelian-buku' ?'active':''}}">
+          <a class="nav-link" href="{{route('pembelian-buku')}}" aria-expanded="false">
+            <i class="fas fa-truck-loading"></i> <span>Pembelian Buku</span>
+          </a>
+        </li>
+
         <li class="nav-item  {{Request::segment(1)=='penulis' ?'active':''}}">
           <a class="nav-link" href="{{route('penulis')}}" aria-expanded="false">
             <i class="fas fa-user-edit"></i><span>Penulis</span>

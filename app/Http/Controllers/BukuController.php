@@ -20,14 +20,14 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
-    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Pemasok $Pemasok, Lokasi $lokasi, PembelianBuku $pembelianbuku)
+    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Pemasok $Pemasok, Lokasi $lokasi)
     {
         $this->buku = $buku;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->kategori = $kategori;
         $this->lokasi = $lokasi;
-        $this->pembelianbuku = $pembelianbuku;
+        // $this->pembelianbuku = $pembelianbuku;
     }
     public function index()
     {
@@ -84,14 +84,14 @@ class BukuController extends Controller
 
             
         ]);
-        $pembelianbuku = PembelianBuku::create([
-            'id_buku' => $buku->id,
-            'id_user' => auth()->user()->id,
-            'harga_jual' => $request->harga_jual,
-            'harga_beli' => $request->harga_beli,
-            'jumlah' => $request->jumlah,
-            'status' => 'Baru'
-        ]);
+        // $pembelianbuku = PembelianBuku::create([
+        //     'id_buku' => $buku->id,
+        //     'id_user' => auth()->user()->id,
+        //     'harga_jual' => $request->harga_jual,
+        //     'harga_beli' => $request->harga_beli,
+        //     'jumlah' => $request->jumlah,
+        //     'status' => 'Baru'
+        // ]);
 
        
 
@@ -185,57 +185,57 @@ class BukuController extends Controller
         return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Buku, Silahkan coba lagi', 'type' => 'danger']);
     }
 
-    public function logs()
-    {
-        $logs = PembelianBuku::orderBy('created_at', 'DESC')->get();
-        return view('buku_admin.logs', compact('logs'));
-    }
+    // public function logs()
+    // {
+    //     $logs = PembelianBuku::orderBy('created_at', 'DESC')->get();
+    //     return view('buku_admin.logs', compact('logs'));
+    // }
 
-    public function tambahjml($id)
-    {
-        $buku = Buku::where('id', $id)->first();
-        return view('buku_admin.tambahjumlah', compact('buku'));
-    }
+    // public function tambahjml($id)
+    // {
+    //     $buku = Buku::where('id', $id)->first();
+    //     return view('buku_admin.tambahjumlah', compact('buku'));
+    // }
 
-    public function tambahstore(Request $request, $id)
-    {
-        $validate = $request->validate([
-            'harga_jual' => 'required',
-            'harga_beli' => 'required',
-            'jumlah' => 'required'
-        ]);
+    // public function tambahstore(Request $request, $id)
+    // {
+    //     $validate = $request->validate([
+    //         'harga_jual' => 'required',
+    //         'harga_beli' => 'required',
+    //         'jumlah' => 'required'
+    //     ]);
         
-        DB::beginTransaction();
+    //     DB::beginTransaction();
 
-        try {
-            $buku = Buku::where('id', $id);
+    //     try {
+    //         $buku = Buku::where('id', $id);
             
-            $logb = PembelianBuku::create([
-                'id_buku' => $buku->first()->id,
-                'id_user' => auth()->user()->id,
-                'harga_beli' => $request->harga_beli,
-                'harga_jual' => $request->harga_jual,
-                'jumlah' => $request->jumlah,
-                'status' => 'Penambahan'
-            ]);
+    //         $logb = PembelianBuku::create([
+    //             'id_buku' => $buku->first()->id,
+    //             'id_user' => auth()->user()->id,
+    //             'harga_beli' => $request->harga_beli,
+    //             'harga_jual' => $request->harga_jual,
+    //             'jumlah' => $request->jumlah,
+    //             'status' => 'Penambahan'
+    //         ]);
 
-            $buku->update([
-                'jumlah' => $buku->first()->jumlah + $request->jumlah
-            ]);
+    //         $buku->update([
+    //             'jumlah' => $buku->first()->jumlah + $request->jumlah
+    //         ]);
 
-            DB::commit();
+    //         DB::commit();
 
-            event(new UpdateDasborEvent());
+    //         event(new UpdateDasborEvent());
 
-            return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Jumlah Buku', 'type' => 'success']);
-        } catch ( Exception $e ) {
-            DB::rollBack();
-            return redirect()->route('buku.tambahstore')->with(['message' => 'Gagal Menambah Jumlah Buku', 'type' => 'danger']);
-        }
-    }
+    //         return redirect()->route('buku')->with(['message' => 'Berhasil Menambah Jumlah Buku', 'type' => 'success']);
+    //     } catch ( Exception $e ) {
+    //         DB::rollBack();
+    //         return redirect()->route('buku.tambahstore')->with(['message' => 'Gagal Menambah Jumlah Buku', 'type' => 'danger']);
+    //     }
+    // }
 
-    public function export(Request $request)
-    {
-        return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
-    }
+    // public function export(Request $request)
+    // {
+    //     return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian-buku.xlsx');
+    // }
 }
