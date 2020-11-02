@@ -10,7 +10,7 @@ use App\Exports\PembelianBukuExport;
 use App\Penulis;
 use App\Penerbit;
 use App\Kategori;
-use App\Pemasok;
+// use App\Pemasok;
 use App\Lokasi;
 use App\PembelianBuku;
 use Exception;
@@ -20,7 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
-    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Pemasok $Pemasok, Lokasi $lokasi)
+    public function __construct(Buku $buku, Penulis $penulis, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
     {
         $this->buku = $buku;
         $this->penulis = $penulis;
@@ -108,11 +108,10 @@ class BukuController extends Controller
         $penulis = Penulis::all();
         $penerbit = Penerbit::all();
         $kategori = Kategori::all();
-        $Pemasok = Pemasok::all();
         $lokasi = Lokasi::all();
         $buku = Buku::where('id', $id)->first();
 
-        return view('buku_admin.edit', compact('penulis', 'penerbit', 'kategori', 'Pemasok', 'buku', 'lokasi'));
+        return view('buku_admin.edit', compact('penulis', 'penerbit', 'kategori',  'buku', 'lokasi'));
     }
 
     public function update(Request $request, $id)
@@ -124,7 +123,6 @@ class BukuController extends Controller
             'id_penulis' => 'required',
             'id_penerbit' => 'required',
             'id_kategori' => 'required',
-            'id_pemasok' => 'required',
             'id_lokasi' => 'required',
             'tahun_terbit' => 'required',
             'harga' => 'required'
@@ -147,7 +145,6 @@ class BukuController extends Controller
             'id_penulis' => $request->id_penulis,
             'id_penerbit' => $request->id_penerbit,
             'id_kategori' => $request->id_kategori,
-            'id_pemasok' => $request->id_pemasok,
             'id_lokasi' => $request->id_lokasi,
             'tahun_terbit' => $request->tahun_terbit,
             'harga' => $request->harga
@@ -167,9 +164,8 @@ class BukuController extends Controller
         $penulis = Penulis::where('id', $id)->first();
         $penerbit = Penerbit::where('id', $id)->first();
         $kategori = Kategori::where('id', $id)->first();
-        $Pemasok = Pemasok::where('id', $id)->first();
         $lokasi = Lokasi::where('id', $id)->first();
-        return view('buku_admin.detail', compact('buku', 'penulis', 'penerbit', 'kategori', 'Pemasok', 'lokasi'));
+        return view('buku_admin.detail', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
     }
 
     public function destroy($id)

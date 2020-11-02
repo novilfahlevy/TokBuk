@@ -26,7 +26,7 @@
                                                         <input type="file" id="inputgambar" name="sampul" class="form-control validate" value="{{$buku->sampul}}"/>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-primary" type="submit" style="width: 100%">Simpan Perubahan</button>
+                                                
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="card">
@@ -67,24 +67,25 @@
                                                                 </select>
                                                                 <br/>
 
-                                                                Penerbit
-                                                                <select required name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
-                                                                    <option value=''>- Pilih -</option>
-                                                                    @foreach($penerbit as $per)     
-                                                                        <option value="{{ $per['id'] }}" {{$per->id == $buku->id_penerbit ?  'selected' : ''}}> {{$per->nama}} </option>
-                                                                    @endforeach
-                                                                </select>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    Pemasok
+                                                                    Penerbit
+                                                                    <select required name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
+                                                                        <option value=''>- Pilih -</option>
+                                                                        @foreach($penerbit as $per)     
+                                                                            <option value="{{ $per['id'] }}" {{$per->id == $buku->id_penerbit ?  'selected' : ''}}> {{$per->nama}} </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <br/>
+                                                                    {{-- Pemasok
                                                                     <select required name="id_pemasok" class="form-control" value="{{ old('id_pemasok') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($Pemasok as $sup)     
                                                                             <option value="{{ $sup['id'] }}" {{$sup->id == $buku->id_pemasok ?  'selected' : ''}}> {{$sup->nama}} </option>
                                                                         @endforeach
                                                                     </select>
-                                                                    <br/>
+                                                                    <br/> --}}
                                                                     
                                                                     Tahun Terbit Buku
                                                                     <input type="number" class="form-control" required name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
@@ -110,6 +111,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <button class="btn btn-primary" type="submit" >Simpan Perubahan</button>
                                                     </div>
                                                 </div>
                                             </div>

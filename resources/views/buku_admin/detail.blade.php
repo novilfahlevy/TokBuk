@@ -64,11 +64,11 @@
                                                         <div class="col-1 text-right">:</div>
                                                         <div class="col-lg-6 col-5">{{$buku->tahun_terbit}}</div>
                                                     </div>
-                                                    <div class="row mb-4">
+                                                    {{-- <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Pemasok</div>
                                                         <div class="col-1 text-right">:</div>
                                                         <div class="col-lg-6 col-5">{{strtoupper($buku->pemasok ? $buku->pemasok->nama : '')}}</div>
-                                                    </div>
+                                                    </div> --}}
                                                     
                                                     <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Harga (Per buku)</div>

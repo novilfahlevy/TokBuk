@@ -19,7 +19,6 @@ class BukuTableSeeder extends Seeder
             'id_penulis' => 1,
             'id_penerbit' => 2,
             'id_kategori' => 3,
-            'id_pemasok' => 1,
             'id_lokasi' => 1,
             'harga' => 80000,
             'jumlah' => 80
@@ -32,7 +31,6 @@ class BukuTableSeeder extends Seeder
             'id_penulis' => 2,
             'id_penerbit' => 1,
             'id_kategori' => 3,
-            'id_pemasok' => 3,
             'id_lokasi' => 1,
             'harga' => 85000,
             'jumlah' => 76

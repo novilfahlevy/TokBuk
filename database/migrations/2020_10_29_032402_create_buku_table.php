@@ -24,9 +24,7 @@ class CreateBukuTable extends Migration
             $table->unsignedBigInteger('id_penerbit')->nullable();
             $table->foreign('id_penerbit')->references('id')->on('penerbit');   
             $table->unsignedBigInteger('id_kategori')->nullable();
-            $table->foreign('id_kategori')->references('id')->on('kategori');   
-            $table->unsignedBigInteger('id_pemasok')->nullable();
-            $table->foreign('id_pemasok')->references('id')->on('pemasok');  
+            $table->foreign('id_kategori')->references('id')->on('kategori');  
             $table->unsignedBigInteger('id_lokasi')->nullable();
             $table->foreign('id_lokasi')->references('id')->on('lokasi');  
             $table->integer('harga')->nullable();
