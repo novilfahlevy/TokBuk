@@ -20,8 +20,8 @@ Buku
                                 <h4>Data Buku</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                <a class="btn btn-sm btn-success mr-2" href="{{route('buku.logs')}}" title="Riwayat Penambahan Buku"><i class="fas fa-list"></i></a>
-                                <a class="btn btn-sm btn-primary" href="{{route('buku.create')}}" title="Tambah Data"><i class="fas fa-plus"></i></a>
+                                {{-- <a class="btn btn-sm btn-success mr-2" href="{{route('buku.logs')}}" title="Riwayat Penambahan Buku"><i class="fas fa-list"></i></a> --}}
+                                {{-- <a class="btn btn-sm btn-primary" href="{{route('buku.create')}}" title="Tambah Data"><i class="fas fa-plus"></i></a> --}}
                                 </div>
                             </div>
                         </div>
@@ -62,9 +62,9 @@ Buku
                                     <div class="btn-group">
                                         <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}" class="btn btn-sm btn-primary text-white" title="Detail Data"><i class="fa fa-eye"></i></i></a>
                                     </div>
-                                    <div class="btn-group">
+                                    {{-- <div class="btn-group">
                                         <a href="{{ route( 'buku.tambah' ,['id' => $b->id]) }}" class="btn btn-sm btn-success text-white" title="Tambah Jumlah Buku"><i class="fas fa-plus"></i></i></a>
-                                    </div>
+                                    </div> --}}
                                   </td>
                               </tr>
                                   @endforeach
