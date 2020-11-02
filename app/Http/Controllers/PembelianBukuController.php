@@ -23,6 +23,23 @@ class PembelianBukuController extends Controller
 		return view('pembelian_buku.index', compact('pembelian'));
 	}
 
+	public function filter(Request $request)
+	{
+		$pembelian = PembelianBuku::select('*');
+
+		if ( $request->mulai ) {
+			$pembelian->whereDate('created_at', '>=', $request->mulai);
+		}
+		
+		if ( $request->sampai ) {
+			$pembelian->whereDate('created_at', '<=', $request->sampai);
+		}
+
+		$pembelian = $pembelian->orderBy('created_at', 'DESC')->get();
+
+		return view('pembelian_buku.index', compact('pembelian'));
+	}
+
 	public function create(Request $request)
 	{
 		$pemasok = Pemasok::all();

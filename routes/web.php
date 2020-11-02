@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth'], function() {
 
   //pembelian buku
   Route::get('pembelian-buku', 'PembelianBukuController@index')->name('pembelian-buku');
+  Route::post('pembelian-buku', 'PembelianBukuController@filter')->name('pembelian-buku.filter');
   Route::get('pembelian-buku/{id}/detail', 'PembelianBukuController@detail')->name('pembelian-buku.detail');
   Route::get('pembelian-buku/create', 'PembelianBukuController@create')->name('pembelian-buku.create');
   Route::post('pembelian-buku/store', 'PembelianBukuController@store')->name('pembelian-buku.store');

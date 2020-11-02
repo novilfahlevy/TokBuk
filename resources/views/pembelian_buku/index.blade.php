@@ -20,7 +20,10 @@ Pembelian Buku
                                     <h4>Daftar Pembelian Buku</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <button type="button" class="btn btn-sm btn-success mr-3" data-toggle="modal" data-target="#exportModal" title="Export Data">
+                                            <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" title="Filter Data">
+                                                <i class="fas fa-filter"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" title="Export Data">
                                                 <i class="fas fa-file-export"></i>
                                             </button>
                                             <a href="{{ route('pembelian-buku.create') }}" class="btn btn-sm btn-primary" title="Tambah Pembelian Buku">
@@ -120,4 +123,38 @@ Pembelian Buku
         </div>
     </form>
   </div>
+
+  <div class="modal" tabindex="-1" role="dialog" id="filterModal">
+    <form action="{{ route('pembelian-buku.filter') }}" method="POST">
+        @csrf
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filter Data Pembelian Buku</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-0">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="mulai">Dari tanggal</label>
+                            <input type="date" class="form-control" id="mulai" name="mulai">
+                        </div>
+                        <div class="col-6">
+                            <label for="sampai">Sampai tanggal</label>
+                            <input type="date" class="form-control" id="sampai" name="sampai">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+            </div>
+        </div>
+    </form>
+</div>
 @endsection
