@@ -27,13 +27,13 @@ Tambah Transaksi
               @csrf
               <input type="hidden" id="hasilRespon" name="transaksi" hidden>
               <div class="form-group">
-                <label for="uangPembeli">Uang pembeli</label>
+                <label for="bayar">Uang pembeli</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Rp</span>
                   </div>
-                  <input type="number" class="form-control" id="uangPembeli" name="uangPembeli" value="0">
-                  @error('uangPembeli')
+                  <input type="number" class="form-control" id="bayar" name="bayar" value="0">
+                  @error('bayar')
                     <span class="invalid-feedback d-block" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

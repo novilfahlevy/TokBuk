@@ -55,7 +55,7 @@ Transaksi Penjualan
                                                     <td>{{ $t->created_at }}</td>
                                                     <td>{{ $t->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($t->total_harga) }}</td>
-                                                    <td>Rp {{ number_format($t->uang_pembeli) }}</td>
+                                                    <td>Rp {{ number_format($t->bayar) }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "

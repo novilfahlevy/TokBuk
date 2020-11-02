@@ -15,7 +15,7 @@
       <td>{{ $pembelian->pemasok->nama }}</td>
     </tr>
     <tr>
-      <td>Harga Beli</td>
+      <td>Bayar</td>
       <td>Rp {{ number_format($pembelian->harga_beli) }}</td>
     </tr>
     <tr>

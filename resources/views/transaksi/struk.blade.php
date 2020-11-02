@@ -11,16 +11,16 @@
       <td>{{ $transaksi->created_at }}</td>
     </tr>
     <tr>
+      <td>Bayar</td>
+      <td>Rp {{ number_format($transaksi->bayar) }}</td>
+    </tr>
+    <tr>
       <td>Total Harga</td>
       <td>Rp {{ number_format($transaksi->total_harga) }}</td>
     </tr>
     <tr>
-      <td>Bayar</td>
-      <td>Rp {{ number_format($transaksi->uang_pembeli) }}</td>
-    </tr>
-    <tr>
       <td>Kembalian</td>
-      <td>Rp {{ number_format($transaksi->uang_pembeli - $transaksi->total_harga) }}</td>
+      <td>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga) }}</td>
     </tr>
   </tbody>
 </table>

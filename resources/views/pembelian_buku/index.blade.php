@@ -41,9 +41,8 @@ Pembelian Buku
                                                     <th scope="col">#</th>
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
-                                                    <th>Ditangani Oleh</th>
                                                     <th>Pemasok</th>
-                                                    <th>Harga Beli</th>
+                                                    <th>Bayar</th>
                                                     <th>Harga Jual</th>
                                                     <th scope="col"></th>
                                                 </tr>
@@ -54,7 +53,6 @@ Pembelian Buku
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
                                                     <td>{{ $p->kode }}</td>
                                                     <td>{{ $p->created_at }}</td>
-                                                    <td>{{ $p->user()->withTrashed()->first()->name }}</td>
                                                     <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
                                                     <td>Rp {{ number_format($p->harga_beli) }}</td>
                                                     <td>Rp {{ number_format($p->total_harga_jual) }}</td>
