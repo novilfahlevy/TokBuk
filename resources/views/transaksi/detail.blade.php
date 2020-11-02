@@ -26,12 +26,16 @@ Detail Transaksi
             <div class="form-group">
               <div class="row">
                 <div class="col-lg-2">
-                  <h6 class="mb-1">Ditangani Oleh</h6>
-                  <p>{{ $transaksi->user()->withTrashed()->first()->name }}</p>
+                  <h6 class="mb-1">Kode</h6>
+                  <p>{{ $transaksi->kode }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Tanggal Transaksi</h6>
                   <p>{{ $transaksi->created_at }}</p>
+                </div>
+                <div class="col-lg-2">
+                  <h6 class="mb-1">Ditangani Oleh</h6>
+                  <p>{{ $transaksi->user()->withTrashed()->first()->name }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Uang Pembeli</h6>
