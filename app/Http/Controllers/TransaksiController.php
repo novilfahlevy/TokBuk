@@ -106,7 +106,7 @@ class TransaksiController extends Controller
 	{
 		return response()->json([
 			'status' => 200,
-			'buku' => Buku::where('jumlah', '>=', 1)->get()
+			'buku' => Buku::where('jumlah', '>=', 1)->whereNotNull('harga')->get()
 		]);
 	}
 
