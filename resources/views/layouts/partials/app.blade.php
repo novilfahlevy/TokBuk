@@ -11,7 +11,7 @@
       appKey: "{{ config('app.pusher.app_key') }}"
     };
   </script>
-  <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicon.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicon.png')}}">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <!-- csrf-token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
