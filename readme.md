@@ -2,6 +2,11 @@
 
 TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner toko buku manapun untuk mengelola dan mencatat atau merekam riwayat pengadaan stok buku atau barang-barang dari supplier, pembelian buku oleh pelanggan, dan mengelola lokasi atau tata letak buku dan barang-barang lainnya.
 
+## Bahan atau software yang diperlukan
+- [Composer](https://getcomposer.org)
+- [Git](https://git-scm.com/downloads)
+- [XAMPP](https://www.apachefriends.org/download.html)
+
 ## Instalasi
 1. Clone repo ini, dengan menggunakan perintah :
 
