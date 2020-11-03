@@ -1,7 +1,7 @@
 <table style="text-align: center">
   <thead>
     <tr>
-      <th>No</th>
+      <th>#</th>
       <th>Kode</th>
       <th>Tanggal</th>
       <th>ISBN</th>

@@ -30,10 +30,11 @@ Pengguna
                                 <table id="table-index" class="display table-striped table-bordered" style="width:100%; text-align:center;">
                                     <thead style="">
                                         <tr>
-                                            <th>No</th>
+                                            <th>#</th>
+                                            <th>Nama</th>
                                             <th>Username</th>
-                                            <th>Posisi</th>
                                             <th>E-Mail</th>
+                                            <th>Posisi</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -41,7 +42,9 @@ Pengguna
                                         @foreach ($users as $u)
                                             <tr>
                                                 <td>{{$loop->index+1}}</td>
+                                                <td>{{$u->name}}</td>
                                                 <td>{{$u->username}}</td>
+                                                <td>{{$u->email}}</td>
                                                 <td>
                                                     @if ($u->posisi == "Admin")
                                                     <span class="badge badge-warning">{{$u->posisi}}</span>
@@ -51,7 +54,6 @@ Pengguna
                                                     <span class="badge badge-success">{{$u->posisi}}</span>
                                                     @endif
                                                 </td>
-                                                <td>{{$u->email}}</td>
                                                 <td>
                                                     @if (auth()->user()->id == $u->id)
                                                     Saya
