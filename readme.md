@@ -64,10 +64,10 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     Semua akun menggunakan password *123123*
 
 ## Kontributor (Kelompok 3)
-- [Muhammad Novil Fahlevy](https://github.com/novilfahlevy) - Backend Developer
-- [Alisanabela Nasrun](https://github.com/alisanabela13) - Backend Developer
-- [Yudha Indra Permana](https://github.com/yudhaip) - Frontend Developer
-- [Roofi Ali Raditya](https://github.com/roopi2203) - Frontend Developer
-- [Farkhanudin](https://github.com/farhan90909) - Frontend Developer
-- Niken Astrid Pradiva Putri - Analis
-- Fariz Dwi Januardi - Desainer
+- [Muhammad Novil Fahlevy](https://github.com/novilfahlevy)
+- [Alisanabela Nasrun](https://github.com/alisanabela13)
+- [Yudha Indra Permana](https://github.com/yudhaip)
+- [Roofi Ali Raditya](https://github.com/roopi2203)
+- [Farkhanudin](https://github.com/farhan90909)
+- Niken Astrid Pradiva Putri
+- Fariz Dwi Januardi
