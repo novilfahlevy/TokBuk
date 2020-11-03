@@ -37,6 +37,10 @@ Detail Pembelian Buku
                   <p>{{ $pembelian->created_at }}</p>
                 </div>
                 <div class="col-lg-2">
+                  <h6 class="mb-1">Ditangani</h6>
+                  <p>{{ $pembelian->user->name }}</p>
+                </div>
+                <div class="col-lg-2">
                   <h6 class="mb-1">Bayar</h6>
                   <p>Rp {{ number_format($pembelian->harga_beli) }}</p>
                 </div>
