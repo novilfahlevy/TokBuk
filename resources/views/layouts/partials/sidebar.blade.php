@@ -29,7 +29,7 @@
       @endif
 
       @if ( $posisi === 'Admin' || $posisi === 'Operator' )
-        <li class="nav-item {{Request::segment(1)=='datauser' ?'active':''}}">
+        <li class="nav-item {{Request::segment(1)=='pengguna' ?'active':''}}">
           <a class="nav-link" href="{{route('user')}}" aria-expanded="false">
             <i class="fas fa-users"></i> <span>Pengguna</span>
           </a>
@@ -37,7 +37,7 @@
 
         <li class="menu-header">MANAJEMEN BUKU</li>
       
-        <li class="nav-item  {{Request::segment(1)=='databuku' ?'active':''}}">
+        <li class="nav-item  {{Request::segment(1)=='buku' ?'active':''}}">
           <a class="nav-link" href="{{route('buku')}}" aria-expanded="false">
             <i class="fas fa-book"></i> <span>Buku</span>
           </a>

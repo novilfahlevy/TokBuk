@@ -22,26 +22,26 @@ Route::group(['middleware' => 'auth'], function() {
   Route::put('/profil/password', 'ProfilController@changePassword')->name('profil.password');
 
   //user
-  Route::get('/datauser', 'UserController@index')->name('user');
-  Route::get('datauser/create', 'UserController@create')->name('user.create');
-  Route::post('datauser/store', 'UserController@store')->name('user.store');
-  Route::get('datauser/{id}', 'UserController@edit')->name('user.edit');
-  Route::put('datauser/{id}/update', 'UserController@update')->name('user.update');
-  Route::delete('datauser/{id}', 'UserController@destroy')->name('user.destroy');
+  Route::get('/pengguna', 'UserController@index')->name('user');
+  Route::get('pengguna/create', 'UserController@create')->name('user.create');
+  Route::post('pengguna/store', 'UserController@store')->name('user.store');
+  Route::get('pengguna/{id}', 'UserController@edit')->name('user.edit');
+  Route::put('pengguna/{id}/update', 'UserController@update')->name('user.update');
+  Route::delete('pengguna/{id}', 'UserController@destroy')->name('user.destroy');
 
   //buku
-  Route::get('/databuku', 'BukuController@index')->name('buku');
-  Route::post('/databuku', 'BukuController@filter')->name('buku.filter');
-  Route::get('databuku/logs', 'BukuController@logs')->name('buku.logs');
-  Route::get('databuku/{id}/tambah', 'BukuController@tambahjml')->name('buku.tambah');
-  Route::get('databuku/{id}/detail', 'BukuController@detail')->name('buku.detail');
-  Route::get('databuku/create', 'BukuController@create')->name('buku.create');
-  Route::post('databuku/store', 'BukuController@store')->name('buku.store');
-  Route::post('databuku/tambahstore/{id}', 'BukuController@tambahstore')->name('buku.tambahstore');
-  Route::get('databuku/{id}', 'BukuController@edit')->name('buku.edit');
-  Route::put('databuku/{id}/update', 'BukuController@update')->name('buku.update');
-  Route::delete('databuku/{id}', 'BukuController@destroy')->name('buku.destroy');
-  Route::post('databuku/export', 'BukuController@export')->name('pembelianbuku.export');
+  Route::get('/buku', 'BukuController@index')->name('buku');
+  Route::post('/buku', 'BukuController@filter')->name('buku.filter');
+  Route::get('buku/logs', 'BukuController@logs')->name('buku.logs');
+  Route::get('buku/{id}/tambah', 'BukuController@tambahjml')->name('buku.tambah');
+  Route::get('buku/{id}/detail', 'BukuController@detail')->name('buku.detail');
+  Route::get('buku/create', 'BukuController@create')->name('buku.create');
+  Route::post('buku/store', 'BukuController@store')->name('buku.store');
+  Route::post('buku/tambahstore/{id}', 'BukuController@tambahstore')->name('buku.tambahstore');
+  Route::get('buku/{id}', 'BukuController@edit')->name('buku.edit');
+  Route::put('buku/{id}/update', 'BukuController@update')->name('buku.update');
+  Route::delete('buku/{id}', 'BukuController@destroy')->name('buku.destroy');
+  Route::post('buku/export', 'BukuController@export')->name('pembelianbuku.export');
 
 
   //penulis

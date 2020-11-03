@@ -126,14 +126,18 @@ class BukuController extends Controller
 
         if ( $request->sampul ) {
             $sampulLama = $buku->first()->sampul;
-            $sampul = $request->file('sampul');
-            $get_name = explode('.', $sampulLama)[0] . '.' . $sampul->getClientOriginalExtension();
-            Storage::disk('public')->delete('images/buku/' . $sampulLama);
-            $sampul->move(public_path('images/buku/'), $get_name);
+            $sampulBaru = $request->file('sampul');
+            $namaBaru = Str::random(20) . '.' . $sampulBaru->getClientOriginalExtension();
+            
+            if ( $sampulLama !== 'sampul.png' ) {
+                Storage::disk('public')->delete('images/buku/' . $sampulLama);
+            }
+
+            $sampulBaru->move(public_path('images/buku/'), $namaBaru);
           }
 
           $update = $buku->update([
-            'sampul' => $request->sampul ? $get_name : $buku->first()->sampul,
+            'sampul' => $request->sampul ? $namaBaru : $buku->first()->sampul,
             'isbn' => $request->isbn,
             'judul' => $request->judul,
             'id_penulis' => $request->id_penulis ?? $buku->first()->id_penulis,
@@ -146,7 +150,7 @@ class BukuController extends Controller
         ]);
 
         if($update == true) {
-            return redirect()->route('buku')->with(['message' => 'Berhasil Mengedit Buku', 'type' => 'success']);
+            return redirect()->route('buku.detail', ['id' => $buku->first()->id])->with(['message' => 'Berhasil Mengedit Buku', 'type' => 'success']);
         } else {
             return redirect()->route('buku')->with(['message' => 'Gagal Mengedit Buku', 'type' => 'danger']);
         }
