@@ -56,6 +56,13 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 
 10. Dan jangan lupa untuk menyalakan *mysql* di *XAMPP*
 
+11. Akun (username) yang dapat dipakai untuk login antara lain
+    - admin
+    - operator
+    - kasir
+
+    Semua akun menggunakan password *123123*
+
 ## Kontributor (Kelompok 3)
 - [Muhammad Novil Fahlevy](https://github.com/novilfahlevy) - Backend Developer
 - [Alisanabela Nasrun](https://github.com/alisanabela13) - Backend Developer
