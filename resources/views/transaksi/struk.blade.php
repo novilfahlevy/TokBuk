@@ -14,11 +14,6 @@
       <td><h6>:</h6></td>
       <td><h6>{{ $transaksi->created_at }}</h6></td>
     </tr>
-    <tr>
-      <td><h6>Dilayani</h6></td>
-      <td><h6>:</h6></td>
-      <td><h6>{{$transaksi->user->name}}</h6></td>
-    </tr>
   </tbody>
 </table>
 <hr style="border-bottom: dashed;">

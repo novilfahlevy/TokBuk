@@ -37,6 +37,10 @@ Detail Transaksi
                   <p>{{ $transaksi->created_at }}</p>
                 </div>
                 <div class="col-lg-2">
+                  <h6 class="mb-1">Dilayani</h6>
+                  <p>{{ $transaksi->user->name }}</p>
+                </div>
+                <div class="col-lg-2">
                   <h6 class="mb-1">Bayar</h6>
                   <p>Rp {{ number_format($transaksi->bayar) }}</p>
                 </div>
