@@ -49,6 +49,8 @@
           </a>
         </li>
 
+        <li class="menu-header">DATA MASTER</li>
+
         <li class="nav-item  {{Request::segment(1)=='penulis' ?'active':''}}">
           <a class="nav-link" href="{{route('penulis')}}" aria-expanded="false">
             <i class="fas fa-user-edit"></i><span>Penulis</span>
