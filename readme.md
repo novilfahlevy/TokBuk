@@ -20,7 +20,6 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     - DB_DATABASE
     - DB_USERNAME
     - DB_PASSWORD
-    - BROADCAST_DRIVER
     - PUSHER_APP_ID
     - PUSHER_APP_KEY
     - PUSHER_APP_SECRET
