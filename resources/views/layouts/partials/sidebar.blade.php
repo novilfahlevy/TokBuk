@@ -1,8 +1,8 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
-    <div class="sidebar-brand mt-0 mb-5">
+    <div class="sidebar-brand mt-0 mb-4 mt-2">
         <a href="{{route('home')}}" class="site_title">
-          <img src="{{ asset('assets/img/logo.png') }}" style="height: 9.5em" width="200">
+          <img src="{{ asset('assets/img/logo.png') }}" width="160">
         </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
