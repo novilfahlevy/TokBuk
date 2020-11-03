@@ -2,10 +2,20 @@
 <h5 style="text-align: center">
   TokBuk <br>
 </h5>
-<h6>
-  Kode Transaksi : {{ $transaksi->kode }}<br>
-  Tanggal        : {{ $transaksi->created_at }}
-</h6>
+<table style="width: 50%; border-width: 0">
+  <tbody>
+    <tr>
+      <td><h6>Kode Transaksi</h6></td>
+      <td><h6>:</h6></td>
+      <td><h6>{{ $transaksi->kode }}</h6></td>
+    </tr>
+    <tr>
+      <td><h6>Tanggal</h6></td>
+      <td><h6>:</h6></td>
+      <td><h6>{{ $transaksi->created_at }}</h6></td>
+    </tr>
+  </tbody>
+</table>
 <hr style="border-bottom: dashed;">
 Dilayani : {{auth()->user()->name}}
 <br>
