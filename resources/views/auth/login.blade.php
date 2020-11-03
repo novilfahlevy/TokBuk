@@ -49,7 +49,7 @@
                       <label for="password" class="control-label mb-0">{{ __('Password') }}</label>
                       @if (Route::has('password.request'))
                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                          {{ __('Forgot Password?') }}
+                          {{ __('Lupa Password?') }}
                         </a>
                       @endif
                     </div>
