@@ -8,7 +8,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 - [XAMPP](https://www.apachefriends.org/download.html)
 
 ## Instalasi
-1. Clone repo ini, dengan menggunakan perintah :
+1. Clone repo ini, dengan menggunakan perintah
 
     ```
     git clone https://github.com/novilfahlevy/TokBuk.git
@@ -16,7 +16,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 
 2. Copy file *.env.example* dan paste menjadi *.env*
 
-3. Variabel-variabel yang harus diisi di file *.env* antara lain :
+3. Variabel-variabel yang harus diisi di file *.env* antara lain
     - DB_DATABASE
     - DB_USERNAME
     - DB_PASSWORD
