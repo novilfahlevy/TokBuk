@@ -77,7 +77,7 @@
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Forgot Password</h4></div>
+              <div class="card-header"><h4>Ganti Password</h4></div>
 
               <div class="card-body">
                 @if (session('status'))
@@ -85,7 +85,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-                <p class="text-muted">Link Reset Password Akan dikirim di E-Mail Anda</p>
+                <p>Link reset password akan dikirim di email anda</p>
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                   <div class="form-group">
@@ -101,7 +101,7 @@
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      Forgot Password
+                      Kirim
                     </button>
                   </div>
                 </form>

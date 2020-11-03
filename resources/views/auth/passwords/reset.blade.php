@@ -71,7 +71,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Reset Password &mdash; TokBuk</title>
+  <title>Ganti Password &mdash; TokBuk</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -96,7 +96,7 @@
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Reset Password</h4></div>
+              <div class="card-header"><h4>Ganti Password</h4></div>
 
               <div class="card-body">
                 <form method="POST" action="{{ route('password.update') }}">
@@ -132,7 +132,7 @@
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      Reset Password
+                      Ganti Password
                     </button>
                   </div>
                 </form>
