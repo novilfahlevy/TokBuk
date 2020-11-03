@@ -57,7 +57,7 @@ Tambah Transaksi
                         <th scope="col">#</th>
                         <th scope="col">Judul</th>
                         <th scope="col">Jumlah</th>
-                        <th scope="col">Harga Per Buku</th>
+                        <th scope="col">Harga</th>
                         <th scope="col">Total Harga</th>
                         <th scope="col"></th>
                       </tr>

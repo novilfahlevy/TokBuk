@@ -6,7 +6,7 @@
       <th>Tanggal</th>
       <th>ISBN</th>
       <th>Judul Buku</th>
-      <th>Harga Per Buku</th>
+      <th>Harga</th>
       <th>Jumlah</th>
       <th>Total Harga</th>
       <th>Status</th>
