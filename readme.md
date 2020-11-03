@@ -54,6 +54,8 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 
 9. Jika langkah-langkah diatas sudah dilakukan semua, seharusnya aplikasi sudah dapat diakses di browser melalui url *http://127.0.0.1:8000*
 
+10. Dan jangan lupa untuk menyalakan *mysql* dan *apache* di *XAMPP*
+
 ## Kontributor (Kelompok 3)
 - [Muhammad Novil Fahlevy](https://github.com/novilfahlevy) - Backend Developer
 - [Alisanabela Nasrun](https://github.com/alisanabela13) - Backend Developer
