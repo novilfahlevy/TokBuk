@@ -1,5 +1,9 @@
 ## TokBuk
 
+<center>
+    <img src="./public/assets/img/logo.png" alt="TokBuk" width="200" style="margin-bottom: 20px" />
+</center>
+
 TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner toko buku manapun untuk mengelola dan mencatat atau merekam riwayat pengadaan stok buku dari supplier, pembelian buku oleh pelanggan, dan mengelola lokasi atau tata letak buku.
 
 ## Bahan atau software yang diperlukan
