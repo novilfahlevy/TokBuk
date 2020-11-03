@@ -7,6 +7,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 - [Git](https://git-scm.com/downloads)
 - [XAMPP](https://www.apachefriends.org/download.html)
 - [Pusher](https://pusher.com) (opsional)
+- [Sentry](https://docs.sentry.io/platforms/php/guides/laravel/) (opsional, jika ingin melakukan error tracking)
 
 ## Instalasi
 1. Clone repo ini dengan menggunakan perintah
@@ -25,6 +26,8 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     - PUSHER_APP_KEY (opsional)
     - PUSHER_APP_SECRET (opsional)
     - PUSHER_APP_CLUSTER (opsional)
+    - SENTRY_LARAVEL_DSN (opsional, jika ingin melakukan error tracking)
+    - SENTRY_TRACES_SAMPLE_RATE (opsional, jika ingin melakukan error tracking)
 
 4. Install package, library, dan dependency yang diperlukan dengan menggunakan perintah
     ```
