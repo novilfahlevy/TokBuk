@@ -56,8 +56,8 @@ Detail Transaksi
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Judul</th>
-                    <th scope="col">Jumlah</th>
                     <th scope="col">Harga Per Buku</th>
+                    <th scope="col">Jumlah</th>
                     <th scope="col">Total Harga</th>
                   </tr>
                 </thead>
@@ -66,8 +66,8 @@ Detail Transaksi
                     <tr>
                       <th>{{ $loop->index + 1 }}</th>
                       <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
-                      <th>{{ $t->jumlah }}</th>
                       <th>Rp {{ number_format($t->harga) }}</th>
+                      <th>{{ $t->jumlah }}</th>
                       <th>Rp {{ number_format($t->jumlah * $t->harga) }}</th>
                     </tr>
                   @endforeach

@@ -161,6 +161,6 @@ class TransaksiController extends Controller
 	public function struk($id)
 	{
 		$transaksi = Transaksi::find($id);
-		return PDF::loadView('transaksi.struk', compact('transaksi'))->download('struk_transaksi.pdf');
+		return PDF::loadView('transaksi.struk', compact('transaksi'))->download('struk_' . $transaksi->kode . '.pdf');
 	}
 }

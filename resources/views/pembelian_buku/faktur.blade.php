@@ -34,8 +34,8 @@
       <th scope="col">#</th>
       <th scope="col">ISBN</th>
       <th scope="col">Judul</th>
+      <th scope="col">Harga</th>
       <th scope="col">Jumlah</th>
-      <th scope="col">Harga Per Buku</th>
       <th scope="col">Total Harga</th>
     </tr>
   </thead>
@@ -45,8 +45,8 @@
         <td>{{ $loop->index + 1 }}</td>
         <td>{{ $p->buku()->withTrashed()->first()->isbn }}</td>
         <td>{{ $p->buku()->withTrashed()->first()->judul }}</td>
-        <td>{{ $p->jumlah }}</td>
         <td>Rp {{ number_format($p->harga_jual) }}</td>
+        <td>{{ $p->jumlah }}</td>
         <td>Rp {{ number_format($p->harga_jual * $p->jumlah) }}</td>
       </tr>
     @endforeach

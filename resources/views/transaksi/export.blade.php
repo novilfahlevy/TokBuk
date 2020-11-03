@@ -6,7 +6,7 @@
       <th>Tanggal</th>
       <th>ISBN</th>
       <th>Judul Buku</th>
-      <th>Harga Per Buku</th>
+      <th>Harga</th>
       <th>Jumlah</th>
       <th>Total Harga</th>
     </tr>
@@ -25,7 +25,7 @@
         <td>{{ $buku->judul }}</td>
         <td>Rp {{ number_format($t->harga) }}</td>
         <td>{{ $t->jumlah }}</td>
-        <td>Rp {{ number_format($transaksiParent->total_harga) }}</td>
+        <td>Rp {{ number_format($t->harga * $t->jumlah) }}</td>
         <td></td>
       </tr>
     @endforeach

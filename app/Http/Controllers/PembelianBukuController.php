@@ -153,6 +153,6 @@ class PembelianBukuController extends Controller
 	public function faktur($id)
 	{
 		$pembelian = PembelianBuku::find($id);
-		return PDF::loadView('pembelian_buku.faktur', compact('pembelian'))->download('faktur_pembelian_buku.pdf');
+		return PDF::loadView('pembelian_buku.faktur', compact('pembelian'))->download('faktur_' . $pembelian->kode . '.pdf');
 	}
 }

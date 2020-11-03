@@ -50,7 +50,7 @@
                                                                 <br/>
     
                                                                 Kategori
-                                                                <select required name="id_kategori" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true"> 
+                                                                <select name="id_kategori" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true"> 
                                                                     <option value=''>- Pilih -</option>
                                                                     @foreach($kategori as $jen)
                                                                         <option value="{{ $jen['id'] }}" {{$jen->id == $buku->id_kategori ?  'selected' : ''}}> {{$jen->nama}} </option>
@@ -59,7 +59,7 @@
                                                                 <br/>
     
                                                                 Penulis
-                                                                <select required name="id_penulis" class="form-control" value="{{ old('id_penulis') }}"data-live-search="true">
+                                                                <select name="id_penulis" class="form-control" value="{{ old('id_penulis') }}"data-live-search="true">
                                                                     <option value='' >- Pilih -</option>
                                                                     @foreach($penulis as $pel)
                                                                         <option value="{{ $pel['id'] }}" {{$pel->id == $buku->id_penulis ?  'selected' : ''}}> {{$pel->nama}} </option>
@@ -71,7 +71,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     Penerbit
-                                                                    <select required name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
+                                                                    <select name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($penerbit as $per)     
                                                                             <option value="{{ $per['id'] }}" {{$per->id == $buku->id_penerbit ?  'selected' : ''}}> {{$per->nama}} </option>
@@ -79,7 +79,7 @@
                                                                     </select>
                                                                     <br/>
                                                                     {{-- Pemasok
-                                                                    <select required name="id_pemasok" class="form-control" value="{{ old('id_pemasok') }}" data-live-search="true">
+                                                                    <select name="id_pemasok" class="form-control" value="{{ old('id_pemasok') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($Pemasok as $sup)     
                                                                             <option value="{{ $sup['id'] }}" {{$sup->id == $buku->id_pemasok ?  'selected' : ''}}> {{$sup->nama}} </option>
@@ -88,11 +88,11 @@
                                                                     <br/> --}}
                                                                     
                                                                     Tahun Terbit
-                                                                    <input type="number" class="form-control" required name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
+                                                                    <input type="number" class="form-control" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
                                                                     <br/>
     
                                                                     Lokasi
-                                                                    <select required name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
+                                                                    <select name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($lokasi as $lok)     
                                                                             <option value="{{ $lok['id'] }}" {{$lok->id == $buku->id_lokasi ?  'selected' : ''}}> {{$lok->nama}} </option>
@@ -105,7 +105,7 @@
                                                                         <div class="input-group-prepend">
                                                                             <span class="input-group-text" id="basic-addon1">Rp</span>
                                                                         </div>
-                                                                    <input type="number" class="form-control" required name="harga" value="{{ $buku->harga }}" >
+                                                                    <input type="number" class="form-control" name="harga" value="{{ $buku->harga }}" >
                                                                     </div>
                                                                     
                                                                 </div>
