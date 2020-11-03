@@ -46,7 +46,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     php artisan optimize
     ```
 
-8. Jalanakan aplikasi secara lokal menggunakan perintah
+8. Jalankan aplikasi secara lokal menggunakan perintah
     ```
     php artisan serve
     ```
