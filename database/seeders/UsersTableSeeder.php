@@ -48,5 +48,65 @@ class UsersTableSeeder extends Seeder
             'alamat' => 'Jl. Langsat',
             'password' => bcrypt('123123')
         ]);
+
+        App\User::create([
+            'name' => 'Alisanabela',
+            'username' => 'icawn',
+            'posisi' => 'Admin',
+            'email' => 'alisanabela25@gmail.com',
+            'telepon' => '085349914090',
+            'alamat' => 'Jl. Damanhuri',
+            'password' => bcrypt('123123')
+        ]);
+
+        App\User::create([
+            'name' => 'Niken Astrid',
+            'username' => 'niken',
+            'posisi' => 'Admin',
+            'email' => 'nikenreza@gmail.com',
+            'telepon' => '085600008989',
+            'alamat' => 'Jl. Sambutan',
+            'password' => bcrypt('123123')
+        ]);
+
+        App\User::create([
+            'name' => 'Farkhanudin',
+            'username' => 'farkhan',
+            'posisi' => 'Admin',
+            'email' => 'farkhan@gmail.com',
+            'telepon' => '085677778888',
+            'alamat' => 'Jl. Merdeka',
+            'password' => bcrypt('123123')
+        ]);
+
+        App\User::create([
+            'name' => 'Roofi Ali',
+            'username' => 'roofi',
+            'posisi' => 'Admin',
+            'email' => 'roofi@gmail.com',
+            'telepon' => '085622223333',
+            'alamat' => 'Jl. Bengkuring',
+            'password' => bcrypt('123123')
+        ]);
+
+        App\User::create([
+            'name' => 'Yudha Indra',
+            'username' => 'yudha',
+            'posisi' => 'Admin',
+            'email' => 'yudha@gmail.com',
+            'telepon' => '085655556666',
+            'alamat' => 'Jl. Pahlawan',
+            'password' => bcrypt('123123')
+        ]);
+
+        App\User::create([
+            'name' => 'Fariz Dwi',
+            'username' => 'fariz',
+            'posisi' => 'Admin',
+            'email' => 'fariz@gmail.com',
+            'telepon' => '085666664444',
+            'alamat' => 'Jl. Pelita',
+            'password' => bcrypt('123123')
+        ]);
     }
 }

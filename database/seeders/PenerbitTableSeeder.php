@@ -14,14 +14,27 @@ class PenerbitTableSeeder extends Seeder
         App\Penerbit::create([
             'nama' => 'UPP STIM YKPN'
         ]);
+
         App\Penerbit::create([
             'nama' => 'PT. Bukune Kreatif Cipta'
         ]);
+
         App\Penerbit::create([
-            'nama' => 'GagasMedia'
+            'nama' => 'PT Elex Media Komputindo'
         ]);
+
         App\Penerbit::create([
             'nama' => 'CV. ITA Surakarta'
         ]);
+
+        App\Penerbit::create([
+            'nama' => 'GagasMedia'
+        ]);
+
+        App\Penerbit::create([
+            'nama' => 'PT Gramedia Jakarta'
+        ]);
+
+
     }
 }

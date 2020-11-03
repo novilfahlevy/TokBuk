@@ -14,14 +14,27 @@ class PenulisTableSeeder extends Seeder
         App\Penulis::create([
             'nama' => 'Risa Saraswati'
         ]);
+
         App\Penulis::create([
             'nama' => 'Tere Liye'
         ]);
+
         App\Penulis::create([
             'nama' => 'Rahimsyah'
         ]);
+
         App\Penulis::create([
-            'nama' => 'Lee Dae Han'
+            'nama' => 'Dr. Martinus R. Hutauruk, S.E., M.M., Ak., CA., ACPA'
         ]);
+
+        App\Penulis::create([
+            'nama' => 'FUJIKO F. Fujio'
+        ]);
+
+        App\Penulis::create([
+            'nama' => 'Gita Savitri Devi'
+        ]);
+
+
     }
 }
