@@ -6,7 +6,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 - [Composer](https://getcomposer.org)
 - [Git](https://git-scm.com/downloads)
 - [XAMPP](https://www.apachefriends.org/download.html)
-- [Pusher](https://pusher.com)
+- [Pusher](https://pusher.com) (opsional)
 
 ## Instalasi
 1. Clone repo ini dengan menggunakan perintah
@@ -21,10 +21,10 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     - DB_DATABASE
     - DB_USERNAME
     - DB_PASSWORD
-    - PUSHER_APP_ID
-    - PUSHER_APP_KEY
-    - PUSHER_APP_SECRET
-    - PUSHER_APP_CLUSTER
+    - PUSHER_APP_ID (opsional)
+    - PUSHER_APP_KEY (opsional)
+    - PUSHER_APP_SECRET (opsional)
+    - PUSHER_APP_CLUSTER (opsional)
 
 4. Install package, library, dan dependency yang diperlukan dengan menggunakan perintah
     ```
