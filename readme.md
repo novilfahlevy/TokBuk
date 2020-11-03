@@ -9,7 +9,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 - [Pusher](https://pusher.com)
 
 ## Instalasi
-1. Clone repo ini, dengan menggunakan perintah
+1. Clone repo ini dengan menggunakan perintah
 
     ```
     git clone https://github.com/novilfahlevy/TokBuk.git
