@@ -32,7 +32,6 @@
     @foreach ($transaksi->detail as $p)
     <tr>
       <td>{{ $p->buku()->withTrashed()->first()->judul }}<br>
-        {{ $p->buku()->withTrashed()->first()->isbn }}</td>
       <td>x {{ $p->jumlah }}</td>
       <td>Rp {{ number_format($p->harga) }}</td>
     </tr>
