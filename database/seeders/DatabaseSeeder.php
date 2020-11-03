@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\PengaturanTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PemasokTableSeeder::class);
         $this->call(LokasiTableSeeder::class);
         $this->call(BukuTableSeeder::class);
+        $this->call(PengaturanTableSeeder::class);
     }
 }

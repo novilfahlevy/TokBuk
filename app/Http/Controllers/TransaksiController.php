@@ -6,6 +6,7 @@ use App\Buku;
 use App\DetailTransaksi;
 use App\Events\UpdateDasborEvent;
 use App\Exports\TransaksiExport;
+use App\Pengaturan;
 use App\Transaksi;
 use Exception;
 use Illuminate\Http\Request;
@@ -157,10 +158,11 @@ class TransaksiController extends Controller
 	{
 		return Excel::download(new TransaksiExport($request->mulai, $request->sampai), 'transaksi.xlsx');
 	}
-
+	
 	public function struk($id)
 	{
 		$transaksi = Transaksi::find($id);
-		return PDF::loadView('transaksi.struk', compact('transaksi'))->download('struk_' . $transaksi->kode . '.pdf');
+		$pengaturan = Pengaturan::first();
+		return PDF::loadView('transaksi.struk', compact('transaksi', 'pengaturan'))->download('struk_' . $transaksi->kode . '.pdf');
 	}
 }

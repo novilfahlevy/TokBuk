@@ -1,4 +1,4 @@
-<div class="main-sidebar">
+<div class="main-sidebar pb-5">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand mt-0 mb-4 mt-2">
         <a href="{{route('home')}}" class="site_title">
@@ -74,6 +74,16 @@
         <li class="nav-item  {{Request::segment(1)=='lokasi' ?'active':''}}">
           <a class="nav-link" href="{{route('lokasi')}}" aria-expanded="false">
             <i class="fas fa-table"></i></i><span>Lokasi</span>
+          </a>
+        </li>
+      @endif
+
+      @if ( $posisi == 'Admin' )
+        <li class="menu-header">Lainnya</li>
+        
+        <li class="nav-item  {{Request::segment(1)=='pengaturan' ?'active':''}}">
+          <a class="nav-link" href="{{route('pengaturan')}}" aria-expanded="false">
+            <i class="fas fa-cogs"></i></i><span>Pengaturan</span>
           </a>
         </li>
       @endif
