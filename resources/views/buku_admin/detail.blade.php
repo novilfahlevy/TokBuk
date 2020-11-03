@@ -11,6 +11,7 @@
                     <h1>Detail Buku</h1>
                 </div>
                 <div class="section-body">
+                    @include('layouts.flash-alert')
                     <div class="row justify-content-center">
                         <div class="col-12">
                                     <div class="row">
@@ -18,7 +19,7 @@
                                             <div class="card border-dark mb-3" style="max-width: 50rem; height:450px">
                                                 <div class="card-header"><h4>Sampul Buku</h4></div>
                                                 <div class="card-body text-dark">
-                                                    <td><img src="{{ asset('images/buku/'.$buku->sampul) }}" alt="" style="width:100%; height:100%;"></td>
+                                                    <td><img src="{{ asset('images/buku/'.$buku->sampul) }}" alt="" style="width:100%; height:100%;" class="img-thumbnail"></td>
                                                 </div>
                                               </div>
                                         </div>
