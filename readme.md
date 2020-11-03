@@ -51,11 +51,9 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     php artisan serve
     ```
 
-9. Jika langkah-langkah diatas sudah dilakukan semua, seharusnya aplikasi sudah dapat diakses di browser melalui url *http://127.0.0.1:8000*
+9. Jika langkah-langkah diatas sudah dilakukan semua, seharusnya aplikasi sudah dapat diakses di browser melalui url *http://127.0.0.1:8000*, dan jangan lupa untuk menyalakan *mysql* di *XAMPP*
 
-10. Dan jangan lupa untuk menyalakan *mysql* di *XAMPP*
-
-11. Akun (username) yang dapat dipakai untuk login antara lain
+10. Akun (username) yang dapat dipakai untuk login antara lain
     - admin
     - operator
     - kasir
