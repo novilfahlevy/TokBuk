@@ -74,7 +74,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Pendapatan dan Pengeluaran Per Hari Bulan Ini (<span id="bulan"></span>)</h4>
+                    <h4>Pendapatan Bulan Ini (<span id="bulan"></span>)</h4>
                   </div>
                   <div class="card-body">
                     <h5 class="mb-0 text-center py-5 my-5" id="loading">Sedang memuat data...</h5>
