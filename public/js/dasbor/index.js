@@ -1,8 +1,8 @@
 function initChart(data) {
-  const { bulan, label, pendapatan } = data;
+  const { tahun, bulan, label, pendapatan } = data;
 
   $('#loading').hide();
-  $('#bulan').text(bulan);
+  $('#bulan').text(`${bulan} ${tahun}`);
 
   new Chart(document.getElementById('transaksi').getContext('2d'), {
     type: 'line',
@@ -33,12 +33,15 @@ function initChart(data) {
   });
 }
 
-$.ajax({
-  url: `${BASEURL}/api/dasbor`,
-  method: 'GET',
-  error: error => console.log(error),
-  success: ({ data }) => initChart(data)
-});
+function ambilDataChart(tahun = null, bulan = null) {
+  $.ajax({
+    url: `${BASEURL}/api/dasbor`,
+    method: 'POST',
+    data: { tahun, bulan },
+    error: error => console.log(error),
+    success: ({ data }) => initChart(data)
+  });
+}
 
 channelBind('dasbor', 'dasbor.update', function(data) {
   initChart(data.chart);
@@ -48,4 +51,11 @@ channelBind('dasbor', 'dasbor.update', function(data) {
   $('#jumlahTransaksi').text(
     new Intl.NumberFormat('id-ID').format(data.jumlahTransaksi)
   );
+});
+
+ambilDataChart();
+
+$('#gantiBulanChart').on('change', function() {
+  const [tahun, bulan] = $(this).val().split('-');
+  ambilDataChart(tahun, bulan);
 });

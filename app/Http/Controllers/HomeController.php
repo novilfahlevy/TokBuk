@@ -40,13 +40,14 @@ class HomeController extends Controller
         return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi'));
     }
 
-    public function chart()
+    public function chart(Request $request)
     {
         $label = collect(range(1, $this->now->daysInMonth))->map(function($day) {
             return 'Hari ke-' . $day;
         });
 
-        $pendapatan = Transaksi::where(DB::raw('MONTH(created_at)'), $this->now->month)
+        $pendapatan = Transaksi::where(DB::raw('MONTH(created_at)'), $request->bulan ?? $this->now->month)
+            ->where(DB::raw('YEAR(created_at)'), $request->tahun ?? $this->now->year)
             ->select(DB::raw('SUM(total_harga) AS total_harga'))
             ->groupBy(DB::raw('DATE(created_at)'))
             ->get();
@@ -56,10 +57,15 @@ class HomeController extends Controller
         //     ->groupBy(DB::raw('DATE(created_at)'))
         //     ->get();
 
+        $waktuMasukan = Carbon::parse(
+            ($request->tahun ?? $this->now->year) . '-' . ($request->bulan ?? $this->now->month)
+        );
+
         return response()->json([
             'status' => 200,
             'data' => [
-                'bulan' => $this->now->monthName,
+                'bulan' => $waktuMasukan->monthName,
+                'tahun' => $waktuMasukan->year,
                 'label' => $label,
                 'pendapatan' => $pendapatan,
                 'pengeluaran' => []

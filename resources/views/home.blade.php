@@ -80,6 +80,9 @@
                     <h5 class="mb-0 text-center py-5 my-5" id="loading">Sedang memuat data...</h5>
                     <canvas id="transaksi" width="400" height="200"></canvas>
                   </div>
+                  <div class="card-footer pt-0">
+                    <input type="month" class="form-control" id="gantiBulanChart" value="{{ date('Y-m') }}">
+                  </div>
                 </div>
               </div>
             </div>
