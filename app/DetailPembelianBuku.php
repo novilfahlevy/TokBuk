@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPembelianBuku extends Model
 {
     protected $table = 'detail_pembelian_buku';
-    protected $fillable = ['id_pembelian_buku', 'id_buku', 'harga_jual', 'jumlah', 'status'];
+    protected $fillable = ['id_pembelian', 'id_buku', 'harga', 'jumlah', 'status'];
 
     
     public function buku()
@@ -17,6 +17,6 @@ class DetailPembelianBuku extends Model
     
     public function pembelian()
     {
-        return $this->belongsTo(PembelianBuku::class, 'id_pembelian_buku', 'id');
+        return $this->belongsTo(PembelianBuku::class, 'id_pembelian', 'id');
     }
 }

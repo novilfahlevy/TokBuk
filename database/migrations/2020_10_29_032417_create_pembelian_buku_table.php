@@ -21,8 +21,8 @@ class CreatePembelianBukuTable extends Migration
             $table->string('faktur');
             $table->unsignedBigInteger('id_pemasok');
             $table->foreign('id_pemasok')->references('id')->on('pemasok');
-            $table->integer('total_harga_jual');
-            $table->integer('harga_beli');  
+            $table->integer('total_harga');
+            $table->integer('bayar');  
             $table->softDeletes();
             $table->timestamps();
         });

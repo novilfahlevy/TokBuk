@@ -54,8 +54,8 @@ Pembelian Buku
                                                     <td>{{ $p->kode }}</td>
                                                     <td>{{ $p->created_at }}</td>
                                                     <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
-                                                    <td>Rp {{ number_format($p->harga_beli) }}</td>
-                                                    <td>Rp {{ number_format($p->total_harga_jual) }}</td>
+                                                    <td>Rp {{ number_format($p->bayar) }}</td>
+                                                    <td>Rp {{ number_format($p->total_harga) }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "

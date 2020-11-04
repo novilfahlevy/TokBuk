@@ -16,11 +16,11 @@ class PembelianBuku extends Model
     use SoftDeletes;
 
     protected $table = 'pembelian_buku';
-    protected $fillable = ['kode', 'id_user', 'id_pemasok', 'total_harga_jual', 'harga_beli', 'faktur'];
+    protected $fillable = ['kode', 'id_user', 'id_pemasok', 'total_harga', 'bayar', 'faktur'];
 
     public function detail()
     {
-        return $this->hasMany(DetailPembelianBuku::class, 'id_pembelian_buku');
+        return $this->hasMany(DetailPembelianBuku::class, 'id_pembelian');
     }
 
     public function pemasok()

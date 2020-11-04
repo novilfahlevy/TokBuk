@@ -31,7 +31,7 @@ class PembelianBukuExport implements FromView
 
 		if ( $this->pemasok ) {
 			$pembelian
-				->join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian_buku')
+				->join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian')
 				->where('pembelian_buku.id_pemasok', $this->pemasok);
 		}
 

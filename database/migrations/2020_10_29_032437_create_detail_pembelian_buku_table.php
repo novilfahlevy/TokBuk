@@ -15,11 +15,11 @@ class CreateDetailPembelianBukuTable extends Migration
     {
         Schema::create('detail_pembelian_buku', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pembelian_buku');
-            $table->foreign('id_pembelian_buku')->references('id')->on('pembelian_buku');  
+            $table->unsignedBigInteger('id_pembelian');
+            $table->foreign('id_pembelian')->references('id')->on('pembelian_buku');  
             $table->unsignedBigInteger('id_buku');
             $table->foreign('id_buku')->references('id')->on('buku');
-            $table->integer('harga_jual');
+            $table->integer('harga');
             $table->integer('jumlah');
             $table->enum('status', ['Penambahan', 'Baru']);
             $table->timestamps();

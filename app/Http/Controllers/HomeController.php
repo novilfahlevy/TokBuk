@@ -52,7 +52,7 @@ class HomeController extends Controller
             ->get();
 
         // $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
-        //     ->select(DB::raw('SUM(harga_jual * jumlah) AS total_harga'))
+        //     ->select(DB::raw('SUM(harga * jumlah) AS total_harga'))
         //     ->groupBy(DB::raw('DATE(created_at)'))
         //     ->get();
 

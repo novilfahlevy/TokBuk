@@ -45,15 +45,15 @@ Detail Pembelian Buku
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Bayar</h6>
-                  <p>Rp {{ number_format($pembelian->harga_beli) }}</p>
+                  <p>Rp {{ number_format($pembelian->bayar) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Total Harga</h6>
-                  <p>Rp {{ number_format($pembelian->total_harga_jual) }}</p>
+                  <p>Rp {{ number_format($pembelian->total_harga) }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Kembalian</h6>
-                  <p>Rp {{ number_format($pembelian->harga_beli - $pembelian->total_harga_jual) }}</p>
+                  <p>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga) }}</p>
                 </div>
               </div>
             </div>
@@ -74,9 +74,9 @@ Detail Pembelian Buku
                     <tr>
                       <td>{{ $loop->index + 1 }}</td>
                       <td>{{ $p->buku()->withTrashed()->first()->judul }}</td>
-                      <td>Rp {{ number_format($p->harga_jual) }}</td>
+                      <td>Rp {{ number_format($p->harga) }}</td>
                       <td>{{ $p->jumlah }}</td>
-                      <td>Rp {{ number_format($p->harga_jual * $p->jumlah) }}</td>
+                      <td>Rp {{ number_format($p->harga * $p->jumlah) }}</td>
                       <td>
                         <div class="badge badge-{{ $p->status === 'Baru' ? 'success' : 'primary' }}">
                           {{$p->status}}

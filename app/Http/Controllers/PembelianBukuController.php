@@ -95,8 +95,8 @@ class PembelianBukuController extends Controller
 				'faktur' => $namaFaktur,
 				'id_user' => auth()->user()->id,
 				'id_pemasok' => (int) $idPemasok,
-				'total_harga_jual' => $bukuYangDibeli->totalHarga,
-				'harga_beli' => $hargaBeli
+				'total_harga' => $bukuYangDibeli->totalHarga,
+				'bayar' => $hargaBeli
 			]);
 
 			foreach ( $bukuYangDibeli->buku as $buku ) {
@@ -109,17 +109,17 @@ class PembelianBukuController extends Controller
 					]);
 
 					DetailPembelianBuku::create([
-						'id_pembelian_buku' => $pembelianBuku->id,
+						'id_pembelian' => $pembelianBuku->id,
 						'id_buku' => $bukuBaru->id,
-						'harga_jual' => (int) $buku->harga,
+						'harga' => (int) $buku->harga,
 						'jumlah' => $buku->jumlah,
 						'status' => 'Baru'
 					]);
 				} else {
 					DetailPembelianBuku::create([
-						'id_pembelian_buku' => $pembelianBuku->id,
+						'id_pembelian' => $pembelianBuku->id,
 						'id_buku' => $buku->idBuku,
-						'harga_jual' => (int) $buku->harga,
+						'harga' => (int) $buku->harga,
 						'jumlah' => $buku->jumlah,
 						'status' => 'Penambahan'
 					]);

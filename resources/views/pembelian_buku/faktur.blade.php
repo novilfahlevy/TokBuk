@@ -34,9 +34,9 @@
   <tr>
     <td>{{ $p->buku()->withTrashed()->first()->judul }}<br>
       {{ $p->buku()->withTrashed()->first()->isbn }}</td>
-      <td>Rp {{ number_format($p->harga_jual) }}</td>
+      <td>Rp {{ number_format($p->harga) }}</td>
       <td>{{ $p->jumlah }}</td>
-      <td>Rp {{ number_format($p->harga_jual * $p->jumlah) }}</td>
+      <td>Rp {{ number_format($p->harga * $p->jumlah) }}</td>
     </tr>
     @endforeach
   </table>
@@ -46,16 +46,16 @@
     <tbody>
       <tr>
         <td>Bayar</td>
-        <td>Rp {{ number_format($pembelian->harga_beli) }}</td>
+        <td>Rp {{ number_format($pembelian->bayar) }}</td>
       </tr>
       <tr>
         <td >Total Harga</td>
-        <td >Rp {{ number_format($pembelian->total_harga_jual) }}</td>
+        <td >Rp {{ number_format($pembelian->total_harga) }}</td>
       </tr>
       
       <tr>
         <td>Kembalian</td>
-        <td>Rp {{ number_format($pembelian->harga_beli - $pembelian->total_harga_jual) }}</td>
+        <td>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga) }}</td>
       </tr>
     </tbody>
   </table>
