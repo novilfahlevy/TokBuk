@@ -28,13 +28,15 @@
         </li>
       @endif
 
-      @if ( $posisi === 'Admin' || $posisi === 'Operator' )
+      @if ( $posisi === 'Admin' )
         <li class="nav-item {{Request::segment(1)=='pengguna' ?'active':''}}">
           <a class="nav-link" href="{{route('user')}}" aria-expanded="false">
             <i class="fas fa-users"></i> <span>Pengguna</span>
           </a>
         </li>
+      @endif
 
+      @if ( $posisi === 'Admin' || $posisi === 'Operator' )
         <li class="menu-header">MANAJEMEN BUKU</li>
       
         <li class="nav-item  {{Request::segment(1)=='buku' ?'active':''}}">
@@ -78,7 +80,7 @@
         </li>
       @endif
 
-      @if ( $posisi == 'Admin' )
+      @if ( $posisi === 'Admin' )
         <li class="menu-header">Lainnya</li>
         
         <li class="nav-item  {{Request::segment(1)=='pengaturan' ?'active':''}}">
