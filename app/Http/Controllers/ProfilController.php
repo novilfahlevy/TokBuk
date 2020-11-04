@@ -18,22 +18,32 @@ class ProfilController extends Controller
 	{
 	  $request->validate([
 			'name' => 'required',
-			'username' => 'required',
+			'username' => 'unique:users,username,{$id},id,deleted_at,NULL',
 			'alamat' => 'required',
-			'email' => 'required|email:rfc,dns,filter',
+			'email' => 'unique:users,email,{$id},id,deleted_at,NULL',
 			'telepon' => 'required'
 		], [
 			'name.required' => 'Masukan nama lengkap anda',
-			'username.required' => 'Masukan username anda',
+			// 'username.required' => 'Masukan username anda',
+			'username.unique' => 'Username sudah dipakai',
 			'alamat.required' => 'Masukan alamat anda',
-			'email.required' => 'Masukan alamat email anda',
+			// 'email.required' => 'Masukan alamat email anda',
 			'email.email' => 'Mohon masukan email yang valid',
+			'email.unique' => 'Email sudah dipakai',
 			'telepon.required' => 'Masukan nomor telepon anda'
 		]);
 
 		$user = User::find(auth()->user()->id);
 
-		if ( $user->update($request->all()) ) {
+		if ( 
+			$user->update([
+				'name' => $request->name,
+				'username' => $request->username ?? $user->first()->username,
+				'email' => $request->email ?? $user->first()->email,
+				'alamat' => $request->alamat,
+				'telepon' => $request->telepon
+			]) 
+		) {
 			return redirect()->route('profil')->with([
 				'message' => 'Profil Anda Berhasil Diganti.', 
 				'type' => 'success'
