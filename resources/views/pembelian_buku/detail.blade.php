@@ -17,12 +17,17 @@ Detail Pembelian Buku
           <div class="card-header">
             <h4>Data Pembelian Buku</h4>
             <div class="card-header-form">
-              <a href="{{ asset('images/faktur/' . $pembelian->faktur) }}" target="_blank" title="Lihat Faktur" class="btn btn-success mr-2">
-                <i class="fas fa-eye"></i>
-              </a>
-              <a href="{{ route('pembelian-buku.faktur', $pembelian->id) }}" title="Cetak Faktur" class="btn btn-success mr-2">
-                <i class="fas fa-file-invoice"></i>
-              </a>
+              <div class="dropdown">
+                <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-file-invoice"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ asset('images/faktur/' . $pembelian->faktur) }}" target="_blank">Lihat</a>
+                  <a class="dropdown-item" href="{{ route('pembelian-buku.faktur', $pembelian->id) }}">Download</a>
+                </div>
+              </div>
               <a href="{{ route('pembelian-buku') }}" class="btn btn-primary">
                 <i class="fas fa-chevron-left"></i>
               </a>
