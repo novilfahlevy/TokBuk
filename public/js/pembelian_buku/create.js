@@ -29,7 +29,10 @@ function fillJsSelect2Options(selectClass, initCallback) {
         return $(`
           <span class="d-flex align-items-center">
             <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
-            ${buku.judul.slice(0, 30)}${buku.judul.length > 30 ? '...' : ''}
+            <div class="d-flex flex-column">
+              ${buku.judul.slice(0, 28)}${buku.judul.length > 28 ? '...' : ''}
+              <span>Rp ${format(buku.harga)}</span>
+            </div>
           </span>
         `);
       }
