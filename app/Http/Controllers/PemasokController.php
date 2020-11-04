@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use Illuminate\Http\Request;
 use App\Pemasok;
+use App\PembelianBuku;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -85,7 +86,7 @@ class PemasokController extends Controller
 		DB::beginTransaction();
 		try {
 			$pemasok = Pemasok::find($id);
-			Buku::where('id_pemasok', $id)->update(['id_pemasok' => null]);
+			PembelianBuku::where('id_pemasok', $id)->update(['id_pemasok' => null]);
 			$pemasok->delete();
 			DB::commit();
 			return redirect()->route('pemasok')->with(['message' => 'Berhasil Menghapus Pemasok', 'type' => 'success']);

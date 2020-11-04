@@ -20,7 +20,7 @@ class CreatePembelianBukuTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');  
             $table->string('faktur');
-            $table->unsignedBigInteger('id_pemasok');
+            $table->unsignedBigInteger('id_pemasok')->nullable();
             $table->foreign('id_pemasok')->references('id')->on('pemasok');
             $table->integer('total_harga');
             $table->integer('bayar');  

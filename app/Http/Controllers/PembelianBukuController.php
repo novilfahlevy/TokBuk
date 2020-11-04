@@ -158,14 +158,14 @@ class PembelianBukuController extends Controller
 			$pembelian->delete();
 			DB::commit();
 			return redirect()->route('pembelian-buku')->with([
-				'message' => 'Berhasil Menghapus pembelian-buku',
+				'message' => 'Berhasil Menghapus Pembelian Buku',
 				'type' => 'success'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			throw new Error($e);
 			return redirect()->route('pembelian-buku')->with([
-				'message' => 'Gagal Menghapus pembelian-buku',
+				'message' => 'Gagal Menghapus Pembelian Buku',
 				'type' => 'danger'
 			]);
 		}
