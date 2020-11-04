@@ -27,21 +27,21 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Nama
+                                                    <label for="nama">Nama</label>
                                                     <input type="text" class="form-control" required id="nama" name="nama" value="{{ old('nama') }}" >
                                                 </div>
                                                 <div class="form-group">
-                                                    Telepon
-                                                    <input type="number" class="form-control" required id="telepon" name="telepon" value="{{ old('telepon') }}">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control" required id="email" name="email" value="{{ old('email') }}" >
                                                 </div>
                                                 <div class="form-group">
-                                                    Email
-                                                    <input type="email" class="form-control" required id="email" name="email" value="{{ old('email') }}" >
+                                                    <label for="telepon">Telepon</label>
+                                                    <input type="number" class="form-control" required id="telepon" name="telepon" value="{{ old('telepon') }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Alamat
+                                                    <label for="alamat">Alamat</label>
                                                     <textarea type="text" class="form-control" required id="alamat" name="alamat" value="{{ old('alamat') }}" style="height:215px"></textarea>
                                                 </div>
                                             </div>

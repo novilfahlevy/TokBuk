@@ -100,12 +100,12 @@ Pembelian Buku
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body pb-2">
                 <div class="form-group mb-0">
                     @php $now = date('Y-m-d'); @endphp
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group mb-2">
+                            <div class="form-group mb-3">
                                 <label for="pemasok">Pemasok</label>
                                 <select name="pemasok" id="pemasok" class="form-control">
                                     <option value="" selected>Semua</option>
@@ -146,11 +146,11 @@ Pembelian Buku
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body pb-2">
                 <div class="form-group mb-0">
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group mb-2">
+                            <div class="form-group mb-3">
                                 <label for="pemasok">Pemasok</label>
                                 <select name="pemasok" id="pemasok" class="form-control">
                                     <option value="" selected>Semua</option>

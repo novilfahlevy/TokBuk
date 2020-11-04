@@ -31,20 +31,23 @@ Kategori Buku
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h4 class="modal-title" id="exampleModalLabel">Tambah Kategori</h4>
+                                  <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body pb-2">
                                     <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
-                                      <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label"><h6>Kategori</h6></label>
+                                      <div class="form-group mb-0">
+                                        <label for="recipient-name" class="col-form-label">Kategori</label>
                                         <input type="text" class="form-control" required name="nama" value="{{ old('nama') }}" >
                                       </div>
-                                      <button class="btn btn-primary" type="submit">Simpan</button>
                                     </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                    <button class="btn btn-primary" type="submit">Simpan</button>
                                   </div>
                               </div>
                             </div>
@@ -82,21 +85,24 @@ Kategori Buku
                                           <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                               <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLabel">Edit Kategori</h4>
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                               </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body pb-2">
                                               <form action="{{ route('kategori.update', ['id' => $j->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                               {{ csrf_field() }}
                                               {{ method_field('PUT') }}
-                                                <div class="form-group">
-                                                  <label for="recipient-name" class="col-form-label"><h6>Kategori</h6></label>
+                                                <div class="form-group mb-0">
+                                                  <label for="recipient-name" class="col-form-label">Kategori</label>
                                                   <input type="text" class="form-control" required name="nama" value="{{$j->nama}}" >
                                                 </div>
-                                                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                                               </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                              <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                                             </div>
                                           </div>
                                         </div>

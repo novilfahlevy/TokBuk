@@ -27,7 +27,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Nama
+                                                    <label for="nama">Nama</label>
                                                     <input type="text" class="form-control" required id="nama" name="nama" value="{{ old('nama') }}">
                                                     @error('nama')
                                                         <span class="invalid-feedback" role="alert">
@@ -36,17 +36,17 @@
                                                     @enderror
                                                     <br/>
 
-                                                    Email
+                                                    <label for="email">Email</label>
                                                     <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
                                                     <br/>
 
-                                                    Telepon
+                                                    <label for="telepon">Telepon</label>
                                                     <input type="number" class="form-control" id="telepon" name="telepon" value="{{ old('telepon') }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Alamat
+                                                    <label for="alamat">Alamat</label>
                                                     <textarea type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" style="height:215px"></textarea>
                                                 </div>
                                             </div>

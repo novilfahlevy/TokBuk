@@ -36,21 +36,21 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            Nama
+                                            <label for="nama">Nama</label>
                                             <input type="text" class="form-control" required id="nama" name="nama" value="{{$pemasok->nama}}">
                                         </div>
                                         <div class="form-group">
-                                            Telepon
-                                            <input type="number" class="form-control" id="telepon" required name="telepon" value="{{$pemasok->telepon}}">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" required name="email" value="{{$pemasok->email}}" >
                                         </div>
                                         <div class="form-group">
-                                            Email
-                                            <input type="email" class="form-control" id="email" required name="email" value="{{$pemasok->email}}" >
+                                            <label for="telepon">Telepon</label>
+                                            <input type="number" class="form-control" id="telepon" required name="telepon" value="{{$pemasok->telepon}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            Alamat
+                                            <label for="alamat">Alamat</label>
                                             <textarea type="text" class="form-control" id="alamat" required name="alamat"  style="height:215px">{{$pemasok->alamat}}</textarea>
                                         </div>
                                     </div>

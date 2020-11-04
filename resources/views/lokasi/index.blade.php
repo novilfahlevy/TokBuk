@@ -81,16 +81,19 @@ Lokasi Buku
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel">Tambah Lokasi</h4>
+                  <h5 class="modal-title" id="exampleModalLabel">Tambah Lokasi</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
               </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label"><h6>Lokasi</h6></label>
+              <div class="modal-body pb-2">
+                <div class="form-group mb-0">
+                  <label for="recipient-name" class="col-form-label">Lokasi</label>
                   <input type="text" class="form-control" id="lokasi" name="lokasi">
                 </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 <button class="btn btn-primary" type="submit">Simpan</button>
               </div>
             </div>
@@ -104,16 +107,19 @@ Lokasi Buku
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Edit Lokasi</h4>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Lokasi</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
               </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label"><h6>Lokasi</h6></label>
+              <div class="modal-body pb-2">
+                <div class="form-group mb-0">
+                  <label for="recipient-name" class="col-form-label">Lokasi</label>
                   <input type="text" class="form-control" id="lokasi" name="lokasi">
                 </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
               </div>
             </div>
