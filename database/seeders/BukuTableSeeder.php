@@ -21,7 +21,7 @@ class BukuTableSeeder extends Seeder
             'id_kategori' => 1,
             'id_lokasi' => 1,
             'harga' => 80000,
-            'jumlah' => 30
+            'jumlah' => 100
         ]);
 
         App\Buku::create([
@@ -34,7 +34,7 @@ class BukuTableSeeder extends Seeder
             'id_kategori' => 3,
             'id_lokasi' => 4,
             'harga' => 30000,
-            'jumlah' => 35
+            'jumlah' => 100
         ]);
 
         App\Buku::create([
@@ -47,7 +47,7 @@ class BukuTableSeeder extends Seeder
             'id_kategori' => 3,
             'id_lokasi' => 4,
             'harga' => 90000,
-            'jumlah' => 40
+            'jumlah' => 100
         ]);
 
         App\Buku::create([
@@ -60,7 +60,7 @@ class BukuTableSeeder extends Seeder
             'id_kategori' => 2,
             'id_lokasi' => 3,
             'harga' => 15000,
-            'jumlah' => 35
+            'jumlah' => 100
         ]);
 
         App\Buku::create([
@@ -73,7 +73,7 @@ class BukuTableSeeder extends Seeder
             'id_kategori' => 1,
             'id_lokasi' => 1,
             'harga' => 85000,
-            'jumlah' => 30
+            'jumlah' => 100
         ]);
 
         App\Buku::create([
@@ -86,7 +86,7 @@ class BukuTableSeeder extends Seeder
             'id_kategori' => 1,
             'id_lokasi' => 1,
             'harga' => 90000,
-            'jumlah' => 20
+            'jumlah' => 100
         ]);
 
         
