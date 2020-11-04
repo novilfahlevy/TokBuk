@@ -2,7 +2,7 @@ function initChart(data) {
   const { tahun, bulan, label, pendapatan } = data;
 
   $('#loading').hide();
-  $('#bulan').text(`${bulan} ${tahun}`);
+  $('#bulan').text(`${bulan.toLowerCase()} ${tahun}`);
 
   new Chart(document.getElementById('transaksi').getContext('2d'), {
     type: 'line',
