@@ -135,22 +135,22 @@ Buku
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-2">
-                            <label for="pemasok">Pemasok</label>
-                            <select name="pemasok" id="pemasok" class="form-control">
+                            <label for="lokasi">Lokasi</label>
+                            <select name="lokasi" id="lokasi" class="form-control">
                                 <option value="" selected>Semua</option>
-                                @foreach ($pemasok as $p)
-                                    <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                @foreach ($lokasi as $l)
+                                    <option value="{{ $l->id }}" {{ $lokasiId == $l->id ? 'selected' : '' }}>{{ $l->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group mb-2">
-                            <label for="lokasi">Lokasi</label>
-                            <select name="lokasi" id="lokasi" class="form-control">
+                            <label for="pemasok">Pemasok</label>
+                            <select name="pemasok" id="pemasok" class="form-control">
                                 <option value="" selected>Semua</option>
-                                @foreach ($lokasi as $l)
-                                    <option value="{{ $l->id }}" {{ $lokasiId == $l->id ? 'selected' : '' }}>{{ $l->nama }}</option>
+                                @foreach ($pemasok as $p)
+                                    <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
