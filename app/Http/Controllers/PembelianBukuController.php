@@ -65,9 +65,11 @@ class PembelianBukuController extends Controller
 	public function store(Request $request)
 	{
 		$request->validate([
+			'faktur' => 'max:2048',
 			'hargaBeli' => 'required',
 			'idPemasok' => 'required'
 		], [
+			'faktur.max' => 'Ukuran file terlalu besar, maksimal 2 MB',
 			'hargaBeli.required' => 'Mohon masukan harga beli untuk pembelian buku ini',
 			'idPemasok.required' => 'Mohon pilih pemasok'
 		]);
@@ -92,6 +94,7 @@ class PembelianBukuController extends Controller
 
 			$pembelianBuku = PembelianBuku::create([
 				'kode' => $kode,
+				'tanggal' => $request->tanggal,
 				'faktur' => $namaFaktur,
 				'id_user' => auth()->user()->id,
 				'id_pemasok' => (int) $idPemasok,

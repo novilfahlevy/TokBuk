@@ -44,7 +44,7 @@ Tambah Pembelian Buku
                   </div>
                   <div class="col-md-6">
                     <label for="idPemasok">Pemasok</label>
-                    <select required name="idPemasok" class="form-control" value="{{ old('idPemasok') }}" data-live-search="true">
+                    <select required name="idPemasok" class="form-control" value="{{ old('idPemasok') }}" data-live-search="true" required>
                       <option value='' disabled selected>- Pilih -</option>
                       @foreach($pemasok as $pem)
                         <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
@@ -56,12 +56,21 @@ Tambah Pembelian Buku
                       </span>
                     @enderror
                   </div>
-                  <div class="col-12">
+                  <div class="col-6">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
+                  </div>
+                  <div class="col-6">
                     <label for="faktur">Faktur</label>
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" name="faktur" id="faktur" required>
                       <label class="custom-file-label" for="faktur">Masukan faktur</label>
                     </div>
+                    @error('faktur')
+                      <span class="invalid-feedback d-block" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
                 </div>
               </div>

@@ -52,7 +52,7 @@ Pembelian Buku
                                                 <tr>
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
                                                     <td>{{ $p->kode }}</td>
-                                                    <td>{{ $p->created_at }}</td>
+                                                    <td>{{ $p->tanggal }}</td>
                                                     <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
                                                     <td>Rp {{ number_format($p->bayar) }}</td>
                                                     <td>Rp {{ number_format($p->total_harga) }}</td>

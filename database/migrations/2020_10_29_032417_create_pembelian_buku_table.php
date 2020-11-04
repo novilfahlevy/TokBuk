@@ -16,6 +16,7 @@ class CreatePembelianBukuTable extends Migration
         Schema::create('pembelian_buku', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode', 12);
+            $table->date('tanggal');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');  
             $table->string('faktur');

@@ -42,7 +42,7 @@ Detail Pembelian Buku
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Tanggal</h6>
-                  <p>{{ $pembelian->created_at }}</p>
+                  <p>{{ $pembelian->tanggal }}</p>
                 </div>
                 <div class="col-lg-2">
                   <h6 class="mb-1">Ditangani</h6>
