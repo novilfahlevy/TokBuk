@@ -60,7 +60,7 @@ Tambah Pembelian Buku
                     <label for="faktur">Faktur</label>
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" name="faktur" id="faktur" required>
-                      <label class="custom-file-label" for="faktur">Choose file</label>
+                      <label class="custom-file-label" for="faktur">Masukan faktur</label>
                     </div>
                   </div>
                 </div>
