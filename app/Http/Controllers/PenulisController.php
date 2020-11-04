@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use Illuminate\Http\Request;
 use App\Penulis;
+use Error;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -70,6 +71,7 @@ class PenulisController extends Controller
 				'message' => 'Berhasil Menghapus Penulis'
 			]);
 		} catch ( Exception $e ) {
+            throw new Error($e);
 			DB::rollBack();
 			return redirect()->route('penulis')->with([
 				'type' => 'danger',
