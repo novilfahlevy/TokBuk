@@ -30,8 +30,8 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     - PUSHER_APP_KEY (opsional)
     - PUSHER_APP_SECRET (opsional)
     - PUSHER_APP_CLUSTER (opsional)
-    - SENTRY_LARAVEL_DSN (opsional, jika ingin melakukan error tracking)
-    - SENTRY_TRACES_SAMPLE_RATE (opsional, jika ingin melakukan error tracking)
+    - SENTRY_LARAVEL_DSN (opsional, jika menggunakan sentry)
+    - SENTRY_TRACES_SAMPLE_RATE (opsional, jika menggunakan sentry)
 
 4. Install package, library, dan dependency yang diperlukan dengan menggunakan perintah
     ```
