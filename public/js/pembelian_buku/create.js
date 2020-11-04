@@ -211,3 +211,13 @@ $(document).on('change', function(event) {
 });
 
 tambahBuku();
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    $(input).parent().find('.custom-file-label').text(input.files[0].name);
+  }
+}
+
+$("#faktur").change(function () {
+  readURL(this);
+});

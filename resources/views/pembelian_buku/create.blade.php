@@ -23,7 +23,7 @@ Tambah Pembelian Buku
             </div>
           </div>
           <div class="card-body">
-            <form action="{{ route('pembelian-buku.store') }}" method="POST" id="pembelianBuku">
+            <form action="{{ route('pembelian-buku.store') }}" method="POST" id="pembelianBuku" enctype="multipart/form-data">
               @csrf
               <input type="hidden" id="hasilRespon" name="bukuYangDibeli" hidden>
               <div class="form-group">
@@ -50,6 +50,18 @@ Tambah Pembelian Buku
                         <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
                       @endforeach
                     </select>
+                    @error('idPemasok')
+                      <span class="invalid-feedback d-block" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+                  <div class="col-12">
+                    <label for="faktur">Faktur</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" name="faktur" id="faktur">
+                      <label class="custom-file-label" for="faktur">Choose file</label>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Storage;
 
 class PembelianBukuController extends Controller
 {
@@ -57,6 +58,14 @@ class PembelianBukuController extends Controller
 
 	public function store(Request $request)
 	{
+		$request->validate([
+			'hargaBeli' => 'required',
+			'idPemasok' => 'required'
+		], [
+			'hargaBeli.required' => 'Mohon masukan harga beli untuk pembelian buku ini',
+			'idPemasok.required' => 'Mohon pilih pemasok'
+		]);
+
 		$hargaBeli = $request->hargaBeli;
 		$idPemasok = $request->idPemasok;
 		$bukuYangDibeli = json_decode($request->bukuYangDibeli);
@@ -68,8 +77,16 @@ class PembelianBukuController extends Controller
 		DB::beginTransaction();
 
 		try {
+			$kode = strtoupper(Str::random(12));
+
+			$faktur = $request->file('faktur');
+			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
+
+			Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
+
 			$pembelianBuku = PembelianBuku::create([
-				'kode' => strtoupper(Str::random(12)),
+				'kode' => $kode,
+				'faktur' => $namaFaktur,
 				'id_user' => auth()->user()->id,
 				'id_pemasok' => (int) $idPemasok,
 				'total_harga_jual' => $bukuYangDibeli->totalHarga,
@@ -153,6 +170,7 @@ class PembelianBukuController extends Controller
 	public function faktur($id)
 	{
 		$pembelian = PembelianBuku::find($id);
-		return PDF::loadView('pembelian_buku.faktur', compact('pembelian'))->download('faktur_' . $pembelian->kode . '.pdf');
+		return Storage::download('images/faktur/' . $pembelian->faktur);
+		// return PDF::loadView('pembelian_buku.faktur', compact('pembelian'))->download('faktur_' . $pembelian->kode . '.pdf');
 	}
 }

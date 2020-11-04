@@ -16,7 +16,7 @@ class PembelianBuku extends Model
     use SoftDeletes;
 
     protected $table = 'pembelian_buku';
-    protected $fillable = ['kode', 'id_user', 'id_pemasok', 'total_harga_jual', 'harga_beli'];
+    protected $fillable = ['kode', 'id_user', 'id_pemasok', 'total_harga_jual', 'harga_beli', 'faktur'];
 
     public function detail()
     {
