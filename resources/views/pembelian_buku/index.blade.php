@@ -116,12 +116,16 @@ Pembelian Buku
                             </div>
                         </div>
                         <div class="col-6">
-                            <label for="mulai">Dari tanggal</label>
-                            <input type="date" class="form-control" id="mulai" name="mulai" value="{{ $now }}">
+                            <div class="form-group mb-0">
+                                <label for="mulai">Dari tanggal</label>
+                                <input type="date" class="form-control" id="mulai" name="mulai" value="{{ $now }}">
+                            </div>
                         </div>
                         <div class="col-6">
-                            <label for="sampai">Sampai tanggal</label>
-                            <input type="date" class="form-control" id="sampai" name="sampai" value="{{ $now }}">
+                            <div class="form-group mb-0">
+                                <label for="sampai">Sampai tanggal</label>
+                                <input type="date" class="form-control" id="sampai" name="sampai" value="{{ $now }}">
+                            </div>
                         </div>
                     </div>
                 </div>
