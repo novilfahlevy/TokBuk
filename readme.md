@@ -16,7 +16,7 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
 ## Instalasi
 1. Clone repo ini dengan menggunakan perintah
 
-    ```
+    ```bash
     git clone https://github.com/novilfahlevy/TokBuk.git
     ```
 
@@ -34,27 +34,27 @@ TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner tok
     - SENTRY_TRACES_SAMPLE_RATE (opsional, jika menggunakan sentry)
 
 4. Install package, library, dan dependency yang diperlukan dengan menggunakan perintah
-    ```
+    ```bash
     composer install
     ```
 
 5. Migrate dan seed database menggunakan perintah
-    ```
+    ```bash
     php artisan migrate --seed
     ```
 
 6. Generate *APP_KEY* pada file *.env* menggunakan perintah
-    ```
+    ```bash
     php artisan key:generate
     ```
 
 7. *Optimize* menggunakan perintah
-    ```
+    ```bash
     php artisan optimize
     ```
 
 8. Jalankan aplikasi secara lokal menggunakan perintah
-    ```
+    ```bash
     php artisan serve
     ```
 
