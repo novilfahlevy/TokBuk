@@ -15,7 +15,7 @@ Pengaturan
         <div class="content-body">
           <div class="card">
             <div class="card-header">
-              <h4>Form Pengaturan</h4>
+              <h4>Identitas Toko</h4>
             </div>
             <div class="card-body">
               <form action="{{ route('pengaturan.update') }}" method="POST">
