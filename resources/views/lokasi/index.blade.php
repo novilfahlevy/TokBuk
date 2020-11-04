@@ -33,7 +33,7 @@ Lokasi Buku
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Nama</th>
-                                            <th scope="col">Aksi</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>

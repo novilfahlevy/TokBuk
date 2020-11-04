@@ -31,11 +31,11 @@ class PembelianBukuController extends Controller
 		$pemasok = $pemasok = Pemasok::all();
 
 		if ( $request->mulai ) {
-			$pembelian->whereDate('created_at', '>=', $request->mulai);
+			$pembelian->whereDate('tanggal', '>=', $request->mulai);
 		}
 		
 		if ( $request->sampai ) {
-			$pembelian->whereDate('created_at', '<=', $request->sampai);
+			$pembelian->whereDate('tanggal', '<=', $request->sampai);
 		}
 		
 		if ( $request->pemasok ) {

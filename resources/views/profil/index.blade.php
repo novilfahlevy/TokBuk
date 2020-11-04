@@ -45,7 +45,7 @@ Profil
                         </div>
                         <div class="form-group">
                           <label for="username">Username</label>
-                          <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}">
+                          <input type="text" class="form-control" id="username" name="username" placeholder="{{ $user->username }}">
                           @error('username')
                             <span class="invalid-feedback d-block" role="alert">
                               <strong>{{ $message }}</strong>
@@ -63,7 +63,7 @@ Profil
                         </div>
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                          <input type="email" class="form-control" id="email" name="email" placeholder="{{ $user->email }}">
                           @error('email')
                             <span class="invalid-feedback d-block" role="alert">
                               <strong>{{ $message }}</strong>

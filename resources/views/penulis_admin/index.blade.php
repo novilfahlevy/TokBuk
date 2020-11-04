@@ -30,6 +30,7 @@ Penulis Buku
                         <div class="modal fade bs-example-modal-lg-" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
+                                    <form action="{{ route('penulis.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Penulis</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -37,18 +38,17 @@ Penulis Buku
                                         </button>
                                     </div>
                                     <div class="modal-body pb-2">
-                                        <form action="{{ route('penulis.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
                                             <div class="form-group mb-0">
                                                 <label for="recipient-name" class="col-form-label">Nama Penulis</label>
                                                 <input type="text" class="form-control" required id="recipient-name" name="nama" value="{{ old('nama') }}" >
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                        <button class="btn btn-primary" type="submit">Simpan</button>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button class="btn btn-primary" type="submit">Simpan</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -90,20 +90,20 @@ Penulis Buku
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
+                                                        <form action="{{ route('penulis.update', ['id' => $p->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                                         <div class="modal-body pb-2">
-                                                            <form action="{{ route('penulis.update', ['id' => $p->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                                             {{ csrf_field() }}
                                                             {{ method_field('PUT') }}
                                                                 <div class="form-group mb-0">
                                                                     <label for="recipient-name" class="col-form-label">Nama Penulis</label>
                                                                     <input type="text" class="form-control" required id="recipient-name" name="nama" value="{{$p->nama}}" >
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
-                                                        </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

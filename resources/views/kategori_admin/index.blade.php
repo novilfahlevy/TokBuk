@@ -36,19 +36,19 @@ Kategori Buku
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
+                                <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                 <div class="modal-body pb-2">
-                                    <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                                         {{ csrf_field() }}
                                       <div class="form-group mb-0">
                                         <label for="recipient-name" class="col-form-label">Kategori</label>
                                         <input type="text" class="form-control" required name="nama" value="{{ old('nama') }}" >
                                       </div>
-                                    </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                    <button class="btn btn-primary" type="submit">Simpan</button>
-                                  </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                      <button class="btn btn-primary" type="submit">Simpan</button>
+                                    </div>
+                                  </form>
                               </div>
                             </div>
                         </div>
@@ -90,20 +90,20 @@ Kategori Buku
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                               </div>
-                                            <div class="modal-body pb-2">
                                               <form action="{{ route('kategori.update', ['id' => $j->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
+                                            <div class="modal-body pb-2">
                                               {{ csrf_field() }}
                                               {{ method_field('PUT') }}
                                                 <div class="form-group mb-0">
                                                   <label for="recipient-name" class="col-form-label">Kategori</label>
                                                   <input type="text" class="form-control" required name="nama" value="{{$j->nama}}" >
                                                 </div>
-                                              </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                              <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
-                                            </div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                                              </div>
+                                            </form>
                                           </div>
                                         </div>
                                       </div>
