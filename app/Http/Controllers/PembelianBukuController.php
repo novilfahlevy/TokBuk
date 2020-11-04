@@ -21,12 +21,14 @@ class PembelianBukuController extends Controller
 	public function index()
 	{
 		$pembelian = PembelianBuku::orderBy('created_at', 'DESC')->get();
-		return view('pembelian_buku.index', compact('pembelian'));
+		$pemasok = Pemasok::all();
+		return view('pembelian_buku.index', compact('pembelian', 'pemasok'));
 	}
 
 	public function filter(Request $request)
 	{
 		$pembelian = PembelianBuku::select('*');
+		$pemasok = $pemasok = Pemasok::all();
 
 		if ( $request->mulai ) {
 			$pembelian->whereDate('created_at', '>=', $request->mulai);
@@ -35,12 +37,16 @@ class PembelianBukuController extends Controller
 		if ( $request->sampai ) {
 			$pembelian->whereDate('created_at', '<=', $request->sampai);
 		}
+		
+		if ( $request->pemasok ) {
+			$pembelian->where('id_pemasok', $request->pemasok);
+		}
 
 		session($request->except('_token'));
 
 		$pembelian = $pembelian->orderBy('created_at', 'DESC')->get();
 
-		return view('pembelian_buku.index', compact('pembelian'));
+		return view('pembelian_buku.index', compact('pembelian', 'pemasok'));
 	}
 
 	public function create(Request $request)
@@ -164,7 +170,7 @@ class PembelianBukuController extends Controller
 
 	public function export(Request $request)
 	{
-		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai), 'pembelian_buku.xlsx');
+		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai, $request->pemasok), 'pembelian_buku.xlsx');
 	}
 
 	public function faktur($id)

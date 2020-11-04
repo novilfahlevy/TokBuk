@@ -144,17 +144,6 @@ Buku
                             </select>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="form-group mb-2">
-                            <label for="pemasok">Pemasok</label>
-                            <select name="pemasok" id="pemasok" class="form-control">
-                                <option value="" selected>Semua</option>
-                                @foreach ($pemasok as $p)
-                                    <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-6">
                         <div class="form-group mb-2">
                             <label for="tahunTerbitDari">Tahun terbit dari</label>

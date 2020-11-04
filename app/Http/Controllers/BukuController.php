@@ -35,12 +35,11 @@ class BukuController extends Controller
     {
         $buku = $this->buku->get();
         $penulis = $this->penulis->get();
-        $pemasok = $this->pemasok->get();
         $penerbit = $this->penerbit->get();
         $kategori = $this->kategori->get();
         $lokasi = $this->lokasi->get();
 
-        return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi', 'pemasok'));
+        return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
     }
 
     public function filter(Request $request)

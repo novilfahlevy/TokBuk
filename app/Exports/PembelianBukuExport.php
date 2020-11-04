@@ -11,11 +11,13 @@ class PembelianBukuExport implements FromView
 {
 	private $mulai;
 	private $sampai;
+	private $pemasok;
 
-	public function __construct($mulai, $sampai)
+	public function __construct($mulai, $sampai, $pemasok)
 	{
 		$this->mulai = $mulai;
 		$this->sampai = $sampai;
+		$this->pemasok = $pemasok ?? null;
 	}
 
 	/**
@@ -24,9 +26,16 @@ class PembelianBukuExport implements FromView
 	public function view(): View
 	{
 		$pembelian = DetailPembelianBuku::where(function($query) {
-			$query->whereDate('created_at', '>=', $this->mulai)->whereDate('created_at', '<=', $this->sampai);
-		})
-		->get();
+			$query->whereDate('detail_pembelian_buku.created_at', '>=', $this->mulai)->whereDate('detail_pembelian_buku.created_at', '<=', $this->sampai);
+		});
+
+		if ( $this->pemasok ) {
+			$pembelian
+				->join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian_buku')
+				->where('pembelian_buku.id_pemasok', $this->pemasok);
+		}
+
+		$pembelian = $pembelian->get();
 
 		return view('pembelian_buku.export', compact('pembelian'));
 	}

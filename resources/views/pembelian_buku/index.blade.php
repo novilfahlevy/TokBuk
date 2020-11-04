@@ -87,6 +87,8 @@ Pembelian Buku
     </div>
 </div>
 
+@php $pemasokId = session()->pull('pemasok') @endphp
+
 <div class="modal" tabindex="-1" role="dialog" id="exportModal">
     <form action="{{ route('pembelian-buku.export') }}" method="POST">
         @csrf
@@ -102,6 +104,17 @@ Pembelian Buku
                 <div class="form-group mb-0">
                     @php $now = date('Y-m-d'); @endphp
                     <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-2">
+                                <label for="pemasok">Pemasok</label>
+                                <select name="pemasok" id="pemasok" class="form-control">
+                                    <option value="" selected>Semua</option>
+                                    @foreach ($pemasok as $p)
+                                        <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-6">
                             <label for="mulai">Dari tanggal</label>
                             <input type="date" class="form-control" id="mulai" name="mulai" value="{{ $now }}">
@@ -136,6 +149,17 @@ Pembelian Buku
             <div class="modal-body">
                 <div class="form-group mb-0">
                     <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-2">
+                                <label for="pemasok">Pemasok</label>
+                                <select name="pemasok" id="pemasok" class="form-control">
+                                    <option value="" selected>Semua</option>
+                                    @foreach ($pemasok as $p)
+                                        <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-6">
                             <label for="mulai">Dari tanggal</label>
                             <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->pull('mulai') }}">
