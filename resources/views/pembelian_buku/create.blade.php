@@ -29,7 +29,7 @@ Tambah Pembelian Buku
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="hargaBeli">Harga Beli</label>
+                    <label for="hargaBeli">Bayar</label>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Rp</span>

@@ -43,7 +43,7 @@ Pembelian Buku
                                                     <th>Tanggal</th>
                                                     <th>Pemasok</th>
                                                     <th>Bayar</th>
-                                                    <th>Harga Jual</th>
+                                                    <th>Harga</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
