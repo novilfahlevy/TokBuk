@@ -42,6 +42,9 @@ $.ajax({
 
 channelBind('dasbor', 'dasbor.update', function(data) {
   initChart(data.chart);
+  $('#jumlahBuku').text(
+    new Intl.NumberFormat('id-ID').format(data.jumlahBuku)
+  );
   $('#jumlahTransaksi').text(
     new Intl.NumberFormat('id-ID').format(data.jumlahTransaksi)
   );

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Buku;
 use App\PembelianBuku;
 use App\Transaksi;
 use Carbon\Carbon;
@@ -19,6 +20,7 @@ class UpdateDasborEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $jumlahTransaksi;
+    public $jumlahBuku;
     public $chart;
 
     /**
@@ -40,6 +42,7 @@ class UpdateDasborEvent implements ShouldBroadcast
             ->get();
 
         $this->jumlahTransaksi = Transaksi::count();
+        $this->jumlahBuku = Buku::sum('jumlah');
         $this->chart = [
             'bulan' => $now->monthName,
             'label' => $label,

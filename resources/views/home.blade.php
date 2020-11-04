@@ -50,7 +50,7 @@
                     <div class="card-header">
                       <h4>Total Buku</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="jumlahBuku">
                       {{ number_format($buku) }}
                     </div>
                   </div>
