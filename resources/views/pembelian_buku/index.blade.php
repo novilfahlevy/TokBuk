@@ -165,12 +165,16 @@ Pembelian Buku
                             </div>
                         </div>
                         <div class="col-6">
-                            <label for="mulai">Dari tanggal</label>
-                            <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->pull('mulai') }}">
+                            <div class="form-group mb-0">
+                                <label for="mulai">Dari tanggal</label>
+                                <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->pull('mulai') }}">
+                            </div>
                         </div>
                         <div class="col-6">
-                            <label for="sampai">Sampai tanggal</label>
-                            <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->pull('sampai') }}">
+                            <div class="form-group mb-0">
+                                <label for="sampai">Sampai tanggal</label>
+                                <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->pull('sampai') }}">
+                            </div>
                         </div>
                     </div>
                 </div>
