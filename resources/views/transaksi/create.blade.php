@@ -27,7 +27,7 @@ Tambah Transaksi
               @csrf
               <input type="hidden" id="hasilRespon" name="transaksi" hidden>
               <div class="form-group">
-                <label for="bayar">Uang pembeli</label>
+                <label for="bayar">Bayar</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Rp</span>

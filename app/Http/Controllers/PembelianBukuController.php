@@ -85,7 +85,8 @@ class PembelianBukuController extends Controller
 		DB::beginTransaction();
 
 		try {
-			$kode = strtoupper(Str::random(12));
+			$jumlahPembelianBuku = PembelianBuku::count() + 1;
+			$kode = substr('P-000000000', 0, -count(str_split((string) $jumlahPembelianBuku))) . $jumlahPembelianBuku;
 
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();

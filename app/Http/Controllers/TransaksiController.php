@@ -86,11 +86,14 @@ class TransaksiController extends Controller
 			}
 
 			if ( $bayar < $transaksi->totalHarga ) {
-				return redirect()->route('transaksi.create')->withErrors(['bayar' => 'Nominal uang pembeli tidak mencukupi']);
+				return redirect()->route('transaksi.create')->withErrors(['bayar' => 'Nominal pembayaran tidak mencukupi']);
 			}
 
+			$jumlahTransaksi = Transaksi::count() + 1;
+			$kode = substr('T-000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+
 			$transaksiBaru = Transaksi::create([
-				'kode' => strtoupper(Str::random(12)),
+				'kode' => $kode,
 				'id_user' => auth()->user()->id,
 				'bayar' => $bayar,
 				'total_harga' => $transaksi->totalHarga
