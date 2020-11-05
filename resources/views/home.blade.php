@@ -128,7 +128,7 @@
                         </tr>
                         <tr>
                           <td>
-                            Buku Terbeli
+                            Buku Dibeli
                           </td>
                           <td id="bukuTerbeli">
                             {{ $pembelian->bukuTerbeli }}
@@ -155,10 +155,5 @@
 @endsection
 
 @push('js')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
   <script src="{{ asset('js/dasbor/index.js') }}"></script>
-@endpush
-
-@push('css')
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
 @endpush

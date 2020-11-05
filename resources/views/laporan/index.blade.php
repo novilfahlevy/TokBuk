@@ -88,7 +88,7 @@ Laporan
                       </tr>
                       <tr>
                         <td>
-                          Buku Terbeli
+                          Buku Dibeli
                         </td>
                         <td id="bukuTerbeli">
                           0
