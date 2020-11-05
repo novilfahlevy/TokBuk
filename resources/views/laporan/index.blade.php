@@ -18,7 +18,7 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
                   <div class="card-header-form">
-                  <a href="{{route('laporan.penjualan')}}"  id="tombolDownload"class="btn btn-success mr-2" title="Download Laporan Transaksi">
+                    <a href="{{ route('laporan.penjualan', ['tahun' => date('Y'), 'bulan' => date('m')]) }}" class="btn btn-success mr-2" title="Download Laporan Transaksi" id="laporanTransaksi">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
@@ -69,7 +69,7 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Pembelian Buku</h4>
                   <div class="card-header-form">
-                    <a href="" class="btn btn-success mr-2" title="Download Laporan Pembelian">
+                    <a href="{{ route('laporan.pembelian', ['tahun' => date('Y'), 'bulan' => date('m')]) }}" class="btn btn-success mr-2" title="Download Laporan Pembelian" id="laporanPembelian">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>

@@ -106,4 +106,6 @@ Route::group(['middleware' => 'auth'], function() {
 
   //laporan
   Route::get('laporan', 'LaporanController@index')->name('laporan');
+  Route::get('laporan/penjualan/{tahun}/{bulan}', 'LaporanController@pdfpenjualan')->name('laporan.penjualan');
+  Route::get('laporan/pembelian/{tahun}/{bulan}', 'LaporanController@pdfpembelian')->name('laporan.pembelian');
 });

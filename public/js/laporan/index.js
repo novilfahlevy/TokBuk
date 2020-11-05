@@ -8,6 +8,7 @@ $('#submitPendapatan').on('click', function() {
     data: { tahun, bulan },
     error: error => console.log(error),
     success: (data) => {
+      $('#laporanTransaksi').attr('href', `${BASEURL}/laporan/penjualan/${tahun}/${bulan}`);
       $('#totalTransaksi').text(data.totalTransaksi);
       $('#bukuTerjual').text(data.bukuTerjual);
       $('#totalPendapatan').text(`Rp ${format(data.pendapatan)}`);
@@ -24,6 +25,7 @@ $('#submitPengeluaran').on('click', function() {
     data: { tahun, bulan },
     error: error => console.log(error),
     success: (data) => {
+      $('#laporanPembelian').attr('href', `${BASEURL}/laporan/pembelian/${tahun}/${bulan}`);
       $('#totalPembelian').text(data.totalPembelian);
       $('#bukuTerbeli').text(data.bukuTerbeli);
       $('#totalPengeluaran').text(`Rp ${format(data.pengeluaran)}`);
