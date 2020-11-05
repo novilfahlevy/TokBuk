@@ -18,7 +18,7 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
                   <div class="card-header-form">
-                  <a href="{{route('laporan.penjualan')}}" class="btn btn-success mr-2" title="Download Laporan Transaksi">
+                  <a href="{{route('laporan.penjualan')}}"  id="tombolDownload"class="btn btn-success mr-2" title="Download Laporan Transaksi">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
