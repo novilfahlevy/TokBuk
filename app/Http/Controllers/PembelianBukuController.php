@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\DetailPembelianBuku;
+use App\Events\UpdateDasborEvent;
 use App\Exports\PembelianBukuExport;
 use App\Pemasok;
 use App\PembelianBuku;
@@ -135,7 +136,7 @@ class PembelianBukuController extends Controller
 
 			DB::commit();
 
-			// event(new UpdateDasborEvent);
+			event(new UpdateDasborEvent);
 
 			return redirect()->route('pembelian-buku.detail', ['id' => $pembelianBuku->id])->with([
 				'type' => 'success',
@@ -158,6 +159,7 @@ class PembelianBukuController extends Controller
 			$pembelian = PembelianBuku::find($id);
 			$pembelian->delete();
 			DB::commit();
+			event(new UpdateDasborEvent);
 			return redirect()->route('pembelian-buku')->with([
 				'message' => 'Berhasil Menghapus Pembelian Buku',
 				'type' => 'success'

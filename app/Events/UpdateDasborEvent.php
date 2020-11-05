@@ -6,10 +6,7 @@ use App\Buku;
 use App\PembelianBuku;
 use App\Transaksi;
 use Carbon\Carbon;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -21,7 +18,10 @@ class UpdateDasborEvent implements ShouldBroadcast
 
     public $jumlahTransaksi;
     public $jumlahBuku;
-    public $chart;
+    public $jumlahJudulBuku;
+    public $transaksi;
+    public $pembelian;
+    public $now;
 
     /**
      * Create a new event instance.
@@ -30,24 +30,13 @@ class UpdateDasborEvent implements ShouldBroadcast
      */
     public function __construct()
     {
-        $now = Carbon::now();
-
-        $label = collect(range(1, $now->daysInMonth))->map(function($day) {
-            return 'Hari ke-' . $day;
-        });
-
-        $pendapatan = Transaksi::where(DB::raw('MONTH(created_at)'), $now->month)
-            ->select(DB::raw('SUM(total_harga) AS total_harga'))
-            ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+        $this->now = Carbon::now();
 
         $this->jumlahTransaksi = Transaksi::count();
         $this->jumlahBuku = Buku::sum('jumlah');
-        $this->chart = [
-            'bulan' => $now->monthName,
-            'label' => $label,
-            'pendapatan' => $pendapatan
-        ];
+        $this->jumlahJudulBuku = Buku::count();
+        $this->transaksi = $this->penjualan();
+        $this->pembelian = $this->pembelian();
     }
 
     /**
@@ -64,4 +53,52 @@ class UpdateDasborEvent implements ShouldBroadcast
     {
         return 'dasbor.update';
     }
+
+    public function penjualan()
+	{
+		$tahun = $this->now->year;
+		$bulan = $this->now->month;
+
+		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
+
+		$total = $transaksi->count();
+		$pendapatan = $transaksi->sum('total_harga');
+		$bukuTerjual = $transaksi->join('detail_transaksi as dt', 'dt.id_transaksi', '=', 'transaksi.id')
+			->select(DB::raw('SUM(dt.jumlah) as buku_terjual'))
+			->first();
+
+		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
+
+		return [
+			'totalTransaksi' => $total,
+			'bukuTerjual' => (int) $bukuTerjual->buku_terjual,
+			'pendapatan' => (int) $pendapatan,
+			'tahun' => $tahun,
+			'bulan' => $waktuMasukan->monthName
+        ];
+	}
+
+	public function pembelian()
+	{
+		$tahun = $this->now->year;
+		$bulan = $this->now->month;
+
+		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
+
+		$totalPembelian = $pembelian->count();
+		$pengeluaran = $pembelian->sum('total_harga');
+		$bukuTerbeli = $pembelian->join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
+			->first();
+
+		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
+
+		return [
+			'totalPembelian' => $totalPembelian,
+			'bukuTerbeli' => (int) $bukuTerbeli->buku_terbeli,
+			'pengeluaran' => (int) $pengeluaran,
+			'tahun' => $tahun,
+			'bulan' => $waktuMasukan->monthName
+        ];
+	}
 }

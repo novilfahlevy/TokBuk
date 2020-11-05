@@ -144,6 +144,7 @@ class TransaksiController extends Controller
 			$transaksi = Transaksi::find($id);
 			$transaksi->delete();
 			DB::commit();
+			event(new UpdateDasborEvent);
 			return redirect()->route('transaksi')->with([
 				'message' => 'Berhasil Menghapus Transaksi',
 				'type' => 'success'
