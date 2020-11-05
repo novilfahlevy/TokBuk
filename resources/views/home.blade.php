@@ -66,7 +66,7 @@
                       <h4>Transaksi Hari Ini</h4>
                     </div>
                     <div class="card-body" id="jumlahTransaksi">
-                      {{ number_format($transaksi, 2, ',', '.') }}
+                      {{ number_format($transaksi) }}
                     </div>
                   </div>
                 </div>
