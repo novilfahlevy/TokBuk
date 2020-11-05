@@ -66,7 +66,7 @@
                       <h4>Transaksi Hari Ini</h4>
                     </div>
                     <div class="card-body" id="jumlahTransaksi">
-                      {{ number_format($transaksi) }}
+                      {{ number_format($transaksi, 2, ',', '.') }}
                     </div>
                   </div>
                 </div>
@@ -101,7 +101,7 @@
                             Total Pendapatan
                           </td>
                           <td id="totalPendapatan">
-                            Rp {{ number_format($penjualan->pendapatan) }}
+                            Rp {{ number_format($penjualan->pendapatan, 2, ',', '.') }}
                           </td>
                         </tr>
                       </table>
@@ -139,7 +139,7 @@
                             Total Pengeluaran
                           </td>
                           <td id="totalPengeluaran">
-                            Rp {{ number_format($pembelian->pengeluaran) }}
+                            Rp {{ number_format($pembelian->pengeluaran, 2, ',', '.') }}
                           </td>
                         </tr>
                       </table>
