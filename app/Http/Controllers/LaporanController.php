@@ -27,7 +27,7 @@ class LaporanController extends Controller
 		$tahun = $request->tahun ?? $this->now->year;
 		$bulan = $request->bulan ?? $this->now->month;
 
-		$transaksi = Transaksi::whereYear('transaksi.created_at', 2020)->whereMonth('transaksi.created_at', $bulan);
+		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
 
 		$total = $transaksi->count();
 		$pendapatan = $transaksi->sum('total_harga');
@@ -52,7 +52,7 @@ class LaporanController extends Controller
 		$tahun = $request->tahun ?? $this->now->year;
 		$bulan = $request->bulan ?? $this->now->month;
 
-		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', 2020)->whereMonth('pembelian_buku.tanggal', $bulan);
+		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');

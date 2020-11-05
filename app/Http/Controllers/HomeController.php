@@ -7,7 +7,6 @@ use App\PembelianBuku;
 use App\Transaksi;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -35,42 +34,59 @@ class HomeController extends Controller
         $pengguna = User::count();
 		$judulBuku = Buku::count();
         $buku = (int) Buku::sum('jumlah');
-		$transaksi = Transaksi::where(DB::raw('MONTH(created_at)'), $this->now->month)->count();
+        $transaksi = Transaksi::where(DB::raw('MONTH(created_at)'), $this->now->month)->count();
         
-        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi'));
+        $penjualan = (object) $this->penjualan();
+        $pembelian = (object) $this->pembelian();
+        
+        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'penjualan', 'pembelian'));
     }
 
-    public function chart(Request $request)
-    {
-        $label = collect(range(1, $this->now->daysInMonth))->map(function($day) {
-            return 'Hari ke-' . $day;
-        });
+    public function penjualan()
+	{
+		$tahun = $this->now->year;
+		$bulan = $this->now->month;
 
-        $pendapatan = Transaksi::where(DB::raw('MONTH(created_at)'), $request->bulan ?? $this->now->month)
-            ->where(DB::raw('YEAR(created_at)'), $request->tahun ?? $this->now->year)
-            ->select(DB::raw('SUM(total_harga) AS total_harga'))
-            ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
 
-        // $pengeluaran = PembelianBuku::where(DB::raw('MONTH(created_at)'), $this->now->month)
-        //     ->select(DB::raw('SUM(harga * jumlah) AS total_harga'))
-        //     ->groupBy(DB::raw('DATE(created_at)'))
-        //     ->get();
+		$total = $transaksi->count();
+		$pendapatan = $transaksi->sum('total_harga');
+		$bukuTerjual = $transaksi->join('detail_transaksi as dt', 'dt.id_transaksi', '=', 'transaksi.id')
+			->select(DB::raw('SUM(dt.jumlah) as buku_terjual'))
+			->first();
 
-        $waktuMasukan = Carbon::parse(
-            ($request->tahun ?? $this->now->year) . '-' . ($request->bulan ?? $this->now->month)
-        );
+		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
 
-        return response()->json([
-            'status' => 200,
-            'data' => [
-                'bulan' => $waktuMasukan->monthName,
-                'tahun' => $waktuMasukan->year,
-                'label' => $label,
-                'pendapatan' => $pendapatan,
-                'pengeluaran' => []
-                // 'pengeluaran' => $pengeluaran
-            ]
-        ]);
-    }
+		return [
+			'totalTransaksi' => $total,
+			'bukuTerjual' => (int) $bukuTerjual->buku_terjual,
+			'pendapatan' => (int) $pendapatan,
+			'tahun' => $tahun,
+			'bulan' => $waktuMasukan->monthName
+        ];
+	}
+
+	public function pembelian()
+	{
+		$tahun = $this->now->year;
+		$bulan = $this->now->month;
+
+		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
+
+		$totalPembelian = $pembelian->count();
+		$pengeluaran = $pembelian->sum('total_harga');
+		$bukuTerbeli = $pembelian->join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
+			->first();
+
+		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
+
+		return [
+			'totalPembelian' => $totalPembelian,
+			'bukuTerbeli' => (int) $bukuTerbeli->buku_terbeli,
+			'pengeluaran' => (int) $pengeluaran,
+			'tahun' => $tahun,
+			'bulan' => $waktuMasukan->monthName
+        ];
+	}
 }

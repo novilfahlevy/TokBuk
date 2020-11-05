@@ -74,14 +74,76 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Pendapatan pada <span id="bulan"></span></h4>
+                    <h4>Laporan Transaksi</h4>
                   </div>
                   <div class="card-body">
-                    <h5 class="mb-0 text-center py-5 my-5" id="loading">Sedang memuat data...</h5>
-                    <canvas id="transaksi" width="400" height="200"></canvas>
+                    <h5 class="mb-3" id="waktuLaporanPenjualan">{{ $penjualan->bulan }} {{ $penjualan->tahun }}</h5>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <tr>
+                          <td width="30%">
+                            Total Transaksi
+                          </td>
+                          <td id="totalTransaksi">
+                            {{ $penjualan->totalTransaksi }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Buku Terjual
+                          </td>
+                          <td id="bukuTerjual">
+                            {{ $penjualan->bukuTerjual }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Total Pendapatan
+                          </td>
+                          <td id="totalPendapatan">
+                            Rp {{ number_format($penjualan->pendapatan) }}
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
-                  <div class="card-footer pt-0">
-                    <input type="month" class="form-control" id="gantiBulanChart" value="{{ date('Y-m') }}">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Laporan Pembelian Buku</h4>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="mb-3" id="waktuLaporanPendapatan">{{ $pembelian->bulan }} {{ $pembelian->tahun }}</h5>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <tr>
+                          <td width="30%">
+                            Total Pembelian
+                          </td>
+                          <td id="totalPembelian">
+                            {{ $pembelian->totalPembelian }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Buku Terbeli
+                          </td>
+                          <td id="bukuTerbeli">
+                            {{ $pembelian->bukuTerbeli }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Total Pengeluaran
+                          </td>
+                          <td id="totalPengeluaran">
+                            Rp {{ number_format($pembelian->pengeluaran) }}
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
