@@ -75,14 +75,14 @@ class LaporanController extends Controller
 		]);
 	}
 
-	public function pdfpenjualan()
+	public function pdfpenjualan($tahun, $bulan)
 	{
-		$tahun = $request->tahun ?? $this->now->year;
-		$bulan = $request->bulan ?? $this->now->month;
+		$tahun = $tahun ?? $this->now->year;
+		$bulan = $bulan ?? $this->now->month;
 
 		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
 
-		$total = $transaksi->count();
+		$totalTransaksi = $transaksi->count();
 		$pendapatan = $transaksi->sum('total_harga');
 		$bukuTerjual = $transaksi->join('detail_transaksi as dt', 'dt.id_transaksi', '=', 'transaksi.id')
 			->select(DB::raw('SUM(dt.jumlah) as buku_terjual'))
@@ -90,6 +90,10 @@ class LaporanController extends Controller
 
 		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
 
-		return PDF::loadView('transaksi.laporan', compact('total', 'pendapatan', 'bukuTerjual'))->download('laporan_penjualan_' . $waktuMasukan->monthName . '.pdf');
+		return PDF::loadView('transaksi.laporan', compact('totalTransaksi', 'pendapatan', 'bukuTerjual', 'waktuMasukan'))->download('laporan_transaksi_' . $waktuMasukan->month . '_' . $waktuMasukan->year . '.pdf');
+	}
+
+	public function pdfpembelian($tahun, $bulan) {
+		
 	}
 }
