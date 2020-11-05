@@ -13,7 +13,7 @@ class BukuTableSeeder extends Seeder
     {
         App\Buku::create([
             'sampul' => 'sampul.png',
-            'isbn' => '9786022202417',
+            'isbn' => '978-601-8520-93-1',
             'judul' => 'Janshen',
             'tahun_terbit' => 2017,
             'id_penulis' => 1,
@@ -26,7 +26,7 @@ class BukuTableSeeder extends Seeder
 
         App\Buku::create([
             'sampul' => 'sampul.png',
-            'isbn' => '979103504504',
+            'isbn' => '958-602-8121-93-3',
             'judul' => 'RPUL Edisi Terbaru',
             'tahun_terbit' => 2019,
             'id_penulis' => 3,
@@ -39,7 +39,7 @@ class BukuTableSeeder extends Seeder
 
         App\Buku::create([
             'sampul' => 'sampul.png',
-            'isbn' => '9786021286746',
+            'isbn' => '921-332-8519-93-3',
             'judul' => 'Akutansi Entitas Manufaktur',
             'tahun_terbit' => 2019,
             'id_penulis' => 4,
@@ -52,7 +52,7 @@ class BukuTableSeeder extends Seeder
 
         App\Buku::create([
             'sampul' => 'sampul.png',
-            'isbn' => '9792056440',
+            'isbn' => '918-692-5419-32-3',
             'judul' => 'Doraemon Canda',
             'tahun_terbit' => 2004,
             'id_penulis' => 5,
@@ -65,7 +65,7 @@ class BukuTableSeeder extends Seeder
 
         App\Buku::create([
             'sampul' => 'sampul.png',
-            'isbn' => '9789797809034',
+            'isbn' => '998-611-8329-66-3',
             'judul' => 'Rentang Kisah',
             'tahun_terbit' => 2017,
             'id_penulis' => 6,
@@ -78,7 +78,7 @@ class BukuTableSeeder extends Seeder
 
         App\Buku::create([
             'sampul' => 'sampul.png',
-            'isbn' => '9786022201502',
+            'isbn' => '933-323-8898-32-4',
             'judul' => 'Danur gerbang dialog',
             'tahun_terbit' => 2015,
             'id_penulis' => 1,
