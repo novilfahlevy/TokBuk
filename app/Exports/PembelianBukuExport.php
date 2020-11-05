@@ -25,10 +25,15 @@ class PembelianBukuExport implements FromView
 	*/
 	public function view(): View
 	{
-		$pembelian = DetailPembelianBuku::join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian')
-		->where(function($query) {
-			$query->whereDate('pembelian_buku.tanggal', '>=', $this->mulai)->whereDate('pembelian_buku.tanggal', '<=', $this->sampai);
-		});
+		$pembelian = DetailPembelianBuku::join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian');
+
+		if ( $this->mulai ) {
+			$pembelian->whereDate('pembelian_buku.tanggal', '>=', $this->mulai);
+		}
+
+		if ( $this->sampai ) {
+			$pembelian->whereDate('pembelian_buku.tanggal', '<=', $this->sampai);
+		}
 
 		if ( $this->pemasok ) {
 			$pembelian->where('pembelian_buku.id_pemasok', $this->pemasok);

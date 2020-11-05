@@ -100,18 +100,17 @@ Transaksi Penjualan
               </div>
               <div class="modal-body pb-2">
                 <div class="form-group mb-0">
-                    @php $now = date('Y-m-d'); @endphp
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group mb-0">
                                 <label for="mulai">Dari tanggal</label>
-                                <input type="date" class="form-control" id="mulai" name="mulai" value="{{ $now }}">
+                                <input type="date" class="form-control" id="mulai" name="mulai">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group mb-0">
                                 <label for="sampai">Sampai tanggal</label>
-                                <input type="date" class="form-control" id="sampai" name="sampai" value="{{ $now }}">
+                                <input type="date" class="form-control" id="sampai" name="sampai">
                             </div>
                         </div>
                     </div>
