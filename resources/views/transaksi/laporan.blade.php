@@ -84,7 +84,7 @@
           Buku Terjual
         </td>
         <td id="bukuTerjual">
-          {{ $bukuTerjual->buku_terjual }}
+          {{$bukuTerjual->buku_terjual ? $bukuTerjual->buku_terjual : '0'  }}
         </td>
       </tr>
       <tr>
@@ -92,7 +92,7 @@
           Total Pendapatan
         </td>
         <td id="totalPendapatan">
-          Rp {{ number_format($pendapatan) }}
+          Rp {{number_format($pendapatan, 2, ',', '.')}}
         </td>
       </tr>
     </table>

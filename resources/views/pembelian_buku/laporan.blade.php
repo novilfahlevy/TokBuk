@@ -37,24 +37,24 @@
         <td width="30%">
           Total Pembelian
         </td>
-        <td id="totalTransaksi">
+        <td id="totalPembelian">
           {{ $totalPembelian }}
         </td>
       </tr>
       <tr>
         <td>
-          Buku Terbeli
+          Buku rbeli
         </td>
-        <td id="bukuTerjual">
-          {{ $bukuTerbeli->buku_terbeli}}
+        <td id="bukuTerbeli">
+          {{$bukuTerbeli->buku_terbeli ? $bukuTerbeli->buku_terbeli : '0'  }}
         </td>
       </tr>
       <tr>
         <td>
           Total Pengeluaran
         </td>
-        <td id="totalPendapatan">
-          Rp {{ number_format($pengeluaran) }}
+        <td id="pengeluaran">
+          Rp {{ number_format($pengeluaran, 2, ',', '.') }}
         </td>
       </tr>
     </table>
