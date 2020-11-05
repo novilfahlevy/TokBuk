@@ -1,7 +1,6 @@
 const format = number => new Intl.NumberFormat('id-ID').format(number);
 
-$('#submitPendapatan').on('click', function() {
-  const [tahun, bulan] = $('#pendapatan').val().split('-');
+function ambilDataTransaksi(tahun, bulan) {
   $.ajax({
     url: `${BASEURL}/api/laporan/penjualan`,
     method: 'POST',
@@ -15,10 +14,9 @@ $('#submitPendapatan').on('click', function() {
       $('#waktuLaporanPenjualan').text(`${data.bulan} ${data.tahun}`)
     }
   });
-});
+}
 
-$('#submitPengeluaran').on('click', function() {
-  const [tahun, bulan] = $('#pengeluaran').val().split('-');
+function ambilDataPembelian(tahun, bulan) {
   $.ajax({
     url: `${BASEURL}/api/laporan/pembelian`,
     method: 'POST',
@@ -32,5 +30,21 @@ $('#submitPengeluaran').on('click', function() {
       $('#waktuLaporanPendapatan').text(`${data.bulan} ${data.tahun}`)
     }
   });
+}
+
+$('#submitPendapatan').on('click', function() {
+  const [tahun, bulan] = $('#pendapatan').val().split('-');
+  ambilDataTransaksi(tahun, bulan);
 });
 
+$('#submitPengeluaran').on('click', function() {
+  const [tahun, bulan] = $('#pengeluaran').val().split('-');
+  ambilDataPembelian(tahun, bulan);
+});
+
+const date = new Date();
+const bulan = date.getMonth() + 1;
+const tahun = date.getFullYear();
+
+ambilDataTransaksi(tahun, bulan);
+ambilDataPembelian(tahun, bulan);

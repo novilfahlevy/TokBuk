@@ -84,7 +84,7 @@
           Buku Terjual
         </td>
         <td id="bukuTerjual">
-          {{ $bukuTerjual}}
+          {{ $bukuTerjual->buku_terjual }}
         </td>
       </tr>
       <tr>

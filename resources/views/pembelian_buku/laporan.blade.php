@@ -46,7 +46,7 @@
           Buku Terbeli
         </td>
         <td id="bukuTerjual">
-          {{ $bukuTerbeli}}
+          {{ $bukuTerbeli->buku_terbeli}}
         </td>
       </tr>
       <tr>
