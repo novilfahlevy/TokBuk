@@ -106,4 +106,5 @@ Route::group(['middleware' => 'auth'], function() {
 
   //laporan
   Route::get('laporan', 'LaporanController@index')->name('laporan');
+  Route::get('laporan/penjualan/', 'LaporanController@pdfpenjualan')->name('laporan.penjualan');
 });

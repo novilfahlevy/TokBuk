@@ -17,6 +17,11 @@ Laporan
               <div class="card">
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
+                  <div class="card-header-form">
+                  <a href="{{route('laporan.penjualan')}}" class="btn btn-success mr-2" title="Download Laporan Transaksi">
+                      <i class="fas fa-file-download"></i>
+                    </a>
+                  </div>
                 </div>
                 <div class="card-body">
                   <h5 class="mb-3" id="waktuLaporanPenjualan"></h5>
@@ -63,6 +68,11 @@ Laporan
               <div class="card">
                 <div class="card-header">
                   <h4>Laporan Pembelian Buku</h4>
+                  <div class="card-header-form">
+                    <a href="" class="btn btn-success mr-2" title="Download Laporan Pembelian">
+                      <i class="fas fa-file-download"></i>
+                    </a>
+                  </div>
                 </div>
                 <div class="card-body">
                   <h5 class="mb-3" id="waktuLaporanPendapatan"></h5>

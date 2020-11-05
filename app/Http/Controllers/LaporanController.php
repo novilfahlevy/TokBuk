@@ -7,6 +7,7 @@ use App\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class LaporanController extends Controller
 {
@@ -45,6 +46,8 @@ class LaporanController extends Controller
 			'tahun' => $tahun,
 			'bulan' => $waktuMasukan->monthName
 		]);
+
+		
 	}
 
 	public function pembelian(Request $request)
@@ -70,5 +73,23 @@ class LaporanController extends Controller
 			'tahun' => $tahun,
 			'bulan' => $waktuMasukan->monthName
 		]);
+	}
+
+	public function pdfpenjualan()
+	{
+		$tahun = $request->tahun ?? $this->now->year;
+		$bulan = $request->bulan ?? $this->now->month;
+
+		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
+
+		$total = $transaksi->count();
+		$pendapatan = $transaksi->sum('total_harga');
+		$bukuTerjual = $transaksi->join('detail_transaksi as dt', 'dt.id_transaksi', '=', 'transaksi.id')
+			->select(DB::raw('SUM(dt.jumlah) as buku_terjual'))
+			->first();
+
+		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
+
+		return PDF::loadView('transaksi.laporan', compact('total', 'pendapatan', 'bukuTerjual'))->download('laporan_penjualan_' . $waktuMasukan->monthName . '.pdf');
 	}
 }
