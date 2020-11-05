@@ -103,4 +103,7 @@ Route::group(['middleware' => 'auth'], function() {
   //pengaturan
   Route::get('pengaturan', 'PengaturanController@index')->name('pengaturan');
   Route::put('pengaturan.update', 'PengaturanController@update')->name('pengaturan.update');
+
+  //laporan
+  Route::get('laporan', 'LaporanController@index')->name('laporan');
 });
