@@ -24,9 +24,9 @@
         <td>{{ $pembelianParent->created_at }}</td>
         <td>{{ $buku->isbn }}</td>
         <td>{{ $buku->judul }}</td>
-        <td>Rp {{ number_format($p->harga) }}</td>
+        <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
         <td>{{ number_format($p->jumlah) }}</td>
-        <td>Rp {{ number_format($p->harga * $p->jumlah) }}</td>
+        <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
         <td>{{ $p->status }}</td>
         <td></td>
       </tr>

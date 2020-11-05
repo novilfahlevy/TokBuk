@@ -68,7 +68,7 @@
                                                     <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Harga</div>
                                                         <div class="col-1 text-right">:</div>
-                                                        <div class="col-lg-6 col-5">Rp. {{number_format($buku->harga)}}</div>
+                                                        <div class="col-lg-6 col-5">Rp. {{number_format($buku->harga, 2, ',', '.')}}</div>
                                                     </div>
                                                     <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Jumlah</div>

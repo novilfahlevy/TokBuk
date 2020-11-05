@@ -24,10 +24,17 @@ class TransaksiExport implements FromView
 	*/
 	public function view(): View
 	{
-		$transaksi = DetailTransaksi::where(function($query) {
-			$query->whereDate('created_at', '>=', $this->mulai)->whereDate('created_at', '<=', $this->sampai);
-		})
-		->get();
+		$transaksi = DetailTransaksi::select('*');
+
+		if ( $this->mulai ) {
+			$transaksi->whereDate('created_at', '>=', $this->mulai);
+		}
+
+		if ( $this->sampai ) {
+			$transaksi->whereDate('created_at', '<=', $this->sampai);
+		}
+
+		$transaksi = $transaksi->get();
 
 		return view('transaksi.export', [
 			'transaksi' => $transaksi

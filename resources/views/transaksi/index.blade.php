@@ -54,8 +54,8 @@ Transaksi Penjualan
                                                     <td>{{ $t->kode }}</td>
                                                     <td>{{ $t->created_at }}</td>
                                                     <td>{{ $t->jumlah_buku }}</td>
-                                                    <td>Rp {{ number_format($t->total_harga) }}</td>
-                                                    <td>Rp {{ number_format($t->bayar) }}</td>
+                                                    <td>Rp {{ number_format($t->total_harga, 2, ',', '.') }}</td>
+                                                    <td>Rp {{ number_format($t->bayar, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "
@@ -100,18 +100,17 @@ Transaksi Penjualan
               </div>
               <div class="modal-body pb-2">
                 <div class="form-group mb-0">
-                    @php $now = date('Y-m-d'); @endphp
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group mb-0">
                                 <label for="mulai">Dari tanggal</label>
-                                <input type="date" class="form-control" id="mulai" name="mulai" value="{{ $now }}">
+                                <input type="date" class="form-control" id="mulai" name="mulai">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group mb-0">
                                 <label for="sampai">Sampai tanggal</label>
-                                <input type="date" class="form-control" id="sampai" name="sampai" value="{{ $now }}">
+                                <input type="date" class="form-control" id="sampai" name="sampai">
                             </div>
                         </div>
                     </div>

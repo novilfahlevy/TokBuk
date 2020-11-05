@@ -71,7 +71,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12 col-lg-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>Laporan Transaksi</h4>
@@ -101,7 +101,7 @@
                             Total Pendapatan
                           </td>
                           <td id="totalPendapatan">
-                            Rp {{ number_format($penjualan->pendapatan) }}
+                            Rp {{ number_format($penjualan->pendapatan, 2, ',', '.') }}
                           </td>
                         </tr>
                       </table>
@@ -109,7 +109,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12 col-lg-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>Laporan Pembelian Buku</h4>
@@ -139,7 +139,7 @@
                             Total Pengeluaran
                           </td>
                           <td id="totalPengeluaran">
-                            Rp {{ number_format($pembelian->pengeluaran) }}
+                            Rp {{ number_format($pembelian->pengeluaran, 2, ',', '.') }}
                           </td>
                         </tr>
                       </table>

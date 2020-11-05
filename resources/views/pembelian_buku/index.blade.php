@@ -54,8 +54,8 @@ Pembelian Buku
                                                     <td>{{ $p->kode }}</td>
                                                     <td>{{ $p->tanggal }}</td>
                                                     <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
-                                                    <td>Rp {{ number_format($p->bayar) }}</td>
-                                                    <td>Rp {{ number_format($p->total_harga) }}</td>
+                                                    <td>Rp {{ number_format($p->bayar, 2, ',', '.') }}</td>
+                                                    <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "
@@ -102,7 +102,6 @@ Pembelian Buku
               </div>
               <div class="modal-body pb-2">
                 <div class="form-group mb-0">
-                    @php $now = date('Y-m-d'); @endphp
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-3">
@@ -118,13 +117,13 @@ Pembelian Buku
                         <div class="col-6">
                             <div class="form-group mb-0">
                                 <label for="mulai">Dari tanggal</label>
-                                <input type="date" class="form-control" id="mulai" name="mulai" value="{{ $now }}">
+                                <input type="date" class="form-control" id="mulai" name="mulai">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group mb-0">
                                 <label for="sampai">Sampai tanggal</label>
-                                <input type="date" class="form-control" id="sampai" name="sampai" value="{{ $now }}">
+                                <input type="date" class="form-control" id="sampai" name="sampai">
                             </div>
                         </div>
                     </div>
