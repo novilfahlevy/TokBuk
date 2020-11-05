@@ -32,9 +32,9 @@ class HomeController extends Controller
     public function index()
     {
         $pengguna = User::count();
-		$judulBuku = Buku::count();
-        $buku = (int) Buku::sum('jumlah');
-        $transaksi = Transaksi::where(DB::raw('MONTH(created_at)'), $this->now->month)->count();
+				$judulBuku = Buku::count();
+				$buku = (int) Buku::sum('jumlah');
+        $transaksi = Transaksi::whereDate('created_at', $this->now->today()->format('Y-m-d'))->count();
         
         $penjualan = (object) $this->penjualan();
         $pembelian = (object) $this->pembelian();
