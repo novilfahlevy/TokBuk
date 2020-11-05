@@ -23,9 +23,9 @@
         <td>{{ $t->created_at }}</td>
         <td>{{ $buku->isbn }}</td>
         <td>{{ $buku->judul }}</td>
-        <td>Rp {{ number_format($t->harga) }}</td>
+        <td>Rp {{ number_format($t->harga, 2, ',', '.') }}</td>
         <td>{{ $t->jumlah }}</td>
-        <td>Rp {{ number_format($t->harga * $t->jumlah) }}</td>
+        <td>Rp {{ number_format($t->harga * $t->jumlah, 2, ',', '.') }}</td>
         <td></td>
       </tr>
     @endforeach
