@@ -96,8 +96,8 @@ class LaporanController extends Controller
 	}
 
 	public function pdfpembelian($tahun, $bulan) {
-		$tahun = $request->tahun ?? $this->now->year;
-		$bulan = $request->bulan ?? $this->now->month;
+		$tahun = $tahun ?? $this->now->year;
+		$bulan = $bulan ?? $this->now->month;
 
 		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
 
