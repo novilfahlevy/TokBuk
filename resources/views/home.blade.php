@@ -128,7 +128,7 @@
                         </tr>
                         <tr>
                           <td>
-                            Buku Terbeli
+                            Buku Dibeli
                           </td>
                           <td id="bukuTerbeli">
                             {{ $pembelian->bukuTerbeli }}
