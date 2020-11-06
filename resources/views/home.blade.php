@@ -71,79 +71,13 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-lg-6">
+              <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Laporan Transaksi</h4>
+                    <h4>Pendapatan Tahun {{ date('Y') }}</h4>
                   </div>
                   <div class="card-body">
-                    <h5 class="mb-3" id="waktuLaporanPenjualan">{{ $penjualan->bulan }} {{ $penjualan->tahun }}</h5>
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <tr>
-                          <td width="30%">
-                            Total Transaksi
-                          </td>
-                          <td id="totalTransaksi">
-                            {{ $penjualan->totalTransaksi }}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Buku Terjual
-                          </td>
-                          <td id="bukuTerjual">
-                            {{ $penjualan->bukuTerjual }}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Total Pendapatan
-                          </td>
-                          <td id="totalPendapatan">
-                            Rp {{ number_format($penjualan->pendapatan, 2, ',', '.') }}
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Laporan Pembelian Buku</h4>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="mb-3" id="waktuLaporanPendapatan">{{ $pembelian->bulan }} {{ $pembelian->tahun }}</h5>
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <tr>
-                          <td width="30%">
-                            Total Pembelian
-                          </td>
-                          <td id="totalPembelian">
-                            {{ $pembelian->totalPembelian }}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Buku Dibeli
-                          </td>
-                          <td id="bukuTerbeli">
-                            {{ $pembelian->bukuTerbeli }}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Total Pengeluaran
-                          </td>
-                          <td id="totalPengeluaran">
-                            Rp {{ number_format($pembelian->pengeluaran, 2, ',', '.') }}
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
+                    <canvas id="transaksiPerbulan"></canvas>
                   </div>
                 </div>
               </div>
@@ -156,4 +90,32 @@
 
 @push('js')
   <script src="{{ asset('js/dasbor/index.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script>
+    var ctx = document.getElementById('transaksiPerbulan').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+          datasets: [{
+            label: 'Pendapatan',
+            backgroundColor: 'rgb(101, 224, 18, 0.5)',
+            borderColor: '#a7e339',
+            data: JSON.parse('{!! json_encode($chartTransaksi) !!}')
+          }],
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: function(value) {
+                  return `Rp ${new Intl.NumberFormat('id-ID').format(value)}`;
+                }
+              }
+            }]
+          }
+        }
+    });
+  </script>
 @endpush
