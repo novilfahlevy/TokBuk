@@ -44,21 +44,23 @@ class HomeController extends Controller
             DB::raw('MONTH(created_at)'),
             'bulan'
         ])
-        ->get();
+        ->orderBy('bulan')
+        ->get()
+        ->toArray();
 
-        $chartTransaksi = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-            ->map(function($bulan) use ($chartTransaksi) {
-                return $chartTransaksi->map(function($transaksi) use ($bulan) {
-                    return [
-                        'bulan' => $transaksi->bulan == $bulan ? $transaksi->bulan : $bulan,
-                        'total_perbulan' => $transaksi->bulan == $bulan ? $transaksi->total_perbulan : 0
-                    ];
-                });
-            })
-            ->map(function($transaksi) {
-                return $transaksi[0]['total_perbulan'];
-            });
-        
-        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'chartTransaksi'));
+        $hasil = [];
+
+        foreach ( range(1, 12) as $bulan ) {
+            $bulanAda = false;
+            foreach ( $chartTransaksi as $t ) {
+                if ( $t['bulan'] == $bulan ) {
+                    $bulanAda = true;
+                    $hasil[] = $t['total_perbulan'];
+                }
+            }
+            if ( !$bulanAda ) $hasil[] = 0;
+        }
+
+        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'hasil'));
     }
 }

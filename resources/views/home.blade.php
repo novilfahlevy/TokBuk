@@ -101,7 +101,7 @@
             label: 'Pendapatan',
             backgroundColor: 'rgb(101, 224, 18, 0.5)',
             borderColor: '#a7e339',
-            data: JSON.parse('{!! json_encode($chartTransaksi) !!}')
+            data: JSON.parse('{!! json_encode($hasil) !!}')
           }],
         },
         options: {
