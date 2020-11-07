@@ -41,7 +41,7 @@ Pembelian Buku
                                                     <th scope="col">#</th>
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
-                                                    <th>Pemasok</th>
+                                                    <th>Distributor</th>
                                                     <th>Nominal Pembayaran</th>
                                                     <th>Harga</th>
                                                     <th scope="col"></th>
@@ -53,7 +53,7 @@ Pembelian Buku
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
                                                     <td>{{ $p->kode }}</td>
                                                     <td>{{ $p->tanggal }}</td>
-                                                    <td>{{ $p->pemasok ? $p->pemasok->nama : '-' }}</td>
+                                                    <td>{{ $p->distributor ? $p->distributor->nama : '-' }}</td>
                                                     <td>Rp {{ number_format($p->bayar, 2, ',', '.') }}</td>
                                                     <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
                                                     <td>
@@ -87,7 +87,7 @@ Pembelian Buku
     </div>
 </div>
 
-@php $pemasokId = session()->pull('pemasok') @endphp
+@php $distributorId = session()->pull('distributor') @endphp
 
 <div class="modal" tabindex="-1" role="dialog" id="exportModal">
     <form action="{{ route('pembelian-buku.export') }}" method="POST">
@@ -105,11 +105,11 @@ Pembelian Buku
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-3">
-                                <label for="pemasok">Pemasok</label>
-                                <select name="pemasok" id="pemasok" class="form-control">
+                                <label for="distributor">Distributor</label>
+                                <select name="distributor" id="distributor" class="form-control">
                                     <option value="" selected>Semua</option>
-                                    @foreach ($pemasok as $p)
-                                        <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    @foreach ($distributor as $p)
+                                        <option value="{{ $p->id }}" {{ $distributorId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -154,11 +154,11 @@ Pembelian Buku
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-3">
-                                <label for="pemasok">Pemasok</label>
-                                <select name="pemasok" id="pemasok" class="form-control">
+                                <label for="distributor">Distributor</label>
+                                <select name="distributor" id="distributor" class="form-control">
                                     <option value="" selected>Semua</option>
-                                    @foreach ($pemasok as $p)
-                                        <option value="{{ $p->id }}" {{ $pemasokId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                    @foreach ($distributor as $p)
+                                        <option value="{{ $p->id }}" {{ $distributorId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>

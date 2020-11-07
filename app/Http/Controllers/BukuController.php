@@ -10,9 +10,9 @@ use App\Exports\PembelianBukuExport;
 use App\Penulis;
 use App\Penerbit;
 use App\Kategori;
-// use App\Pemasok;
+// use App\Distributor;
 use App\Lokasi;
-use App\Pemasok;
+use App\Distributor;
 use App\PembelianBuku;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -21,11 +21,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
-    public function __construct(Buku $buku, Penulis $penulis, Pemasok $pemasok, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
+    public function __construct(Buku $buku, Penulis $penulis, Distributor $distributor, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
     {
         $this->buku = $buku;
         $this->penulis = $penulis;
-        $this->pemasok = $pemasok;
+        $this->distributor = $distributor;
         $this->penerbit = $penerbit;
         $this->kategori = $kategori;
         $this->lokasi = $lokasi;
@@ -46,7 +46,7 @@ class BukuController extends Controller
 	{
 		$buku = Buku::select('*');
         $penulis = $this->penulis->get();
-        $pemasok = $this->pemasok->get();
+        $distributor = $this->distributor->get();
         $penerbit = $this->penerbit->get();
         $kategori = $this->kategori->get();
         $lokasi = $this->lokasi->get();
@@ -63,8 +63,8 @@ class BukuController extends Controller
             $buku->where('id_penulis', $request->penulis);
         }
 
-        if ( $request->pemasok ) {
-            $buku->where('id_pemasok', $request->pemasok);
+        if ( $request->distributor ) {
+            $buku->where('id_distributor', $request->distributor);
         }
 
         if ( $request->lokasi ) {
@@ -83,7 +83,7 @@ class BukuController extends Controller
         
         session($request->except('_token'));
 
-		return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi', 'pemasok'));
+		return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi', 'distributor'));
 	}
     
     public function create()
@@ -91,9 +91,9 @@ class BukuController extends Controller
         $penulis = Penulis::all();
         $penerbit = Penerbit::all();
         $kategori = Kategori::all();
-        $Pemasok = Pemasok::all();
+        $Distributor = Distributor::all();
         $lokasi = Lokasi::all();
-        return view('buku_admin.create', compact('penulis', 'penerbit', 'kategori', 'Pemasok', 'lokasi'));
+        return view('buku_admin.create', compact('penulis', 'penerbit', 'kategori', 'Distributor', 'lokasi'));
     }
 
     public function edit($id)

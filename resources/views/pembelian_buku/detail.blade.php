@@ -62,7 +62,11 @@ Detail Pembelian Buku
                 <h6 class="mb-1">Kembalian</h6>
                 <p>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga, 2, ',', '.') }}</p>
               </div>
-              <div class="col-12">
+              <div class="col-lg-2">
+                <h6 class="mb-1">Distributor</h6>
+                <p>{{ $pembelian->distributor->nama ?? '-' }}</p>
+              </div>
+              <div class="col-lg-2">
                 <h6 class="mb-1">Keterangan</h6>
                 <p>{{ $pembelian->keterangan ?? '-' }}</p>
               </div>

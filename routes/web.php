@@ -64,13 +64,13 @@ Route::group(['middleware' => 'auth'], function() {
   Route::put('kategori/{id}/update', 'KategoriController@update')->name('kategori.update');
   Route::delete('kategori/{id}', 'KategoriController@destroy')->name('kategori.destroy');
 
-  //Pemasok
-  Route::get('/pemasok', 'PemasokController@index')->name('pemasok');
-  Route::get('pemasok/create', 'PemasokController@create')->name('pemasok.create');
-  Route::post('pemasok/store', 'PemasokController@store')->name('pemasok.store');
-  Route::get('pemasok/{id}', 'PemasokController@edit')->name('pemasok.edit');
-  Route::put('pemasok/{id}/update', 'PemasokController@update')->name('pemasok.update');
-  Route::delete('pemasok/{id}', 'PemasokController@destroy')->name('pemasok.destroy');
+  //Distributor
+  Route::get('/distributor', 'DistributorController@index')->name('distributor');
+  Route::get('distributor/create', 'DistributorController@create')->name('distributor.create');
+  Route::post('distributor/store', 'DistributorController@store')->name('distributor.store');
+  Route::get('distributor/{id}', 'DistributorController@edit')->name('distributor.edit');
+  Route::put('distributor/{id}/update', 'DistributorController@update')->name('distributor.update');
+  Route::delete('distributor/{id}', 'DistributorController@destroy')->name('distributor.destroy');
 
   //Lokasi
   Route::get('lokasi', 'LokasiController@index')->name('lokasi');

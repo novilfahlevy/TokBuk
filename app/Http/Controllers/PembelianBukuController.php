@@ -6,7 +6,7 @@ use App\Buku;
 use App\DetailPembelianBuku;
 use App\Events\UpdateDasborEvent;
 use App\Exports\PembelianBukuExport;
-use App\Pemasok;
+use App\Distributor;
 use App\PembelianBuku;
 use App\Pengaturan;
 use Error;
@@ -23,14 +23,14 @@ class PembelianBukuController extends Controller
 	public function index()
 	{
 		$pembelian = PembelianBuku::orderBy('created_at', 'DESC')->get();
-		$pemasok = Pemasok::all();
-		return view('pembelian_buku.index', compact('pembelian', 'pemasok'));
+		$distributor = Distributor::all();
+		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
 	}
 
 	public function filter(Request $request)
 	{
 		$pembelian = PembelianBuku::select('*');
-		$pemasok = $pemasok = Pemasok::all();
+		$distributor = $distributor = Distributor::all();
 
 		if ( $request->mulai ) {
 			$pembelian->whereDate('tanggal', '>=', $request->mulai);
@@ -40,22 +40,22 @@ class PembelianBukuController extends Controller
 			$pembelian->whereDate('tanggal', '<=', $request->sampai);
 		}
 		
-		if ( $request->pemasok ) {
-			$pembelian->where('id_pemasok', $request->pemasok);
+		if ( $request->distributor ) {
+			$pembelian->where('id_distributor', $request->distributor);
 		}
 
 		session($request->except('_token'));
 
 		$pembelian = $pembelian->orderBy('created_at', 'DESC')->get();
 
-		return view('pembelian_buku.index', compact('pembelian', 'pemasok'));
+		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
 	}
 
 	public function create(Request $request)
 	{
-		$pemasok = Pemasok::all();
+		$distributor = Distributor::all();
 
-		return view('pembelian_buku.create', compact('pemasok'));
+		return view('pembelian_buku.create', compact('distributor'));
 	}
 
 	public function detail($id)
@@ -69,15 +69,15 @@ class PembelianBukuController extends Controller
 		$request->validate([
 			'faktur' => 'max:2048',
 			'hargaBeli' => 'required',
-			'idPemasok' => 'required'
+			'idDistributor' => 'required'
 		], [
 			'faktur.max' => 'Ukuran file terlalu besar, maksimal 2 MB',
 			'hargaBeli.required' => 'Mohon masukan harga beli untuk pembelian buku ini',
-			'idPemasok.required' => 'Mohon pilih pemasok'
+			'idDistributor.required' => 'Mohon pilih distributor'
 		]);
 
 		$hargaBeli = $request->hargaBeli;
-		$idPemasok = $request->idPemasok;
+		$idDistributor = $request->idDistributor;
 		$bukuYangDibeli = json_decode($request->bukuYangDibeli);
 
 		if ( $hargaBeli < $bukuYangDibeli->totalHarga ) {
@@ -100,7 +100,7 @@ class PembelianBukuController extends Controller
 				'tanggal' => $request->tanggal,
 				'faktur' => $namaFaktur,
 				'id_user' => auth()->user()->id,
-				'id_pemasok' => (int) $idPemasok,
+				'id_distributor' => (int) $idDistributor,
 				'total_harga' => $bukuYangDibeli->totalHarga,
 				'bayar' => $hargaBeli,
 				'keterangan' => $request->keterangan
@@ -178,7 +178,7 @@ class PembelianBukuController extends Controller
 
 	public function export(Request $request)
 	{
-		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai, $request->pemasok), 'pembelian_buku.xlsx');
+		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai, $request->distributor), 'pembelian_buku.xlsx');
 	}
 
 	public function faktur($id)

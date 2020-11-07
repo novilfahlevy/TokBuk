@@ -46,14 +46,14 @@ Tambah Pembelian Buku
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="idPemasok">Pemasok</label>
-                      <select required name="idPemasok" class="form-control" value="{{ old('idPemasok') }}" data-live-search="true" required>
+                      <label for="idDistributor">Distributor</label>
+                      <select required name="idDistributor" class="form-control" value="{{ old('idDistributor') }}" data-live-search="true" required>
                         <option value='' disabled selected>- Pilih -</option>
-                        @foreach($pemasok as $pem)
+                        @foreach($distributor as $pem)
                           <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
                         @endforeach
                       </select>
-                      @error('idPemasok')
+                      @error('idDistributor')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

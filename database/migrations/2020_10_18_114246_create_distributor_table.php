@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePemasokTable extends Migration
+class CreateDistributorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePemasokTable extends Migration
      */
     public function up()
     {
-        Schema::create('pemasok', function (Blueprint $table) {
+        Schema::create('distributor', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
             $table->text('alamat');
@@ -30,6 +30,6 @@ class CreatePemasokTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pemasok');
+        Schema::dropIfExists('distributor');
     }
 }

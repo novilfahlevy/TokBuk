@@ -14,9 +14,9 @@
       <td><h6>{{ $pembelian->created_at }}</h6></td>
     </tr>
     <tr>
-      <td><h6>Pemasok</h6></td>
+      <td><h6>Distributor</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->pemasok->nama }}</h6></td>
+      <td><h6>{{ $pembelian->distributor->nama }}</h6></td>
     </tr>
     <tr>
       <td><h6>Keterangan</h6></td>

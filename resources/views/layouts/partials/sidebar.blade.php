@@ -67,9 +67,9 @@
                 <span>Kategori</span>
               </a>
             </li>
-            <li class="nav-item  {{Request::segment(1)=='pemasok' ?'active':''}}">
-              <a class="nav-link" href="{{route('pemasok')}}" aria-expanded="false">
-                <span>Pemasok</span>
+            <li class="nav-item  {{Request::segment(1)=='distributor' ?'active':''}}">
+              <a class="nav-link" href="{{route('distributor')}}" aria-expanded="false">
+                <span>Distributor</span>
               </a>
             </li>
             <li class="nav-item  {{Request::segment(1)=='lokasi' ?'active':''}}">

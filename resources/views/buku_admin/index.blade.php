@@ -97,7 +97,7 @@ Buku
                         $kategoriId = session()->pull('kategori');
                         $penulisId = session()->pull('penulis');
                         $penerbitId = session()->pull('penerbit');
-                        $pemasokId = session()->pull('pemasok');
+                        $distributorId = session()->pull('distributor');
                         $lokasiId = session()->pull('lokasi');
                     @endphp
                     <div class="col-6">
