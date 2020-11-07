@@ -83,7 +83,7 @@ Tambah Pembelian Buku
                   <div class="col-12">
                     <div class="form-group mb-0">
                       <label for="keterangan">Keterangan</label>
-                      <textarea type="text" class="form-control" required name="keterangan" value="{{ old('keterangan') }}" style="height:80px;"></textarea>
+                      <textarea type="text" class="form-control" name="keterangan" value="{{ old('keterangan') }}" style="height:80px;"></textarea>
                     </div>
                   </div>
                 </div>
