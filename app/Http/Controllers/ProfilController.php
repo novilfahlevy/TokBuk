@@ -38,8 +38,8 @@ class ProfilController extends Controller
 		if ( 
 			$user->update([
 				'name' => $request->name,
-				'username' => $request->username ?? $user->first()->username,
-				'email' => $request->email ?? $user->first()->email,
+				'username' => $request->username ?? $user->username,
+				'email' => $request->email ?? $user->email,
 				'alamat' => $request->alamat,
 				'telepon' => $request->telepon
 			]) 
