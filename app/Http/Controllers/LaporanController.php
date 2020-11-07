@@ -21,15 +21,13 @@ class LaporanController extends Controller
 
 	public function index()
 	{
-		return view('laporan.index');
+		$akhirBulan = $this->now->daysInMonth;
+		return view('laporan.index', compact('akhirBulan'));
 	}
 
 	public function penjualan(Request $request)
 	{
-		$tahun = $request->tahun ?? $this->now->year;
-		$bulan = $request->bulan ?? $this->now->month;
-
-		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
+		$transaksi = Transaksi::whereDate('transaksi.created_at', '>=', $request->dari)->whereDate('transaksi.created_at', '<=', $request->sampai);
 
 		$total = $transaksi->count();
 		$pendapatan = $transaksi->sum('total_harga');
@@ -37,15 +35,13 @@ class LaporanController extends Controller
 			->select(DB::raw('SUM(dt.jumlah) as buku_terjual'))
 			->first();
 
-		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
-
 		return response()->json([
 			'status' => 200,
 			'totalTransaksi' => $total,
 			'bukuTerjual' => (int) $bukuTerjual->buku_terjual,
 			'pendapatan' => (int) $pendapatan,
-			'tahun' => $tahun,
-			'bulan' => $waktuMasukan->monthName
+			'dari' => Carbon::parse($request->dari)->format('d-m-Y'),
+			'sampai' => Carbon::parse($request->sampai)->format('d-m-Y')
 		]);
 
 		
@@ -53,10 +49,7 @@ class LaporanController extends Controller
 
 	public function pembelian(Request $request)
 	{
-		$tahun = $request->tahun ?? $this->now->year;
-		$bulan = $request->bulan ?? $this->now->month;
-
-		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
+		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $request->dari)->whereDate('pembelian_buku.tanggal', '<=', $request->sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
@@ -64,24 +57,19 @@ class LaporanController extends Controller
 			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
 			->first();
 
-		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
-
 		return response()->json([
 			'status' => 200,
 			'totalPembelian' => $totalPembelian,
 			'bukuTerbeli' => (int) $bukuTerbeli->buku_terbeli,
 			'pengeluaran' => (int) $pengeluaran,
-			'tahun' => $tahun,
-			'bulan' => $waktuMasukan->monthName
+			'dari' => Carbon::parse($request->dari)->format('d-m-Y'),
+			'sampai' => Carbon::parse($request->sampai)->format('d-m-Y')
 		]);
 	}
 
-	public function pdfpenjualan($tahun, $bulan)
+	public function pdfpenjualan($dari, $sampai)
 	{
-		$tahun = $tahun ?? $this->now->year;
-		$bulan = $bulan ?? $this->now->month;
-
-		$transaksi = Transaksi::whereYear('transaksi.created_at', $tahun)->whereMonth('transaksi.created_at', $bulan);
+		$transaksi = Transaksi::whereDate('transaksi.created_at', '>=', $dari)->whereDate('transaksi.created_at', '<=', $sampai);
 
 		$totalTransaksi = $transaksi->count();
 		$pendapatan = $transaksi->sum('total_harga');
@@ -89,17 +77,15 @@ class LaporanController extends Controller
 			->select(DB::raw('SUM(dt.jumlah) as buku_terjual'))
 			->first();
 
-		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
+		$dari = Carbon::parse($dari)->format('d-m-Y');
+		$sampai = Carbon::parse($sampai)->format('d-m-Y');
 		$pengaturan = Pengaturan::first();
 
-		return PDF::loadView('transaksi.laporan', compact('totalTransaksi', 'pendapatan', 'bukuTerjual', 'waktuMasukan', 'pengaturan'))->setPaper('a4', 'potrait')->download('laporan_transaksi_' . $waktuMasukan->month . '_' . $waktuMasukan->year . '.pdf');
+		return PDF::loadView('transaksi.laporan', compact('totalTransaksi', 'pendapatan', 'bukuTerjual', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_transaksi_' . $dari . '_' . $sampai . '.pdf');
 	}
 
-	public function pdfpembelian($tahun, $bulan) {
-		$tahun = $tahun ?? $this->now->year;
-		$bulan = $bulan ?? $this->now->month;
-
-		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
+	public function pdfpembelian($dari, $sampai) {
+		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $dari)->whereDate('pembelian_buku.tanggal', '<=', $sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
@@ -107,9 +93,10 @@ class LaporanController extends Controller
 			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
 			->first();
 
-		$waktuMasukan = Carbon::parse($tahun . '-' . $bulan);
+		$dari = Carbon::parse($dari)->format('d-m-Y');
+		$sampai = Carbon::parse($sampai)->format('d-m-Y');
 		$pengaturan = Pengaturan::first();
 
-		return PDF::loadView('pembelian_buku.laporan', compact('totalPembelian', 'pengeluaran', 'bukuTerbeli', 'waktuMasukan', 'pengaturan'))->setPaper('a4', 'potrait')->download('laporan_pembelian_' . $waktuMasukan->month . '_' . $waktuMasukan->year . '.pdf');
+		return PDF::loadView('pembelian_buku.laporan', compact('totalPembelian', 'pengeluaran', 'bukuTerbeli', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_pembelian_' . $dari . '_' . $sampai . '.pdf');
 	}
 }

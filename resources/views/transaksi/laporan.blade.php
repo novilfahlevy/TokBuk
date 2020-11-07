@@ -68,7 +68,7 @@
     </tr>
 </table>
 <hr>
-<h5 style="text-align: center;">Laporan Penjualan Bulan {{ $waktuMasukan->monthName }} {{ $waktuMasukan->year }}</h5><br/>
+<h5 style="text-align: center;">Laporan Penjualan Tanggal {{ $dari }} s.d. {{ $sampai }}</h5><br/>
 <div class="table-responsive">
     <table class="table table-striped">
       <tr>

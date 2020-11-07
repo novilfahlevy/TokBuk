@@ -13,18 +13,18 @@ Laporan
       <div class="section-body">
         <div class="content-body table">
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-md-6">
               <div class="card">
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.penjualan', ['tahun' => date('Y'), 'bulan' => date('m')]) }}" class="btn btn-success mr-2" title="Download Laporan Transaksi" id="laporanTransaksi">
+                    <a href="{{ route('laporan.penjualan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" title="Download Laporan Transaksi" id="laporanTransaksi">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
                 </div>
-                <div class="card-body">
-                  <h5 class="mb-3" id="waktuLaporanPenjualan"></h5>
+                <div class="card-body pb-0">
+                  <h6 class="mb-3 bg-secondary rounded py-2 px-3 text-white text-center" id="waktuLaporanPenjualan"></h6>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>
@@ -55,27 +55,38 @@ Laporan
                   </div>
                 </div>
                 <div class="card-footer pt-0">
-                  <div class="input-group">
-                    <input type="month" class="form-control" id="pendapatan" value="{{ date('Y-m') }}">
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-primary" id="submitPendapatan">Submit</button>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group mb-0">
+                        <label for="awalTanggalPendapatan">Dari</label>
+                        <input type="date" class="form-control" id="awalTanggalPendapatan" value="{{ date('Y-m') }}-01">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group mb-0">
+                        <label for="akhirTanggalPendapatan">Sampai</label>
+                        <input type="date" class="form-control" id="akhirTanggalPendapatan" value="{{ date('Y-m') }}-{{ $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan }}">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="button" class="btn btn-primary mt-3 w-100" id="submitPendapatan">Submit</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-md-6">
               <div class="card">
                 <div class="card-header">
                   <h4>Laporan Pembelian Buku</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.pembelian', ['tahun' => date('Y'), 'bulan' => date('m')]) }}" class="btn btn-success mr-2" title="Download Laporan Pembelian" id="laporanPembelian">
+                    <a href="{{ route('laporan.pembelian', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" title="Download Laporan Pembelian" id="laporanPembelian">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
                 </div>
-                <div class="card-body">
-                  <h5 class="mb-3" id="waktuLaporanPendapatan"></h5>
+                <div class="card-body pb-0">
+                  <h6 class="mb-3 bg-secondary rounded py-2 px-3 text-white text-center" id="waktuLaporanPendapatan"></h6>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>
@@ -106,10 +117,21 @@ Laporan
                   </div>
                 </div>
                 <div class="card-footer pt-0">
-                  <div class="input-group">
-                    <input type="month" class="form-control" id="pengeluaran" value="{{ date('Y-m') }}">
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-primary" id="submitPengeluaran">Submit</button>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group mb-0">
+                        <label for="awalTanggalPengeluaran">Dari</label>
+                        <input type="date" class="form-control" id="awalTanggalPengeluaran" value="{{ date('Y-m') }}-01">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group mb-0">
+                        <label for="akhirTanggalPengeluaran">Sampai</label>
+                        <input type="date" class="form-control" id="akhirTanggalPengeluaran" value="{{ date('Y-m') }}-{{ $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan }}">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="button" class="btn btn-primary mt-3 w-100" id="submitPengeluaran">Submit</button>
                     </div>
                   </div>
                 </div>
