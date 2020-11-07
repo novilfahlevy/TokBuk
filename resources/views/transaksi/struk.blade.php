@@ -30,15 +30,19 @@
   <table style="width: 100%">
     <tr>
       <td>Buku <hr style="border-bottom: dashed;"></td>
-      <td>QTY <hr style="border-bottom: dashed;"></td>
       <td>Harga <hr style="border-bottom: dashed;"></td>
+      <td>QTY <hr style="border-bottom: dashed;"></td>
+      <td>Diskon <hr style="border-bottom: dashed;"></td>
+      <td>Total Harga <hr style="border-bottom: dashed;"></td>
     </tr>
     
     @foreach ($transaksi->detail as $p)
     <tr>
       <td>{{ $p->buku()->withTrashed()->first()->judul }}<br>
+      <td>Rp {{ number_format($p->harga, 2, ',', '.') }}<br>
       <td>x {{ $p->jumlah }}</td>
-      <td>Rp {{ number_format($p->harga) }}</td>
+      <td>{{ $p->diskon ? $p->diskon . '%' : '-' }}</td>
+      <td>Rp {{ number_format($p->jumlah * ($p->diskon ? $p->harga - (($p->harga / 100) * $p->diskon) : $p->harga), 2, ',', '.') }}</td>
     </tr>
     @endforeach
   </table>
@@ -48,7 +52,7 @@
 
     <table style="width: 100%; text-align : center;">
       <tbody>
-        
+
         <tr>
           <td>Bayar</td>
           <td>Rp {{ number_format($transaksi->bayar) }}</td>

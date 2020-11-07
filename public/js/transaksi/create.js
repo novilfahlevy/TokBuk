@@ -18,6 +18,8 @@ function fillJsSelect2Options(selectClass, initCallback) {
     templateSelection: function(data) {
       const buku = JSON.parse(atob(data.id));
       const tr = $(`tr[data-select-class=${selectClass}]`);
+      const diskon = buku.diskon;
+      const hargaDiskon = !!diskon ? buku.harga - ((buku.harga / 100) * diskon) : buku.harga;
 
       tr.data('buku-id', buku.id);
 
@@ -30,8 +32,11 @@ function fillJsSelect2Options(selectClass, initCallback) {
       tr.find('.jumlah-buku-label').text(buku.jumlah);
       tr.find('.jumlah-buku-label').data('jumlah', buku.jumlah);
 
-      tr.find('.total-harga').text(`Rp ${format(buku.harga)}`);
-      tr.find('.total-harga').data('total-harga', buku.harga);
+      tr.find('.diskon').text(diskon ? `${diskon}%` : '-');
+      tr.find('.diskon').data('diskon', diskon || '');
+
+      tr.find('.total-harga').text(`Rp ${format(hargaDiskon)}`);
+      tr.find('.total-harga').data('total-harga', hargaDiskon);
 
       $('#totalSemuaHarga').text(format(getTotalHarga()));
 
@@ -102,6 +107,7 @@ function tambahBuku() {
         <span class="jumlah-buku-label"></span>
       </th>
       <th class="harga"></th>
+      <th class="diskon"></th>
       <th class="total-harga">Rp 0</th>
       <th>
         <button type="button" class="btn btn-danger hapus-buku">Hapus</button>
@@ -130,7 +136,8 @@ function getAllBooksData() {
     return {
       idBuku: $(buku).data('buku-id'),
       jumlah: parseInt($(buku).find('.jumlah-buku-input').val(), 10),
-      harga: $(buku).find('.total-harga').data('total-harga')
+      harga: $(buku).find('.total-harga').data('total-harga'),
+      diskon: $(buku).find('.diskon').data('diskon') || null
     }
   });
 
@@ -161,7 +168,9 @@ $(document).on('change', function(event) {
   const target = $(event.target);
   if ( target.prop('tagName') === 'INPUT' && target.hasClass('jumlah-buku-input') ) {
     const tr = target.parent().parent();
-    const totalHarga = parseInt(tr.find('.harga').data('harga'), 10) * target.val();
+    const diskon = tr.find('.diskon').data('diskon');
+    const harga = tr.find('.harga').data('harga');
+    const totalHarga = parseInt(!!diskon ? (harga - ((harga / 100) * diskon)) : harga, 10) * target.val();
     tr.find('.total-harga').text(`Rp ${format(totalHarga)}`);
     tr.find('.total-harga').data('total-harga', totalHarga);
     $('#totalSemuaHarga').text(format(getTotalHarga()));

@@ -40,78 +40,94 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-md-6">
-                                                                ISBN
-                                                                <input type="number" class="form-control" required name="isbn" value="{{ $buku->isbn }}" >
-                                                                <br/>
-    
-                                                                Judul Buku
-                                                                <input type="text" class="form-control" required name="judul" value="{{ $buku->judul }}" >
-                                                                <br/>
-    
-                                                                Kategori
-                                                                <select name="id_kategori" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true"> 
-                                                                    <option value=''>- Pilih -</option>
-                                                                    @foreach($kategori as $jen)
-                                                                        <option value="{{ $jen['id'] }}" {{$jen->id == $buku->id_kategori ?  'selected' : ''}}> {{$jen->nama}} </option>
-                                                                    @endforeach
-                                                                </select>
-                                                                <br/>
-    
-                                                                Penulis
-                                                                <select name="id_penulis" class="form-control" value="{{ old('id_penulis') }}"data-live-search="true">
-                                                                    <option value='' >- Pilih -</option>
-                                                                    @foreach($penulis as $pel)
-                                                                        <option value="{{ $pel['id'] }}" {{$pel->id == $buku->id_penulis ?  'selected' : ''}}> {{$pel->nama}} </option>
-                                                                    @endforeach
-                                                                </select>
-                                                                <br/>
-
-                                                            </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-12 col-md-6">
                                                                 <div class="form-group">
-                                                                    Penerbit
+                                                                    <label for="isbn">ISBN</label>
+                                                                    <input type="text" class="form-control" required name="isbn" value="{{ $buku->isbn }}" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="judul">Judul Buku</label>
+                                                                    <input type="text" class="form-control" required name="judul" value="{{ $buku->judul }}" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="id_kategpri">Kategori</label>
+                                                                    <select name="id_kategori" id="id_kategpri" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true"> 
+                                                                        <option value=''>- Pilih -</option>
+                                                                        @foreach($kategori as $jen)
+                                                                            <option value="{{ $jen['id'] }}" {{$jen->id == $buku->id_kategori ?  'selected' : ''}}> {{$jen->nama}} </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="id_penulis">Penulis</label>
+                                                                    <select name="id_penulis" id="id_penulis" class="form-control" value="{{ old('id_penulis') }}"data-live-search="true">
+                                                                        <option value='' >- Pilih -</option>
+                                                                        @foreach($penulis as $pel)
+                                                                            <option value="{{ $pel['id'] }}" {{$pel->id == $buku->id_penulis ?  'selected' : ''}}> {{$pel->nama}} </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="id_penerbit">Penerbit</label>
                                                                     <select name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($penerbit as $per)     
                                                                             <option value="{{ $per['id'] }}" {{$per->id == $buku->id_penerbit ?  'selected' : ''}}> {{$per->nama}} </option>
                                                                         @endforeach
                                                                     </select>
-                                                                    <br/>
-                                                                    {{-- Pemasok
-                                                                    <select name="id_pemasok" class="form-control" value="{{ old('id_pemasok') }}" data-live-search="true">
-                                                                        <option value=''>- Pilih -</option>
-                                                                        @foreach($Pemasok as $sup)     
-                                                                            <option value="{{ $sup['id'] }}" {{$sup->id == $buku->id_pemasok ?  'selected' : ''}}> {{$sup->nama}} </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    <br/> --}}
-                                                                    
-                                                                    Tahun Terbit
-                                                                    <input type="number" class="form-control" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
-                                                                    <br/>
-    
-                                                                    Lokasi
-                                                                    <select name="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="tahun_terbit">Tahun Terbit</label>
+                                                                    <input type="number" class="form-control" id="tahun_terbit" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="id_lokasi">Lokasi</label>
+                                                                    <select name="id_lokasi" id="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
                                                                         <option value=''>- Pilih -</option>
                                                                         @foreach($lokasi as $lok)     
                                                                             <option value="{{ $lok['id'] }}" {{$lok->id == $buku->id_lokasi ?  'selected' : ''}}> {{$lok->nama}} </option>
                                                                         @endforeach
                                                                     </select>
-                                                                    <br/>
-    
-                                                                    Harga
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="harga">Harga</label>
                                                                     <div class="input-group">
                                                                         <div class="input-group-prepend">
                                                                             <span class="input-group-text" id="basic-addon1">Rp</span>
                                                                         </div>
-                                                                    <input type="number" class="form-control" name="harga" value="{{ $buku->harga }}" >
+                                                                    <input type="number" class="form-control" id="harga" name="harga" value="{{ $buku->harga }}" >
                                                                     </div>
-                                                                    
                                                                 </div>
                                                             </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="diskon">Diskon</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="basic-addon1">%</span>
+                                                                        </div>
+                                                                    <input type="number" class="form-control" id="diskon" name="diskon" value="{{ $buku->diskon }}" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <button class="btn btn-primary" type="submit" >Simpan Perubahan</button>
+                                                            </div>
                                                         </div>
-                                                        <button class="btn btn-primary" type="submit" >Simpan Perubahan</button>
                                                     </div>
                                                 </div>
                                             </div>

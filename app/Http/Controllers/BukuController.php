@@ -144,8 +144,8 @@ class BukuController extends Controller
             'id_kategori' => $request->id_kategori ?? $buku->first()->id_kategori,
             'id_lokasi' => $request->id_lokasi ?? $buku->first()->id_lokasi,
             'tahun_terbit' => $request->tahun_terbit ?? $buku->first()->tahun_terbit,
-            'harga' => $request->harga ?? $buku->first()->harga
-
+            'harga' => $request->harga ?? $buku->first()->harga,
+            'diskon' => $request->diskon ?? $buku->first()->diskon
         ]);
 
         if($update == true) {

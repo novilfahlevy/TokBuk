@@ -107,7 +107,8 @@ class TransaksiController extends Controller
 					'id_transaksi' => $transaksiBaru->id,
 					'id_buku' => $buku->idBuku,
 					'jumlah' => $buku->jumlah,
-					'harga' => $bukuLama->harga
+					'harga' => $bukuLama->harga,
+					'diskon' => $buku->diskon ?? null
 				]);
 
 				$bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);

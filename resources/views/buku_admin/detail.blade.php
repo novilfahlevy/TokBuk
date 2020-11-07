@@ -71,6 +71,17 @@
                                                         <div class="col-lg-6 col-5">Rp. {{number_format($buku->harga, 2, ',', '.')}}</div>
                                                     </div>
                                                     <div class="row mb-4">
+                                                        <div class="col-lg-4 col-5">Diskon</div>
+                                                        <div class="col-1 text-right">:</div>
+                                                        @if ( $buku->diskon )
+                                                            <div class="col-lg-6 col-5">
+                                                                {{ $buku->diskon }}% (Rp {{ number_format($buku->harga - (($buku->harga / 100) * $buku->diskon), 2, ',', '.') }})
+                                                            </div>    
+                                                        @else
+                                                            <div class="col-lg-6 col-5">-</div>    
+                                                        @endif
+                                                    </div>
+                                                    <div class="row mb-4">
                                                         <div class="col-lg-4 col-5">Jumlah</div>
                                                         <div class="col-1 text-right">:</div>
                                                         <div class="col-lg-6 col-5">{{$buku->jumlah}} Buku</div>

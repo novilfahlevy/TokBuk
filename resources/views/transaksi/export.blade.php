@@ -7,6 +7,7 @@
       <th>ISBN</th>
       <th>Judul Buku</th>
       <th>Harga</th>
+      <th>Diskon</th>
       <th>Jumlah</th>
       <th>Total Harga</th>
     </tr>
@@ -24,9 +25,9 @@
         <td>{{ $buku->isbn }}</td>
         <td>{{ $buku->judul }}</td>
         <td>Rp {{ number_format($t->harga, 2, ',', '.') }}</td>
+        <td>{{ $t->diskon ? $t->diskon . '%' : '-' }}</td>
         <td>{{ $t->jumlah }}</td>
-        <td>Rp {{ number_format($t->harga * $t->jumlah, 2, ',', '.') }}</td>
-        <td></td>
+        <td>Rp {{ number_format($t->jumlah * ($t->diskon ? $t->harga - (($t->harga / 100) * $t->diskon) : $t->harga), 2, ',', '.') }}</td>
       </tr>
     @endforeach
   </tbody>

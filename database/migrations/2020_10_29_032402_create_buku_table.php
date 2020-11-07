@@ -28,6 +28,7 @@ class CreateBukuTable extends Migration
             $table->unsignedBigInteger('id_lokasi')->nullable();
             $table->foreign('id_lokasi')->references('id')->on('lokasi');  
             $table->integer('harga')->nullable();
+            $table->integer('diskon')->nullable();
             $table->string('jumlah');
             $table->softDeletes();
             $table->timestamps();

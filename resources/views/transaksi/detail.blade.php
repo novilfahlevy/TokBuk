@@ -65,6 +65,7 @@ Detail Transaksi
                     <th scope="col">#</th>
                     <th scope="col">Judul</th>
                     <th scope="col">Harga</th>
+                    <th scope="col">Diskon</th>
                     <th scope="col">Jumlah</th>
                     <th scope="col">Sub Total</th>
                   </tr>
@@ -75,8 +76,9 @@ Detail Transaksi
                       <th>{{ $loop->index + 1 }}</th>
                       <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
                       <th>Rp {{ number_format($t->harga, 2, ',', '.') }}</th>
+                      <th>{{ $t->diskon ? $t->diskon . '%' : '-' }}</th>
                       <th>{{ $t->jumlah }}</th>
-                      <th>Rp {{ number_format($t->jumlah * $t->harga, 2, ',', '.') }}</th>
+                      <th>Rp {{ number_format($t->jumlah * ($t->diskon ? $t->harga - (($t->harga / 100) * $t->diskon) : $t->harga), 2, ',', '.') }}</th>
                     </tr>
                   @endforeach
                 </tbody>

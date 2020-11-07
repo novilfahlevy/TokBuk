@@ -21,6 +21,7 @@ class CreateDetailTransaksiTable extends Migration
             $table->foreign('id_buku')->references('id')->on('buku');
             $table->integer('jumlah');
             $table->integer('harga');
+            $table->integer('diskon')->nullable();
             $table->timestamps();
         });
     }
