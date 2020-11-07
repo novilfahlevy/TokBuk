@@ -49,33 +49,37 @@
           </a>
         </li>
 
-        <li class="menu-header">DATA MASTER</li>
+        <li class="dropdown">
+          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Data Master</span></a>
+          <ul class="dropdown-menu">
+            <li class="nav-item  {{Request::segment(1)=='penulis' ?'active':''}}">
+              <a class="nav-link" href="{{route('penulis')}}" aria-expanded="false">
+                <span>Penulis</span>
+              </a>
+            </li>
+            <li class="nav-item  {{Request::segment(1)=='penerbit' ?'active':''}}">
+              <a class="nav-link" href="{{route('penerbit')}}" aria-expanded="false">
+                <span>Penerbit</span>
+              </a>
+            </li>
+            <li class="nav-item  {{Request::segment(1)=='kategori' ?'active':''}}">
+              <a class="nav-link" href="{{route('kategori')}}" aria-expanded="false">
+                <span>Kategori</span>
+              </a>
+            </li>
+            <li class="nav-item  {{Request::segment(1)=='pemasok' ?'active':''}}">
+              <a class="nav-link" href="{{route('pemasok')}}" aria-expanded="false">
+                <span>Pemasok</span>
+              </a>
+            </li>
+            <li class="nav-item  {{Request::segment(1)=='lokasi' ?'active':''}}">
+              <a class="nav-link" href="{{route('lokasi')}}" aria-expanded="false">
+                <span>Lokasi</span>
+              </a>
+            </li>
+          </ul>
+        </li>
 
-        <li class="nav-item  {{Request::segment(1)=='penulis' ?'active':''}}">
-          <a class="nav-link" href="{{route('penulis')}}" aria-expanded="false">
-            <i class="fas fa-user-edit"></i><span>Penulis</span>
-          </a>
-        </li>
-        <li class="nav-item  {{Request::segment(1)=='penerbit' ?'active':''}}">
-          <a class="nav-link" href="{{route('penerbit')}}" aria-expanded="false">
-            <i class="fas fa-building"></i></i><span>Penerbit</span>
-          </a>
-        </li>
-        <li class="nav-item  {{Request::segment(1)=='kategori' ?'active':''}}">
-          <a class="nav-link" href="{{route('kategori')}}" aria-expanded="false">
-            <i class="fas fa-swatchbook"></i></i><span>Kategori</span>
-          </a>
-        </li>
-        <li class="nav-item  {{Request::segment(1)=='pemasok' ?'active':''}}">
-          <a class="nav-link" href="{{route('pemasok')}}" aria-expanded="false">
-            <i class="fas fa-truck-moving"></i></i><span>Pemasok</span>
-          </a>
-        </li>
-        <li class="nav-item  {{Request::segment(1)=='lokasi' ?'active':''}}">
-          <a class="nav-link" href="{{route('lokasi')}}" aria-expanded="false">
-            <i class="fas fa-table"></i></i><span>Lokasi</span>
-          </a>
-        </li>
       @endif
 
       @if ( $posisi === 'Admin' )
