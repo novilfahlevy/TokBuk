@@ -99,7 +99,7 @@ Tambah Pembelian Buku
                     </thead>
                     <tbody id="bukuContainer"></tbody>
                   </table>
-                  <button type="button" class="btn btn-primary w-100" id="tambahBuku">Tambah Buku</button>
+                  <button type="button" class="btn btn-success" id="tambahBuku">Tambah Buku</button>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Simpan</button>
