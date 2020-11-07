@@ -42,7 +42,7 @@ Pembelian Buku
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
                                                     <th>Pemasok</th>
-                                                    <th>Bayar</th>
+                                                    <th>Nominal Pembayaran</th>
                                                     <th>Harga</th>
                                                     <th scope="col"></th>
                                                 </tr>

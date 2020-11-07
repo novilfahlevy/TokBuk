@@ -51,7 +51,7 @@ Detail Pembelian Buku
                 <p>{{ $pembelian->user->name }}</p>
               </div>
               <div class="col-lg-2">
-                <h6 class="mb-1">Bayar</h6>
+                <h6 class="mb-1">Nominal Pembayaran</h6>
                 <p>Rp {{ number_format($pembelian->bayar, 2, ',', '.') }}</p>
               </div>
               <div class="col-lg-2">
@@ -77,7 +77,7 @@ Detail Pembelian Buku
                     <th scope="col">Judul</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Jumlah</th>
-                    <th scope="col">Total Harga</th>
+                    <th scope="col">Sub Total</th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>

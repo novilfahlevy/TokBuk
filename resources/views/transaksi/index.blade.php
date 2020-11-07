@@ -42,8 +42,8 @@ Transaksi Penjualan
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
                                                     <th>Jumlah Buku</th>
+                                                    <th>Nominal Pembayaran</th>
                                                     <th>Total Harga</th>
-                                                    <th>Bayar</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
@@ -54,8 +54,8 @@ Transaksi Penjualan
                                                     <td>{{ $t->kode }}</td>
                                                     <td>{{ $t->created_at }}</td>
                                                     <td>{{ $t->jumlah_buku }}</td>
-                                                    <td>Rp {{ number_format($t->total_harga, 2, ',', '.') }}</td>
                                                     <td>Rp {{ number_format($t->bayar, 2, ',', '.') }}</td>
+                                                    <td>Rp {{ number_format($t->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "

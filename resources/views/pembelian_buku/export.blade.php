@@ -28,7 +28,6 @@
         <td>{{ number_format($p->jumlah) }}</td>
         <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
         <td>{{ $p->status }}</td>
-        <td></td>
       </tr>
     @endforeach
   </tbody>

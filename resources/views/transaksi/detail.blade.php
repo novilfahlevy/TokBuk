@@ -40,7 +40,7 @@ Detail Transaksi
                 <p>{{ $transaksi->user->name }}</p>
               </div>
               <div class="col-lg-2">
-                <h6 class="mb-1">Bayar</h6>
+                <h6 class="mb-1">Nominal Pembayaran</h6>
                 <p>Rp {{ number_format($transaksi->bayar, 2, ',', '.') }}</p>
               </div>
               <div class="col-lg-2">
@@ -65,8 +65,8 @@ Detail Transaksi
                     <th scope="col">#</th>
                     <th scope="col">Judul</th>
                     <th scope="col">Harga</th>
-                    <th scope="col">Diskon</th>
                     <th scope="col">Jumlah</th>
+                    <th scope="col">Diskon</th>
                     <th scope="col">Sub Total</th>
                   </tr>
                 </thead>
@@ -76,8 +76,8 @@ Detail Transaksi
                       <th>{{ $loop->index + 1 }}</th>
                       <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
                       <th>Rp {{ number_format($t->harga, 2, ',', '.') }}</th>
-                      <th>{{ $t->diskon ? $t->diskon . '%' : '-' }}</th>
                       <th>{{ $t->jumlah }}</th>
+                      <th>{{ $t->diskon ? $t->diskon . '%' : '-' }}</th>
                       <th>Rp {{ number_format($t->jumlah * ($t->diskon ? $t->harga - (($t->harga / 100) * $t->diskon) : $t->harga), 2, ',', '.') }}</th>
                     </tr>
                   @endforeach

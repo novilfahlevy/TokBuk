@@ -32,7 +32,7 @@
     <td>Buku <hr style="border-bottom: dashed;"></td>
     <td>Harga <hr style="border-bottom: dashed;"></td>
     <td>QTY<hr style="border-bottom: dashed;"></td>
-    <td>Total Harga <hr style="border-bottom: dashed;"></td>
+    <td>Sub Total <hr style="border-bottom: dashed;"></td>
   </tr>
   
   @foreach ($pembelian->detail as $p)
@@ -50,7 +50,7 @@
   <table style="width: 100%; text-align : center;">
     <tbody>
       <tr>
-        <td>Bayar</td>
+        <td>Nominal Pembayaran</td>
         <td>Rp {{ number_format($pembelian->bayar) }}</td>
       </tr>
       <tr>

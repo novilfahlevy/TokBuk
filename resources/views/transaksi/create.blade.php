@@ -69,7 +69,7 @@ Tambah Transaksi
                         <th scope="col">Jumlah</th>
                         <th scope="col">Harga</th>
                         <th scope="col">Diskon</th>
-                        <th scope="col">Total Harga</th>
+                        <th scope="col">Sub Total</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>

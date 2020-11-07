@@ -33,7 +33,7 @@
       <td>Harga <hr style="border-bottom: dashed;"></td>
       <td>QTY <hr style="border-bottom: dashed;"></td>
       <td>Diskon <hr style="border-bottom: dashed;"></td>
-      <td>Total Harga <hr style="border-bottom: dashed;"></td>
+      <td>Sub Total <hr style="border-bottom: dashed;"></td>
     </tr>
     
     @foreach ($transaksi->detail as $p)
@@ -54,7 +54,7 @@
       <tbody>
 
         <tr>
-          <td>Bayar</td>
+          <td>Nominal Pembayaran</td>
           <td>Rp {{ number_format($transaksi->bayar) }}</td>
         </tr>
         <tr>
