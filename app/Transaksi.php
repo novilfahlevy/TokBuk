@@ -10,7 +10,7 @@ class Transaksi extends Model
     use SoftDeletes;
 
     protected $table = 'transaksi';
-    protected $fillable = ['kode', 'id_user', 'bayar', 'total_harga'];
+    protected $fillable = ['kode', 'id_user', 'bayar', 'total_harga', 'keterangan'];
 
     public function user()
     {

@@ -8,6 +8,7 @@ use App\Events\UpdateDasborEvent;
 use App\Exports\PembelianBukuExport;
 use App\Pemasok;
 use App\PembelianBuku;
+use App\Pengaturan;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
@@ -87,7 +88,7 @@ class PembelianBukuController extends Controller
 
 		try {
 			$jumlahPembelianBuku = PembelianBuku::count() + 1;
-			$kode = substr('P-000000000', 0, -count(str_split((string) $jumlahPembelianBuku))) . $jumlahPembelianBuku;
+			$kode = substr('P000000000', 0, -count(str_split((string) $jumlahPembelianBuku))) . $jumlahPembelianBuku;
 
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
@@ -101,7 +102,8 @@ class PembelianBukuController extends Controller
 				'id_user' => auth()->user()->id,
 				'id_pemasok' => (int) $idPemasok,
 				'total_harga' => $bukuYangDibeli->totalHarga,
-				'bayar' => $hargaBeli
+				'bayar' => $hargaBeli,
+				'keterangan' => $request->keterangan
 			]);
 
 			foreach ( $bukuYangDibeli->buku as $buku ) {
@@ -183,6 +185,12 @@ class PembelianBukuController extends Controller
 	{
 		$pembelian = PembelianBuku::find($id);
 		return Storage::download('images/faktur/' . $pembelian->faktur);
-		// return PDF::loadView('pembelian_buku.faktur', compact('pembelian'))->download('faktur_' . $pembelian->kode . '.pdf');
+	}
+	
+	public function laporan($id)
+	{
+		$pembelian = PembelianBuku::find($id);
+		$pengaturan = Pengaturan::first();
+		return PDF::loadView('pembelian_buku.faktur', compact('pembelian', 'pengaturan'))->download('laporan_' . $pembelian->kode . '.pdf');
 	}
 }

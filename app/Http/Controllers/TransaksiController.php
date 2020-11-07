@@ -90,13 +90,14 @@ class TransaksiController extends Controller
 			}
 
 			$jumlahTransaksi = Transaksi::count() + 1;
-			$kode = substr('T-000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+			$kode = substr('T000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,
 				'id_user' => auth()->user()->id,
 				'bayar' => $bayar,
-				'total_harga' => $transaksi->totalHarga
+				'total_harga' => $transaksi->totalHarga,
+				'keterangan' => $request->keterangan
 			]);
 
 			foreach ( $transaksi->buku as $buku ) {

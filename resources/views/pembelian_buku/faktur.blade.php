@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<h5 style="text-align: center">TokBuk </h5>
-<h5 style="text-align: center">Faktur Pembelian Buku</h5><br>
+<h5 style="text-align: center">{{ $pengaturan->nama_toko }}</h5>
+<h5 style="text-align: center">Laporan Pembelian Buku</h5><br>
 <table style="width: 50%; border-width: 0">
   <tbody>
     <tr>
@@ -17,6 +17,11 @@
       <td><h6>Pemasok</h6></td>
       <td><h6>:</h6></td>
       <td><h6>{{ $pembelian->pemasok->nama }}</h6></td>
+    </tr>
+    <tr>
+      <td><h6>Keterangan</h6></td>
+      <td><h6>:</h6></td>
+      <td><h6>{{ $pembelian->keterangan ?? '-' }}</h6></td>
     </tr>
   </tbody>
 </table>
@@ -52,7 +57,6 @@
         <td >Total Harga</td>
         <td >Rp {{ number_format($pembelian->total_harga) }}</td>
       </tr>
-      
       <tr>
         <td>Kembalian</td>
         <td>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga) }}</td>

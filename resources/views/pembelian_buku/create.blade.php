@@ -29,48 +29,62 @@ Tambah Pembelian Buku
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="hargaBeli">Nominal Pembayaran</label>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                    <div class="form-group">
+                      <label for="hargaBeli">Nominal Pembayaran</label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">Rp</span>
+                        </div>
+                        <input type="number" class="form-control" id="hargaBeli" name="hargaBeli" value="0">
+                        @error('hargaBeli')
+                          <span class="invalid-feedback d-block" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
-                      <input type="number" class="form-control" id="hargaBeli" name="hargaBeli" value="0">
-                      @error('hargaBeli')
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="idPemasok">Pemasok</label>
+                      <select required name="idPemasok" class="form-control" value="{{ old('idPemasok') }}" data-live-search="true" required>
+                        <option value='' disabled selected>- Pilih -</option>
+                        @foreach($pemasok as $pem)
+                          <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
+                        @endforeach
+                      </select>
+                      @error('idPemasok')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                       @enderror
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="idPemasok">Pemasok</label>
-                    <select required name="idPemasok" class="form-control" value="{{ old('idPemasok') }}" data-live-search="true" required>
-                      <option value='' disabled selected>- Pilih -</option>
-                      @foreach($pemasok as $pem)
-                        <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
-                      @endforeach
-                    </select>
-                    @error('idPemasok')
-                      <span class="invalid-feedback d-block" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                    @enderror
-                  </div>
                   <div class="col-6">
-                    <label for="tanggal">Tanggal</label>
-                    <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
-                  </div>
-                  <div class="col-6">
-                    <label for="faktur">Faktur</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" name="faktur" id="faktur" required>
-                      <label class="custom-file-label" for="faktur">Masukan faktur</label>
+                    <div class="form-group">
+                      <label for="tanggal">Tanggal</label>
+                      <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
                     </div>
-                    @error('faktur')
-                      <span class="invalid-feedback d-block" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                    @enderror
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="faktur">Faktur</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="faktur" id="faktur" required>
+                        <label class="custom-file-label" for="faktur">Masukan faktur</label>
+                      </div>
+                      @error('faktur')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group mb-0">
+                      <label for="keterangan">Keterangan</label>
+                      <textarea type="text" class="form-control" required name="keterangan" value="{{ old('keterangan') }}" style="height:80px;"></textarea>
+                    </div>
                   </div>
                 </div>
               </div>

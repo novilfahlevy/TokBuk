@@ -26,34 +26,38 @@ Detail Transaksi
             </div>
           </div>
           <div class="card-body">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Kode</h6>
-                  <p>{{ $transaksi->kode }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Tanggal Transaksi</h6>
-                  <p>{{ $transaksi->created_at }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Dilayani</h6>
-                  <p>{{ $transaksi->user->name }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Bayar</h6>
-                  <p>Rp {{ number_format($transaksi->bayar, 2, ',', '.') }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Total Harga</h6>
-                  <p>Rp {{ number_format($transaksi->total_harga, 2, ',', '.') }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Kembalian</h6>
-                  <p>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga, 2, ',', '.') }}</p>
-                </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <h6 class="mb-1">Kode</h6>
+                <p>{{ $transaksi->kode }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Tanggal Transaksi</h6>
+                <p>{{ $transaksi->created_at }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Dilayani</h6>
+                <p>{{ $transaksi->user->name }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Bayar</h6>
+                <p>Rp {{ number_format($transaksi->bayar, 2, ',', '.') }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Total Harga</h6>
+                <p>Rp {{ number_format($transaksi->total_harga, 2, ',', '.') }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Kembalian</h6>
+                <p>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga, 2, ',', '.') }}</p>
+              </div>
+              <div class="col-12">
+                <h6 class="mb-1">Keterangan</h6>
+                <p>{{ $transaksi->keterangan ?? '-' }}</p>
               </div>
             </div>
+            <hr class="mt-0 mb-3">
+            <h6>Buku yang dibeli</h6>
             <div class="table-responsive">
               <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                 <thead>
@@ -62,7 +66,7 @@ Detail Transaksi
                     <th scope="col">Judul</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Jumlah</th>
-                    <th scope="col">Total Harga</th>
+                    <th scope="col">Sub Total</th>
                   </tr>
                 </thead>
                 <tbody>

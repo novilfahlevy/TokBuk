@@ -98,6 +98,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('pembelian-buku/store', 'PembelianBukuController@store')->name('pembelian-buku.store');
   Route::post('pembelian-buku/export', 'PembelianBukuController@export')->name('pembelian-buku.export');
   Route::get('pembelian-buku/faktur/{id}', 'PembelianBukuController@faktur')->name('pembelian-buku.faktur');
+  Route::get('pembelian-buku/laporan/{id}', 'PembelianBukuController@laporan')->name('pembelian-buku.laporan');
   Route::delete('pembelian-buku/{id}', 'PembelianBukuController@destroy')->name('pembelian-buku.destroy');
 
   //pengaturan

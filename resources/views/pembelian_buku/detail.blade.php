@@ -17,6 +17,9 @@ Detail Pembelian Buku
           <div class="card-header">
             <h4>Data Pembelian Buku</h4>
             <div class="card-header-form">
+              <a href="{{ route('pembelian-buku.laporan', $pembelian->id) }}" class="btn btn-success mr-2" title="Download Laporan">
+                <i class="fas fa-file-download"></i>
+              </a>
               <div class="dropdown">
                 <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-file-invoice"></i>
@@ -34,34 +37,38 @@ Detail Pembelian Buku
             </div>
           </div>
           <div class="card-body">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Kode</h6>
-                  <p>{{ $pembelian->kode }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Tanggal</h6>
-                  <p>{{ $pembelian->tanggal }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Ditangani</h6>
-                  <p>{{ $pembelian->user->name }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Bayar</h6>
-                  <p>Rp {{ number_format($pembelian->bayar, 2, ',', '.') }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Total Harga</h6>
-                  <p>Rp {{ number_format($pembelian->total_harga, 2, ',', '.') }}</p>
-                </div>
-                <div class="col-lg-2">
-                  <h6 class="mb-1">Kembalian</h6>
-                  <p>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga, 2, ',', '.') }}</p>
-                </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <h6 class="mb-1">Kode</h6>
+                <p>{{ $pembelian->kode }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Tanggal</h6>
+                <p>{{ $pembelian->tanggal }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Ditangani</h6>
+                <p>{{ $pembelian->user->name }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Bayar</h6>
+                <p>Rp {{ number_format($pembelian->bayar, 2, ',', '.') }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Total Harga</h6>
+                <p>Rp {{ number_format($pembelian->total_harga, 2, ',', '.') }}</p>
+              </div>
+              <div class="col-lg-2">
+                <h6 class="mb-1">Kembalian</h6>
+                <p>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga, 2, ',', '.') }}</p>
+              </div>
+              <div class="col-12">
+                <h6 class="mb-1">Keterangan</h6>
+                <p>{{ $pembelian->keterangan ?? '-' }}</p>
               </div>
             </div>
+            <hr class="mt-0 mb-3">
+            <h6>Buku yang dibeli</h6>
             <div class="table-responsive">
               <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                 <thead>

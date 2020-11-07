@@ -24,6 +24,7 @@ class CreatePembelianBukuTable extends Migration
             $table->foreign('id_pemasok')->references('id')->on('pemasok');
             $table->integer('total_harga');
             $table->integer('bayar');  
+            $table->text('keterangan')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

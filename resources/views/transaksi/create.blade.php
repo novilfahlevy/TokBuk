@@ -26,18 +26,28 @@ Tambah Transaksi
             <form action="{{ route('transaksi.store') }}" method="POST" id="formTransaksi">
               @csrf
               <input type="hidden" id="hasilRespon" name="transaksi" hidden>
-              <div class="form-group">
-                <label for="bayar">Nominal Pembayaran</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Rp</span>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="bayar">Nominal Pembayaran</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                      </div>
+                      <input type="number" class="form-control" id="bayar" name="bayar" value="0">
+                      @error('bayar')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                    </div>
                   </div>
-                  <input type="number" class="form-control" id="bayar" name="bayar" value="0">
-                  @error('bayar')
-                    <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                    <textarea type="text" class="form-control" required name="keterangan" value="{{ old('keterangan') }}" style="height:80px;"></textarea>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
