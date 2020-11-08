@@ -38,7 +38,7 @@ Penerbit Buku
                                 <table id="table-index" class="display table-striped table-bordered" style="width:100%; text-align:center;">
                                     <thead style="">
                                         <tr>
-                                            <th>#</th>
+                                            <th>No</th>
                                             <th>Nama Penerbit</th>
                                             <th></th>
                                         </tr>

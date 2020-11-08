@@ -102,7 +102,7 @@ Tambah Pembelian Buku
                   <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Status</th>
                         <th scope="col">Buku</th>
                         <th scope="col">Jumlah</th>

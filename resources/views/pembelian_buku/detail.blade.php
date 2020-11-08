@@ -77,7 +77,7 @@ Detail Pembelian Buku
               <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Judul</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Jumlah</th>

@@ -38,7 +38,7 @@ Pembelian Buku
                                             style="width:100%; text-align:center;">
                                             <thead style="">
                                                 <tr>
-                                                    <th scope="col">#</th>
+                                                    <th scope="col">No</th>
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
                                                     <th>Distributor</th>
