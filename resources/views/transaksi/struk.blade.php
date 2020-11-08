@@ -65,6 +65,12 @@
           <td>Kembalian</td>
           <td>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga, 2, ',', '.') }}</td>
         </tr>
+        @if ( $transaksi->diskon )
+          <tr>
+            <td>Diskon</td>
+            <td>{{ $transaksi->diskon . '%' }}</td>
+          </tr>
+        @endif
       </tbody>
     </table>
   

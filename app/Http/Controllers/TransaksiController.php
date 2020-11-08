@@ -26,14 +26,16 @@ class TransaksiController extends Controller
 				DB::raw('SUM(dt.jumlah) AS jumlah_buku'),
 				'transaksi.total_harga',
 				'transaksi.bayar',
-				'transaksi.id'
-			])
+				'transaksi.id',
+				'transaksi.diskon'
+				])
 			->groupBy([
 				'transaksi.kode',
 				'transaksi.created_at',
 				'transaksi.total_harga', 
 				'transaksi.bayar',
-				'transaksi.id'
+				'transaksi.id',
+				'transaksi.diskon'
 			]);
 	}
 
@@ -91,13 +93,15 @@ class TransaksiController extends Controller
 
 			$jumlahTransaksi = Transaksi::count() + 1;
 			$kode = substr('T000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+			$diskon = $request->diskon;
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,
 				'id_user' => auth()->user()->id,
 				'bayar' => $bayar,
-				'total_harga' => $transaksi->totalHarga,
-				'keterangan' => $request->keterangan
+				'total_harga' => !!$diskon ? ($transaksi->totalHarga - (($transaksi->totalHarga / 100) * $diskon)) : $request->total_harga,
+				'keterangan' => $request->keterangan,
+				'diskon' => $diskon ?? null
 			]);
 
 			foreach ( $transaksi->buku as $buku ) {

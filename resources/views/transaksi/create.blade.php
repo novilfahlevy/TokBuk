@@ -27,7 +27,7 @@ Tambah Transaksi
               @csrf
               <input type="hidden" id="hasilRespon" name="transaksi" hidden>
               <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                   <div class="form-group">
                     <label for="bayar">Nominal Pembayaran</label>
                     <div class="input-group mb-3">
@@ -40,6 +40,17 @@ Tambah Transaksi
                             <strong>{{ $message }}</strong>
                         </span>
                       @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label for="diskon">Diskon</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
+                      <input type="number" class="form-control" id="diskon" name="diskon" value="0">
                     </div>
                   </div>
                 </div>

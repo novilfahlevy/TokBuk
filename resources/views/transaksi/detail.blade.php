@@ -51,7 +51,11 @@ Detail Transaksi
                 <h6 class="mb-1">Kembalian</h6>
                 <p>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga, 2, ',', '.') }}</p>
               </div>
-              <div class="col-12">
+              <div class="col-lg-2">
+                <h6 class="mb-1">Diskon</h6>
+                <p>{{ $transaksi->diskon ? $transaksi->diskon . '%' : '-' }}</p>
+              </div>
+              <div class="col-lg-2">
                 <h6 class="mb-1">Keterangan</h6>
                 <p>{{ $transaksi->keterangan ?? '-' }}</p>
               </div>
