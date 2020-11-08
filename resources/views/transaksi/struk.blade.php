@@ -55,15 +55,15 @@
 
         <tr>
           <td>Nominal Pembayaran</td>
-          <td>Rp {{ number_format($transaksi->bayar) }}</td>
+          <td>Rp {{ number_format($transaksi->bayar, 2, ',', '.') }}</td>
         </tr>
         <tr>
           <td >Total Harga</td>
-          <td >Rp {{ number_format($transaksi->total_harga) }}</td>
+          <td >Rp {{ number_format($transaksi->total_harga, 2, ',', '.') }}</td>
         </tr>
         <tr>
           <td>Kembalian</td>
-          <td>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga) }}</td>
+          <td>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga, 2, ',', '.') }}</td>
         </tr>
       </tbody>
     </table>
