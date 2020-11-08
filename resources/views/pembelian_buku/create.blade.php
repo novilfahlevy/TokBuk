@@ -60,13 +60,13 @@ Tambah Pembelian Buku
                       @enderror
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-12">
                     <div class="form-group">
-                      <label for="tanggal">Tanggal</label>
-                      <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
+                      <label for="tanggal_pesan">Tanggal</label>
+                      <input type="date" class="form-control" id="tanggal_pesan" name="tanggal_pesan" value="{{ date('Y-m-d') }}" required>
                     </div>
                   </div>
-                  <div class="col-6">
+                  {{-- <div class="col-6">
                     <div class="form-group">
                       <label for="faktur">Faktur</label>
                       <div class="custom-file">
@@ -79,7 +79,7 @@ Tambah Pembelian Buku
                         </span>
                       @enderror
                     </div>
-                  </div>
+                  </div> --}}
                   <div class="col-12">
                     <div class="form-group mb-0">
                       <label for="keterangan">Keterangan</label>

@@ -17,10 +17,14 @@ class PembelianBuku extends Model
     use SoftDeletes;
 
     protected $table = 'pembelian_buku';
-    protected $fillable = ['kode', 'tanggal', 'id_user', 'id_distributor', 'total_harga', 'bayar', 'faktur', 'keterangan'];
+    protected $fillable = ['kode', 'tanggal_pesan', 'tanggal_terima', 'id_user', 'id_distributor', 'total_harga', 'bayar', 'faktur', 'keterangan'];
     
-    public function getTanggalAttribute() {
-        return date('d-m-Y', strtotime($this->attributes['tanggal']));
+    public function getTanggalPesanAttribute() {
+        return date('d-m-Y', strtotime($this->attributes['tanggal_pesan']));
+    }
+
+    public function getTanggalTerimaAttribute() {
+        return $this->attributes['tanggal_terima'] ? date('d-m-Y', strtotime($this->attributes['tanggal_terima'])) : null;
     }
 
     public function detail()

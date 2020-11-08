@@ -40,8 +40,9 @@ Pembelian Buku
                                                 <tr>
                                                     <th scope="col">No</th>
                                                     <th>Kode</th>
-                                                    <th>Tanggal</th>
                                                     <th>Distributor</th>
+                                                    <th>Tanggal Pesan</th>
+                                                    <th>Tanggal Terima</th>
                                                     <th>Nominal Pembayaran</th>
                                                     <th>Jumlah Buku</th>
                                                     <th>Harga</th>
@@ -53,8 +54,9 @@ Pembelian Buku
                                                 <tr>
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
                                                     <td>{{ $p->kode }}</td>
-                                                    <td>{{ $p->tanggal }}</td>
                                                     <td>{{ $p->distributor ? $p->distributor->nama : '-' }}</td>
+                                                    <td>{{ $p->tanggal_pesan }}</td>
+                                                    <td>{!! $p->tanggal_terima ?? '<span class="text-warning">Belum Diterima</span>' !!}</td>
                                                     <td>Rp {{ number_format($p->bayar, 2, ',', '.') }}</td>
                                                     <td>{{ $p->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
@@ -89,7 +91,8 @@ Pembelian Buku
     </div>
 </div>
 
-@php $distributorId = session()->pull('distributor') @endphp
+@php $distributorId = session()->pull('distributor')  @endphp
+@php $status = session()->pull('status') @endphp
 
 <div class="modal" tabindex="-1" role="dialog" id="exportModal">
     <form action="{{ route('pembelian-buku.export') }}" method="POST">
@@ -166,15 +169,25 @@ Pembelian Buku
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group mb-0">
-                                <label for="mulai">Dari tanggal</label>
+                            <div class="form-group mb-3">
+                                <label for="mulai">Dari tanggal (tanggal pesan)</label>
                                 <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->pull('mulai') }}">
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group mb-0">
-                                <label for="sampai">Sampai tanggal</label>
+                            <div class="form-group mb-3">
+                                <label for="sampai">Sampai tanggal (tanggal pesan)</label>
                                 <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->pull('sampai') }}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group mb-0">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="" selected>Semua</option>
+                                    <option value="Belum Diterima" {{ $status == 'Belum Diterima' ? 'selected' : '' }}>Belum Diterima</option>
+                                    <option value="Sudah Diterima" {{ $status == 'Sudah Diterima' ? 'selected' : '' }}>Sudah Diterima</option>
+                                </select>
                             </div>
                         </div>
                     </div>

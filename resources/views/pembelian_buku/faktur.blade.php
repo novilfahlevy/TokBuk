@@ -9,9 +9,14 @@
       <td><h6>{{ $pembelian->kode }}</h6></td>
     </tr>
     <tr>
-      <td><h6>Tanggal</h6></td>
+      <td><h6>Tanggal Pesan</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->tanggal }}</h6></td>
+      <td><h6>{{ $pembelian->tanggal_pesan }}</h6></td>
+    </tr>
+    <tr>
+      <td><h6>Tanggal Terima</h6></td>
+      <td><h6>:</h6></td>
+      <td><h6>{{ $pembelian->tanggal_terima }}</h6></td>
     </tr>
     <tr>
       <td><h6>Distributor</h6></td>

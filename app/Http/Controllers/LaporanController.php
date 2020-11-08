@@ -43,13 +43,11 @@ class LaporanController extends Controller
 			'dari' => Carbon::parse($request->dari)->format('d-m-Y'),
 			'sampai' => Carbon::parse($request->sampai)->format('d-m-Y')
 		]);
-
-		
 	}
 
 	public function pembelian(Request $request)
 	{
-		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $request->dari)->whereDate('pembelian_buku.tanggal', '<=', $request->sampai);
+		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal_terima', '>=', $request->dari)->whereDate('pembelian_buku.tanggal_terima', '<=', $request->sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
@@ -85,7 +83,7 @@ class LaporanController extends Controller
 	}
 
 	public function pdfpembelian($dari, $sampai) {
-		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $dari)->whereDate('pembelian_buku.tanggal', '<=', $sampai);
+		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal_terima', '>=', $dari)->whereDate('pembelian_buku.tanggal_terima', '<=', $sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
