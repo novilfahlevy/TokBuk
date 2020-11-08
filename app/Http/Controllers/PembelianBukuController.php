@@ -22,7 +22,26 @@ class PembelianBukuController extends Controller
 {
 	public function index()
 	{
-		$pembelian = PembelianBuku::orderBy('created_at', 'DESC')->get();
+		$pembelian = PembelianBuku::join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+			->select([
+				'pembelian_buku.id',
+				'pembelian_buku.kode',
+				'pembelian_buku.tanggal',
+				'pembelian_buku.id_distributor',
+				'pembelian_buku.bayar',
+				'pembelian_buku.total_harga',
+				DB::raw('SUM(dp.jumlah) as jumlah_buku')
+			])
+				->groupBy([
+				'pembelian_buku.id',
+				'pembelian_buku.kode',
+				'pembelian_buku.tanggal',
+				'pembelian_buku.id_distributor',
+				'pembelian_buku.bayar',
+				'pembelian_buku.total_harga'
+			])
+			->orderBy('tanggal', 'DESC')
+			->get();
 		$distributor = Distributor::all();
 		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
 	}
@@ -46,7 +65,7 @@ class PembelianBukuController extends Controller
 
 		session($request->except('_token'));
 
-		$pembelian = $pembelian->orderBy('created_at', 'DESC')->get();
+		$pembelian = $pembelian->orderBy('tanggal', 'DESC')->get();
 
 		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
 	}

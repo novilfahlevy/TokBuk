@@ -43,6 +43,7 @@ Pembelian Buku
                                                     <th>Tanggal</th>
                                                     <th>Distributor</th>
                                                     <th>Nominal Pembayaran</th>
+                                                    <th>Jumlah Buku</th>
                                                     <th>Harga</th>
                                                     <th scope="col"></th>
                                                 </tr>
@@ -55,6 +56,7 @@ Pembelian Buku
                                                     <td>{{ $p->tanggal }}</td>
                                                     <td>{{ $p->distributor ? $p->distributor->nama : '-' }}</td>
                                                     <td>Rp {{ number_format($p->bayar, 2, ',', '.') }}</td>
+                                                    <td>{{ $p->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
