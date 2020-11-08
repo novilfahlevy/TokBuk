@@ -11,7 +11,7 @@
     <tr>
       <td><h6>Tanggal</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->created_at }}</h6></td>
+      <td><h6>{{ $pembelian->tanggal }}</h6></td>
     </tr>
     <tr>
       <td><h6>Distributor</h6></td>

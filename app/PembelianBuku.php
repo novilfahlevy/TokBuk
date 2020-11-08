@@ -7,6 +7,7 @@ namespace App;
 use App\DetailPembelianBuku;
 use App\Distributor;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,6 +18,10 @@ class PembelianBuku extends Model
 
     protected $table = 'pembelian_buku';
     protected $fillable = ['kode', 'tanggal', 'id_user', 'id_distributor', 'total_harga', 'bayar', 'faktur', 'keterangan'];
+    
+    public function getTanggalAttribute() {
+        return date('d-m-Y', strtotime($this->attributes['tanggal']));
+    }
 
     public function detail()
     {

@@ -31,7 +31,7 @@ function fillJsSelect2Options(selectClass, initCallback) {
             <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
             <div class="d-flex flex-column">
               ${buku.judul.slice(0, 28)}${buku.judul.length > 28 ? '...' : ''}
-              <span>Jumlah: ${format(buku.jumlah)}</span>
+              <span>Jumlah: ${buku.jumlah}</span>
             </div>
           </span>
         `);
