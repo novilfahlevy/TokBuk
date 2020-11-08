@@ -41,8 +41,8 @@ Transaksi Penjualan
                                                     <th scope="col">#</th>
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
-                                                    <th>Jumlah Buku</th>
                                                     <th>Nominal Pembayaran</th>
+                                                    <th>Jumlah Buku</th>
                                                     <th>Total Harga</th>
                                                     <th scope="col"></th>
                                                 </tr>
@@ -53,8 +53,8 @@ Transaksi Penjualan
                                                     <td scope="row">{{$loop->index+1}}</td>
                                                     <td>{{ $t->kode }}</td>
                                                     <td>{{ $t->created_at }}</td>
-                                                    <td>{{ $t->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($t->bayar, 2, ',', '.') }}</td>
+                                                    <td>{{ $t->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($t->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
