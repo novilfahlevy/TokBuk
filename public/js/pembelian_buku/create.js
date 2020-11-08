@@ -1,5 +1,5 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID').format(number);
+const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
 
 let bukuCache = [];
 
@@ -185,7 +185,7 @@ $(document).on('change', function(event) {
     const hargaPerBuku = tr.find('.harga-per-buku').val();
     const totalHarga = hargaPerBuku * target.val();
 
-    tr.find('.total-harga').html(`Rp ${format(totalHarga)}`);
+    tr.find('.total-harga').html(`${format(totalHarga)}`);
     tr.find('.total-harga').data('total-harga', totalHarga);
 
     setTotalHarga();
@@ -206,7 +206,7 @@ $(document).on('change', function(event) {
     const jumlahBuku = tr.parent().find('.jumlah-buku-input').val();
     const totalHarga = target.val() * jumlahBuku;
 
-    tr.parent().find('.total-harga').html(`Rp ${format(totalHarga)}`);
+    tr.parent().find('.total-harga').html(`${format(totalHarga)}`);
     tr.parent().find('.total-harga').data('total-harga', totalHarga);
 
     setTotalHarga();

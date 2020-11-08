@@ -1,4 +1,4 @@
-const format = number => new Intl.NumberFormat('id-ID').format(number);
+const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
 
 function ambilDataTransaksi(dari, sampai) {
   $.ajax({
@@ -10,7 +10,7 @@ function ambilDataTransaksi(dari, sampai) {
       $('#laporanTransaksi').attr('href', `${BASEURL}/laporan/penjualan/${dari}/${sampai}`);
       $('#totalTransaksi').text(data.totalTransaksi);
       $('#bukuTerjual').text(data.bukuTerjual);
-      $('#totalPendapatan').text(`Rp ${format(data.pendapatan)}`);
+      $('#totalPendapatan').text(`${format(data.pendapatan)}`);
       $('#waktuLaporanPenjualan').text(`${data.dari} s.d. ${data.sampai}`)
     }
   });
@@ -26,7 +26,7 @@ function ambilDataPembelian(dari, sampai) {
       $('#laporanPembelian').attr('href', `${BASEURL}/laporan/pembelian/${dari}/${sampai}`);
       $('#totalPembelian').text(data.totalPembelian);
       $('#bukuTerbeli').text(data.bukuTerbeli);
-      $('#totalPengeluaran').text(`Rp ${format(data.pengeluaran)}`);
+      $('#totalPengeluaran').text(`${format(data.pengeluaran)}`);
       $('#waktuLaporanPendapatan').text(`${data.dari} s.d. ${data.sampai}`)
     }
   });

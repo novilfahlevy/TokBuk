@@ -99,8 +99,8 @@
           labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
           datasets: [{
             label: 'Pendapatan',
-            backgroundColor: 'rgb(101, 224, 18, 0.5)',
-            borderColor: '#a7e339',
+            backgroundColor: 'rgba(71, 195, 99, 0.8)',
+            borderColor: '#47c363',
             data: JSON.parse('{!! json_encode($hasil) !!}')
           }],
         },
@@ -110,10 +110,17 @@
               ticks: {
                 beginAtZero: true,
                 callback: function(value) {
-                  return `Rp ${new Intl.NumberFormat('id-ID').format(value)}`;
+                  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value);
                 }
               }
             }]
+          },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItems, data) {
+                return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(tooltipItems.yLabel);
+              }
+            }
           }
         }
     });

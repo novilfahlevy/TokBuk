@@ -1,5 +1,5 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID').format(number);
+const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
 
 let bukuCache = [];
 
@@ -23,7 +23,7 @@ function fillJsSelect2Options(selectClass, initCallback) {
 
       tr.data('buku-id', buku.id);
 
-      tr.find('.harga').text(`Rp ${format(buku.harga)}`);
+      tr.find('.harga').text(`${format(buku.harga)}`);
       tr.find('.harga').data('harga', buku.harga);
 
       tr.find('.jumlah-buku-input').attr('max', buku.jumlah);
@@ -35,7 +35,7 @@ function fillJsSelect2Options(selectClass, initCallback) {
       tr.find('.diskon').text(diskon ? `${diskon}%` : '-');
       tr.find('.diskon').data('diskon', diskon || '');
 
-      tr.find('.total-harga').text(`Rp ${format(hargaDiskon)}`);
+      tr.find('.total-harga').text(`${format(hargaDiskon)}`);
       tr.find('.total-harga').data('total-harga', hargaDiskon);
 
       $('#totalSemuaHarga').text(format(getTotalHarga()));
@@ -50,7 +50,7 @@ function fillJsSelect2Options(selectClass, initCallback) {
             <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
             <div class="d-flex flex-column">
               ${buku.judul.slice(0, 28)}${buku.judul.length > 28 ? '...' : ''}
-              <span>Rp ${format(buku.harga)}</span>
+              <span>${format(buku.harga)}</span>
             </div>
           </span>
         `);
@@ -171,7 +171,7 @@ $(document).on('change', function(event) {
     const diskon = tr.find('.diskon').data('diskon');
     const harga = tr.find('.harga').data('harga');
     const totalHarga = parseInt(!!diskon ? (harga - ((harga / 100) * diskon)) : harga, 10) * target.val();
-    tr.find('.total-harga').text(`Rp ${format(totalHarga)}`);
+    tr.find('.total-harga').text(`${format(totalHarga)}`);
     tr.find('.total-harga').data('total-harga', totalHarga);
     $('#totalSemuaHarga').text(format(getTotalHarga()));
   }

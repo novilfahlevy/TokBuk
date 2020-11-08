@@ -53,7 +53,7 @@ Tambah Transaksi
               <div class="form-group">
                 <div class="d-flex justify-content-between align-items-center">
                   <label for="buku" class="mb-2">Buku yang ingin dibeli</label>
-                  <h6 class="mb-0 mr-2">Total Rp <span id="totalSemuaHarga">0</span></h6>
+                  <h6 class="mb-0 mr-2">Total <span id="totalSemuaHarga">0</span></h6>
                 </div>
                 @error('bukuDibeli')
                   <span class="invalid-feedback d-block my-2" role="alert">

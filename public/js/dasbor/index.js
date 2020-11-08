@@ -1,16 +1,16 @@
 channelBind('dasbor', 'dasbor.update', function(data) {
   $('#totalTransaksi').text(data.transaksi.totalTransaksi);
   $('#bukuTerjual').text(data.transaksi.bukuTerjual);
-  $('#totalPendapatan').text(`Rp ${new Intl.NumberFormat('id-ID').format(data.transaksi.pendapatan)}`);
+  $('#totalPendapatan').text(`${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.transaksi.pendapatan)}`);
 
   $('#totalPembelian').text(data.pembelian.totalPembelian);
   $('#bukuTerbeli').text(data.pembelian.bukuTerbeli);
-  $('#totalPengeluaran').text(`Rp ${new Intl.NumberFormat('id-ID').format(data.pembelian.pengeluaran)}`);
+  $('#totalPengeluaran').text(`${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.pembelian.pengeluaran)}`);
 
   $('#jumlahBuku').text(
-    new Intl.NumberFormat('id-ID').format(data.jumlahBuku)
+    new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.jumlahBuku)
   );
   $('#jumlahTransaksi').text(
-    new Intl.NumberFormat('id-ID').format(data.jumlahTransaksi)
+    new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.jumlahTransaksi)
   );
 });
