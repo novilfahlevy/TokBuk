@@ -51,15 +51,15 @@
     <tbody>
       <tr>
         <td>Nominal Pembayaran</td>
-        <td>Rp {{ number_format($pembelian->bayar) }}</td>
+        <td>Rp {{ number_format($pembelian->bayar, 2, ',', '.') }}</td>
       </tr>
       <tr>
         <td >Total Harga</td>
-        <td >Rp {{ number_format($pembelian->total_harga) }}</td>
+        <td >Rp {{ number_format($pembelian->total_harga, 2, ',', '.') }}</td>
       </tr>
       <tr>
         <td>Kembalian</td>
-        <td>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga) }}</td>
+        <td>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga, 2, ',', '.') }}</td>
       </tr>
     </tbody>
   </table>
