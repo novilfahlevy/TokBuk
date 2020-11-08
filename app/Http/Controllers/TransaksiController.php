@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
+use Error;
 
 class TransaksiController extends Controller
 {
@@ -99,7 +100,7 @@ class TransaksiController extends Controller
 				'kode' => $kode,
 				'id_user' => auth()->user()->id,
 				'bayar' => $bayar,
-				'total_harga' => !!$diskon ? ($transaksi->totalHarga - (($transaksi->totalHarga / 100) * $diskon)) : $request->total_harga,
+				'total_harga' => !!$diskon ? ($transaksi->totalHarga - (($transaksi->totalHarga / 100) * $diskon)) : $transaksi->totalHarga,
 				'keterangan' => $request->keterangan,
 				'diskon' => $diskon ?? null
 			]);
@@ -128,6 +129,7 @@ class TransaksiController extends Controller
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
+			throw new Error($e);
 			return redirect()->route('transaksi.create')->with([
 				'message' => 'Gagal Membuat Transaksi, Silahkan Coba Lagi.',
 				'type' => 'danger'

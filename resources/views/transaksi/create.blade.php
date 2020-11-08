@@ -50,7 +50,7 @@ Tambah Transaksi
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">%</span>
                       </div>
-                      <input type="number" class="form-control" id="diskon" name="diskon" value="0">
+                      <input type="number" class="form-control" id="diskon" name="diskon">
                     </div>
                   </div>
                 </div>
