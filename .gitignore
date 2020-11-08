@@ -2,8 +2,9 @@
 /public/hot
 /public/storage
 /public/images/buku/*
-/public/images/faktur/*
 !/public/images/buku/sampul.png
+/public/images/faktur/*
+!/public/images/faktur/P000000001.png
 /storage/*.key
 /storage/framework/laravel-excel/*
 /vendor
