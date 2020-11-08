@@ -178,8 +178,20 @@ class PembelianBukuController extends Controller
 		DB::beginTransaction();
 		try {
 			$pembelian = PembelianBuku::find($id);
+
+			foreach ( $pembelian->detail as $detailPembelian ) {
+				$buku = Buku::find($detailPembelian->id_buku);
+				if ( $buku->jumlah < $detailPembelian->jumlah ) {
+					$buku->update(['jumlah' => 0]);
+				} else {
+					$buku->update(['jumlah' => $buku->jumlah - $detailPembelian->jumlah]);
+				}
+			}
+
 			$pembelian->delete();
+
 			DB::commit();
+
 			event(new UpdateDasborEvent);
 			return redirect()->route('pembelian-buku')->with([
 				'message' => 'Berhasil Menghapus Pembelian Buku',
