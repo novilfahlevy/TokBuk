@@ -62,8 +62,8 @@ class LoginController extends Controller
                 ]);
                 return redirect('home');
             }
-            return redirect('login')->withErrors(['password' => 'Password tidak tepat']);
+            return redirect('login')->withErrors(['password' => 'Password tidak tepat'])->withInput($request->except('password'));
         }
-        return redirect('login')->withErrors(['keyword' => 'Email atau username tidak ditemukan']);
+        return redirect('login')->withErrors(['keyword' => 'Email atau username tidak ditemukan'])->withInput($request->except('password'));
     }
 }
