@@ -115,6 +115,8 @@ class PembelianBukuController extends Controller
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
 
+			Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
+
 			$pembelianBuku = PembelianBuku::create([
 				'kode' => $kode,
 				'tanggal' => $request->tanggal,
