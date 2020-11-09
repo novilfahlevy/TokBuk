@@ -51,7 +51,7 @@ function getAllBooks(selectClass) {
 
   $.ajax({
     method: 'GET',
-    url: `${BASEURL}/api/transaksi/buku`,
+    url: `${BASEURL}/api/pembelian-buku/buku`,
     success: function(data) {
       fillJsSelect2Options(selectClass, () => {
         data.buku.map(buku => {

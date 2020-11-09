@@ -43,7 +43,6 @@ Transaksi Penjualan
                                                     <th>Tanggal</th>
                                                     <th>Nominal Pembayaran</th>
                                                     <th>Jumlah Buku</th>
-                                                    <th>Diskon</th>
                                                     <th>Total Harga</th>
                                                     <th scope="col"></th>
                                                 </tr>
@@ -56,7 +55,6 @@ Transaksi Penjualan
                                                     <td>{{ $t->created_at }}</td>
                                                     <td>Rp {{ number_format($t->bayar, 2, ',', '.') }}</td>
                                                     <td>{{ $t->jumlah_buku }}</td>
-                                                    <td>{{ $t->diskon ? $t->diskon . '%' : '-' }}</td>
                                                     <td>Rp {{ number_format($t->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">

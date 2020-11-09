@@ -227,4 +227,12 @@ class PembelianBukuController extends Controller
 		$pengaturan = Pengaturan::first();
 		return PDF::loadView('pembelian_buku.faktur', compact('pembelian', 'pengaturan'))->download('laporan_' . $pembelian->kode . '.pdf');
 	}
+
+	public function getAllBuku() 
+	{
+		return response()->json([
+			'status' => 200,
+			'buku' => Buku::get()
+		]);
+	}
 }

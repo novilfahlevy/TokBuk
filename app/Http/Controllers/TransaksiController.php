@@ -28,7 +28,6 @@ class TransaksiController extends Controller
 				'transaksi.total_harga',
 				'transaksi.bayar',
 				'transaksi.id',
-				'transaksi.diskon'
 				])
 			->groupBy([
 				'transaksi.kode',
@@ -36,7 +35,6 @@ class TransaksiController extends Controller
 				'transaksi.total_harga', 
 				'transaksi.bayar',
 				'transaksi.id',
-				'transaksi.diskon'
 			]);
 	}
 
@@ -94,15 +92,13 @@ class TransaksiController extends Controller
 
 			$jumlahTransaksi = Transaksi::count() + 1;
 			$kode = substr('T000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
-			$diskon = $request->diskon;
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,
 				'id_user' => auth()->user()->id,
 				'bayar' => $bayar,
-				'total_harga' => !!$diskon ? ($transaksi->totalHarga - (($transaksi->totalHarga / 100) * $diskon)) : $transaksi->totalHarga,
-				'keterangan' => $request->keterangan,
-				'diskon' => $diskon ?? null
+				'total_harga' => $transaksi->totalHarga,
+				'keterangan' => $request->keterangan
 			]);
 
 			foreach ( $transaksi->buku as $buku ) {
