@@ -32,6 +32,7 @@
       <td>Buku <hr style="border-bottom: dashed;"></td>
       <td>Harga <hr style="border-bottom: dashed;"></td>
       <td>QTY <hr style="border-bottom: dashed;"></td>
+      <td>Diskon <hr style="border-bottom: dashed;"></td>
       <td>Sub Total <hr style="border-bottom: dashed;"></td>
     </tr>
     
@@ -40,7 +41,8 @@
       <td>{{ $p->buku()->withTrashed()->first()->judul }}<br>
       <td>Rp {{ number_format($p->harga, 2, ',', '.') }}<br>
       <td>x {{ $p->jumlah }}</td>
-      <td>Rp {{ number_format($p->jumlah * $p->harga, 2, ',', '.') }}</td>
+      <td>{{ !!$p->diskon ? $p->diskon . '%' : '-' }}</td>
+      <td>Rp {{ number_format($p->jumlah * (!!$p->diskon ? ($p->harga - (($p->harga / 100) * $p->diskon)) : $p->harga), 2, ',', '.') }}</td>
     </tr>
     @endforeach
   </table>
