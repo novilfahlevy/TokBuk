@@ -96,24 +96,35 @@
 <script>
 
   $(function(){ 
+    function deleteWithForm($form) {
+      const form = $(event.target).parent();
+      Swal.fire({
+        title: 'Apakah anda yakin ingin menghapus data tersebut?',
+        text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Hapus!'
+      })
+      .then((result) => {
+        if (result.value) {
+          $form.submit();
+        }
+      });
+    }
+
     $(document).on('click', function(event) {
-      if ( (event.target.tagName === 'BUTTON' && $(event.target).parent().hasClass('delete_form')) || (event.target.tagName === 'I' && $(event.target).parent().hasClass('btn-delete')) ) {
+      if ( (event.target.tagName === 'BUTTON' && $(event.target).parent().hasClass('delete_form')) ) {
         event.preventDefault();
-        const form = $(event.target).parent();
-        Swal.fire({
-          title: 'Apakah anda yakin ingin menghapus data tersebut?',
-          text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Hapus!'
-        })
-        .then((result) => {
-          if (result.value) {
-            form.submit();
-          }
-        });
+        deleteWithForm($(event.target).parent());
+        return;
+      }
+      
+      if ( (event.target.tagName === 'I' && $(event.target).parent().hasClass('btn-delete')) ) {
+        event.preventDefault();
+        deleteWithForm($(event.target).parent().parent());
+        return;
       }
     });
   });
