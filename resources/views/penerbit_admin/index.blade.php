@@ -56,7 +56,7 @@ Penerbit
                                         <form method="post" class="delete_form " action="{{route('penerbit.destroy',$p['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger" id="btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
                                     <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}" title="Detail Data"><i class="fa fa-eye"></i></a>

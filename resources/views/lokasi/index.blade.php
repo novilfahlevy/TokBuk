@@ -57,7 +57,7 @@ Lokasi
                                         <form method="post" class="delete_form " action="{{route('lokasi.destroy',$l['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  title="Hapus Data"><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger btn-delete"  title="Hapus Data"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
                                   </td>

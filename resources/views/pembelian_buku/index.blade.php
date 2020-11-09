@@ -64,7 +64,7 @@ Pembelian Buku
                                                             action="{{route('pembelian-buku.destroy',$p->id)}}">
                                                             @method('DELETE')
                                                             @csrf
-                                                            <button class="btn btn-sm btn-danger" id="btn-delete"><i
+                                                            <button class="btn btn-sm btn-danger btn-delete"><i
                                                                 class="fa fa-trash" title="Hapus Data"></i></button>
                                                             </form>
                                                         </div>

@@ -96,31 +96,26 @@
 <script>
 
   $(function(){ 
-      $("form.delete_form button").click(function(e) {
-          e.preventDefault();
-          var form = $(this).parent();
-          Swal.fire({
-              title: 'Apakah anda yakin ingin menghapus data tersebut?',
-              text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Hapus!'
-              }).then((result) => {
+    $(document).on('click', function(event) {
+      if ( (event.target.tagName === 'BUTTON' && $(event.target).parent().hasClass('delete_form')) || (event.target.tagName === 'I' && $(event.target).parent().hasClass('btn-delete')) ) {
+        event.preventDefault();
+        const form = $(event.target).parent();
+        Swal.fire({
+          title: 'Apakah anda yakin ingin menghapus data tersebut?',
+          text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Hapus!'
+        })
+        .then((result) => {
           if (result.value) {
-              // Swal.fire({
-              //         position: 'center',
-              //         icon: 'success',
-              //         title: 'Data Terhapus',
-              //         showConfirmButton: false,
-              //         timer: 1500
-              //     });
-              form.submit();
+            form.submit();
           }
-      });
-          
-      });
+        });
+      }
+    });
   });
 </script>
   
