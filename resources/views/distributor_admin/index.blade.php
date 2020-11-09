@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Distributor Buku
+Distributor
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Distributor Buku
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
           <div class="section-header">
-                <h1>Distributor Buku</h1>
+                <h1>Distributor</h1>
           </div>
           <div class="section-body">
             <div class="content-body table">
@@ -25,7 +25,7 @@ Distributor Buku
                         @include('layouts.flash-alert')
                         <div class="card">
                             <div class="card-header">
-                                <h4>Distributor Buku</h4>
+                                <h4>Daftar Distributor</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right">
                                 <a class="btn btn-sm btn-primary" href="{{route('distributor.create')}}" title="Tambah Data"><i class="fas fa-plus"></i></a>

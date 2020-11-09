@@ -18,7 +18,7 @@ Pengguna
                         @include('layouts.flash-alert')
                         <div class="card">
                             <div class="card-header">
-                                <h4>Pengguna</h4>
+                                <h4>Daftar Pengguna</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right">
                                 <a class="btn btn-sm btn-primary" href="{{route('user.create')}}" title="Tambah Data"><i class="fas fa-plus"></i></a>
@@ -56,21 +56,25 @@ Pengguna
                                                 </td>
                                                 <td>
                                                     @if (auth()->user()->id == $u->id)
-                                                    Saya
-                                                    @else 
-                                                    <div class="btn-group">
-                                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
-                                                    </div>
-                                                    <div class="btn-group">
-                                                        <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-eye"></i></a>
-                                                    </div>
-                                                    <div class="btn-group">
-                                                        <form method="post" class="delete_form " action="{{route('user.destroy',$u['id'])}}">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button  class="btn btn-sm btn-danger" id="btn-delete"  title="Hapus Data"><i class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
+                                                        Saya
+                                                    @elseif ( (auth()->user()->posisi === 'Admin' && $u->posisi !== 'Admin') || (auth()->user()->posisi === 'Operator' && $u->posisi === 'Kasir') )
+                                                        <div class="btn-group">
+                                                            <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-eye"></i></a>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <form method="post" class="delete_form " action="{{route('user.destroy',$u['id'])}}">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button  class="btn btn-sm btn-danger" id="btn-delete"  title="Hapus Data"><i class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    @else
+                                                        <div class="btn-group">
+                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-eye"></i></a>
+                                                        </div>
                                                     @endif
                                                 </td>
                                             </tr>

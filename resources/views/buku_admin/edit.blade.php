@@ -31,7 +31,7 @@
                                             <div class="col-sm-8">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h4>Data Buku</h4>
+                                                        <h4>Form Edit Buku</h4>
                                                         <div class="card-header-form">
                                                             <a href="{{ route('buku') }}" class="btn btn-primary" title="Kembali">
                                                               <i class="fas fa-chevron-left"></i>

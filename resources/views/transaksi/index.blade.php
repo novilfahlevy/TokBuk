@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Transaksi Penjualan
+Transaksi
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Transaksi Penjualan
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
             <div class="section-header">
-                <h1>Transaksi Penjualan</h1>
+                <h1>Transaksi</h1>
             </div>
             <div class="section-body">
                 <div class="content-body table">
@@ -17,7 +17,7 @@ Transaksi Penjualan
                             @include('layouts.flash-alert')
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Daftar Transaksi Penjualan</h4>
+                                    <h4>Daftar Transaksi</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
                                             <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" title="Export Data">

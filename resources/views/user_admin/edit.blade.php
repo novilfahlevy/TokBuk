@@ -28,36 +28,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            Nama
-                                            <input type="text" class="form-control" required name="name" value="{{$user->name}}" ><br/>
-                                            Username
-                                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="{{$user->username}}" >
-                                            @error('username')
-                                                <span class="invalid-feedback" role="alert">
-                                                     <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <br/>
-                                            Posisi
-                                            <select name="posisi" class="form-control" value="{{ old('posisi') }}">
-                                                @if ($user->posisi == "Admin")
-                                                    <option value="Admin" selected>Admin</option>
-                                                    <option value="Operator">Operator</option>
-                                                    <option value="Kasir">Kasir</option>
-                                                @elseif($user->posisi == "Operator")
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="Operator" selected>Operator</option>
-                                                    <option value="Kasir">Kasir</option>
-                                                @else
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="Operator">Operator</option>
-                                                    <option value="Kasir" selected>Kasir</option>
-                                                @endif
-                                            </select>
-                                            <br/>
-                                            E-Mail
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="{{$user->email}}" >
-                                            @error('email')
+                                            <label for="name">Nama</label>
+                                            <input type="text" class="form-control" required id="name" name="name" value="{{ old('name', $user->name) }}">
+                                            @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -65,10 +38,60 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        Telepon
-                                        <input type="number" class="form-control" required name="telepon" value="{{$user->telepon}}" ><br/>
-                                        Alamat
-                                        <textarea type="text" class="form-control" required name="alamat"  style="height:215px">{{$user->alamat}}</textarea>
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" value="{{ old('username') }}" placeholder="{{ $user->username }}">
+                                            @error('username')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="telepon">Telepon</label>
+                                            <input type="number" class="form-control @error('telepon') is-invalid @enderror" required name="telepon" value="{{ old('telepon', $user->telepon) }}">
+                                            @error('telepon')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="{{ $user->email }}">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="posisi">Posisi</label>
+                                            <select name="posisi" class="form-control">
+                                                @if ( auth()->user()->posisi === 'Admin' )
+                                                    <option value="Admin" {{ $user->posisi === 'Admin' ? 'selected' : '' }}>Admin</option>
+                                                @endif
+                                                <option value="Operator" {{ $user->posisi === 'Operator' ? 'selected' : '' }}>Operator</option>
+                                                <option value="Kasir" {{ $user->posisi === 'Kasir' ? 'selected' : '' }}>Kasir</option>
+                                            </select>
+                                            @error('posisi')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="alamat">Alamat</label>
+                                            <textarea type="text" class="form-control" required name="alamat" style="height:180px">{{ old('alamat', $user->alamat) }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" type="submit">Simpan Perubahan</button>

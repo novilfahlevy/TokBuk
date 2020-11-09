@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Penulis Buku
+Penulis
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Penulis Buku
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
           <div class="section-header">
-                <h1>Penulis Buku</h1>
+                <h1>Penulis</h1>
           </div>
         </section>
           <div class="section-body">
@@ -18,7 +18,7 @@ Penulis Buku
                         @include('layouts.flash-alert')
                         <div class="card">
                             <div class="card-header">
-                                <h4>Penulis Buku</h4>
+                                <h4>Daftar Penulis</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right">
                                     <a class="btn btn-sm btn-primary text-white" data-target=".bs-example-modal-lg-" data-toggle="modal" title="Tambah Data"><i class="fas fa-plus"></i></a>

@@ -12,6 +12,7 @@
                     <h1>Tambah Pengguna</h1>
                 </div>
                 <div class="section-body">
+                    @include('layouts.flash-alert')
                     <div class="card">
                         <div class="card-header">
                             <h4>Form Tambah Pengguna</h4>
@@ -27,58 +28,86 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Nama
-                                                    <input type="text" class="form-control" required name="name" value="{{ old('name') }}" >
-                                                    <br/>
-                                                    Username
-                                                    <input type="text" class="form-control @error('username') is-invalid @enderror" required name="username" value="{{ old('username') }}">
-                                                    @error('username')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
+                                                    <label for="name">Nama</label>
+                                                    <input type="text" class="form-control" required id="name" name="name" value="{{ old('name') }}">
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
                                                     @enderror
-                                                    <br/>
-
-                                                    Posisi
-                                                    <select name="posisi" class="form-control">
-                                                        <option value=''>--- Pilih Posisi ---</option>
-                                                        <option value="Admin">Admin</option>
-                                                        <option value="Operator">Operator</option>
-                                                        <option value="Kasir">Kasir</option>
-                                                    </select>
-                                                    <br/>
-
-                                                    E-Mail
-                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" required name="email" value="{{ old('email') }}">
-                                                    @error('email')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                    @enderror
-                                                    <br/>
-                                                    Telepon
-                                                    <input type="number" class="form-control" required name="telepon" value="{{ old('telepon') }}">
                                                 </div>
-                                                
-                                               
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    Password
-                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                                        @error('password')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                        <br/>
-
-                                                    Konfirmasi Password
-                                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                                    <br/>
-
-                                                    Alamat
-                                                    <textarea type="text" class="form-control" required name="alamat" value="{{ old('alamat') }}" style="height:215px"></textarea>
+                                                    <label for="username">Username</label>
+                                                    <input type="text" class="form-control @error('username') is-invalid @enderror" required name="username" id="username" value="{{ old('username') }}">
+                                                    @error('username')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="telepon">Telepon</label>
+                                                    <input type="number" class="form-control @error('telepon') is-invalid @enderror" required name="telepon" value="{{ old('telepon') }}">
+                                                    @error('telepon')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" required name="email" value="{{ old('email') }}">
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" class="form-control @error('password') is-invalid @enderror" required name="password" value="{{ old('password') }}">
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="password_confirmation">Konfirmasi Password</label>
+                                                    <input type="password" class="form-control" required name="password_confirmation" value="{{ old('password_confirmation') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="posisi">Posisi</label>
+                                                    <select name="posisi" class="form-control">
+                                                        @if ( auth()->user()->posisi === 'Admin' ) 
+                                                            <option value="Admin">Admin</option> 
+                                                        @endif
+                                                        <option value="Operator">Operator</option>
+                                                        <option value="Kasir">Kasir</option>
+                                                    </select>
+                                                    @error('posisi')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="alamat">Alamat</label>
+                                                    <textarea type="text" class="form-control" required id="alamat" name="alamat" value="{{ old('alamat') }}" style="height:180px"></textarea>
                                                 </div>
                                             </div>
                                         </div>

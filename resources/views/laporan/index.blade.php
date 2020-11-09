@@ -24,7 +24,7 @@ Laporan
                   </div>
                 </div>
                 <div class="card-body pb-0">
-                  <h6 class="mb-3 bg-secondary rounded py-2 px-3 text-white text-center" id="waktuLaporanPenjualan"></h6>
+                  <h6 class="mb-3 text-center" id="waktuLaporanPenjualan"></h6>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>
@@ -86,7 +86,7 @@ Laporan
                   </div>
                 </div>
                 <div class="card-body pb-0">
-                  <h6 class="mb-3 bg-secondary rounded py-2 px-3 text-white text-center" id="waktuLaporanPendapatan"></h6>
+                  <h6 class="mb-3 text-center" id="waktuLaporanPendapatan"></h6>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>

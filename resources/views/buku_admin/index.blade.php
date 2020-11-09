@@ -17,7 +17,7 @@ Buku
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Buku</h4>
+                                <h4>Daftar Buku</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
                                 <button type="button" class="btn btn-sm btn-warning" title="FilterData" data-toggle="modal" data-target="#filterModal"><i class="fas fa-filter"></i></button>

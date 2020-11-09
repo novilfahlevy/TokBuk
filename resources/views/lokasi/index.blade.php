@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Lokasi Buku
+Lokasi
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Lokasi Buku
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
           <div class="section-header">
-                <h1>Lokasi Buku</h1>
+                <h1>Lokasi</h1>
           </div>
           <div class="section-body">
             <div class="content-body table">
@@ -17,7 +17,7 @@ Lokasi Buku
                         @include('layouts.flash-alert')
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Lokasi Buku</h4>
+                                <h4>Daftar Lokasi</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right">
                                 <button class="btn btn-sm btn-primary" title="Tambah Data" data-toggle="modal" data-target="#createLokasiModal">
