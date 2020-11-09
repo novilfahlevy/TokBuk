@@ -97,7 +97,6 @@
 
   $(function(){ 
     function deleteWithForm($form) {
-      const form = $(event.target).parent();
       Swal.fire({
         title: 'Apakah anda yakin ingin menghapus data tersebut?',
         text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
@@ -120,7 +119,7 @@
         deleteWithForm($(event.target).parent());
         return;
       }
-      
+
       if ( (event.target.tagName === 'I' && $(event.target).parent().hasClass('btn-delete')) ) {
         event.preventDefault();
         deleteWithForm($(event.target).parent().parent());
