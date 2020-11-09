@@ -47,7 +47,7 @@ class LaporanController extends Controller
 
 	public function pembelian(Request $request)
 	{
-		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal_terima', '>=', $request->dari)->whereDate('pembelian_buku.tanggal_terima', '<=', $request->sampai);
+		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $request->dari)->whereDate('pembelian_buku.tanggal', '<=', $request->sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
@@ -83,7 +83,7 @@ class LaporanController extends Controller
 	}
 
 	public function pdfpembelian($dari, $sampai) {
-		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal_terima', '>=', $dari)->whereDate('pembelian_buku.tanggal_terima', '<=', $sampai);
+		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $dari)->whereDate('pembelian_buku.tanggal', '<=', $sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');

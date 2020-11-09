@@ -26,8 +26,7 @@ class PembelianBukuController extends Controller
 		->select([
 			'pembelian_buku.id',
 			'pembelian_buku.kode',
-			'pembelian_buku.tanggal_pesan',
-			'pembelian_buku.tanggal_terima',
+			'pembelian_buku.tanggal',
 			'pembelian_buku.id_distributor',
 			'pembelian_buku.bayar',
 			'pembelian_buku.total_harga',
@@ -36,8 +35,7 @@ class PembelianBukuController extends Controller
 		->groupBy([
 			'pembelian_buku.id',
 			'pembelian_buku.kode',
-			'pembelian_buku.tanggal_pesan',
-			'pembelian_buku.tanggal_terima',
+			'pembelian_buku.tanggal',
 			'pembelian_buku.id_distributor',
 			'pembelian_buku.bayar',
 			'pembelian_buku.total_harga'
@@ -46,7 +44,7 @@ class PembelianBukuController extends Controller
 
 	public function index()
 	{
-		$pembelian = $this->getPembelianBuku()->orderBy('tanggal_terima', 'DESC')->get();
+		$pembelian = $this->getPembelianBuku()->orderBy('tanggal', 'DESC')->get();
 		$distributor = Distributor::all();
 		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
 	}
@@ -57,25 +55,20 @@ class PembelianBukuController extends Controller
 		$distributor = Distributor::all();
 
 		if ( $request->mulai ) {
-			$pembelian->whereDate('tanggal_pesan', '>=', $request->mulai);
+			$pembelian->whereDate('tanggal', '>=', $request->mulai);
 		}
 		
 		if ( $request->sampai ) {
-			$pembelian->whereDate('tanggal_pesan', '<=', $request->sampai);
+			$pembelian->whereDate('tanggal', '<=', $request->sampai);
 		}
 		
 		if ( $request->distributor ) {
 			$pembelian->where('id_distributor', $request->distributor);
 		}
 
-		switch ( $request->status ) {
-			case 'Belum Diterima' : $pembelian->whereNull('tanggal_terima'); break;
-			case 'Sudah Diterima' : $pembelian->whereNotNull('tanggal_terima'); break;
-		}
-
 		session($request->except('_token'));
 
-		$pembelian = $pembelian->orderBy('tanggal_terima', 'DESC')->get();
+		$pembelian = $pembelian->orderBy('tanggal', 'DESC')->get();
 
 		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
 	}
@@ -119,10 +112,13 @@ class PembelianBukuController extends Controller
 			$jumlahPembelianBuku = PembelianBuku::count() + 1;
 			$kode = substr('P000000000', 0, -count(str_split((string) $jumlahPembelianBuku))) . $jumlahPembelianBuku;
 
+			$faktur = $request->file('faktur');
+			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
+
 			$pembelianBuku = PembelianBuku::create([
 				'kode' => $kode,
-				'tanggal_pesan' => $request->tanggal_pesan,
-				// 'faktur' => $namaFaktur,
+				'tanggal' => $request->tanggal,
+				'faktur' => $namaFaktur,
 				'id_user' => auth()->user()->id,
 				'id_distributor' => (int) $idDistributor,
 				'total_harga' => $bukuYangDibeli->totalHarga,
@@ -155,8 +151,8 @@ class PembelianBukuController extends Controller
 						'status' => 'Penambahan'
 					]);
 
-					// $bukuLama = Buku::find($buku->idBuku);
-					// $bukuLama->update(['jumlah' => $bukuLama->jumlah + $buku->jumlah]);
+					$bukuLama = Buku::find($buku->idBuku);
+					$bukuLama->update(['jumlah' => $bukuLama->jumlah + $buku->jumlah]);
 				}
 			}
 
@@ -178,56 +174,18 @@ class PembelianBukuController extends Controller
 		}
 	}
 
-	public function terima(Request $request, $id)
-	{
-		$pembelian = PembelianBuku::find($id);
-
-		DB::beginTransaction();
-		try {
-			$faktur = $request->file('faktur');
-			$namaFaktur = $pembelian->kode . '.' . $faktur->getClientOriginalExtension();
-
-			Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
-
-			$pembelian->update([
-				'tanggal_terima' => $request->tanggal_terima,
-				'faktur' => $namaFaktur
-			]);
-
-			foreach ( $pembelian->detail as $pembelianBuku ) {
-				$bukuLama = Buku::find($pembelianBuku->id_buku);
-				$bukuLama->update(['jumlah' => $bukuLama->jumlah + $pembelianBuku->jumlah]);
-			}
-
-			DB::commit();
-
-			return redirect()->route('pembelian-buku.detail', ['id' => $pembelian->id])->with([
-				'type' => 'success',
-				'message' => 'Penerimaan Pesanan Berhasil Dilakukan.'
-			]);
-		} catch ( Exception $e ) {
-			DB::rollBack();
-			return redirect()->route('pembelian-buku.detail', ['id' => $pembelian->id])->with([
-				'type' => 'danger',
-				'message' => 'Gagal Melakukan Penerimaan Pesanan, Silahkan coba lagi.'
-			]);
-		}
-	}
-
 	public function destroy($id)
 	{
 		DB::beginTransaction();
 		try {
 			$pembelian = PembelianBuku::find($id);
 
-			if ( $pembelian->tanggal_terima ) {
-				foreach ( $pembelian->detail as $detailPembelian ) {
-					$buku = Buku::find($detailPembelian->id_buku);
-					if ( $buku->jumlah < $detailPembelian->jumlah ) {
-						$buku->update(['jumlah' => 0]);
-					} else {
-						$buku->update(['jumlah' => $buku->jumlah - $detailPembelian->jumlah]);
-					}
+			foreach ( $pembelian->detail as $detailPembelian ) {
+				$buku = Buku::find($detailPembelian->id_buku);
+				if ( $buku->jumlah < $detailPembelian->jumlah ) {
+					$buku->update(['jumlah' => 0]);
+				} else {
+					$buku->update(['jumlah' => $buku->jumlah - $detailPembelian->jumlah]);
 				}
 			}
 

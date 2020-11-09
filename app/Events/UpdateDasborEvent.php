@@ -83,7 +83,7 @@ class UpdateDasborEvent implements ShouldBroadcast
 		$tahun = $this->now->year;
 		$bulan = $this->now->month;
 
-		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal_terima', $tahun)->whereMonth('pembelian_buku.tanggal_terima', $bulan);
+		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');

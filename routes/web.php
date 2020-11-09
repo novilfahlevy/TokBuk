@@ -100,7 +100,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('pembelian-buku/faktur/{id}', 'PembelianBukuController@faktur')->name('pembelian-buku.faktur');
   Route::get('pembelian-buku/laporan/{id}', 'PembelianBukuController@laporan')->name('pembelian-buku.laporan');
   Route::delete('pembelian-buku/{id}', 'PembelianBukuController@destroy')->name('pembelian-buku.destroy');
-  Route::put('pembelian-buku/terima/{id}', 'PembelianBukuController@terima')->name('pembelian-buku.terima');
 
   //pengaturan
   Route::get('pengaturan', 'PengaturanController@index')->name('pengaturan');

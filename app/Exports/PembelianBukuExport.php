@@ -28,11 +28,11 @@ class PembelianBukuExport implements FromView
 		$pembelian = DetailPembelianBuku::join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian');
 
 		if ( $this->mulai ) {
-			$pembelian->whereDate('pembelian_buku.tanggal_terima', '>=', $this->mulai);
+			$pembelian->whereDate('pembelian_buku.tanggal', '>=', $this->mulai);
 		}
 
 		if ( $this->sampai ) {
-			$pembelian->whereDate('pembelian_buku.tanggal_terima', '<=', $this->sampai);
+			$pembelian->whereDate('pembelian_buku.tanggal', '<=', $this->sampai);
 		}
 
 		if ( $this->distributor ) {

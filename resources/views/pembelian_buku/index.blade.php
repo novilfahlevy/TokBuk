@@ -41,8 +41,7 @@ Pembelian Buku
                                                     <th scope="col">No</th>
                                                     <th>Kode</th>
                                                     <th>Distributor</th>
-                                                    <th>Tanggal Pesan</th>
-                                                    <th>Tanggal Terima</th>
+                                                    <th>Tanggal</th>
                                                     <th>Nominal Pembayaran</th>
                                                     <th>Jumlah Buku</th>
                                                     <th>Harga</th>
@@ -55,8 +54,7 @@ Pembelian Buku
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
                                                     <td>{{ $p->kode }}</td>
                                                     <td>{{ $p->distributor ? $p->distributor->nama : '-' }}</td>
-                                                    <td>{{ $p->tanggal_pesan }}</td>
-                                                    <td>{!! $p->tanggal_terima ?? '<span class="text-warning">Belum Diterima</span>' !!}</td>
+                                                    <td>{{ $p->tanggal }}</td>
                                                     <td>Rp {{ number_format($p->bayar, 2, ',', '.') }}</td>
                                                     <td>{{ $p->jumlah_buku }}</td>
                                                     <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
@@ -170,24 +168,14 @@ Pembelian Buku
                         </div>
                         <div class="col-6">
                             <div class="form-group mb-3">
-                                <label for="mulai">Dari tanggal (tanggal pesan)</label>
+                                <label for="mulai">Dari tanggal</label>
                                 <input type="date" class="form-control" id="mulai" name="mulai" value="{{ session()->pull('mulai') }}">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group mb-3">
-                                <label for="sampai">Sampai tanggal (tanggal pesan)</label>
+                                <label for="sampai">Sampai tanggal</label>
                                 <input type="date" class="form-control" id="sampai" name="sampai" value="{{ session()->pull('sampai') }}">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group mb-0">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="" selected>Semua</option>
-                                    <option value="Belum Diterima" {{ $status == 'Belum Diterima' ? 'selected' : '' }}>Belum Diterima</option>
-                                    <option value="Sudah Diterima" {{ $status == 'Sudah Diterima' ? 'selected' : '' }}>Sudah Diterima</option>
-                                </select>
                             </div>
                         </div>
                     </div>

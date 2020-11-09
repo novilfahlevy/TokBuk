@@ -21,8 +21,7 @@ class PembelianBukuTableSeeder extends Seeder
 
         PembelianBuku::create([
             'kode' => 'P000000001',
-            'tanggal_pesan' => $now->format('Y-m-d'),
-            'tanggal_terima' => $now->addDays(4)->format('Y-m-d'),
+            'tanggal' => $now->format('Y-m-d'),
             'id_user' => 1,
             'id_distributor' => 3,
             'total_harga' => $totalHarga,
