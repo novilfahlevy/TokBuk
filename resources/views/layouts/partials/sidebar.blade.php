@@ -20,7 +20,7 @@
         </a>
       </li>
 
-      @if ( $posisi === 'Admin' || $posisi === 'Kasir' )
+      @if ( $posisi === 'Admin' || $posisi === 'Kasir' || $posisi === 'Owner' )
         <li class="nav-item {{Request::segment(1)=='transaksi' ?'active':''}}">
           <a class="nav-link" href="{{ route('transaksi') }}">
             <i class="fas fa-dollar-sign"></i><span>Transaksi</span>
@@ -28,7 +28,7 @@
         </li>
       @endif
 
-      @if ( $posisi === 'Admin' || $posisi === 'Operator' )
+      @if ( $posisi === 'Admin' || $posisi === 'Operator' || $posisi === 'Owner' )
       <li class="nav-item  {{Request::segment(1)=='laporan' ?'active':''}}">
         <a class="nav-link" href="{{route('laporan')}}" aria-expanded="false">
           <i class="fas fa-file"></i> <span>Laporan</span>
@@ -82,7 +82,7 @@
 
       @endif
 
-      @if ( $posisi === 'Admin' || $posisi === 'Operator' )
+      @if ( $posisi === 'Admin' || $posisi === 'Operator' || $posisi === 'Owner' )
         <li class="menu-header">Lainnya</li>
 
         <li class="nav-item {{Request::segment(1)=='pengguna' ?'active':''}}">
@@ -92,7 +92,7 @@
         </li>
       @endif
 
-      @if ( $posisi === 'Admin' )
+      @if ( $posisi === 'Admin' || $posisi === 'Owner' )
         <li class="nav-item  {{Request::segment(1)=='pengaturan' ?'active':''}}">
           <a class="nav-link" href="{{route('pengaturan')}}" aria-expanded="false">
             <i class="fas fa-cogs"></i></i><span>Pengaturan</span>

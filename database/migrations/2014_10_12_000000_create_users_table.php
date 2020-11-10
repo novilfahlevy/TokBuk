@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('username');
-            $table->enum('posisi', ['Admin', 'Operator', 'Kasir']);
+            $table->enum('posisi', ['Owner', 'Admin', 'Operator', 'Kasir']);
             $table->string('email');
             $table->string('telepon');
             $table->text('alamat');

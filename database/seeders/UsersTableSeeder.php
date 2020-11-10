@@ -12,6 +12,16 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         App\User::create([
+            'name' => 'owner',
+            'username' => 'owner',
+            'posisi' => 'Owner',
+            'email' => 'owner@gmail.com',
+            'telepon' => '08927621145',
+            'alamat' => 'Jl. Sawo',
+            'password' => bcrypt('123123')
+        ]);
+
+        App\User::create([
             'name' => 'admin',
             'username' => 'admin',
             'posisi' => 'Admin',
@@ -20,6 +30,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => 'Jl. Bunga Bunga',
             'password' => bcrypt('123123')
         ]);
+
         App\User::create([
             'name' => 'operator',
             'username' => 'operator',
@@ -29,6 +40,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => 'Jl. Biola',
             'password' => bcrypt('123123')
         ]);
+
         App\User::create([
             'name' => 'kasir',
             'username' => 'kasir',
