@@ -71,7 +71,7 @@ Pembelian Buku
                                                         <div class="btn-group">
                                                             <a href="{{ route('pembelian-buku.detail', $p->id) }}"
                                                                 class="btn btn-sm btn-primary text-white" title="Detail Data">
-                                                                <i class="fas fa-eye"></i>
+                                                                <i class="fas fa-info"></i>
                                                             </a>
                                                         </div>
                                                     </td>

@@ -62,7 +62,7 @@ Pengguna
                                                             <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                                         </div>
                                                         <div class="btn-group">
-                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-eye"></i></a>
+                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-info"></i></a>
                                                         </div>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form " action="{{route('user.destroy',$u['id'])}}">
@@ -73,7 +73,7 @@ Pengguna
                                                         </div>
                                                     @else
                                                         <div class="btn-group">
-                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-eye"></i></a>
+                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-info"></i></a>
                                                         </div>
                                                     @endif
                                                 </td>
