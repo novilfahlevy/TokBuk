@@ -69,7 +69,7 @@ Transaksi
                                                         <div class="btn-group">
                                                             <a href="{{ route('transaksi.detail', $t->id) }}"
                                                                 class="btn btn-sm btn-primary text-white" title="Detail Data">
-                                                                <i class="fas fa-info"></i>
+                                                                <i class="fas fa-info px-1"></i>
                                                             </a>
                                                         </div>
                                                     </td>

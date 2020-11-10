@@ -60,7 +60,7 @@ Buku
                                         </form>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}" class="btn btn-sm btn-primary text-white" title="Detail Data"><i class="fa fa-info"></i></i></a>
+                                        <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}" class="btn btn-sm btn-primary text-white" title="Detail Data"><i class="fa fa-info px-1"></i></i></a>
                                     </div>
                                     {{-- <div class="btn-group">
                                         <a href="{{ route( 'buku.tambah' ,['id' => $b->id]) }}" class="btn btn-sm btn-success text-white" title="Tambah Jumlah Buku"><i class="fas fa-plus"></i></i></a>
