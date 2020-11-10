@@ -167,10 +167,10 @@ class TransaksiController extends Controller
 		return Excel::download(new TransaksiExport($request->mulai, $request->sampai), 'transaksi.xlsx');
 	}
 	
-	public function struk($id)
+	public function nota($id)
 	{
 		$transaksi = Transaksi::find($id);
 		$pengaturan = Pengaturan::first();
-		return PDF::loadView('transaksi.struk', compact('transaksi', 'pengaturan'))->download('struk_' . $transaksi->kode . '.pdf');
+		return PDF::loadView('transaksi.nota', compact('transaksi', 'pengaturan'))->download('nota_' . $transaksi->kode . '.pdf');
 	}
 }

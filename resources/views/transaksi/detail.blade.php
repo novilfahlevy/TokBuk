@@ -17,7 +17,7 @@ Detail Transaksi
           <div class="card-header">
             <h4>Data Transaksi</h4>
             <div class="card-header-form">
-              <a href="{{ route('transaksi.struk', $transaksi->id) }}" class="btn btn-success mr-2" title="Download Struk">
+              <a href="{{ route('transaksi.nota', $transaksi->id) }}" class="btn btn-success mr-2" title="Download Nota">
                 <i class="fas fa-file-download"></i>
               </a>
               <a href="{{ route('transaksi') }}" class="btn btn-primary">

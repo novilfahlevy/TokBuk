@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::put('transaksi/update/{id}', 'TransaksiController@update')->name('transaksi.update');
   Route::get('transaksi/{id}/detail', 'TransaksiController@detail')->name('transaksi.detail');
   Route::post('transaksi/export', 'TransaksiController@export')->name('transaksi.export');
-  Route::get('transaksi/struk/{id}', 'TransaksiController@struk')->name('transaksi.struk');
+  Route::get('transaksi/nota/{id}', 'TransaksiController@nota')->name('transaksi.nota');
   Route::delete('transaksi/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');
 
   //pembelian buku
