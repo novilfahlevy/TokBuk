@@ -59,7 +59,7 @@ Pengguna
                                                 <td>
                                                     @if (auth()->user()->id == $u->id)
                                                         Saya
-                                                    @elseif ( (auth()->user()->posisi === 'Admin' && $u->posisi !== 'Admin') || (auth()->user()->posisi === 'Operator' && $u->posisi === 'Kasir') || (auth()->user()->posisi === 'Owner') )
+                                                    @elseif ( $u->posisi !== 'Owner' && ((auth()->user()->posisi === 'Admin' && $u->posisi !== 'Admin') || (auth()->user()->posisi === 'Operator' && $u->posisi === 'Kasir') || (auth()->user()->posisi === 'Owner')) )
                                                         <div class="btn-group">
                                                             <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                                         </div>
