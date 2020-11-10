@@ -83,7 +83,7 @@
     </tr>
   </tbody>
 </table>
-<br>
+{{-- <br>
 <center>Terima kasih telah membeli buku di {{ $pengaturan->nama_toko }}<br>
 Buku yang telah dibeli tidak dapat ditukar atau dikembalikan<br>
-Terima kasih atas kunjungan anda</center>
+Terima kasih atas kunjungan anda</center> --}}
