@@ -145,15 +145,27 @@ Buku
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group mb-2">
+                        <div class="form-group mb-3">
                             <label for="tahunTerbitDari">Tahun terbit dari</label>
                             <input type="number" id="tahunTerbitDari" name="tahunTerbitDari" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitDari') }}">
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group mb-2">
+                        <div class="form-group mb-3">
                             <label for="tahunTerbitSampai">Tahun terbit sampai</label>
                             <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitSampai') }}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="tahunTerbitDari">Jumlah dari</label>
+                            <input type="number" id="jumlahDari" name="jumlahDari" class="form-control" pattern="/0-9/" value="{{ session()->pull('jumlahDari') }}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label for="jumlahSampai">Jumlah sampai</label>
+                            <input type="number" id="jumlahSampai" name="jumlahSampai" class="form-control" pattern="/0-9/" value="{{ session()->pull('jumlahSampai') }}">
                         </div>
                     </div>
                     <div class="col-12">

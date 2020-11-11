@@ -79,6 +79,14 @@ class BukuController extends Controller
             $buku->where('tahun_terbit', '<=', $request->tahunTerbitSampai);
         }
 
+        if ( $request->jumlahDari !== null ) {
+            $buku->where('jumlah', '>=', (int) $request->jumlahDari);
+        }
+
+        if ( $request->jumlahSampai !== null ) {
+            $buku->where('jumlah', '<=', (int) $request->jumlahSampai);
+        }
+
         if ( $request->diskon ) {
             $buku->whereNotNull('diskon')->where('diskon', '>', 0);
         }
