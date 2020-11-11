@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPembelianBuku extends Model
 {
     protected $table = 'detail_pembelian_buku';
-    protected $fillable = ['id_pembelian', 'id_buku', 'harga', 'jumlah', 'status'];
+    protected $fillable = ['id_pembelian', 'id_buku', 'harga', 'jumlah'];
 
     
     public function buku()

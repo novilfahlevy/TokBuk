@@ -141,16 +141,14 @@ class PembelianBukuController extends Controller
 						'id_pembelian' => $pembelianBuku->id,
 						'id_buku' => $bukuBaru->id,
 						'harga' => (int) $buku->harga,
-						'jumlah' => $buku->jumlah,
-						'status' => 'Baru'
+						'jumlah' => $buku->jumlah
 					]);
 				} else {
 					DetailPembelianBuku::create([
 						'id_pembelian' => $pembelianBuku->id,
 						'id_buku' => $buku->idBuku,
 						'harga' => (int) $buku->harga,
-						'jumlah' => $buku->jumlah,
-						'status' => 'Penambahan'
+						'jumlah' => $buku->jumlah
 					]);
 
 					$bukuLama = Buku::find($buku->idBuku);

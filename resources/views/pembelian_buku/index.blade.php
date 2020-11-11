@@ -90,7 +90,6 @@ Pembelian Buku
 </div>
 
 @php $distributorId = session()->pull('distributor')  @endphp
-@php $status = session()->pull('status') @endphp
 
 <div class="modal" tabindex="-1" role="dialog" id="exportModal">
     <form action="{{ route('pembelian-buku.export') }}" method="POST">

@@ -21,7 +21,6 @@ class CreateDetailPembelianBukuTable extends Migration
             $table->foreign('id_buku')->references('id')->on('buku');
             $table->integer('harga');
             $table->integer('jumlah');
-            $table->enum('status', ['Penambahan', 'Baru']);
             $table->timestamps();
         });
     }

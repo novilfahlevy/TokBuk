@@ -33,7 +33,6 @@ class PembelianBukuTableSeeder extends Seeder
         DetailPembelianBuku::create([
             'id_pembelian' => 1,
             'id_buku' => 1,
-            'status' => 'Baru',
             'harga' => 65000,
             'jumlah' => 100
         ]);
@@ -41,7 +40,6 @@ class PembelianBukuTableSeeder extends Seeder
         DetailPembelianBuku::create([
             'id_pembelian' => 1,
             'id_buku' => 2,
-            'status' => 'Baru',
             'harga' => 27000,
             'jumlah' => 100
         ]);
@@ -49,7 +47,6 @@ class PembelianBukuTableSeeder extends Seeder
         DetailPembelianBuku::create([
             'id_pembelian' => 1,
             'id_buku' => 3,
-            'status' => 'Baru',
             'harga' => 84500,
             'jumlah' => 100
         ]);
@@ -57,7 +54,6 @@ class PembelianBukuTableSeeder extends Seeder
         DetailPembelianBuku::create([
             'id_pembelian' => 1,
             'id_buku' => 4,
-            'status' => 'Baru',
             'harga' => 12200,
             'jumlah' => 100
         ]);
@@ -65,7 +61,6 @@ class PembelianBukuTableSeeder extends Seeder
         DetailPembelianBuku::create([
             'id_pembelian' => 1,
             'id_buku' => 5,
-            'status' => 'Baru',
             'harga' => 76000,
             'jumlah' => 100
         ]);
@@ -73,7 +68,6 @@ class PembelianBukuTableSeeder extends Seeder
         DetailPembelianBuku::create([
             'id_pembelian' => 1,
             'id_buku' => 6,
-            'status' => 'Baru',
             'harga' => 81300,
             'jumlah' => 100
         ]);
