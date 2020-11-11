@@ -149,7 +149,7 @@ class TransaksiController extends Controller
 
 			foreach ( $transaksi->detail as $detail ) {
 				if ( $buku = $detail->buku ) {
-					$buku->update(['jumlah' => $buku->first()->jumlah + $detail->jumlah]);
+					$buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
 				}
 			}
 
