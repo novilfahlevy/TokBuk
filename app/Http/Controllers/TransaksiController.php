@@ -146,6 +146,13 @@ class TransaksiController extends Controller
 		DB::beginTransaction();
 		try {
 			$transaksi = Transaksi::find($id);
+
+			foreach ( $transaksi->detail as $detail ) {
+				if ( $buku = $detail->buku ) {
+					$buku->update(['jumlah' => $buku->first()->jumlah + $detail->jumlah]);
+				}
+			}
+
 			$transaksi->delete();
 			DB::commit();
 			event(new UpdateDasborEvent);
