@@ -80,7 +80,7 @@ class BukuController extends Controller
         }
 
         if ( $request->diskon ) {
-            $buku->whereNotNull('diskon');
+            $buku->whereNotNull('diskon')->where('diskon', '>', 0);
         }
 
         $buku = $buku->get();
