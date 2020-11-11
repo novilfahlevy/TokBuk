@@ -91,8 +91,9 @@
                                                 <div class="form-group">
                                                     <label for="posisi">Posisi</label>
                                                     <select name="posisi" class="form-control">
-                                                        @if ( auth()->user()->posisi === 'Admin' ) 
-                                                            <option value="Admin">Admin</option> 
+                                                        @php $posisi = auth()->user()->posisi; @endphp
+                                                        @if ( $posisi === 'Admin' || $posisi === 'Owner' ) 
+                                                            <option value="Admin">Admin</option>
                                                         @endif
                                                         <option value="Operator">Operator</option>
                                                         <option value="Kasir">Kasir</option>

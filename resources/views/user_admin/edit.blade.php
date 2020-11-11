@@ -74,7 +74,8 @@
                                         <div class="form-group">
                                             <label for="posisi">Posisi</label>
                                             <select name="posisi" class="form-control">
-                                                @if ( auth()->user()->posisi === 'Admin' )
+                                                @php $posisi = auth()->user()->posisi; @endphp
+                                                @if ( $posisi === 'Admin' || $posisi === 'Owner' ) 
                                                     <option value="Admin" {{ $user->posisi === 'Admin' ? 'selected' : '' }}>Admin</option>
                                                 @endif
                                                 <option value="Operator" {{ $user->posisi === 'Operator' ? 'selected' : '' }}>Operator</option>
