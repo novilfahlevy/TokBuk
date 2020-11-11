@@ -61,10 +61,10 @@ Pengguna
                                                         Saya
                                                     @elseif ( $u->posisi !== 'Owner' && ((auth()->user()->posisi === 'Admin' && $u->posisi !== 'Admin') || (auth()->user()->posisi === 'Operator' && $u->posisi === 'Kasir') || (auth()->user()->posisi === 'Owner')) )
                                                         <div class="btn-group">
-                                                            <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
+                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-info px-1"></i></a>
                                                         </div>
                                                         <div class="btn-group">
-                                                            <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-info px-1"></i></a>
+                                                            <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('user.edit',  ['id' => $u["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                                         </div>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form " action="{{route('user.destroy',$u['id'])}}">

@@ -49,6 +49,7 @@ Penerbit
                                       <td>{{$loop->index+1}}</td>
                                       <td>{{$p->nama}}</td>
                                   <td>
+                                      <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}" title="Detail Data"><i class="fa fa-info px-1"></i></a>
                                       <div class="btn-group">
                                         <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('penerbit.edit',  ['id' => $p["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
@@ -59,7 +60,6 @@ Penerbit
                                             <button  class="btn btn-sm btn-danger btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
-                                    <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}" title="Detail Data"><i class="fa fa-info px-1"></i></a>
                                   </td>
                               </tr>
                               

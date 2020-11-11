@@ -60,6 +60,12 @@ Pembelian Buku
                                                     <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
+                                                            <a href="{{ route('pembelian-buku.detail', $p->id) }}"
+                                                                class="btn btn-sm btn-primary text-white" title="Detail Data">
+                                                                <i class="fas fa-info px-1"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="btn-group">
                                                             <form method="post" class="delete_form "
                                                             action="{{route('pembelian-buku.destroy',$p->id)}}">
                                                             @method('DELETE')
@@ -67,12 +73,6 @@ Pembelian Buku
                                                             <button class="btn btn-sm btn-danger btn-delete"><i
                                                                 class="fa fa-trash" title="Hapus Data"></i></button>
                                                             </form>
-                                                        </div>
-                                                        <div class="btn-group">
-                                                            <a href="{{ route('pembelian-buku.detail', $p->id) }}"
-                                                                class="btn btn-sm btn-primary text-white" title="Detail Data">
-                                                                <i class="fas fa-info px-1"></i>
-                                                            </a>
                                                         </div>
                                                     </td>
                                                 </tr>
