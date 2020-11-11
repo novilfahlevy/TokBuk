@@ -156,6 +156,14 @@ Buku
                             <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitSampai') }}">
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="form-group mt-2 mb-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="diskon" id="diskon" {{ session()->pull('diskon') ? 'checked' : '' }}>
+                                <label class="custom-control-label" for="diskon" style="user-select: none">Diskon</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

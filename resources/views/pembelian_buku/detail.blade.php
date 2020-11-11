@@ -84,7 +84,6 @@ Detail Pembelian Buku
                         <th scope="col">Harga</th>
                         <th scope="col">Jumlah</th>
                         <th scope="col">Sub Total</th>
-                        <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -95,11 +94,6 @@ Detail Pembelian Buku
                           <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
                           <td>{{ $p->jumlah }}</td>
                           <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
-                          <td>
-                            <div class="badge badge-{{ $p->status === 'Baru' ? 'success' : 'primary' }}">
-                              {{$p->status}}
-                            </div>
-                          </td>
                         </tr>
                       @endforeach
                     </tbody>

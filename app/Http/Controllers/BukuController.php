@@ -79,6 +79,10 @@ class BukuController extends Controller
             $buku->where('tahun_terbit', '<=', $request->tahunTerbitSampai);
         }
 
+        if ( $request->diskon ) {
+            $buku->whereNotNull('diskon');
+        }
+
         $buku = $buku->get();
         
         session($request->except('_token'));
