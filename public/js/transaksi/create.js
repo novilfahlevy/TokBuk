@@ -1,7 +1,17 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
 const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
 
+let jumlahBuku = 0;
 let bukuCache = [];
+let bukuPilihan = [];
+
+const appendBukuPilihan = idBuku => {bukuPilihan.push(idBuku); console.log(bukuPilihan)};
+const removeBukuPilihan = idBuku => {
+ if ( idBuku !== 'empty' ) {
+  bukuPilihan = bukuPilihan.filter(id => id !== idBuku);
+ }
+  console.log(bukuPilihan);
+};
 
 function uniqueClass(length) {
   var result = '';
@@ -40,6 +50,8 @@ function fillJsSelect2Options(selectClass, initCallback) {
 
       $('#totalSemuaHarga').text(format(getTotalHarga()));
 
+      appendBukuPilihan(buku.id);
+
       return data.text;
     },
     templateResult: function(data) {
@@ -63,7 +75,12 @@ function fillJsSelect2Options(selectClass, initCallback) {
 function getAllBooks(selectClass) {
   if ( bukuCache.length ) {
     fillJsSelect2Options(selectClass, () => {
-      bukuCache.map(option => $(`.${selectClass}`).append(option));
+      bukuCache.forEach(option => {
+        const idBuku = JSON.parse(atob($(option).attr('value'))).id;
+        if ( !bukuPilihan.includes(idBuku) ) {
+          $(`.${selectClass}`).append(option);
+        }
+      });
     });
     return;
   }
@@ -78,6 +95,7 @@ function getAllBooks(selectClass) {
           const option = `<option value="${data}">${buku.judul}</option>`;
           $(`.${selectClass}`).append(option);
           bukuCache.push(option);
+          jumlahBuku++;
         });
       });
     },
@@ -158,9 +176,11 @@ function getTotalHarga() {
 $(document).on('click', function(event) {
   const target = $(event.target);
   if ( target.prop('tagName') === 'BUTTON' && target.hasClass('hapus-buku') ) {
-    target.parent().parent().addClass('deleted');
+    const tr = target.parent().parent();
+    tr.addClass('deleted');
     $('#totalSemuaHarga').text(format(getTotalHarga()));
     initNumbers();
+    removeBukuPilihan(tr.data('buku-id'));
   }
 });
 
