@@ -5,13 +5,20 @@ let jumlahBuku = 0;
 let bukuCache = [];
 let bukuPilihan = [];
 
-const appendBukuPilihan = idBuku => {bukuPilihan.push(idBuku); console.log(bukuPilihan)};
+const appendBukuPilihan = idBuku => bukuPilihan.push(idBuku);
 const removeBukuPilihan = idBuku => {
  if ( idBuku !== 'empty' ) {
   bukuPilihan = bukuPilihan.filter(id => id !== idBuku);
  }
-  console.log(bukuPilihan);
 };
+
+function setDisableTambahBuku() {
+  $('button#tambahBuku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length >= jumlahBuku);
+}
+
+function setDisableHapusBuku() {
+  $('button.hapus-buku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length <= 1);
+}
 
 function uniqueClass(length) {
   var result = '';
@@ -94,9 +101,9 @@ function getAllBooks(selectClass) {
           const data = btoa(JSON.stringify(buku));
           const option = `<option value="${data}">${buku.judul}</option>`;
           $(`.${selectClass}`).append(option);
-          bukuCache.push(option);
-          jumlahBuku++;
+          bukuCache.push(option);;
         });
+        jumlahBuku = data.buku.length;
       });
     },
     error: function(error) {
@@ -198,3 +205,5 @@ $(document).on('change', function(event) {
 });
 
 tambahBuku();
+setInterval(setDisableTambahBuku, 100);
+setInterval(setDisableHapusBuku, 100);

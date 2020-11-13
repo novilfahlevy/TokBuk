@@ -13,6 +13,10 @@ function uniqueClass(length) {
   return result;
 }
 
+function setDisableHapusBuku() {
+  $('button.hapus-buku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length <= 1);
+}
+
 function fillJsSelect2Options(selectClass, initCallback) {
   initJsSelect2(selectClass, {
     templateSelection: function(data) {
@@ -214,6 +218,7 @@ $(document).on('change', function(event) {
 });
 
 tambahBuku();
+setInterval(setDisableHapusBuku, 100);
 
 function readURL(input) {
   if (input.files && input.files[0]) {
