@@ -25,14 +25,17 @@
     </tr>
   </tbody>
 </table>
-<hr style="border-bottom: dashed;">
+<hr>
 
 <table style="width: 100%">
   <tr>
-    <td>Buku <hr style="border-bottom: dashed;"></td>
-    <td>Harga <hr style="border-bottom: dashed;"></td>
-    <td>QTY<hr style="border-bottom: dashed;"></td>
-    <td>Sub Total <hr style="border-bottom: dashed;"></td>
+    <td>Buku</td>
+    <td>Harga</td>
+    <td>QTY</td>
+    <td>Sub Total</td>
+  </tr>
+  <tr>
+    <td colspan="4"><hr></td>
   </tr>
   
   @foreach ($pembelian->detail as $p)
@@ -45,7 +48,7 @@
     </tr>
     @endforeach
   </table>
-  <hr style="border-bottom: dashed;">
+  <hr>
 
   <table style="width: 100%; text-align : center;">
     <tbody>
