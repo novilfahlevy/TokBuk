@@ -109,7 +109,7 @@ class PembelianBukuController extends Controller
 		DB::beginTransaction();
 
 		try {
-			$jumlahPembelianBuku = PembelianBuku::count() + 1;
+			$jumlahPembelianBuku = PembelianBuku::withTrashed()->count() + 1;
 			$kode = substr('P000000000', 0, -count(str_split((string) $jumlahPembelianBuku))) . $jumlahPembelianBuku;
 
 			$faktur = $request->file('faktur');
