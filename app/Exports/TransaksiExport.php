@@ -28,11 +28,11 @@ class TransaksiExport implements FromView
 			->whereNull('t.deleted_at');
 
 		if ( $this->mulai ) {
-			$transaksi->whereDate('created_at', '>=', $this->mulai);
+			$transaksi->whereDate('t.created_at', '>=', $this->mulai);
 		}
 
 		if ( $this->sampai ) {
-			$transaksi->whereDate('created_at', '<=', $this->sampai);
+			$transaksi->whereDate('t.created_at', '<=', $this->sampai);
 		}
 
 		$transaksi = $transaksi->get();

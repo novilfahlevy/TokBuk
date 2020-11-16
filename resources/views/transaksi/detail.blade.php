@@ -51,10 +51,6 @@ Detail Transaksi
                 <h6 class="mb-1">Kembalian</h6>
                 <p>Rp {{ number_format($transaksi->bayar - $transaksi->total_harga, 2, ',', '.') }}</p>
               </div>
-              <div class="col-lg-2">
-                <h6 class="mb-1">Keterangan</h6>
-                <p>{{ $transaksi->keterangan ?? '-' }}</p>
-              </div>
             </div>
             <hr class="mt-0 mb-3">
             <h6>Buku yang dibeli</h6>

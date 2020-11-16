@@ -43,12 +43,6 @@ Tambah Transaksi
                     </div>
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="form-group">
-                    <label for="keterangan">Keterangan</label>
-                    <textarea type="text" class="form-control" name="keterangan" value="{{ old('keterangan') }}" style="height:80px;"></textarea>
-                  </div>
-                </div>
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between align-items-center">

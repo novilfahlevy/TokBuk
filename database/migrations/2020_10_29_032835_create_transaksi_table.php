@@ -20,7 +20,6 @@ class CreateTransaksiTable extends Migration
             $table->foreign('id_user')->references('id')->on('users');
             $table->integer('bayar');
             $table->integer('total_harga');
-            $table->text('keterangan')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -97,8 +97,7 @@ class TransaksiController extends Controller
 				'kode' => $kode,
 				'id_user' => auth()->user()->id,
 				'bayar' => $bayar,
-				'total_harga' => $transaksi->totalHarga,
-				'keterangan' => $request->keterangan
+				'total_harga' => $transaksi->totalHarga
 			]);
 
 			foreach ( $transaksi->buku as $buku ) {

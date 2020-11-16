@@ -19,11 +19,6 @@
       <td><h6>:</h6></td>
       <td><h6>{{ $pengaturan->alamat }}</h6></td>
     </tr>
-    <tr>
-      <td><h6>Keterangan</h6></td>
-      <td><h6>:</h6></td>
-      <td><h6>{{ $transaksi->keterangan ?? '-' }}</h6></td>
-    </tr>
   </tbody>
 </table>
 <hr>
