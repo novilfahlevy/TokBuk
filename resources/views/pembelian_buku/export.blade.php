@@ -21,7 +21,7 @@
       <tr>
         <td>{{ $loop->index + 1 }}</td>
         <td>{{ $pembelianParent->kode }}</td>
-        <td>{{ $pembelianParent->created_at }}</td>
+        <td>{{ $pembelianParent->tanggal }}</td>
         <td>{{ $buku->isbn }}</td>
         <td>{{ $buku->judul }}</td>
         <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
