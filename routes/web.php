@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('pembelian-buku/faktur/{id}', 'PembelianBukuController@faktur')->name('pembelian-buku.faktur');
     Route::get('pembelian-buku/laporan/{id}', 'PembelianBukuController@laporan')->name('pembelian-buku.laporan');
     Route::delete('pembelian-buku/{id}', 'PembelianBukuController@destroy')->name('pembelian-buku.destroy');
+    Route::get('pembelian-buku/cetak/{id}', 'PembelianBukuController@cetak')->name('pembelian-buku.cetak');
 
     //laporan
     Route::get('laporan', 'LaporanController@index')->name('laporan');
@@ -107,6 +108,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('transaksi/export', 'TransaksiController@export')->name('transaksi.export');
     Route::get('transaksi/nota/{id}', 'TransaksiController@nota')->name('transaksi.nota');
     Route::delete('transaksi/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');
+    Route::get('transaksi/cetak/{id}', 'TransaksiController@cetak')->name('transaksi.cetak');
   });
 
   Route::group(['middleware' => 'posisi:Admin,Owner'], function() {

@@ -178,5 +178,12 @@ class TransaksiController extends Controller
 		$transaksi = Transaksi::find($id);
 		$pengaturan = Pengaturan::first();
 		return PDF::loadView('transaksi.nota', compact('transaksi', 'pengaturan'))->download('nota_' . $transaksi->kode . '.pdf');
-	}
+  }
+  
+  public function cetak($id)
+  {
+    $transaksi = Transaksi::find($id);
+		$pengaturan = Pengaturan::first();
+		return view('transaksi.cetak', compact('transaksi', 'pengaturan'));
+  }
 }

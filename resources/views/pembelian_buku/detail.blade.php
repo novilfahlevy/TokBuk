@@ -19,9 +19,20 @@ Detail Pembelian Buku
               <div class="card-header">
                 <h4>Data Pembelian Buku</h4>
                 <div class="card-header-form">
-                  <a href="{{ route('pembelian-buku.laporan', $pembelian->id) }}" class="btn btn-success mr-2" title="Download Laporan">
+                  {{-- <a href="{{ route('pembelian-buku.laporan', $pembelian->id) }}" class="btn btn-success mr-2" title="Unduh Laporan">
                     <i class="fas fa-file-download"></i>
-                  </a>
+                  </a> --}}
+                  <div class="dropdown">
+                    <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-file"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <h6 class="dropdown-header pl-3 pt-1 pb-0">Laporan</h6>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{ route('pembelian-buku.laporan', $pembelian->id) }}">Unduh</a>
+                      <a class="dropdown-item" href="{{ route('pembelian-buku.cetak', $pembelian->id) }}">Cetak</a>
+                    </div>
+                  </div>
                   <div class="dropdown">
                     <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-file-invoice"></i>
@@ -30,7 +41,7 @@ Detail Pembelian Buku
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ asset('images/faktur/' . $pembelian->faktur) }}" target="_blank">Lihat</a>
-                      <a class="dropdown-item" href="{{ route('pembelian-buku.faktur', $pembelian->id) }}">Download</a>
+                      <a class="dropdown-item" href="{{ route('pembelian-buku.faktur', $pembelian->id) }}">Unduh</a>
                     </div>
                   </div>
                   <a href="{{ route('pembelian-buku') }}" class="btn btn-primary">

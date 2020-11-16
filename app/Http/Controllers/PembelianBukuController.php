@@ -232,5 +232,12 @@ class PembelianBukuController extends Controller
 			'status' => 200,
 			'buku' => Buku::get()
 		]);
-	}
+  }
+  
+  public function cetak($id)
+  {
+    $pembelian = PembelianBuku::find($id);
+		$pengaturan = Pengaturan::first();
+		return view('pembelian_buku.cetak', compact('pembelian', 'pengaturan'));
+  }
 }

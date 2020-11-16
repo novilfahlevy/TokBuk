@@ -17,9 +17,20 @@ Detail Transaksi
           <div class="card-header">
             <h4>Data Transaksi</h4>
             <div class="card-header-form">
-              <a href="{{ route('transaksi.nota', $transaksi->id) }}" class="btn btn-success mr-2" title="Download Nota">
+              {{-- <a href="{{ route('transaksi.nota', $transaksi->id) }}" class="btn btn-success mr-2" title="Unduh Nota">
                 <i class="fas fa-file-download"></i>
-              </a>
+              </a> --}}
+              <div class="dropdown">
+                <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-file-invoice"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <h6 class="dropdown-header pl-3 pt-1 pb-0">Nota</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ route('transaksi.nota', $transaksi->id) }}">Unduh</a>
+                  <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}">Cetak</a>
+                </div>
+              </div>
               <a href="{{ route('transaksi') }}" class="btn btn-primary">
                 <i class="fas fa-chevron-left"></i>
               </a>
