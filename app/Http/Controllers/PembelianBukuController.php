@@ -182,11 +182,13 @@ class PembelianBukuController extends Controller
 
 			foreach ( $pembelian->detail as $detailPembelian ) {
 				$buku = Buku::find($detailPembelian->id_buku);
-				if ( $buku->jumlah < $detailPembelian->jumlah ) {
-					$buku->update(['jumlah' => 0]);
-				} else {
-					$buku->update(['jumlah' => $buku->jumlah - $detailPembelian->jumlah]);
-				}
+				if ( !!$buku ) {
+          if ( $buku->jumlah < $detailPembelian->jumlah ) {
+            $buku->update(['jumlah' => 0]);
+          } else {
+            $buku->update(['jumlah' => $buku->jumlah - $detailPembelian->jumlah]);
+          }
+        }
 			}
 
 			$pembelian->delete();
