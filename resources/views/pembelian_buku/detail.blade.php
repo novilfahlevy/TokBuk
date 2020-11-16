@@ -30,7 +30,7 @@ Detail Pembelian Buku
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Laporan</h6>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ route('pembelian-buku.laporan', $pembelian->id) }}">Unduh</a>
-                      <a class="dropdown-item" href="{{ route('pembelian-buku.cetak', $pembelian->id) }}">Cetak</a>
+                      <a class="dropdown-item" href="{{ route('pembelian-buku.cetak', $pembelian->id) }}" target="_blank">Cetak</a>
                     </div>
                   </div>
                   <div class="dropdown">

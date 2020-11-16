@@ -28,7 +28,7 @@ Detail Transaksi
                   <h6 class="dropdown-header pl-3 pt-1 pb-0">Nota</h6>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ route('transaksi.nota', $transaksi->id) }}">Unduh</a>
-                  <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}">Cetak</a>
+                  <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank">Cetak</a>
                 </div>
               </div>
               <a href="{{ route('transaksi') }}" class="btn btn-primary">
