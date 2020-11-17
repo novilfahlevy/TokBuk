@@ -81,6 +81,42 @@
                   </div>
                 </div>
               </div>
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Buku Yang Sudah Mencapai Batasan Stok</h4>
+                  </div>
+                  <div class="card-body p-3">
+                    <p>* Batasan stok {{ $batasanStok }}</p>
+                    <div class="table-responsive">
+                      <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
+                        <thead style="">
+                          <tr>
+                            <th scope="col">No</th>
+                            <th>ISBN</th>
+                            <th>Judul</th>
+                            <th>Stok</th>
+                            <th>Tanggal Pembelian Terakhir</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @forelse ($bukuMencapaiStok as $buku)
+                            <tr>
+                              <td scope="row">{{ $loop->index + 1 }}</td>
+                              <td>{{ $buku->isbn }}</td>
+                              <td>{{ $buku->judul }}</td>
+                              <td>{{ $buku->jumlah }}</td>
+                              <td>{{ $buku->tanggal }}</td>
+                            </tr>
+                          @empty
+                            <tr class="odd"><td valign="top" colspan="5" class="dataTables_empty">No data available in table</td></tr>
+                          @endforelse
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
       </section>

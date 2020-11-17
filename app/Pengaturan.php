@@ -10,5 +10,5 @@ class Pengaturan extends Model
     use HasFactory;
 
     protected $table = 'pengaturan';
-    protected $fillable = ['nama_toko', 'email', 'telepon', 'alamat'];
+    protected $fillable = ['nama_toko', 'email', 'telepon', 'alamat', 'limit_stok'];
 }

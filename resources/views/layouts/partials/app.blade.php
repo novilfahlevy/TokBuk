@@ -119,6 +119,8 @@
         return;
       }
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
   

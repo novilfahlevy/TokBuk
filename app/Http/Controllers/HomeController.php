@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buku;
-use App\PembelianBuku;
+use App\Pengaturan;
 use App\Transaksi;
 use App\User;
 use Carbon\Carbon;
@@ -31,10 +31,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $batasanStok = Pengaturan::first()->limit_stok;
         $pengguna = User::count();
         $judulBuku = Buku::count();
         $buku = (int) Buku::sum('jumlah');
         $transaksi = Transaksi::whereDate('created_at', $this->now->today()->format('Y-m-d'))->count();
+        $bukuMencapaiStok = Buku::join('detail_pembelian_buku as dpb', 'dpb.id_buku', '=', 'buku.id')
+          ->join('pembelian_buku as pb', 'dpb.id_pembelian', '=', 'pb.id')
+          ->select(['buku.isbn', 'buku.judul', 'buku.jumlah', DB::raw('MAX(pb.tanggal) as tanggal')])
+          ->where('buku.jumlah', '<=', $batasanStok)
+          ->orderByDesc('pb.tanggal')
+          ->groupBy(['buku.isbn', 'buku.judul', 'buku.jumlah'])
+          ->get();
         $chartTransaksi = Transaksi::select([
             DB::raw('SUM(total_harga) AS total_perbulan'),
             DB::raw('MONTH(created_at) AS bulan')
@@ -61,6 +69,6 @@ class HomeController extends Controller
             if ( !$bulanAda ) $hasil[] = 0;
         }
 
-        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'hasil'));
+        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok'));
     }
 }

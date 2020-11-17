@@ -19,6 +19,7 @@ class CreatePengaturanTable extends Migration
             $table->string('email');
             $table->string('telepon');
             $table->string('alamat');
+            $table->integer('limit_stok')->default(0);
             $table->timestamps();
         });
     }
