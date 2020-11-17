@@ -95,7 +95,7 @@
                             <th scope="col">No</th>
                             <th>ISBN</th>
                             <th>Judul</th>
-                            <th>Stok</th>
+                            <th>Jumlah</th>
                             <th>Tanggal Pembelian Terakhir</th>
                           </tr>
                         </thead>
