@@ -13,7 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
+      $this->call(UsersTableSeeder::class);
+      $this->call(PengaturanTableSeeder::class);
+      
+      if ( env('APP_ENV') !== 'production' ) {
         $this->call(PenulisTableSeeder::class);
         $this->call(PenerbitTableSeeder::class);
         $this->call(KategoriTableSeeder::class);
@@ -21,6 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LokasiTableSeeder::class);
         $this->call(BukuTableSeeder::class);
         $this->call(PembelianBukuTableSeeder::class);
-        $this->call(PengaturanTableSeeder::class);
+      }
     }
 }
