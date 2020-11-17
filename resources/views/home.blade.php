@@ -84,7 +84,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Buku Yang Sudah Mencapai Batasan Stok</h4>
+                    <h4>Buku Mencapai Batasan Stok</h4>
                   </div>
                   <div class="card-body p-3">
                     <p>* Batasan stok {{ $batasanStok }}</p>
