@@ -22,14 +22,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::put('/profil/password', 'ProfilController@changePassword')->name('profil.password');
 
   Route::group(['middleware' => 'posisi:Owner,Admin,Operator'], function() {
-    //user
-    Route::get('/pengguna', 'UserController@index')->name('user');
-    Route::get('pengguna/create', 'UserController@create')->name('user.create');
-    Route::post('pengguna/store', 'UserController@store')->name('user.store');
-    Route::get('pengguna/{id}', 'UserController@edit')->name('user.edit');
-    Route::put('pengguna/{id}/update', 'UserController@update')->name('user.update');
-    Route::delete('pengguna/{id}', 'UserController@destroy')->name('user.destroy');
-
     //buku
     Route::get('/buku', 'BukuController@index')->name('buku');
     Route::post('/buku', 'BukuController@filter')->name('buku.filter');
@@ -112,6 +104,14 @@ Route::group(['middleware' => 'auth'], function() {
   });
 
   Route::group(['middleware' => 'posisi:Admin,Owner'], function() {
+    //user
+    Route::get('/pengguna', 'UserController@index')->name('user');
+    Route::get('pengguna/create', 'UserController@create')->name('user.create');
+    Route::post('pengguna/store', 'UserController@store')->name('user.store');
+    Route::get('pengguna/{id}', 'UserController@edit')->name('user.edit');
+    Route::put('pengguna/{id}/update', 'UserController@update')->name('user.update');
+    Route::delete('pengguna/{id}', 'UserController@destroy')->name('user.destroy');
+    
     //pengaturan
     Route::get('pengaturan', 'PengaturanController@index')->name('pengaturan');
     Route::put('pengaturan.update', 'PengaturanController@update')->name('pengaturan.update');

@@ -82,7 +82,7 @@
 
       @endif
 
-      @if ( $posisi === 'Admin' || $posisi === 'Operator' || $posisi === 'Owner' )
+      @if ( $posisi === 'Admin' || $posisi === 'Owner' )
         <li class="menu-header">Lainnya</li>
 
         <li class="nav-item {{Request::segment(1)=='pengguna' ?'active':''}}">
