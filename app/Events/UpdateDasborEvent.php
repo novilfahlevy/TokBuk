@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use App\Buku;
-use App\PembelianBuku;
+use App\Pengadaan;
 use App\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -83,11 +83,11 @@ class UpdateDasborEvent implements ShouldBroadcast
 		$tahun = $this->now->year;
 		$bulan = $this->now->month;
 
-		$pembelian = PembelianBuku::whereYear('pembelian_buku.tanggal', $tahun)->whereMonth('pembelian_buku.tanggal', $bulan);
+		$pembelian = Pengadaan::whereYear('pengadaan.tanggal', $tahun)->whereMonth('pengadaan.tanggal', $bulan);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
-		$bukuTerbeli = $pembelian->join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+		$bukuTerbeli = $pembelian->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
 			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
 			->first();
 

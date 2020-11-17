@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use Illuminate\Http\Request;
 use App\Distributor;
-use App\PembelianBuku;
+use App\Pengadaan;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -86,7 +86,7 @@ class DistributorController extends Controller
 		DB::beginTransaction();
 		try {
 			$distributor = Distributor::find($id);
-			PembelianBuku::where('id_distributor', $id)->update(['id_distributor' => null]);
+			Pengadaan::where('id_distributor', $id)->update(['id_distributor' => null]);
 			$distributor->delete();
 			DB::commit();
 			return redirect()->route('distributor')->with(['message' => 'Berhasil Menghapus Distributor', 'type' => 'success']);

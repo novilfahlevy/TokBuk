@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PembelianBuku;
+use App\Pengadaan;
 use App\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,11 +47,11 @@ class LaporanController extends Controller
 
 	public function pembelian(Request $request)
 	{
-		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $request->dari)->whereDate('pembelian_buku.tanggal', '<=', $request->sampai);
+		$pembelian = Pengadaan::whereDate('pengadaan.tanggal', '>=', $request->dari)->whereDate('pengadaan.tanggal', '<=', $request->sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
-		$bukuTerbeli = $pembelian->join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+		$bukuTerbeli = $pembelian->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
 			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
 			->first();
 
@@ -83,11 +83,11 @@ class LaporanController extends Controller
 	}
 
 	public function pdfpembelian($dari, $sampai) {
-		$pembelian = PembelianBuku::whereDate('pembelian_buku.tanggal', '>=', $dari)->whereDate('pembelian_buku.tanggal', '<=', $sampai);
+		$pembelian = Pengadaan::whereDate('pengadaan.tanggal', '>=', $dari)->whereDate('pengadaan.tanggal', '<=', $sampai);
 
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
-		$bukuTerbeli = $pembelian->join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+		$bukuTerbeli = $pembelian->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
 			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
 			->first();
 
@@ -95,6 +95,6 @@ class LaporanController extends Controller
 		$sampai = Carbon::parse($sampai)->format('d-m-Y');
 		$pengaturan = Pengaturan::first();
 
-		return PDF::loadView('pembelian_buku.laporan', compact('totalPembelian', 'pengeluaran', 'bukuTerbeli', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_pembelian_' . $dari . '_' . $sampai . '.pdf');
+		return PDF::loadView('pengadaan.laporan', compact('totalPembelian', 'pengeluaran', 'bukuTerbeli', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_pembelian_' . $dari . '_' . $sampai . '.pdf');
 	}
 }

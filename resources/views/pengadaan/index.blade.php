@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Pembelian Buku
+Pengadaan
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Pembelian Buku
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
             <div class="section-header">
-                <h1>Pembelian Buku</h1>
+                <h1>Pengadaan</h1>
             </div>
             <div class="section-body">
                 <div class="content-body table">
@@ -17,7 +17,7 @@ Pembelian Buku
                             @include('layouts.flash-alert')
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Daftar Pembelian Buku</h4>
+                                    <h4>Daftar Pengadaan</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
                                             <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" title="Export Data">
@@ -26,7 +26,7 @@ Pembelian Buku
                                             <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" title="Filter Data">
                                                 <i class="fas fa-filter"></i>
                                             </button>
-                                            <a href="{{ route('pembelian-buku.create') }}" class="btn btn-sm btn-primary" title="Tambah Pembelian Buku">
+                                            <a href="{{ route('pengadaan.create') }}" class="btn btn-sm btn-primary" title="Tambah Pengadaan">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
@@ -60,14 +60,14 @@ Pembelian Buku
                                                     <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="{{ route('pembelian-buku.detail', $p->id) }}"
+                                                            <a href="{{ route('pengadaan.detail', $p->id) }}"
                                                                 class="btn btn-sm btn-primary text-white" title="Detail Data">
                                                                 <i class="fas fa-info px-1"></i>
                                                             </a>
                                                         </div>
                                                         <div class="btn-group">
                                                             <form method="post" class="delete_form "
-                                                            action="{{route('pembelian-buku.destroy',$p->id)}}">
+                                                            action="{{route('pengadaan.destroy',$p->id)}}">
                                                             @method('DELETE')
                                                             @csrf
                                                             <button class="btn btn-sm btn-danger btn-delete"><i
@@ -92,12 +92,12 @@ Pembelian Buku
 @php $distributorId = session()->pull('distributor')  @endphp
 
 <div class="modal" tabindex="-1" role="dialog" id="exportModal">
-    <form action="{{ route('pembelian-buku.export') }}" method="POST">
+    <form action="{{ route('pengadaan.export') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Export Data Pembelian Buku</h5>
+                <h5 class="modal-title">Export Data Pengadaan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -141,12 +141,12 @@ Pembelian Buku
   </div>
 
   <div class="modal" tabindex="-1" role="dialog" id="filterModal">
-    <form action="{{ route('pembelian-buku.filter') }}" method="POST">
+    <form action="{{ route('pengadaan.filter') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Filter Data Pembelian Buku</h5>
+                <h5 class="modal-title">Filter Data Pengadaan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

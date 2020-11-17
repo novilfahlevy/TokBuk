@@ -1,7 +1,7 @@
 @extends('layouts.partials.app')
 
 @section('title')
-Detail Pembelian Buku
+Detail Pengadaan
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@ Detail Pembelian Buku
   <div class="main-content" style="min-height: 116px;">
     <section class="section">
       <div class="section-header">
-        <h1>Detail Pembelian Buku</h1>
+        <h1>Detail Pengadaan</h1>
       </div>
       <div class="section-body">
         @include('layouts.flash-alert')
@@ -17,9 +17,9 @@ Detail Pembelian Buku
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4>Data Pembelian Buku</h4>
+                <h4>Data Pengadaan</h4>
                 <div class="card-header-form">
-                  {{-- <a href="{{ route('pembelian-buku.laporan', $pembelian->id) }}" class="btn btn-success mr-2" title="Unduh Laporan">
+                  {{-- <a href="{{ route('pengadaan.laporan', $pembelian->id) }}" class="btn btn-success mr-2" title="Unduh Laporan">
                     <i class="fas fa-file-download"></i>
                   </a> --}}
                   <div class="dropdown">
@@ -29,8 +29,8 @@ Detail Pembelian Buku
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Laporan</h6>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{ route('pembelian-buku.laporan', $pembelian->id) }}">Unduh</a>
-                      <a class="dropdown-item" href="{{ route('pembelian-buku.cetak', $pembelian->id) }}" target="_blank">Cetak</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.laporan', $pembelian->id) }}">Unduh</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.cetak', $pembelian->id) }}" target="_blank">Cetak</a>
                     </div>
                   </div>
                   <div class="dropdown">
@@ -41,10 +41,10 @@ Detail Pembelian Buku
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ asset('images/faktur/' . $pembelian->faktur) }}" target="_blank">Lihat</a>
-                      <a class="dropdown-item" href="{{ route('pembelian-buku.faktur', $pembelian->id) }}">Unduh</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.faktur', $pembelian->id) }}">Unduh</a>
                     </div>
                   </div>
-                  <a href="{{ route('pembelian-buku') }}" class="btn btn-primary">
+                  <a href="{{ route('pengadaan') }}" class="btn btn-primary">
                     <i class="fas fa-chevron-left"></i>
                   </a>
                 </div>

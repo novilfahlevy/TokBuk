@@ -36,9 +36,9 @@ class HomeController extends Controller
         $judulBuku = Buku::count();
         $buku = (int) Buku::sum('jumlah');
         $transaksi = Transaksi::whereDate('created_at', $this->now->today()->format('Y-m-d'))->count();
-        $bukuMencapaiStok = Buku::join('detail_pembelian_buku as dpb', 'dpb.id_buku', '=', 'buku.id')
-          ->join('pembelian_buku as pb', 'dpb.id_pembelian', '=', 'pb.id')
-          ->select(['buku.isbn', 'buku.judul', 'buku.jumlah', DB::raw('MAX(pb.tanggal) as tanggal')])
+        $bukuMencapaiStok = Buku::join('detail_pengadaan as dpb', 'dpb.id_buku', '=', 'buku.id')
+          ->join('pengadaan as pb', 'dpb.id_pengadaan', '=', 'pb.id')
+          ->select(['buku.isbn', 'buku.judul', 'buku.jumlah', DB::raw('DATE_FORMAT(MAX(pb.tanggal), "%d-%m-%Y") as tanggal')])
           ->where('buku.jumlah', '<=', $batasanStok)
           ->orderByDesc('pb.tanggal')
           ->groupBy(['buku.isbn', 'buku.judul', 'buku.jumlah'])

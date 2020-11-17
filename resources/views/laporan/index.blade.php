@@ -78,7 +78,7 @@ Laporan
             <div class="col-12 col-md-6">
               <div class="card">
                 <div class="card-header">
-                  <h4>Laporan Pembelian Buku</h4>
+                  <h4>Laporan Pengadaan</h4>
                   <div class="card-header-form">
                     <a href="{{ route('laporan.pembelian', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" title="Unduh Laporan Pembelian" id="laporanPembelian">
                       <i class="fas fa-file-download"></i>

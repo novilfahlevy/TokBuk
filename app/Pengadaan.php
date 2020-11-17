@@ -4,19 +4,19 @@ namespace App;
 
 // use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\DetailPembelianBuku;
+use App\DetailPengadaan;
 use App\Distributor;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PembelianBuku extends Model
+class Pengadaan extends Model
 {
     // use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'pembelian_buku';
+    protected $table = 'pengadaan';
     protected $fillable = ['kode', 'tanggal', 'id_user', 'id_distributor', 'total_harga', 'bayar', 'faktur', 'keterangan'];
 
     public function getTanggalAttribute() {
@@ -25,7 +25,7 @@ class PembelianBuku extends Model
 
     public function detail()
     {
-        return $this->hasMany(DetailPembelianBuku::class, 'id_pembelian');
+        return $this->hasMany(DetailPengadaan::class, 'id_pengadaan');
     }
 
     public function distributor()

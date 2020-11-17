@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('buku/{id}', 'BukuController@edit')->name('buku.edit');
     Route::put('buku/{id}/update', 'BukuController@update')->name('buku.update');
     Route::delete('buku/{id}', 'BukuController@destroy')->name('buku.destroy');
-    Route::post('buku/export', 'BukuController@export')->name('pembelianbuku.export');
+    Route::post('buku/export', 'BukuController@export')->name('Pengadaan.export');
 
     //penulis
     Route::get('/penulis', 'PenulisController@index')->name('penulis');
@@ -79,16 +79,16 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('lokasi/{id}', 'LokasiController@destroy')->name('lokasi.destroy');
 
     //pembelian buku
-    Route::get('pembelian-buku', 'PembelianBukuController@index')->name('pembelian-buku');
-    Route::post('pembelian-buku', 'PembelianBukuController@filter')->name('pembelian-buku.filter');
-    Route::get('pembelian-buku/{id}/detail', 'PembelianBukuController@detail')->name('pembelian-buku.detail');
-    Route::get('pembelian-buku/create', 'PembelianBukuController@create')->name('pembelian-buku.create');
-    Route::post('pembelian-buku/store', 'PembelianBukuController@store')->name('pembelian-buku.store');
-    Route::post('pembelian-buku/export', 'PembelianBukuController@export')->name('pembelian-buku.export');
-    Route::get('pembelian-buku/faktur/{id}', 'PembelianBukuController@faktur')->name('pembelian-buku.faktur');
-    Route::get('pembelian-buku/laporan/{id}', 'PembelianBukuController@laporan')->name('pembelian-buku.laporan');
-    Route::delete('pembelian-buku/{id}', 'PembelianBukuController@destroy')->name('pembelian-buku.destroy');
-    Route::get('pembelian-buku/cetak/{id}', 'PembelianBukuController@cetak')->name('pembelian-buku.cetak');
+    Route::get('pengadaan', 'PengadaanController@index')->name('pengadaan');
+    Route::post('pengadaan', 'PengadaanController@filter')->name('pengadaan.filter');
+    Route::get('pengadaan/{id}/detail', 'PengadaanController@detail')->name('pengadaan.detail');
+    Route::get('pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
+    Route::post('pengadaan/store', 'PengadaanController@store')->name('pengadaan.store');
+    Route::post('pengadaan/export', 'PengadaanController@export')->name('pengadaan.export');
+    Route::get('pengadaan/faktur/{id}', 'PengadaanController@faktur')->name('pengadaan.faktur');
+    Route::get('pengadaan/laporan/{id}', 'PengadaanController@laporan')->name('pengadaan.laporan');
+    Route::delete('pengadaan/{id}', 'PengadaanController@destroy')->name('pengadaan.destroy');
+    Route::get('pengadaan/cetak/{id}', 'PengadaanController@cetak')->name('pengadaan.cetak');
 
     //laporan
     Route::get('laporan', 'LaporanController@index')->name('laporan');

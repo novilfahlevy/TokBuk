@@ -1,6 +1,6 @@
 <?php
 
-use Database\Seeders\PembelianBukuTableSeeder;
+use Database\Seeders\PengadaanTableSeeder;
 use Database\Seeders\PengaturanTableSeeder;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DistributorTableSeeder::class);
         $this->call(LokasiTableSeeder::class);
         $this->call(BukuTableSeeder::class);
-        $this->call(PembelianBukuTableSeeder::class);
+        $this->call(PengadaanTableSeeder::class);
       }
     }
 }

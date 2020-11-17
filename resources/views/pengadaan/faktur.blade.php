@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<div class="container" style="width: 60% !important">
-  <h5 style="text-align: center">{{ $pengaturan->nama_toko }}</h5>
-<h5 style="text-align: center">Laporan Pembelian Buku</h5><br>
+<h5 style="text-align: center">{{ $pengaturan->nama_toko }}</h5>
+<h5 style="text-align: center">Laporan Pengadaan</h5><br>
 <table style="width: 50%; border-width: 0">
   <tbody>
     <tr>
@@ -28,7 +27,7 @@
 </table>
 <hr>
 
-<table cellpadding="10" style="width: 100%">
+<table style="width: 100%">
   <tr>
     <td>Buku</td>
     <td>Harga</td>
@@ -41,15 +40,12 @@
   
   @foreach ($pembelian->detail as $p)
   <tr>
-    <td>
-      {{ $p->buku()->withTrashed()->first()->judul }}
-      <br>
-      {{ $p->buku()->withTrashed()->first()->isbn }}
-    </td>
+    <td>{{ $p->buku()->withTrashed()->first()->judul }}<br>
+      {{ $p->buku()->withTrashed()->first()->isbn }}</td>
       <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
       <td>{{ $p->jumlah }}</td>
       <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
-  </tr>
+    </tr>
     @endforeach
   </table>
   <hr>
@@ -70,8 +66,3 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<script>
-  window.print();
-</script>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Buku;
-use App\DetailPembelianBuku;
+use App\DetailPengadaan;
 use App\Events\UpdateDasborEvent;
-use App\Exports\PembelianBukuExport;
+use App\Exports\PengadaanExport;
 use App\Distributor;
-use App\PembelianBuku;
+use App\Pengadaan;
 use App\Pengaturan;
 use Error;
 use Exception;
@@ -18,40 +18,40 @@ use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
 
-class PembelianBukuController extends Controller
+class PengadaanController extends Controller
 {
-	private function getPembelianBuku()
+	private function getPengadaan()
 	{
-		return PembelianBuku::join('detail_pembelian_buku as dp', 'dp.id_pembelian', '=', 'pembelian_buku.id')
+		return Pengadaan::join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
 		->select([
-			'pembelian_buku.id',
-			'pembelian_buku.kode',
-			'pembelian_buku.tanggal',
-			'pembelian_buku.id_distributor',
-			'pembelian_buku.bayar',
-			'pembelian_buku.total_harga',
+			'pengadaan.id',
+			'pengadaan.kode',
+			'pengadaan.tanggal',
+			'pengadaan.id_distributor',
+			'pengadaan.bayar',
+			'pengadaan.total_harga',
 			DB::raw('SUM(dp.jumlah) as jumlah_buku')
 		])
 		->groupBy([
-			'pembelian_buku.id',
-			'pembelian_buku.kode',
-			'pembelian_buku.tanggal',
-			'pembelian_buku.id_distributor',
-			'pembelian_buku.bayar',
-			'pembelian_buku.total_harga'
+			'pengadaan.id',
+			'pengadaan.kode',
+			'pengadaan.tanggal',
+			'pengadaan.id_distributor',
+			'pengadaan.bayar',
+			'pengadaan.total_harga'
 		]);
 	}
 
 	public function index()
 	{
-		$pembelian = $this->getPembelianBuku()->orderBy('tanggal', 'DESC')->get();
+		$pembelian = $this->getPengadaan()->orderBy('tanggal')->get();
 		$distributor = Distributor::all();
-		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
+		return view('pengadaan.index', compact('pembelian', 'distributor'));
 	}
 
 	public function filter(Request $request)
 	{
-		$pembelian = $this->getPembelianBuku();
+		$pembelian = $this->getPengadaan();
 		$distributor = Distributor::all();
 
 		if ( $request->mulai ) {
@@ -70,20 +70,20 @@ class PembelianBukuController extends Controller
 
 		$pembelian = $pembelian->orderBy('tanggal', 'DESC')->get();
 
-		return view('pembelian_buku.index', compact('pembelian', 'distributor'));
+		return view('pengadaan.index', compact('pembelian', 'distributor'));
 	}
 
 	public function create(Request $request)
 	{
 		$distributor = Distributor::all();
 
-		return view('pembelian_buku.create', compact('distributor'));
+		return view('pengadaan.create', compact('distributor'));
 	}
 
 	public function detail($id)
 	{
-		$pembelian = PembelianBuku::find($id);
-		return view('pembelian_buku.detail', compact('pembelian'));
+		$pembelian = Pengadaan::find($id);
+		return view('pengadaan.detail', compact('pembelian'));
 	}
 
 	public function store(Request $request)
@@ -94,7 +94,7 @@ class PembelianBukuController extends Controller
 			'idDistributor' => 'required'
 		], [
 			'faktur.max' => 'Ukuran file terlalu besar, maksimal 2 MB',
-			'hargaBeli.required' => 'Mohon masukan harga beli untuk pembelian buku ini',
+			'hargaBeli.required' => 'Mohon masukan harga beli untuk pengadaan ini',
 			'idDistributor.required' => 'Mohon pilih distributor'
 		]);
 
@@ -103,21 +103,21 @@ class PembelianBukuController extends Controller
 		$bukuYangDibeli = json_decode($request->bukuYangDibeli);
 
 		if ( $hargaBeli < $bukuYangDibeli->totalHarga ) {
-			return redirect()->route('pembelian-buku.create')->withErrors(['hargaBeli' => 'Biaya untuk membeli pasokan buku dibawah kurang']);
+			return redirect()->route('pengadaan.create')->withErrors(['hargaBeli' => 'Biaya untuk membeli pasokan buku dibawah kurang']);
 		}
 
 		DB::beginTransaction();
 
 		try {
-			$jumlahPembelianBuku = PembelianBuku::withTrashed()->count() + 1;
-			$kode = substr('P000000000', 0, -count(str_split((string) $jumlahPembelianBuku))) . $jumlahPembelianBuku;
+			$jumlahPengadaan = Pengadaan::withTrashed()->count() + 1;
+			$kode = substr('P000000000', 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
 
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
 
 			Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
 
-			$pembelianBuku = PembelianBuku::create([
+			$pengadaan = Pengadaan::create([
 				'kode' => $kode,
 				'tanggal' => $request->tanggal,
 				'faktur' => $namaFaktur,
@@ -137,15 +137,15 @@ class PembelianBukuController extends Controller
 						'jumlah' => $buku->jumlah
 					]);
 
-					DetailPembelianBuku::create([
-						'id_pembelian' => $pembelianBuku->id,
+					DetailPengadaan::create([
+						'id_pengadaan' => $pengadaan->id,
 						'id_buku' => $bukuBaru->id,
 						'harga' => (int) $buku->harga,
 						'jumlah' => $buku->jumlah
 					]);
 				} else {
-					DetailPembelianBuku::create([
-						'id_pembelian' => $pembelianBuku->id,
+					DetailPengadaan::create([
+						'id_pengadaan' => $pengadaan->id,
 						'id_buku' => $buku->idBuku,
 						'harga' => (int) $buku->harga,
 						'jumlah' => $buku->jumlah
@@ -160,16 +160,16 @@ class PembelianBukuController extends Controller
 
 			event(new UpdateDasborEvent);
 
-			return redirect()->route('pembelian-buku.detail', ['id' => $pembelianBuku->id])->with([
+			return redirect()->route('pengadaan.detail', ['id' => $pengadaan->id])->with([
 				'type' => 'success',
-				'message' => 'Pembelian Buku Berhasil Dilakukan.'
+				'message' => 'Pengadaan Berhasil Dilakukan.'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			throw new Error($e);
-			return redirect()->route('pembelian-buku.create')->with([
+			return redirect()->route('pengadaan.create')->with([
 				'type' => 'danger',
-				'message' => 'Gagal Melakukan Pembelian Buku, Silahkan coba lagi.'
+				'message' => 'Gagal Melakukan Pengadaan, Silahkan coba lagi.'
 			]);
 		}
 	}
@@ -178,33 +178,33 @@ class PembelianBukuController extends Controller
 	{
 		DB::beginTransaction();
 		try {
-			$pembelian = PembelianBuku::find($id);
+			$pengadaan = Pengadaan::find($id);
 
-			foreach ( $pembelian->detail as $detailPembelian ) {
-				$buku = Buku::find($detailPembelian->id_buku);
+			foreach ( $pengadaan->detail as $detailPengadaan ) {
+				$buku = Buku::find($detailPengadaan->id_buku);
 				if ( !!$buku ) {
-          if ( $buku->jumlah < $detailPembelian->jumlah ) {
+          if ( $buku->jumlah < $detailPengadaan->jumlah ) {
             $buku->update(['jumlah' => 0]);
           } else {
-            $buku->update(['jumlah' => $buku->jumlah - $detailPembelian->jumlah]);
+            $buku->update(['jumlah' => $buku->jumlah - $detailPengadaan->jumlah]);
           }
         }
 			}
 
-			$pembelian->delete();
+			$pengadaan->delete();
 
 			DB::commit();
 
 			event(new UpdateDasborEvent);
-			return redirect()->route('pembelian-buku')->with([
-				'message' => 'Berhasil Menghapus Pembelian Buku',
+			return redirect()->route('pengadaan')->with([
+				'message' => 'Berhasil Menghapus Pengadaan',
 				'type' => 'success'
 			]);
 		} catch ( Exception $e ) {
 			DB::rollBack();
 			throw new Error($e);
-			return redirect()->route('pembelian-buku')->with([
-				'message' => 'Gagal Menghapus Pembelian Buku',
+			return redirect()->route('pengadaan')->with([
+				'message' => 'Gagal Menghapus Pengadaan',
 				'type' => 'danger'
 			]);
 		}
@@ -212,20 +212,20 @@ class PembelianBukuController extends Controller
 
 	public function export(Request $request)
 	{
-		return Excel::download(new PembelianBukuExport($request->mulai, $request->sampai, $request->distributor), 'pembelian_buku.xlsx');
+		return Excel::download(new PengadaanExport($request->mulai, $request->sampai, $request->distributor), 'pengadaan.xlsx');
 	}
 
 	public function faktur($id)
 	{
-		$pembelian = PembelianBuku::find($id);
+		$pembelian = Pengadaan::find($id);
 		return Storage::download('images/faktur/' . $pembelian->faktur);
 	}
 	
 	public function laporan($id)
 	{
-		$pembelian = PembelianBuku::find($id);
+		$pembelian = Pengadaan::find($id);
 		$pengaturan = Pengaturan::first();
-		return PDF::loadView('pembelian_buku.faktur', compact('pembelian', 'pengaturan'))->download('laporan_' . $pembelian->kode . '.pdf');
+		return PDF::loadView('pengadaan.faktur', compact('pembelian', 'pengaturan'))->download('laporan_' . $pembelian->kode . '.pdf');
 	}
 
 	public function getAllBuku() 
@@ -238,8 +238,8 @@ class PembelianBukuController extends Controller
   
   public function cetak($id)
   {
-    $pembelian = PembelianBuku::find($id);
+    $pembelian = Pengadaan::find($id);
 		$pengaturan = Pengaturan::first();
-		return view('pembelian_buku.cetak', compact('pembelian', 'pengaturan'));
+		return view('pengadaan.cetak', compact('pembelian', 'pengaturan'));
   }
 }

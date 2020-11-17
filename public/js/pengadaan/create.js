@@ -55,7 +55,7 @@ function getAllBooks(selectClass) {
 
   $.ajax({
     method: 'GET',
-    url: `${BASEURL}/api/pembelian-buku/buku`,
+    url: `${BASEURL}/api/pengadaan/buku`,
     success: function(data) {
       fillJsSelect2Options(selectClass, () => {
         data.buku.map(buku => {
@@ -124,7 +124,7 @@ function tambahBuku() {
 
 $('button#tambahBuku').on('click', tambahBuku);
 
-$('form#pembelianBuku').on('submit', function() {
+$('form#pengadaan').on('submit', function() {
   $('#hasilRespon').val(JSON.stringify(getAllBooksData()));
   $(this).submit();
 });

@@ -2,12 +2,12 @@
 
 namespace App\Exports;
 
-use App\DetailPembelianBuku;
-use App\PembelianBuku;
+use App\DetailPengadaan;
+use App\Pengadaan;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class PembelianBukuExport implements FromView
+class PengadaanExport implements FromView
 {
 	private $mulai;
 	private $sampai;
@@ -25,22 +25,22 @@ class PembelianBukuExport implements FromView
 	*/
 	public function view(): View
 	{
-		$pembelian = DetailPembelianBuku::join('pembelian_buku', 'pembelian_buku.id', '=', 'detail_pembelian_buku.id_pembelian');
+		$pembelian = DetailPengadaan::join('pengadaan', 'pengadaan.id', '=', 'detail_pengadaan.id_pengadaan');
 
 		if ( $this->mulai ) {
-			$pembelian->whereDate('pembelian_buku.tanggal', '>=', $this->mulai);
+			$pembelian->whereDate('pengadaan.tanggal', '>=', $this->mulai);
 		}
 
 		if ( $this->sampai ) {
-			$pembelian->whereDate('pembelian_buku.tanggal', '<=', $this->sampai);
+			$pembelian->whereDate('pengadaan.tanggal', '<=', $this->sampai);
 		}
 
 		if ( $this->distributor ) {
-			$pembelian->where('pembelian_buku.id_distributor', $this->distributor);
+			$pembelian->where('pengadaan.id_distributor', $this->distributor);
 		}
 
 		$pembelian = $pembelian->get();
 
-		return view('pembelian_buku.export', compact('pembelian'));
+		return view('pengadaan.export', compact('pembelian'));
 	}
 }

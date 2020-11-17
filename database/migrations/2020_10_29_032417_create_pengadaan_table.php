@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePembelianBukuTable extends Migration
+class CreatePengadaanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePembelianBukuTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembelian_buku', function (Blueprint $table) {
+        Schema::create('pengadaan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode', 12);
             $table->date('tanggal');
@@ -37,6 +37,6 @@ class CreatePembelianBukuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembelian_buku');
+        Schema::dropIfExists('pengadaan');
     }
 }

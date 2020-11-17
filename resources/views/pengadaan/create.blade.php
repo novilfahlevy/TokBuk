@@ -1,7 +1,7 @@
 @extends('layouts.partials.app')
 
 @section('title')
-Tambah Pembelian Buku
+Tambah Pengadaan
 @endsection
 
 @section('content')
@@ -9,21 +9,21 @@ Tambah Pembelian Buku
   <div class="main-content" style="min-height: 116px;">
     <section class="section">
       <div class="section-header">
-        <h1>Tambah Pembelian Buku</h1>
+        <h1>Tambah Pengadaan</h1>
       </div>
       <div class="section-body">
         @include('layouts.flash-alert')
         <div class="card">
           <div class="card-header">
-            <h4>Form Tambah Pembelian Buku</h4>
+            <h4>Form Tambah Pengadaan</h4>
             <div class="card-header-form">
-              <a href="{{ route('pembelian-buku') }}" class="btn btn-primary" title="Kembali">
+              <a href="{{ route('pengadaan') }}" class="btn btn-primary" title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </div>
           </div>
           <div class="card-body">
-            <form action="{{ route('pembelian-buku.store') }}" method="POST" id="pembelianBuku" enctype="multipart/form-data">
+            <form action="{{ route('pengadaan.store') }}" method="POST" id="pengadaan" enctype="multipart/form-data">
               @csrf
               <input type="hidden" id="hasilRespon" name="bukuYangDibeli" hidden>
               <div class="form-group">
@@ -129,7 +129,7 @@ Tambah Pembelian Buku
 @push('js')
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="{{ asset('js/pembelian_buku/create.js') }}"></script>
+  <script src="{{ asset('js/pengadaan/create.js') }}"></script>
 @endpush
 
 @push('css')

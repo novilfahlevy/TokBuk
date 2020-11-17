@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Buku;
 use App\Events\UpdateDasborEvent;
-use App\Exports\PembelianBukuExport;
+use App\Exports\PengadaanExport;
 use App\Penulis;
 use App\Penerbit;
 use App\Kategori;
 // use App\Distributor;
 use App\Lokasi;
 use App\Distributor;
-use App\PembelianBuku;
+use App\Pengadaan;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +29,7 @@ class BukuController extends Controller
         $this->penerbit = $penerbit;
         $this->kategori = $kategori;
         $this->lokasi = $lokasi;
-        // $this->pembelianbuku = $pembelianbuku;
+        // $this->Pengadaan = $Pengadaan;
     }
     public function index()
     {

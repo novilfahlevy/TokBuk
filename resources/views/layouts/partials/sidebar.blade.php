@@ -43,9 +43,9 @@
           </a>
         </li>
 
-        <li class="nav-item  {{Request::segment(1)=='pembelian-buku' ?'active':''}}">
-          <a class="nav-link" href="{{route('pembelian-buku')}}" aria-expanded="false">
-            <i class="fas fa-truck-loading"></i> <span>Pembelian Buku</span>
+        <li class="nav-item  {{Request::segment(1)=='pengadaan' ?'active':''}}">
+          <a class="nav-link" href="{{route('pengadaan')}}" aria-expanded="false">
+            <i class="fas fa-truck-loading"></i> <span>Pengadaan</span>
           </a>
         </li>
 
