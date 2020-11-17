@@ -59,7 +59,7 @@ Pengguna
                                                 <td>
                                                     @if (auth()->user()->id == $u->id)
                                                         Saya
-                                                    @elseif ( $u->posisi !== 'Owner' && ((auth()->user()->posisi === 'Admin' && $u->posisi !== 'Admin') && ($u->posisi === 'Kasir' || $u->posisi === 'Operator')) || (auth()->user()->posisi === 'Owner')) )
+                                                    @elseif ( $u->posisi !== 'Owner' && ((auth()->user()->posisi === 'Admin' && $u->posisi !== 'Admin') && ($u->posisi === 'Kasir' || $u->posisi === 'Operator')) || (auth()->user()->posisi === 'Owner'))
                                                         <div class="btn-group">
                                                             <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$u->id}}" title="Detail Data"><i class="fa fa-info px-1"></i></a>
                                                         </div>
