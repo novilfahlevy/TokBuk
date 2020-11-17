@@ -110,7 +110,7 @@ class PengadaanController extends Controller
 
 		try {
 			$jumlahPengadaan = Pengadaan::withTrashed()->count() + 1;
-			$kode = substr('P000000000', 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
+			$kode = substr('P00000000000', 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
 
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();

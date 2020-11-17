@@ -91,7 +91,7 @@ class TransaksiController extends Controller
 			}
 
 			$jumlahTransaksi = Transaksi::withTrashed()->count() + 1;
-			$kode = substr('T000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+			$kode = substr('T00000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,

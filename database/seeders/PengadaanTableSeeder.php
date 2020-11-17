@@ -20,13 +20,13 @@ class PengadaanTableSeeder extends Seeder
         $totalHarga = ((65000 * 100) + (27000 * 100) + (84500 * 100) + (12200 * 100) + (76000 * 100) + (81300 * 100));
 
         Pengadaan::create([
-            'kode' => 'P000000001',
+            'kode' => 'P00000000001',
             'tanggal' => $now->format('Y-m-d'),
             'id_user' => 1,
             'id_distributor' => 3,
             'total_harga' => $totalHarga,
             'bayar' => $totalHarga,
-            'faktur' => 'P000000001.png',
+            'faktur' => 'P00000000001.png',
             'keterangan' => 'Stok buku pertama.'
         ]);
 
