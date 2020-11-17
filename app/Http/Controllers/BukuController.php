@@ -33,7 +33,7 @@ class BukuController extends Controller
     }
     public function index()
     {
-        $buku = $this->buku->orderByDesc('jumlah')->get();
+        $buku = $this->buku->orderBy(DB::raw('CAST(jumlah as int)'))->get();
         $penulis = $this->penulis->get();
         $penerbit = $this->penerbit->get();
         $kategori = $this->kategori->get();
