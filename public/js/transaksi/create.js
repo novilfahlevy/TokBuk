@@ -84,9 +84,10 @@ function getAllBooks(selectClass) {
     fillJsSelect2Options(selectClass, () => {
       bukuCache.forEach(option => {
         const idBuku = JSON.parse(atob($(option).attr('value'))).id;
-        if ( !bukuPilihan.includes(idBuku) ) {
-          $(`.${selectClass}`).append(option);
-        }
+        $(`.${selectClass}`).append(option);
+        // if ( !bukuPilihan.includes(idBuku) ) {
+        //   $(`.${selectClass}`).append(option);
+        // }
       });
     });
     return;
