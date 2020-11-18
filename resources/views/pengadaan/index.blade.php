@@ -26,7 +26,7 @@ Pengadaan
                                             <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" data-tooltip="tooltip" title="Filter">
                                                 <i class="fas fa-filter"></i>
                                             </button>
-                                            <a href="{{ route('pengadaan.create') }}" class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Tambah">
+                                            <a href="{{ route('pengadaan.create') }}" class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Buat Pengadaan">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
