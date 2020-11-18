@@ -20,7 +20,7 @@ class Pengadaan extends Model
     protected $fillable = ['kode', 'tanggal', 'id_user', 'id_distributor', 'total_harga', 'bayar', 'faktur', 'keterangan'];
 
     public function getTanggalAttribute() {
-        return date('d-m-Y', strtotime($this->attributes['tanggal']));
+        return Carbon::parse($this->attributes['tanggal'])->format('d-m-Y');
     }
 
     public function detail()
