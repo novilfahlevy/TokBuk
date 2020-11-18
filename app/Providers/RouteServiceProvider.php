@@ -13,13 +13,13 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
-     * The path to the "home" route for your application.
+     * The path to the "dasbor" route for your application.
      *
      * This is used by Laravel authentication to redirect users after login.
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dasbor';
 
     /**
      * The controller namespace for the application.

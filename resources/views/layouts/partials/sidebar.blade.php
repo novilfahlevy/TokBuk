@@ -1,12 +1,12 @@
 <div class="main-sidebar pb-5">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand mt-0 mb-4 mt-2">
-        <a href="{{route('home')}}" class="site_title">
+        <a href="{{route('dasbor')}}" class="site_title">
           <img src="{{ asset('assets/img/logo.png') }}" width="160">
         </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      {{-- <a href="{{route('home')}}"><img src="{{asset('img/landingpage/logo.png')}}"  width="50px" alt=""></a> --}}
+      {{-- <a href="{{route('dasbor')}}"><img src="{{asset('img/landingpage/logo.png')}}"  width="50px" alt=""></a> --}}
     </div>
     <br/>
     <ul class="sidebar-menu">
@@ -14,9 +14,9 @@
       
       <li class="menu-header">MENU UTAMA</li>
 
-      <li class="nav-item {{Request::segment(1)=='home' ?'active':''}}">
-        <a class="nav-link" href="{{route('home')}}" aria-expanded="false">
-          <i class="fas fa-home"></i> <span>Dasbor</span>
+      <li class="nav-item {{Request::segment(1)=='dasbor' ?'active':''}}">
+        <a class="nav-link" href="{{route('dasbor')}}" aria-expanded="false">
+          <i class="fas fa-tachometer-alt"></i> <span>Dasbor</span>
         </a>
       </li>
 

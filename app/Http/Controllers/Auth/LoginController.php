@@ -17,7 +17,7 @@ class LoginController extends Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
+    | redirecting them to your dasbor screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
     */
@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dasbor';
 
     /**
      * Create a new controller instance.
@@ -60,7 +60,7 @@ class LoginController extends Controller
                     $isEmail ? 'email' : 'username' => $request->keyword,
                     'password' => $request->password
                 ]);
-                return redirect('home');
+                return redirect('dasbor');
             }
             return redirect('login')->withErrors(['password' => 'Password tidak tepat'])->withInput($request->except('password'));
         }

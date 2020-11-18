@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::post('dasbor', 'HomeController@chart');
+Route::post('dasbor', 'DasborController@chart');
 Route::get('transaksi/buku', 'TransaksiController@getAllBuku');
 Route::get('pengadaan/buku', 'PengadaanController@getAllBuku');
 Route::post('laporan/penjualan', 'LaporanController@penjualan');

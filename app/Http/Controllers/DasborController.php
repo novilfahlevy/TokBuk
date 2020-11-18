@@ -9,7 +9,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class DasborController extends Controller
 {
     protected $now;
 
@@ -69,6 +69,6 @@ class HomeController extends Controller
             if ( !$bulanAda ) $hasil[] = 0;
         }
 
-        return view('home', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok'));
+        return view('dasbor', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok'));
     }
 }

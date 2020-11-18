@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::redirect('/', '/home');
+Route::redirect('/', '/dasbor');
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('/dasbor', 'DasborController@index')->name('dasbor');
 
   //profil
   Route::get('/profil', 'ProfilController@index')->name('profil');
