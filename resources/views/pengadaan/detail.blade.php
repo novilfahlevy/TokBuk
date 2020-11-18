@@ -35,7 +35,7 @@ Detail Pengadaan
                       <a class="dropdown-item" href="{{ route('pengadaan.faktur', $pembelian->id) }}">Unduh</a>
                     </div>
                   </div>
-                  <a href="{{ route('pengadaan') }}" class="btn btn-primary">
+                  <a href="{{ route('pengadaan') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
                     <i class="fas fa-chevron-left"></i>
                   </a>
                 </div>

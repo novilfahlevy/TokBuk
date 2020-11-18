@@ -20,7 +20,7 @@ Lokasi
                                 <h4>Daftar Lokasi</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right">
-                                <button class="btn btn-sm btn-primary" title="Tambah Data" data-toggle="modal" data-target="#createLokasiModal">
+                                <button class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Tambah" data-toggle="modal" data-target="#createLokasiModal">
                                     <i class="fas fa-plus"></i>
                                 </button>
                                 </div>

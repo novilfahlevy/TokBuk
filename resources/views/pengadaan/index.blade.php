@@ -20,13 +20,13 @@ Pengadaan
                                     <h4>Daftar Pengadaan</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" title="Export Data">
+                                            <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" data-tooltip="tooltip" title="Export XLSX">
                                                 <i class="fas fa-file-export"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" title="Filter Data">
+                                            <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" data-tooltip="tooltip" title="Filter">
                                                 <i class="fas fa-filter"></i>
                                             </button>
-                                            <a href="{{ route('pengadaan.create') }}" class="btn btn-sm btn-primary" title="Tambah Pengadaan">
+                                            <a href="{{ route('pengadaan.create') }}" class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Tambah">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
@@ -97,7 +97,7 @@ Pengadaan
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Export Data Pengadaan</h5>
+                <h5 class="modal-title">Export XLXS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -146,7 +146,7 @@ Pengadaan
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Filter Data Pengadaan</h5>
+                <h5 class="modal-title">Filter</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

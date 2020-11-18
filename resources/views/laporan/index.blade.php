@@ -18,7 +18,7 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.penjualan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" title="Unduh Laporan Transaksi" id="laporanTransaksi">
+                    <a href="{{ route('laporan.penjualan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanTransaksi">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
@@ -80,7 +80,7 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Pengadaan</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.pembelian', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" title="Unduh Laporan Pembelian" id="laporanPembelian">
+                    <a href="{{ route('laporan.pembelian', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanPembelian">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>

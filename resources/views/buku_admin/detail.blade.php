@@ -28,7 +28,7 @@
                                                 <div class="card-header">
                                                     <h4>Data Buku</h4>
                                                     <div class="card-header-form">
-                                                        <a href="{{ route('buku') }}" class="btn btn-primary" title="Kembali">
+                                                        <a href="{{ route('buku') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
                                                           <i class="fas fa-chevron-left"></i>
                                                         </a>
                                                       </div>

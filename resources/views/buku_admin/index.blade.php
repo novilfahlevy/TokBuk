@@ -20,8 +20,8 @@ Buku
                                 <h4>Daftar Buku</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                <button type="button" class="btn btn-sm btn-warning" title="FilterData" data-toggle="modal" data-target="#filterModal"><i class="fas fa-filter"></i></button>
-                                {{-- <a class="btn btn-sm btn-primary" href="{{route('buku.create')}}" title="Tambah Data"><i class="fas fa-plus"></i></a> --}}
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#filterModal" data-tooltip="tooltip" title="Filter"><i class="fas fa-filter"></i></button>
+                                {{-- <a class="btn btn-sm btn-primary" href="{{route('buku.create')}}" data-tooltip="tooltip" title="Tambah"><i class="fas fa-plus"></i></a> --}}
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@ Buku
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Filter Data Buku</h5>
+                <h5 class="modal-title">Filter</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

@@ -72,7 +72,7 @@ Pengaturan
                     <div class="form-group">
                       <label for="limit_stok">
                         Batasan Stok Buku
-                        <i class="fas fa-question-circle ml-1" data-toggle="tooltip" title="Batasan stok untuk menandakan bahwa stok atau jumlah buku tersebut tinggal sedikit dan perlu untuk dipasok ulang"></i>
+                        <i class="fas fa-question-circle ml-1" data-tooltip="tooltip" title="Batasan stok untuk menandakan bahwa stok atau jumlah buku tersebut tinggal sedikit dan perlu untuk dipasok ulang"></i>
                       </label>
                       <input type="number" class="form-control" id="limit_stok" name="limit_stok" value="{{ $pengaturan->limit_stok }}">
                       @error('limit_stok')

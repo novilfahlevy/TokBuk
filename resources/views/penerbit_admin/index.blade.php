@@ -29,7 +29,7 @@ Penerbit
                                 <h4>Daftar Penerbit</h4>
                                 <div class="card-header-action">
                                 <div class="col-md-3 col-sm-3 col-xs-4 text-right">
-                                    <a class="btn btn-sm btn-primary" href="{{route('penerbit.create')}} " title="Tambah Data"><i class="fas fa-plus"></i></a>
+                                    <a class="btn btn-sm btn-primary" href="{{route('penerbit.create')}} " data-tooltip="tooltip" title="Tambah"><i class="fas fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>

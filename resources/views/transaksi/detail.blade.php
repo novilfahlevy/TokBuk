@@ -31,7 +31,7 @@ Detail Transaksi
                   <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank">Cetak</a>
                 </div>
               </div>
-              <a href="{{ route('transaksi') }}" class="btn btn-primary">
+              <a href="{{ route('transaksi') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </div>
