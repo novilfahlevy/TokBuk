@@ -4,7 +4,7 @@
 /public/images/buku/*
 !/public/images/buku/sampul.png
 /public/images/faktur/*
-!/public/images/faktur/P000000001.png
+!/public/images/faktur/P00000000001.png
 /storage/*.key
 /storage/framework/laravel-excel/*
 /vendor
