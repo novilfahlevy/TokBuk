@@ -114,8 +114,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     //retur
     Route::get('retur', 'ReturController@index')->name('retur');
-    Route::get('retur/create', 'ReturController@create')->name('retur.create');
-    Route::post('retur/store', 'ReturController@store')->name('retur.store');
+    Route::get('retur/create/{id}', 'ReturController@create')->name('retur.create');
+    Route::post('retur/store/{id}', 'ReturController@store')->name('retur.store');
     Route::get('retur/{id}/detail', 'ReturController@detail')->name('retur.detail');
     Route::get('retur/faktur/{id}', 'ReturController@faktur')->name('retur.faktur');
     Route::delete('retur/{id}', 'ReturController@destroy')->name('retur.destroy');

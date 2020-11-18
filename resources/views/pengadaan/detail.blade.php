@@ -19,6 +19,9 @@ Detail Pengadaan
               <div class="card-header">
                 <h4>Data Pengadaan</h4>
                 <div class="card-header-form">
+                  <a href="{{ route('retur.create', $pembelian->id) }}" class="btn btn-danger mr-2" data-tooltip="tooltip" title="Ajukan Retur">
+                    <i class="fas fa-exchange-alt"></i>
+                  </a>
                   <div class="dropdown">
                     <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-file-invoice"></i>

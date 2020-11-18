@@ -44,7 +44,7 @@ class PengadaanController extends Controller
 
 	public function index()
 	{
-		$pembelian = $this->getPengadaan()->orderBy('tanggal')->get();
+		$pembelian = $this->getPengadaan()->orderByDesc('tanggal')->get();
 		$distributor = Distributor::all();
 		return view('pengadaan.index', compact('pembelian', 'distributor'));
 	}

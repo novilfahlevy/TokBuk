@@ -18,13 +18,6 @@ Retur
                             <div class="card">
                                 <div class="card-header">
                                     <h4>Daftar Retur</h4>
-                                    <div class="card-header-action">
-                                        <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <a href="{{ route('retur.create') }}" class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Buat Retur">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="card-body p-3">
                                     <div class="table-responsive">
@@ -35,15 +28,36 @@ Retur
                                                     <th scope="col">No</th>
                                                     <th>Kode</th>
                                                     <th>Tanggal</th>
-                                                    <th>Nominal Pembayaran</th>
                                                     <th>Jumlah Buku</th>
-                                                    <th>Total Harga</th>
+                                                    <th>Dana Pengembalian</th>
+                                                    <th>Distributor</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($transaksi as $t)
-                                                
+                                                @foreach ($returs as $retur)
+                                                  <td>{{ $loop->index }}</td>
+                                                  <td>{{ $retur->kode }}</td>
+                                                  <td>{{ $retur->tanggal }}</td>
+                                                  <td>{{ $retur->jumlah }}</td>
+                                                  <td>{{ $retur->total_dana_pengembalian }}</td>
+                                                  <td>{{ $retur->pengadaan->distributor ?? '-' }}</td>
+                                                  <td>
+                                                    <div class="btn-group">
+                                                      <a href="{{ route('transaksi.detail', $retur->id) }}" class="btn btn-sm btn-primary text-white" data-tooltip="tooltip" title="Detail">
+                                                        <i class="fas fa-info px-1"></i>
+                                                      </a>
+                                                    </div>
+                                                    <div class="btn-group">
+                                                      <form method="post" class="delete_form" data-tooltip="tooltip" title="Hapus"
+                                                      action="{{route('transaksi.destroy',$retur->id)}}">
+                                                      @method('DELETE')
+                                                      @csrf
+                                                      <button class="btn btn-sm btn-danger btn-delete"><i
+                                                        class="fa fa-trash" ></i></button>
+                                                      </form>
+                                                    </div>
+                                                  </td>
                                                 @endforeach
                                             </tbody>
                                         </table>
