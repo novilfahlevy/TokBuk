@@ -96,7 +96,7 @@
                             <th>ISBN</th>
                             <th>Judul</th>
                             <th>Jumlah</th>
-                            <th>Tanggal Pembelian Terakhir</th>
+                            <th>Tanggal Pengadaan Terakhir</th>
                           </tr>
                         </thead>
                         <tbody>
