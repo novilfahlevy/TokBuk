@@ -61,17 +61,17 @@ Pengadaan
                                                     <td>
                                                         <div class="btn-group">
                                                             <a href="{{ route('pengadaan.detail', $p->id) }}"
-                                                                class="btn btn-sm btn-primary text-white" title="Detail Data">
+                                                                class="btn btn-sm btn-primary text-white" data-tooltip="tooltip" title="Detail">
                                                                 <i class="fas fa-info px-1"></i>
                                                             </a>
                                                         </div>
                                                         <div class="btn-group">
-                                                            <form method="post" class="delete_form "
+                                                            <form method="post" class="delete_form " data-tooltip="tooltip" title="Hapus"
                                                             action="{{route('pengadaan.destroy',$p->id)}}">
                                                             @method('DELETE')
                                                             @csrf
                                                             <button class="btn btn-sm btn-danger btn-delete"><i
-                                                                class="fa fa-trash" title="Hapus Data"></i></button>
+                                                                class="fa fa-trash" ></i></button>
                                                             </form>
                                                         </div>
                                                     </td>

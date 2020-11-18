@@ -49,15 +49,15 @@ Distributor
                                       <td>{{$loop->index+1}}</td>
                                       <td>{{$s->nama}}</td>
                                   <td>
-                                    <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$s->id}}" title="Detail Data"><i class="fa fa-info px-1"></i></a>
+                                    <a type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$s->id}}" data-tooltip="tooltip" title="Detail"><i class="fa fa-info px-1"></i></a>
                                       <div class="btn-group">
-                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('distributor.edit',  ['id' => $s["id"]]) }}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
+                                        <a type="submit" class="btn btn-sm btn-info text-white" href="{{ route('distributor.edit',  ['id' => $s["id"]]) }}" data-tooltip="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form method="post" class="delete_form " action="{{route('distributor.destroy',$s['id'])}}">
+                                        <form method="post" class="delete_form " data-tooltip="tooltip" title="Hapus" action="{{route('distributor.destroy',$s['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                            <button  class="btn btn-sm btn-danger btn-delete" title="Hapus Data"  ><i class="fa fa-trash"></i></button>
+                                            <button  class="btn btn-sm btn-danger btn-delete"   ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </div>
                                   </td>

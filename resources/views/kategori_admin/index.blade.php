@@ -70,13 +70,13 @@ Kategori
                                         <td>{{$j->nama}}</td>
                                         <td>
                                           <div class="btn-group">
-                                            <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$j->id}}"><i class="fas fa-pencil-alt" title="Edit Data"></i></a>
+                                            <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$j->id}}"><i class="fas fa-pencil-alt" data-tooltip="tooltip" title="Edit"></i></a>
                                           </div>
                                           <div class="btn-group">
-                                            <form method="post" class="delete_form " action="{{route('kategori.destroy',$j['id'])}}">
+                                            <form method="post" class="delete_form " data-tooltip="tooltip" title="Hapus" action="{{route('kategori.destroy',$j['id'])}}">
                                             @method('DELETE')
                                             @csrf
-                                              <button  class="btn btn-sm btn-danger btn-delete" title="Hapus Data" ><i class="fa fa-trash"></i></button>
+                                              <button  class="btn btn-sm btn-danger btn-delete"  ><i class="fa fa-trash"></i></button>
                                             </form>
                                           </div>
                                         </td>

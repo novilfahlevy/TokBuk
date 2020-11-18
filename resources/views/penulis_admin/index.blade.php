@@ -69,10 +69,10 @@ Penulis
                                             <td>{{$p->nama}}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}" title="Edit Data"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a type="submit" class="btn btn-sm btn-info text-white" data-toggle="modal" data-target=".bs-example-modal-lg-{{$p->id}}" data-tooltip="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                                 </div>
                                                 <div class="btn-group">
-                                                    <form method="post" class="delete_form " action="{{route('penulis.destroy',$p['id'])}}">
+                                                    <form method="post" class="delete_form " data-tooltip="tooltip" title="Hapus" action="{{route('penulis.destroy',$p['id'])}}">
                                                     @method('DELETE')
                                                     @csrf
                                                         <button  class="btn btn-sm btn-danger btn-delete"  title="Hapus data"><i class="fa fa-trash"></i></button>
