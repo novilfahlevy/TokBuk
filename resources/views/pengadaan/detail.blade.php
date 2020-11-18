@@ -19,25 +19,16 @@ Detail Pengadaan
               <div class="card-header">
                 <h4>Data Pengadaan</h4>
                 <div class="card-header-form">
-                  {{-- <a href="{{ route('pengadaan.laporan', $pembelian->id) }}" class="btn btn-success mr-2" title="Unduh Laporan">
-                    <i class="fas fa-file-download"></i>
-                  </a> --}}
                   <div class="dropdown">
                     <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-file"></i>
+                      <i class="fas fa-file-invoice"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Laporan</h6>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ route('pengadaan.laporan', $pembelian->id) }}">Unduh</a>
                       <a class="dropdown-item" href="{{ route('pengadaan.cetak', $pembelian->id) }}" target="_blank">Cetak</a>
-                    </div>
-                  </div>
-                  <div class="dropdown">
-                    <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-file-invoice"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <div class="my-3"></div>
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ asset('images/faktur/' . $pembelian->faktur) }}" target="_blank">Lihat</a>
