@@ -4,7 +4,7 @@
 
 ## Tentang TokBuk
 
-TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner toko buku manapun untuk <b>mencatat atau merekam riwayat pengadaan stok buku dari distributor</b>, <b>layanan kasir untuk pembelian buku oleh pelanggan</b>, dan <b>mengelola lokasi atau tata letak buku</b>.
+TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner toko buku manapun untuk <b>mencatat atau merekam riwayat pengadaan stok buku dari distributor</b>, <b>retur atau pengembalian barang dari pengadaan</b>, <b>layanan kasir untuk pembelian buku oleh pelanggan</b>, dan <b>mengelola lokasi atau tata letak buku</b>.
 
 ## Bahan atau software yang diperlukan
 - [Composer](https://getcomposer.org)
