@@ -9,7 +9,7 @@ class ReturController extends Controller
 {
   public function index()
   {
-    $retur = Retur::orderByDesc('tanggal')->get();
+    $returs = Retur::orderByDesc('tanggal')->get();
     return view('retur.index', compact('returs'));
   }
 }

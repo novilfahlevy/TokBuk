@@ -1,6 +1,6 @@
 @extends('layouts.partials.app')
 @section('title')
-Transaksi
+Retur
 @endsection
 
 @section('content')
@@ -8,7 +8,7 @@ Transaksi
     <div class="main-content" style="min-height: 116px;">
         <section class="section">
             <div class="section-header">
-                <h1>Transaksi</h1>
+                <h1>Retur</h1>
             </div>
             <div class="section-body">
                 <div class="content-body table">
@@ -17,16 +17,10 @@ Transaksi
                             @include('layouts.flash-alert')
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Daftar Transaksi</h4>
+                                    <h4>Daftar Retur</h4>
                                     <div class="card-header-action">
                                         <div class="col-md-3 col-sm-3 col-xs-4 text-right d-flex align-items-center">
-                                            <button type="button" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#exportModal" data-tooltip="tooltip" title="Export XLSX">
-                                                <i class="fas fa-file-export"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#filterModal" data-tooltip="tooltip" title="Filter">
-                                                <i class="fas fa-filter"></i>
-                                            </button>
-                                            <a href="{{ route('transaksi.create') }}" class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Buat Transaksi">
+                                            <a href="{{ route('retur.create') }}" class="btn btn-sm btn-primary" data-tooltip="tooltip" title="Buat Retur">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
@@ -49,31 +43,7 @@ Transaksi
                                             </thead>
                                             <tbody>
                                                 @foreach ($transaksi as $t)
-                                                <tr>
-                                                    <td scope="row">{{$loop->index+1}}</td>
-                                                    <td>{{ $t->kode }}</td>
-                                                    <td>{{ $t->created_at }}</td>
-                                                    <td>Rp {{ number_format($t->bayar, 2, ',', '.') }}</td>
-                                                    <td>{{ $t->jumlah_buku }}</td>
-                                                    <td>Rp {{ number_format($t->total_harga, 2, ',', '.') }}</td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <a href="{{ route('transaksi.detail', $t->id) }}"
-                                                                class="btn btn-sm btn-primary text-white" data-tooltip="tooltip" title="Detail">
-                                                                <i class="fas fa-info px-1"></i>
-                                                            </a>
-                                                        </div>
-                                                        <div class="btn-group">
-                                                            <form method="post" class="delete_form " data-tooltip="tooltip" title="Hapus"
-                                                            action="{{route('transaksi.destroy',$t->id)}}">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button class="btn btn-sm btn-danger btn-delete"><i
-                                                                class="fa fa-trash" ></i></button>
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -86,80 +56,4 @@ Transaksi
         </section>
     </div>
 </div>
-
-<div class="modal" tabindex="-1" role="dialog" id="exportModal">
-    <form action="{{ route('transaksi.export') }}" method="POST">
-        @csrf
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Export XLSX</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body pb-2">
-                <div class="form-group mb-0">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group mb-0">
-                                <label for="mulai">Dari tanggal</label>
-                                <input type="date" class="form-control" id="mulai" name="mulai">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group mb-0">
-                                <label for="sampai">Sampai tanggal</label>
-                                <input type="date" class="form-control" id="sampai" name="sampai">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Export</button>
-              </div>
-            </div>
-        </div>
-    </form>
-  </div>
-  
-    <div class="modal" tabindex="-1" role="dialog" id="filterModal">
-        <form action="{{ route('transaksi.filter') }}" method="POST">
-            @csrf
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Filter</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-2">
-                    <div class="form-group mb-0">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group mb-0">
-                                    <label for="mulaiFilter">Dari tanggal</label>
-                                    <input type="date" class="form-control" id="mulaiFilter" name="mulai" value="{{ session()->pull('mulai') }}">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group mb-0">
-                                    <label for="sampaiFilter">Sampai tanggal</label>
-                                    <input type="date" class="form-control" id="sampaiFilter" name="sampai" value="{{ session()->pull('sampai') }}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </div>
-                </div>
-            </div>
-        </form>
-    </div>
 @endsection

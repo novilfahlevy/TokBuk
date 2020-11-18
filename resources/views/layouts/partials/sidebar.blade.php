@@ -49,6 +49,12 @@
           </a>
         </li>
 
+        <li class="nav-item  {{Request::segment(1)=='retur' ?'active':''}}">
+          <a class="nav-link" href="{{route('retur')}}" aria-expanded="false">
+            <i class="fas fa-exchange-alt"></i> <span>Retur</span>
+          </a>
+        </li>
+
         <li class="dropdown{{ (Request::segment(1) === 'penulis' || Request::segment(1) === 'penerbit' || Request::segment(1) === 'kategori' || Request::segment(1) === 'distributor' || Request::segment(1) === 'lokasi') ? ' active' : '' }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Data Master</span></a>
           <ul class="dropdown-menu{{ (Request::segment(1) === 'penulis' || Request::segment(1) === 'penerbit' || Request::segment(1) === 'kategori' || Request::segment(1) === 'distributor' || Request::segment(1) === 'lokasi') ? ' show' : '' }}">
