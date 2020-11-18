@@ -14,14 +14,29 @@
               <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                   <div class="card-icon bg-primary">
-                    <i class="far fa-user"></i>
+                    <i class="fas fa-handshake"></i>
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>Total Pengguna</h4>
+                      <h4>Transaksi Hari Ini</h4>
+                    </div>
+                    <div class="card-body" id="jumlahTransaksi">
+                      {{ number_format($transaksi) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                  <div class="card-icon bg-success">
+                    <i class="fas fa-dollar-sign"></i>
+                  </div>
+                  <div class="card-wrap">
+                    <div class="card-header">
+                      <h4>Pendapatan Hari Ini</h4>
                     </div>
                     <div class="card-body">
-                      {{ number_format($pengguna) }}
+                      <small>Rp {{ number_format($pendapatanHariIni, 2, ',', '.') }}</small>
                     </div>
                   </div>
                 </div>
@@ -33,7 +48,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>Total Judul Buku</h4>
+                      <h4>Judul Buku</h4>
                     </div>
                     <div class="card-body">
                       {{ number_format($judulBuku) }}
@@ -48,25 +63,10 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>Total Buku</h4>
+                      <h4>Buku</h4>
                     </div>
                     <div class="card-body" id="jumlahBuku">
                       {{ number_format($buku) }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                  <div class="card-icon bg-success">
-                    <i class="fas fa-money-bill"></i>
-                  </div>
-                  <div class="card-wrap">
-                    <div class="card-header">
-                      <h4>Transaksi Hari Ini</h4>
-                    </div>
-                    <div class="card-body" id="jumlahTransaksi">
-                      {{ number_format($transaksi) }}
                     </div>
                   </div>
                 </div>

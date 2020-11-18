@@ -31,11 +31,12 @@ class DasborController extends Controller
      */
     public function index()
     {
+        $transaksiHariIni = Transaksi::whereDate('created_at', $this->now->today()->format('Y-m-d'));
         $batasanStok = Pengaturan::first()->limit_stok;
-        $pengguna = User::count();
+        $pendapatanHariIni = $transaksiHariIni->sum('total_harga');
         $judulBuku = Buku::count();
         $buku = (int) Buku::sum('jumlah');
-        $transaksi = Transaksi::whereDate('created_at', $this->now->today()->format('Y-m-d'))->count();
+        $transaksi = $transaksiHariIni->count();
         $bukuMencapaiStok = Buku::join('detail_pengadaan as dpb', 'dpb.id_buku', '=', 'buku.id')
           ->join('pengadaan as pb', 'dpb.id_pengadaan', '=', 'pb.id')
           ->select(['buku.isbn', 'buku.judul', 'buku.jumlah', DB::raw('DATE_FORMAT(MAX(pb.tanggal), "%d-%m-%Y") as tanggal')])
@@ -69,6 +70,6 @@ class DasborController extends Controller
             if ( !$bulanAda ) $hasil[] = 0;
         }
 
-        return view('dasbor', compact('pengguna', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok'));
+        return view('dasbor', compact('pendapatanHariIni', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok'));
     }
 }
