@@ -36,7 +36,7 @@ Retur
                                             </thead>
                                             <tbody>
                                                 @foreach ($returs as $retur)
-                                                  <td>{{ $loop->index }}</td>
+                                                  <td>{{ $loop->index + 1 }}</td>
                                                   <td>{{ $retur->kode }}</td>
                                                   <td>{{ $retur->tanggal }}</td>
                                                   <td>{{ $retur->jumlah }}</td>
