@@ -118,6 +118,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('retur/store/{id}', 'ReturController@store')->name('retur.store');
     Route::get('retur/{id}/detail', 'ReturController@detail')->name('retur.detail');
     Route::get('retur/faktur/{id}', 'ReturController@faktur')->name('retur.faktur');
+    Route::get('retur/faktur{id}/cetak', 'ReturController@cetak')->name('retur.cetak');
     Route::delete('retur/{id}', 'ReturController@destroy')->name('retur.destroy');
     
     //pengaturan

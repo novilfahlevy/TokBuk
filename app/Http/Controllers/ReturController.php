@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Buku;
 use App\DetailRetur;
 use App\Pengadaan;
+use App\Pengaturan;
 use App\Retur;
+use Barryvdh\DomPDF\Facade as PDF;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
@@ -137,5 +139,19 @@ class ReturController extends Controller
 				'type' => 'danger'
 			]);
 		}
+  }
+
+  public function faktur($id)
+	{
+    $retur = Retur::find($id);
+    $pengaturan = Pengaturan::first();
+		return PDF::loadView('retur.faktur', compact('retur', 'pengaturan'))->download('faktur_' . $retur->kode . '.pdf');
+  }
+
+  public function cetak($id)
+	{
+    $retur = Retur::find($id);
+    $pengaturan = Pengaturan::first();
+		return view ('retur.cetak', compact('retur', 'pengaturan'));
   }
 }

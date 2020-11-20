@@ -17,23 +17,20 @@ Detail Retur
           <div class="card-header">
             <h4>Data Retur</h4>
             <div class="card-header-form">
-              {{-- <a href="{{ route('transaksi.nota', $transaksi->id) }}" class="btn btn-success mr-2" title="Unduh Nota">
-                <i class="fas fa-file-download"></i>
-              </a> --}}
-              {{-- <div class="dropdown">
+              <a href="{{ route('pengadaan.detail', $retur->pengadaan->id) }}" class="btn btn-warning mr-2" data-tooltip="tooltip" title="Pengadaan">
+                <i class="fas fa-truck-loading"></i>
+              </a>
+              <div class="dropdown">
                 <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-file-invoice"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <h6 class="dropdown-header pl-3 pt-1 pb-0">Nota</h6>
+                  <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{ route('transaksi.nota', $transaksi->id) }}">Unduh</a>
-                  <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank">Cetak</a>
+                  <a class="dropdown-item" href="{{ route('retur.faktur', $retur->id) }}">Unduh</a>
+                  <a class="dropdown-item" href="{{ route('retur.cetak', $retur->id) }}" target="_blank">Cetak</a>
                 </div>
-              </div> --}}
-              <a href="{{ route('pengadaan.detail', $retur->pengadaan->id) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Pengadaan">
-                <i class="fas fa-truck-loading"></i>
-              </a>
+              </div>
               <a href="{{ route('retur') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>
