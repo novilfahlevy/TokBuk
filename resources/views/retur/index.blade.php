@@ -41,16 +41,16 @@ Retur
                                                   <td>{{ $retur->tanggal }}</td>
                                                   <td>{{ $retur->jumlah }}</td>
                                                   <td>{{ $retur->total_dana_pengembalian }}</td>
-                                                  <td>{{ $retur->pengadaan->distributor ?? '-' }}</td>
+                                                  <td>{{ $retur->pengadaan->distributor ? $retur->pengadaan->distributor->nama : '-' }}</td>
                                                   <td>
                                                     <div class="btn-group">
-                                                      <a href="{{ route('transaksi.detail', $retur->id) }}" class="btn btn-sm btn-primary text-white" data-tooltip="tooltip" title="Detail">
+                                                      <a href="{{ route('retur.detail', $retur->id) }}" class="btn btn-sm btn-primary text-white" data-tooltip="tooltip" title="Detail">
                                                         <i class="fas fa-info px-1"></i>
                                                       </a>
                                                     </div>
                                                     <div class="btn-group">
                                                       <form method="post" class="delete_form" data-tooltip="tooltip" title="Hapus"
-                                                      action="{{route('transaksi.destroy',$retur->id)}}">
+                                                      action="{{route('retur.destroy',$retur->id)}}">
                                                       @method('DELETE')
                                                       @csrf
                                                       <button class="btn btn-sm btn-danger btn-delete"><i

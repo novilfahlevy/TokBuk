@@ -1,5 +1,6 @@
 const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
 const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+const idPengadaan = $('#idPengadaan').text();
 
 let jumlahBuku = 0;
 let bukuCache = [];
@@ -92,7 +93,7 @@ function getAllBooks(selectClass) {
 
   $.ajax({
     method: 'GET',
-    url: `${BASEURL}/api/retur/${$('#idPengadaan').text()}/buku`,
+    url: `${BASEURL}/api/retur/${idPengadaan}/buku`,
     success: function(data) {
       fillJsSelect2Options(selectClass, () => {
         data.buku.map(buku => {
@@ -164,12 +165,13 @@ function getAllBooksData() {
       jumlah: parseInt($(buku).find('.jumlah-buku-input').val(), 10),
       harga: $(buku).find('.harga').data('harga'),
       keterangan: $(buku).find('.keterangan').val(),
-      idPengadaan: $(buku).find('.id_pengadaan').text()
+      idDetailPengadaan: $(buku).find('.id_pengadaan').text()
     }
   });
 
   return {
     danaPengembalian,
+    idPengadaan,
     tanggal: $('#tanggal').val(),
     buku: semuaBuku
   }

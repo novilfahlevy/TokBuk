@@ -21,6 +21,7 @@ class CreateDetailReturTable extends Migration
             $table->foreign('id_detail_pengadaan')->references('id')->on('detail_pengadaan')->onDelete('cascade');
             $table->integer('jumlah');
             $table->integer('dana_pengembalian');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
