@@ -40,7 +40,7 @@ Retur
                                                   <td>{{ $retur->kode }}</td>
                                                   <td>{{ $retur->tanggal }}</td>
                                                   <td>{{ $retur->jumlah }}</td>
-                                                  <td>{{ $retur->total_dana_pengembalian }}</td>
+                                                  <td>Rp {{ number_format($retur->total_dana_pengembalian, 2, ',', '.') }}</td>
                                                   <td>{{ $retur->pengadaan->distributor ? $retur->pengadaan->distributor->nama : '-' }}</td>
                                                   <td>
                                                     <div class="btn-group">
