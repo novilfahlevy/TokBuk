@@ -91,10 +91,10 @@ class DasborController extends Controller
         ->toArray();
 
         $bestSeller = [
-          'buku' => collect(range(0, 7))->map(function($i) use ($bukuBestSeller) {
+          'buku' => collect(range(0, 6))->map(function($i) use ($bukuBestSeller) {
             return isset($bukuBestSeller[$i]) ? $bukuBestSeller[$i] : '-';
           }),
-          'jumlah' => collect(range(0, 7))->map(function($i) use ($jumlahBestSeller) {
+          'jumlah' => collect(range(0, 6))->map(function($i) use ($jumlahBestSeller) {
             return isset($jumlahBestSeller[$i]) ? $jumlahBestSeller[$i] : 0;
           })
         ];
