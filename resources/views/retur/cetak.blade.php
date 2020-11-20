@@ -20,6 +20,11 @@
         <td><h6>:</h6></td>
         <td><h6>{{ $pengaturan->alamat }}</h6></td>
       </tr>
+      <tr>
+        <td><h6>Distributor</h6></td>
+        <td><h6>:</h6></td>
+        <td><h6>{{ $retur->pengadaan->distributor ? $retur->pengadaan->distributor->nama : '-' }}</h6></td>
+      </tr>
     </tbody>
   </table>
   <hr>
