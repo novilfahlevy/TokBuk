@@ -28,7 +28,7 @@ class TransaksiController extends Controller
 				'transaksi.total_harga',
 				'transaksi.bayar',
 				'transaksi.id',
-				])
+      ])
 			->groupBy([
 				'transaksi.kode',
 				'transaksi.created_at',

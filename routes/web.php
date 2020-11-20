@@ -111,6 +111,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('pengguna/{id}', 'UserController@edit')->name('user.edit');
     Route::put('pengguna/{id}/update', 'UserController@update')->name('user.update');
     Route::delete('pengguna/{id}', 'UserController@destroy')->name('user.destroy');
+
+    //retur
+    Route::get('retur', 'ReturController@index')->name('retur');
+    Route::get('retur/create/{id}', 'ReturController@create')->name('retur.create');
+    Route::post('retur/store/{id}', 'ReturController@store')->name('retur.store');
+    Route::get('retur/{id}/detail', 'ReturController@detail')->name('retur.detail');
+    Route::get('retur/faktur/{id}', 'ReturController@faktur')->name('retur.faktur');
+    Route::get('retur/faktur{id}/cetak', 'ReturController@cetak')->name('retur.cetak');
+    Route::delete('retur/{id}', 'ReturController@destroy')->name('retur.destroy');
     
     //pengaturan
     Route::get('pengaturan', 'PengaturanController@index')->name('pengaturan');

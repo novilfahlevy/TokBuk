@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Pengaturan;
+use App\Retur;
 
 class LaporanController extends Controller
 {
@@ -52,13 +53,23 @@ class LaporanController extends Controller
 		$totalPembelian = $pembelian->count();
 		$pengeluaran = $pembelian->sum('total_harga');
 		$bukuTerbeli = $pembelian->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
-			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
-			->first();
+      ->select(['pengadaan.id', DB::raw('SUM(dp.jumlah) as buku_terbeli')])
+      ->groupBy('pengadaan.id')
+      ->first()
+      ->buku_terbeli;
+      
+    foreach ( $pembelian->get() as $pengadaan ) {
+      $retur = $pengadaan->retur;
+      if ( $retur = $pengadaan->retur ) {
+        $pengeluaran -= $retur->total_dana_pengembalian;
+        $bukuTerbeli -= $retur->detail->sum('jumlah');
+      }
+    }
 
 		return response()->json([
 			'status' => 200,
 			'totalPembelian' => $totalPembelian,
-			'bukuTerbeli' => (int) $bukuTerbeli->buku_terbeli,
+			'bukuTerbeli' => (int) $bukuTerbeli,
 			'pengeluaran' => (int) $pengeluaran,
 			'dari' => Carbon::parse($request->dari)->format('d-m-Y'),
 			'sampai' => Carbon::parse($request->sampai)->format('d-m-Y')
