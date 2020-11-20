@@ -60,6 +60,7 @@ class LoginController extends Controller
                     $isEmail ? 'email' : 'username' => $request->keyword,
                     'password' => $request->password
                 ]);
+                config('session.lifetime', 720);
                 return redirect('dasbor');
             }
             return redirect('login')->withErrors(['password' => 'Password tidak tepat'])->withInput($request->except('password'));
