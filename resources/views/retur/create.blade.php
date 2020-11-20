@@ -73,6 +73,7 @@ Tambah Retur
                 </div>
                 <button type="button" class="btn btn-success mt-2" id="tambahBuku">Tambah Buku</button>
               </div>
+              <p>* Pastikan buku yang ingin diretur masih dalam keadaan sama seperti saat baru dibeli melalui pengadaan.</p>
               <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
           </div>
