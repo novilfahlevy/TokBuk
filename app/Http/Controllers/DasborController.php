@@ -32,6 +32,8 @@ class DasborController extends Controller
     public function index()
     {
         $transaksiHariIni = Transaksi::whereDate('created_at', $this->now->today()->format('Y-m-d'));
+        $transaksiBulanIni = Transaksi::whereMonth('transaksi.created_at', $this->now->month);
+
         $batasanStok = Pengaturan::first()->limit_stok;
         $pendapatanHariIni = $transaksiHariIni->sum('total_harga');
         $judulBuku = Buku::count();
@@ -70,6 +72,33 @@ class DasborController extends Controller
             if ( !$bulanAda ) $hasil[] = 0;
         }
 
-        return view('dasbor', compact('pendapatanHariIni', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok'));
+        $bestSeller = $transaksiBulanIni->join('detail_transaksi as dt', 'dt.id_transaksi', '=', 'transaksi.id')
+          ->join('buku', 'buku.id', '=', 'dt.id_buku')
+          ->select(['buku.isbn', 'buku.judul', DB::raw('SUM(dt.jumlah) as jumlah')])
+          ->groupBy(['buku.isbn', 'buku.judul'])
+          ->orderByDesc('jumlah')
+          ->limit(7)
+          ->get();
+
+        $bukuBestSeller = $bestSeller->map(function($buku) {
+          return strlen($buku->judul) > 16 ? substr($buku->judul, 0, 16) . '...' : $buku->judul;
+        })
+        ->toArray();
+        
+        $jumlahBestSeller = $bestSeller->map(function($buku) {
+          return $buku->jumlah;
+        })
+        ->toArray();
+
+        $bestSeller = [
+          'buku' => collect(range(0, 7))->map(function($i) use ($bukuBestSeller) {
+            return isset($bukuBestSeller[$i]) ? $bukuBestSeller[$i] : '-';
+          }),
+          'jumlah' => collect(range(0, 7))->map(function($i) use ($jumlahBestSeller) {
+            return isset($jumlahBestSeller[$i]) ? $jumlahBestSeller[$i] : 0;
+          })
+        ];
+
+        return view('dasbor', compact('pendapatanHariIni', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok', 'bestSeller'));
     }
 }

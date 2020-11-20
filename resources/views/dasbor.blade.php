@@ -71,13 +71,23 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>Pendapatan Tahun {{ date('Y') }}</h4>
                   </div>
                   <div class="card-body">
                     <canvas id="transaksiPerbulan"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>7 Best Seller Bulan Ini</h4>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="bestSeller" class="h-100"></canvas>
                   </div>
                 </div>
               </div>
@@ -128,19 +138,22 @@
   <script src="{{ asset('js/dasbor/index.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script>
-    var ctx = document.getElementById('transaksiPerbulan').getContext('2d');
-    var chart = new Chart(ctx, {
+    var pendapatan = document.getElementById('transaksiPerbulan').getContext('2d');
+    var chart = new Chart(pendapatan, {
         type: 'bar',
         data: {
           labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
           datasets: [{
-            label: 'Pendapatan',
+            label: false,
             backgroundColor: 'rgba(71, 195, 99, 0.8)',
             borderColor: '#47c363',
             data: JSON.parse('{!! json_encode($hasil) !!}')
           }],
         },
         options: {
+          legend: {
+            display: false
+          },
           scales: {
             yAxes: [{
               ticks: {
@@ -158,6 +171,33 @@
               }
             }
           }
+        }
+    });
+
+    var bestSeller = document.getElementById('bestSeller').getContext('2d');
+    var chart = new Chart(bestSeller, {
+        type: 'horizontalBar',
+        data: {
+          labels: JSON.parse(`{!! json_encode($bestSeller['buku']) !!}`),
+          datasets: [{
+            backgroundColor: 'rgba(103, 119, 239, 0.8)',
+            borderColor: '#6777ef',
+            data: JSON.parse(`{!! json_encode($bestSeller['jumlah']) !!}`)
+          }],
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              ticks: {
+                callback: function(value) {
+                  return Number(value);
+                }
+              }
+            }]
+          },
         }
     });
   </script>
