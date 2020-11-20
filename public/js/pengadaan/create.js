@@ -94,12 +94,12 @@ function tambahBuku() {
           <select class="${selectClass} form-control buku-dipilih" name="states" style="width: 300px"></select>
         </div>
         <div class="form-group my-2 baru">
-          <input type="text" class="form-control form-control-sm mb-2 isbn" placeholder="ISBN">
-          <input type="text" class="form-control form-control-sm judul" placeholder="Judul">
+          <input type="text" class="form-control form-control-sm mb-2 isbn" placeholder="ISBN" style="width: 200px">
+          <input type="text" class="form-control form-control-sm judul" placeholder="Judul" style="width: 200px">
         </div>
       </th>
       <th>
-        <input type="number" class="form-control jumlah-buku-input" min="1" value="1">
+        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 80px">
       </th>
       <th class="harga">
         <div class="input-group">
