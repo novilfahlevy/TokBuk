@@ -126,7 +126,7 @@ function tambahBuku() {
         <select class="${selectClass} form-control buku-dipilih" name="states" style="width: 300px"></select>
       </th>
       <th class="d-flex align-items-center">
-        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 60px">
+        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 80px">
         <span class="mx-2">/</span>
         <span class="jumlah-buku-label"></span>
       </th>
