@@ -19,7 +19,7 @@ Detail Pengadaan
               <div class="card-header">
                 <h4>Data Pengadaan</h4>
                 <div class="card-header-form">
-                  <a href="{{ $pembelian->retur ? route('retur.detail', $pembelian->retur->id) : route('retur.create', $pembelian->id) }}" class="btn btn-danger mr-2" data-tooltip="tooltip" title="{{ !$pembelian->retur ?? 'Ajukan' }} Retur">
+                  <a href="{{ $pembelian->retur ? route('retur.detail', $pembelian->retur->id) : route('retur.create', $pembelian->id) }}" class="btn btn-danger mr-2" data-tooltip="tooltip" title="{{ !$pembelian->retur ? 'Ajukan' : '' }} Retur">
                     <i class="fas fa-exchange-alt"></i>
                   </a>
                   <div class="dropdown">
