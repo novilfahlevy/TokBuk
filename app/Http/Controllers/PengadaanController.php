@@ -82,7 +82,7 @@ class PengadaanController extends Controller
 
 	public function detail($id)
 	{
-		$pembelian = Pengadaan::find($id);
+    $pembelian = Pengadaan::find($id);
 		return view('pengadaan.detail', compact('pembelian'));
 	}
 

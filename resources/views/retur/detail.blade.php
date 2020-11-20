@@ -31,6 +31,9 @@ Detail Retur
                   <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank">Cetak</a>
                 </div>
               </div> --}}
+              <a href="{{ route('pengadaan.detail', $retur->pengadaan->id) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Pengadaan">
+                <i class="fas fa-truck-loading"></i>
+              </a>
               <a href="{{ route('retur') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>

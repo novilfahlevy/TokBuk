@@ -37,4 +37,9 @@ class Pengadaan extends Model
     {
         return $this->hasOne(User::class, 'id', 'id_user');
     }
+
+    public function retur()
+    {
+        return $this->hasOne(Retur::class, 'id_pengadaan', 'id');
+    }
 }
