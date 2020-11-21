@@ -91,7 +91,7 @@ Laporan
                     <table class="table table-striped">
                       <tr>
                         <td width="30%">
-                          Total Pembelian
+                          Total Pengadaan
                         </td>
                         <td id="totalPembelian">
                           0
