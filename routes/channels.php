@@ -11,10 +11,10 @@
 |
 */
 
-Broadcast::channel('my-channel', function ($user, $id) {
-    return true;
-});
+// Broadcast::channel('my-channel', function ($user, $id) {
+//     return true;
+// });
 
-Broadcast::channel('dasbor', function() {
-    return true;
-});
+// Broadcast::channel('dasbor', function() {
+//     return true;
+// });

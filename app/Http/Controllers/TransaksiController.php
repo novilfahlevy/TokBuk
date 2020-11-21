@@ -119,7 +119,7 @@ class TransaksiController extends Controller
       
       RiwayatAktivitas::create(['aktivitas' => 'Membuat transaksi ' . $kode]);
 
-			event(new UpdateDasborEvent());
+			
 
 			return redirect()->route('transaksi.detail', ['id' => $transaksiBaru->id])->with([
 				'message' => 'Transaksi Berhasil Dibuat.',
@@ -161,8 +161,6 @@ class TransaksiController extends Controller
       DB::commit();
 
       RiwayatAktivitas::create(['aktivitas' => 'Menghapus transaksi ' . $kode]);
-      
-      event(new UpdateDasborEvent);
       
 			return redirect()->route('transaksi')->with([
 				'message' => 'Berhasil Menghapus Transaksi',

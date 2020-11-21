@@ -161,7 +161,7 @@ class PengadaanController extends Controller
       
       RiwayatAktivitas::create(['aktivitas' => 'Membuat pengadaan ' . $kode]);
 
-			event(new UpdateDasborEvent);
+			
 
 			return redirect()->route('pengadaan.detail', ['id' => $pengadaan->id])->with([
 				'type' => 'success',
@@ -200,8 +200,7 @@ class PengadaanController extends Controller
       DB::commit();
       
       RiwayatAktivitas::create(['aktivitas' => 'Menghapus pengadaan ' . $kode]);
-
-			event(new UpdateDasborEvent);
+			
 			return redirect()->route('pengadaan')->with([
 				'message' => 'Berhasil Menghapus Pengadaan',
 				'type' => 'success'
