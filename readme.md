@@ -67,7 +67,7 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
     - operator
     - kasir
 
-    Semua akun menggunakan password *123123*
+    Ada beberapa akun lainnya yang dapat dilihat di menu pengguna, semua akun menggunakan password *123123*.
 
 ## Kontributor (Kelompok 3)
 - [Muhammad Novil Fahlevy](https://github.com/novilfahlevy)
