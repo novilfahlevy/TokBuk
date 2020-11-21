@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\Lokasi;
+use App\RiwayatAktivitas;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,7 @@ class LokasiController extends Controller
 	{
 		$lokasi = $request->lokasi;
 		if ( Lokasi::create(['nama' => $lokasi]) ) {
+      RiwayatAktivitas::create(['aktivitas' => 'Menambah lokasi ' . $request->lokasi]);
 			return redirect()->route('lokasi')->with([
 				'type' => 'success',
 				'message' => 'Berhasil Menambah Lokasi'
@@ -35,6 +37,7 @@ class LokasiController extends Controller
 	{
 		$lokasi = Lokasi::find($id);
 		if ( $lokasi->update(['nama' => $request->lokasi]) ) {
+      RiwayatAktivitas::create(['aktivitas' => 'Mengedit lokasi ' . $request->lokasi]);
 			return redirect()->route('lokasi')->with([
 				'type' => 'success',
 				'message' => 'Berhasil Mengedit Lokasi'
@@ -50,10 +53,12 @@ class LokasiController extends Controller
 	{
 		DB::beginTransaction();
 		try {
-			$lokasi = Lokasi::find($id);
+      $lokasi = Lokasi::find($id);
+      $nama = $lokasi->nama;
 			Buku::where('id_lokasi', $id)->update(['id_lokasi' => null]);
 			$lokasi->delete();
-			DB::commit();
+      DB::commit();
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus lokasi ' . $nama]);
 			return redirect()->route('lokasi')->with([
 				'type' => 'success',
 				'message' => 'Berhasil Menghapus Lokasi'

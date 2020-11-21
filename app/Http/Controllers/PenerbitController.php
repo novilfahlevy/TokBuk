@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use Illuminate\Http\Request;
 use App\Penerbit;
+use App\RiwayatAktivitas;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +41,7 @@ class PenerbitController extends Controller
         ]);
 
         if($insert == true ){
+            RiwayatAktivitas::create(['aktivitas' => 'Menambah penerbit ' . $request->nama]);
             return redirect()->route('penerbit')->with(['message' => 'Berhasil Menambah Penerbit', 'type' => 'success']);
         } else {
 
@@ -73,6 +75,7 @@ class PenerbitController extends Controller
         ]);
 
         if($update == true) {
+            RiwayatAktivitas::create(['aktivitas' => 'Mengedit penerbit ' . $request->nama]);
             return redirect()->route('penerbit')->with(['message' => 'Berhasil Mengedit Penerbit', 'type' => 'success']);
         } else {
             return redirect()->route('penerbit')->with(['message' => 'Gagal Mengedit Penerbit', 'type' => 'danger']);
@@ -83,10 +86,12 @@ class PenerbitController extends Controller
     {
         DB::beginTransaction();
 		try {
-			$penerbit = Penerbit::find($id);
+      $penerbit = Penerbit::find($id);
+      $nama = $penerbit->nama;
 			Buku::where('id_penerbit', $id)->update(['id_penerbit' => null]);
 			$penerbit->delete();
-			DB::commit();
+      DB::commit();
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus penerbit ' . $nama]);
 			return redirect()->route('penerbit')->with(['message' => 'Berhasil Menghapus Penerbit', 'type' => 'success']);
 		} catch ( Exception $e ) {
 			DB::rollBack();

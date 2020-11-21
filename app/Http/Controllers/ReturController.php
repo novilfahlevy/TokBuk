@@ -7,6 +7,7 @@ use App\DetailRetur;
 use App\Pengadaan;
 use App\Pengaturan;
 use App\Retur;
+use App\RiwayatAktivitas;
 use Barryvdh\DomPDF\Facade as PDF;
 use Error;
 use Exception;
@@ -58,7 +59,7 @@ class ReturController extends Controller
       $retur = json_decode($request->retur);
 
 			$jumlahRetur = Retur::count() + 1;
-			$kode = substr('R00000000000', 0, -count(str_split((string) $jumlahRetur))) . $jumlahRetur;
+			$kode = substr('R000000', 0, -count(str_split((string) $jumlahRetur))) . $jumlahRetur;
 
 			$returBaru = Retur::create([
         'kode' => $kode,
@@ -82,7 +83,9 @@ class ReturController extends Controller
 				$bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);
 			}
 
-			DB::commit();
+      DB::commit();
+      
+      RiwayatAktivitas::create(['aktivitas' => 'Membuat retur ' . $kode]);
 
 			return redirect()->route('retur.detail', ['id' => $returBaru->id])->with([
 				'message' => 'Retur Berhasil Dibuat.',
@@ -117,7 +120,8 @@ class ReturController extends Controller
   {
     DB::beginTransaction();
 		try {
-			$retur = Retur::find($id);
+      $retur = Retur::find($id);
+      $kode = $retur->kode;
 
 			foreach ( $retur->detail as $detail ) {
 				if ( $buku = $detail->pengadaan->buku ) {
@@ -127,7 +131,10 @@ class ReturController extends Controller
 
       $retur->delete();
       
-			DB::commit();
+      DB::commit();
+      
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus retur ' . $kode]);
+
 			return redirect()->route('retur')->with([
 				'message' => 'Berhasil Menghapus retur',
 				'type' => 'success'

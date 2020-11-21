@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use Illuminate\Http\Request;
 use App\Kategori;
+use App\RiwayatAktivitas;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,7 @@ class KategoriController extends Controller
         ]);
 
         if($insert == true ){
+            RiwayatAktivitas::create(['aktivitas' => 'Menambah kategori ' . $request->nama]);
             return redirect()->route('kategori')->with(['message' => 'Berhasil Menambah Kategori', 'type' => 'success']);
         } else {
 
@@ -51,6 +53,7 @@ class KategoriController extends Controller
         ]);
 
         if($update == true) {
+            RiwayatAktivitas::create(['aktivitas' => 'Mengedit kategori ' . $request->nama]);
             return redirect()->route('kategori')->with(['message' => 'Berhasil Mengedit Kategori', 'type' => 'success']);
         } else {
             return redirect()->route('kategori')->with(['message' => 'Gagal Mengedit Kategori', 'type' => 'danger']);
@@ -61,10 +64,12 @@ class KategoriController extends Controller
     {
         DB::beginTransaction();
 		try {
-			$kategori = Kategori::find($id);
+      $kategori = Kategori::find($id);
+      $nama = $kategori->nama;
 			Buku::where('id_kategori', $id)->update(['id_kategori' => null]);
 			$kategori->delete();
-			DB::commit();
+      DB::commit();
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus kategori ' . $nama]);
 			return redirect()->route('kategori')->with([
 				'type' => 'success',
 				'message' => 'Berhasil Menghapus Kategori'

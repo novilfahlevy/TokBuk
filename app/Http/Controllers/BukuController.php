@@ -14,6 +14,7 @@ use App\Kategori;
 use App\Lokasi;
 use App\Distributor;
 use App\Pengadaan;
+use App\RiwayatAktivitas;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -161,6 +162,7 @@ class BukuController extends Controller
         ]);
 
         if($update == true) {
+            RiwayatAktivitas::create(['aktivitas' => 'Mengedit buku ' . $request->judul]);
             return redirect()->route('buku.detail', ['id' => $buku->first()->id])->with(['message' => 'Berhasil Mengedit Buku', 'type' => 'success']);
         } else {
             return redirect()->route('buku')->with(['message' => 'Gagal Mengedit Buku', 'type' => 'danger']);
@@ -180,11 +182,13 @@ class BukuController extends Controller
     public function destroy($id)
     {
         $buku = Buku::find($id);
+        $judul = $buku->judul;
         $sampul = $buku->sampul;
         if ( $buku->delete() ) {
             if ( $sampul !== 'sampul.png' ) {
                 Storage::disk('public')->delete('images/buku/' . $sampul);
             }
+            RiwayatAktivitas::create(['aktivitas' => 'Menghapus buku ' . $judul]);
             return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Buku', 'type' => 'success']);
         }
         return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Buku, Silahkan coba lagi', 'type' => 'danger']);

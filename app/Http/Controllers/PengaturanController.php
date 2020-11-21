@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pengaturan;
+use App\RiwayatAktivitas;
 use Illuminate\Http\Request;
 
 class PengaturanController extends Controller
@@ -31,7 +32,9 @@ class PengaturanController extends Controller
       'limit_stok.min' => 'Jumlah batasan stok minimal 0'
     ]);
 
-		$pengaturan = Pengaturan::first()->update($request->except('_token', '_method'));
+    $pengaturan = Pengaturan::first()->update($request->except('_token', '_method'));
+    
+    RiwayatAktivitas::create(['aktivitas' => 'Mengedit pengaturan']);
 
 		return redirect('pengaturan')->with([
 			'message' => $pengaturan ? 'Pengaturan toko berhasil diperbarui' : 'Gagal memperbarui pengaturan, silahkan coba lagi',

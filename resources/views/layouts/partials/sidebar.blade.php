@@ -88,22 +88,30 @@
 
       @endif
 
-      @if ( $posisi === 'Admin' || $posisi === 'Owner' )
+      @if ( $posisi === 'Admin' || $posisi === 'Owner' || $posisi === 'Operator' )
         <li class="menu-header">Lainnya</li>
+      @endif
 
+      @if ( $posisi === 'Admin' || $posisi === 'Owner' )
         <li class="nav-item {{Request::segment(1)=='pengguna' ?'active':''}}">
           <a class="nav-link" href="{{route('user')}}" aria-expanded="false">
             <i class="fas fa-users"></i> <span>Pengguna</span>
           </a>
         </li>
-      @endif
 
-      @if ( $posisi === 'Admin' || $posisi === 'Owner' )
         <li class="nav-item  {{Request::segment(1)=='pengaturan' ?'active':''}}">
           <a class="nav-link" href="{{route('pengaturan')}}" aria-expanded="false">
             <i class="fas fa-cogs"></i></i><span>Pengaturan</span>
           </a>
         </li>
-      @endif
+        @endif
+        
+        @if ( $posisi === 'Admin' || $posisi === 'Owner' || $posisi === 'Operator' )
+          <li class="nav-item  {{Request::segment(1)=='aktivitas' ?'active':''}}">
+            <a class="nav-link" href="{{route('aktivitas')}}" aria-expanded="false">
+              <i class="fas fa-history"></i></i><span>Riwayat Aktivitas</span>
+            </a>
+          </li>
+        @endif
   </aside>
 </div>

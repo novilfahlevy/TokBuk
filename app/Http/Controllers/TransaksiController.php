@@ -7,6 +7,7 @@ use App\DetailTransaksi;
 use App\Events\UpdateDasborEvent;
 use App\Exports\TransaksiExport;
 use App\Pengaturan;
+use App\RiwayatAktivitas;
 use App\Transaksi;
 use Exception;
 use Illuminate\Http\Request;
@@ -91,7 +92,7 @@ class TransaksiController extends Controller
 			}
 
 			$jumlahTransaksi = Transaksi::withTrashed()->count() + 1;
-			$kode = substr('T00000000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+			$kode = substr('T000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,
@@ -114,7 +115,9 @@ class TransaksiController extends Controller
 				$bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);
 			}
 
-			DB::commit();
+      DB::commit();
+      
+      RiwayatAktivitas::create(['aktivitas' => 'Membuat transaksi ' . $kode]);
 
 			event(new UpdateDasborEvent());
 
@@ -144,7 +147,8 @@ class TransaksiController extends Controller
 	{
 		DB::beginTransaction();
 		try {
-			$transaksi = Transaksi::find($id);
+      $transaksi = Transaksi::find($id);
+      $kode = $transaksi->kode;
 
 			foreach ( $transaksi->detail as $detail ) {
 				if ( $buku = $detail->buku ) {
@@ -152,9 +156,14 @@ class TransaksiController extends Controller
 				}
 			}
 
-			$transaksi->delete();
-			DB::commit();
-			event(new UpdateDasborEvent);
+      $transaksi->delete();
+      
+      DB::commit();
+
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus transaksi ' . $kode]);
+      
+      event(new UpdateDasborEvent);
+      
 			return redirect()->route('transaksi')->with([
 				'message' => 'Berhasil Menghapus Transaksi',
 				'type' => 'success'

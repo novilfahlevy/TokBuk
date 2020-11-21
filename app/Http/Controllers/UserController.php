@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RiwayatAktivitas;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -46,6 +47,7 @@ class UserController extends Controller
         ]);
 
         if($insert == true ){
+            RiwayatAktivitas::create(['aktivitas' => 'Menambahkan pengguna ' . $request->name]);
             return redirect()->route('user')->with(['message' => 'Berhasil Menambah Pengguna', 'type' => 'success']);
         } else {
             return redirect()->route('user')->with(['message' => 'Gagal Menambah Pengguna', 'type' => 'danger']);
@@ -82,6 +84,7 @@ class UserController extends Controller
         ]);
 
         if($update == true) {
+            RiwayatAktivitas::create(['aktivitas' => 'Mengedit pengguna ' . $request->name]);
             return redirect()->route('user')->with(['message' => 'Berhasil Mengedit Pengguna', 'type' => 'success']);
         } else {
             return redirect()->route('user')->with(['message' => 'Gagal Mengedit Pengguna', 'type' => 'danger']);
@@ -90,7 +93,10 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        if(User::destroy($id)) {
+        $user = User::find($id);
+        $nama = $user->name;
+        if($user->delete()) {
+            RiwayatAktivitas::create(['aktivitas' => 'Menghapus pengguna ' . $nama]);
             return redirect()->route('user')->with(['message' => 'Berhasil Menghapus Pengguna', 'type' => 'success']);
         } else {
             return redirect()->route('user')->with(['message' => 'Gagal Menghapus Pengguna, Silahkan coba lagi', 'type' => 'danger']);

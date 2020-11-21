@@ -86,6 +86,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('laporan', 'LaporanController@index')->name('laporan');
     Route::get('laporan/penjualan/{dari}/{sampai}', 'LaporanController@pdfpenjualan')->name('laporan.penjualan');
     Route::get('laporan/pembelian/{dari}/{sampai}', 'LaporanController@pdfpembelian')->name('laporan.pembelian');
+
+    Route::get('aktivitas', 'RiwayatAktivitasController@index')->name('aktivitas');
   });
 
   Route::group(['middleware' => 'posisi:Admin,Kasir,Owner'], function() {

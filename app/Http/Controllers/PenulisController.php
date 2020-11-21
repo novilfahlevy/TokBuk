@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use Illuminate\Http\Request;
 use App\Penulis;
+use App\RiwayatAktivitas;
 use Error;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,7 @@ class PenulisController extends Controller
         ]);
 
         if($insert == true ){
+            RiwayatAktivitas::create(['aktivitas' => 'Menambah penulis ' . $request->nama]);
             return redirect()->route('penulis')->with(['message' => 'Berhasil Menambah Penulis', 'type' => 'success']);
         } else {
 
@@ -52,6 +54,7 @@ class PenulisController extends Controller
         ]);
 
         if($update == true) {
+            RiwayatAktivitas::create(['aktivitas' => 'Mengedit penulis ' . $request->nama]);
             return redirect()->route('penulis')->with(['message' => 'Berhasil Mengedit Penulis', 'type' => 'success']);
         } else {
             return redirect()->route('penulis')->with(['message' => 'Gagal Mengedit Penulis', 'type' => 'danger']);
@@ -62,10 +65,12 @@ class PenulisController extends Controller
     {
         DB::beginTransaction();
 		try {
-			$penulis = Penulis::find($id);
+      $penulis = Penulis::find($id);
+      $nama = $penulis->nama;
 			Buku::where('id_penulis', $id)->update(['id_penulis' => null]);
 			$penulis->delete();
-			DB::commit();
+      DB::commit();
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus penulis ' . $nama]);
 			return redirect()->route('penulis')->with([
 				'type' => 'success',
 				'message' => 'Berhasil Menghapus Penulis'

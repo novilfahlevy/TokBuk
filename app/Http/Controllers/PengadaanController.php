@@ -9,6 +9,7 @@ use App\Exports\PengadaanExport;
 use App\Distributor;
 use App\Pengadaan;
 use App\Pengaturan;
+use App\RiwayatAktivitas;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
@@ -110,7 +111,7 @@ class PengadaanController extends Controller
 
 		try {
 			$jumlahPengadaan = Pengadaan::withTrashed()->count() + 1;
-			$kode = substr('P00000000000', 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
+			$kode = substr('P000000', 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
 
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
@@ -156,7 +157,9 @@ class PengadaanController extends Controller
 				}
 			}
 
-			DB::commit();
+      DB::commit();
+      
+      RiwayatAktivitas::create(['aktivitas' => 'Membuat pengadaan ' . $kode]);
 
 			event(new UpdateDasborEvent);
 
@@ -178,7 +181,8 @@ class PengadaanController extends Controller
 	{
 		DB::beginTransaction();
 		try {
-			$pengadaan = Pengadaan::find($id);
+      $pengadaan = Pengadaan::find($id);
+      $kode = $pengadaan->kode;
 
 			foreach ( $pengadaan->detail as $detailPengadaan ) {
 				$buku = Buku::find($detailPengadaan->id_buku);
@@ -193,7 +197,9 @@ class PengadaanController extends Controller
 
 			$pengadaan->delete();
 
-			DB::commit();
+      DB::commit();
+      
+      RiwayatAktivitas::create(['aktivitas' => 'Menghapus pengadaan ' . $kode]);
 
 			event(new UpdateDasborEvent);
 			return redirect()->route('pengadaan')->with([

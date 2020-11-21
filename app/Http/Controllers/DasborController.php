@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\Pengaturan;
+use App\RiwayatAktivitas;
 use App\Transaksi;
 use App\User;
 use Carbon\Carbon;
@@ -99,6 +100,8 @@ class DasborController extends Controller
           })
         ];
 
-        return view('dasbor', compact('pendapatanHariIni', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok', 'bestSeller'));
+        $aktivitasTerakhir = RiwayatAktivitas::latest()->first();
+
+        return view('dasbor', compact('pendapatanHariIni', 'judulBuku', 'buku', 'transaksi', 'hasil', 'bukuMencapaiStok', 'batasanStok', 'bestSeller', 'aktivitasTerakhir'));
     }
 }
