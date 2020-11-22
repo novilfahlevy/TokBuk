@@ -119,8 +119,6 @@ class TransaksiController extends Controller
       
       RiwayatAktivitas::create(['aktivitas' => 'Membuat transaksi ' . $kode]);
 
-			
-
 			return redirect()->route('transaksi.detail', ['id' => $transaksiBaru->id])->with([
 				'message' => 'Transaksi Berhasil Dibuat.',
 				'type' => 'success'

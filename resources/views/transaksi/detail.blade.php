@@ -17,9 +17,12 @@ Detail Transaksi
           <div class="card-header">
             <h4>Data Transaksi</h4>
             <div class="card-header-form">
-              {{-- <a href="{{ route('transaksi.nota', $transaksi->id) }}" class="btn btn-success mr-2" title="Unduh Nota">
-                <i class="fas fa-file-download"></i>
-              </a> --}}
+              @if ( session()->has('message') )
+                <a href="{{ route('transaksi.create') }}" class="btn btn-warning mr-2" data-tooltip="tooltip" title="Buat Transaksi Lagi" id="buatTransaksiLagi">
+                  <i class="fas fa-plus"></i>
+                </a>
+                <script>window.onload = function() { document.getElementById('buatTransaksiLagi').focus(); }</script>
+              @endif
               <div class="dropdown">
                 <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-file-invoice"></i>
