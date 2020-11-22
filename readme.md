@@ -12,7 +12,6 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
 - [Composer](https://getcomposer.org)
 - [Git](https://git-scm.com/downloads)
 - [XAMPP](https://www.apachefriends.org/download.html)
-- [Pusher](https://pusher.com) (opsional)
 - [Sentry](https://docs.sentry.io/platforms/php/guides/laravel/) (opsional, jika ingin melakukan error tracking)
 
 ## Instalasi
@@ -28,10 +27,6 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
     - DB_DATABASE
     - DB_USERNAME
     - DB_PASSWORD
-    - PUSHER_APP_ID (opsional)
-    - PUSHER_APP_KEY (opsional)
-    - PUSHER_APP_SECRET (opsional)
-    - PUSHER_APP_CLUSTER (opsional)
     - SENTRY_LARAVEL_DSN (opsional, jika menggunakan sentry)
     - SENTRY_TRACES_SAMPLE_RATE (opsional, jika menggunakan sentry)
 
