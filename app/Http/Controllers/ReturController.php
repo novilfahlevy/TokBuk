@@ -58,7 +58,7 @@ class ReturController extends Controller
 		try {
       $retur = json_decode($request->retur);
 
-      $jumlahRetur = Retur::count() + 1;
+      $jumlahRetur = Retur::count() + 2;
       $kodeTerakhir = Retur::latest()->first();
       $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T0000';
 			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahRetur))) . $jumlahRetur;

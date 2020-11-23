@@ -110,7 +110,7 @@ class PengadaanController extends Controller
 		DB::beginTransaction();
 
 		try {
-      $jumlahPengadaan = Pengadaan::count() + 1;
+      $jumlahPengadaan = Pengadaan::count() + 2;
       $kodeTerakhir = Pengadaan::latest()->first();
       $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'P00000';
 			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
