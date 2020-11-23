@@ -91,8 +91,10 @@ class TransaksiController extends Controller
 				return redirect()->route('transaksi.create')->withErrors(['bayar' => 'Nominal pembayaran tidak mencukupi']);
 			}
 
-			$jumlahTransaksi = Transaksi::withTrashed()->count() + 1;
-			$kode = substr('T000000', 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+      $jumlahTransaksi = Transaksi::count() + 1;
+      $kodeTerakhir = Transaksi::latest()->first();
+      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T00000';
+			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,

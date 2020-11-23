@@ -110,8 +110,10 @@ class PengadaanController extends Controller
 		DB::beginTransaction();
 
 		try {
-			$jumlahPengadaan = Pengadaan::withTrashed()->count() + 1;
-			$kode = substr('P000000', 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
+      $jumlahPengadaan = Pengadaan::count() + 1;
+      $kodeTerakhir = Pengadaan::latest()->first();
+      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'P00000';
+			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
 
 			$faktur = $request->file('faktur');
 			$namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
