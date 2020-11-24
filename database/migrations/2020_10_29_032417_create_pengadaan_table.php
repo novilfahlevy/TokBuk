@@ -17,7 +17,7 @@ class CreatePengadaanTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode', 12);
             $table->date('tanggal');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');  
             $table->string('faktur')->nullable();
             $table->unsignedBigInteger('id_distributor')->nullable();

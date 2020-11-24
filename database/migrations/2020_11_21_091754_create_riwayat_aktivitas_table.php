@@ -15,7 +15,7 @@ class CreateRiwayatAktivitasTable extends Migration
     {
         Schema::create('riwayat_aktivitas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->string('aktivitas');
             $table->timestamps();

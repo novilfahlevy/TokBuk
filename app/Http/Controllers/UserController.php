@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Pengadaan;
+use App\Retur;
 use App\RiwayatAktivitas;
+use App\Transaksi;
 use Illuminate\Http\Request;
 use App\User;
+use Error;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -93,13 +98,25 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+      try {
         $user = User::find($id);
         $nama = $user->name;
-        if($user->delete()) {
-            RiwayatAktivitas::create(['aktivitas' => 'Menghapus pengguna ' . $nama]);
-            return redirect()->route('user')->with(['message' => 'Berhasil Menghapus Pengguna', 'type' => 'success']);
-        } else {
-            return redirect()->route('user')->with(['message' => 'Gagal Menghapus Pengguna, Silahkan coba lagi', 'type' => 'danger']);
-        }
+
+        RiwayatAktivitas::create(['aktivitas' => 'Menghapus pengguna ' . $nama]);
+
+        Transaksi::where('id_user', $id)->update(['id_user' => null]);
+        Pengadaan::where('id_user', $id)->update(['id_user' => null]);
+        Retur::where('id_user', $id)->update(['id_user' => null]);
+        RiwayatAktivitas::where('id_user', $id)->update(['id_user' => null]);
+        
+        $user->delete();
+        DB::commit();
+
+        return redirect()->route('user')->with(['message' => 'Berhasil Menghapus Pengguna', 'type' => 'success']);
+      } catch ( Exception $e ) {
+        throw new Error($e);
+        DB::rollBack();
+        return redirect()->route('user')->with(['message' => 'Gagal Menghapus Pengguna, Silahkan coba lagi', 'type' => 'danger']);
+      }
     }
 }

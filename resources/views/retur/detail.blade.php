@@ -48,7 +48,7 @@ Detail Retur
               </div>
               <div class="col-lg-2">
                 <h6 class="mb-1">Ditangani</h6>
-                <p>{{ $retur->user->name }}</p>
+                <p>{{ $retur->user ? $retur->user->name : '-' }}</p>
               </div>
               <div class="col-lg-2">
                 <h6 class="mb-1">Dana Pengembalian</h6>

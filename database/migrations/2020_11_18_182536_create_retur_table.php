@@ -18,8 +18,8 @@ class CreateReturTable extends Migration
             $table->string('kode', 12);
             $table->unsignedBigInteger('id_pengadaan');
             $table->foreign('id_pengadaan')->references('id')->on('pengadaan')->onDelete('cascade');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user')->nullable();
+            $table->foreign('id_user')->references('id')->on('users');
             $table->integer('total_dana_pengembalian');
             $table->date('tanggal');
             $table->timestamps();

@@ -51,7 +51,7 @@ Detail Transaksi
               </div>
               <div class="col-lg-2">
                 <h6 class="mb-1">Dilayani</h6>
-                <p>{{ $transaksi->user->name }}</p>
+                <p>{{ $transaksi->user ? $transaksi->user->name : '-' }}</p>
               </div>
               <div class="col-lg-2">
                 <h6 class="mb-1">Nominal Pembayaran</h6>

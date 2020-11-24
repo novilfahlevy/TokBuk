@@ -55,7 +55,7 @@ Detail Pengadaan
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Ditangani</h6>
-                    <p>{{ $pembelian->user->name }}</p>
+                    <p>{{ $pembelian->user ? $pembelian->user->name : '-' }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Nominal Pembayaran</h6>

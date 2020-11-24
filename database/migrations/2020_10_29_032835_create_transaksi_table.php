@@ -16,7 +16,7 @@ class CreateTransaksiTable extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode', 12);
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->integer('bayar');
             $table->integer('total_harga');

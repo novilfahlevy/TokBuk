@@ -75,7 +75,7 @@
                 <div class="col-12">
                   <div class="alert alert-info mb-4" role="alert">
                     <h5 class="alert-heading">Aktivitas Terakhir</h5>
-                    <p><b>{{ $aktivitasTerakhir->user->name }}</b> baru saja "<b>{{ $aktivitasTerakhir->aktivitas }}</b>" pada <b>{{ $aktivitasTerakhir->created_at }}</b> atau {{ $aktivitasTerakhir->created_at->diffForHumans() }}.</p>
+                    <p><b>{{ $aktivitasTerakhir->user ? $aktivitasTerakhir->user->name : '-' }}</b> baru saja "<b>{{ $aktivitasTerakhir->aktivitas }}</b>" pada <b>{{ $aktivitasTerakhir->created_at }}</b> atau {{ $aktivitasTerakhir->created_at->diffForHumans() }}.</p>
                   </div>
                 </div>
               @endif

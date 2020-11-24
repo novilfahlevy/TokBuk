@@ -47,4 +47,24 @@ class User extends Authenticatable
 
     use SoftDeletes;
     protected $dates =['deleted_at'];
+
+    public function transaksi()
+    {
+      return $this->hasMany(Transaksi::class, 'id_user');
+    }
+
+    public function pengadaan()
+    {
+      return $this->hasMany(Pengadaan::class, 'id_user');
+    }
+
+    public function retur()
+    {
+      return $this->hasMany(Retur::class, 'id_user');
+    }
+
+    public function aktivitas()
+    {
+      return $this->hasMany(RiwayatAktivitas::class, 'id_user');
+    }
 }

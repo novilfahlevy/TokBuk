@@ -35,7 +35,7 @@ Riwayat Aktivitas
                                                 @foreach ($riwayat as $aktivitas)
                                                   <tr>
                                                     <td>{{ $loop->index + 1 }}</td>
-                                                    <td>{{ $aktivitas->user->name }}</td>
+                                                    <td>{{ $aktivitas->user ? $aktivitas->user->name : '-' }}</td>
                                                     <td align="left">{{ $aktivitas->aktivitas }}.</td>
                                                     <td>{{ $aktivitas->created_at }}</td>
                                                   </tr>
