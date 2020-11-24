@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\RiwayatAktivitas;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,7 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule
+          ->call(function() {
+            RiwayatAktivitas::whereMonth('created_at', '<=', Carbon::now()->subMonths(3)->month)->delete();
+          })
+          ->dailyAt('00:00');
     }
 
     /**

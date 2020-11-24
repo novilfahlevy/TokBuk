@@ -20,6 +20,7 @@ Riwayat Aktivitas
                                     <h4>Daftar Riwayat Aktivitas</h4>
                                 </div>
                                 <div class="card-body p-3">
+                                    <p>* Riwayat aktivitas yang ditampilkan hanya aktivitas 3 bulan terakhir, riwayat aktivitas yang sudah lewat 3 bulan akan otomatis dihapus.</p>
                                     <div class="table-responsive">
                                         <table id="table-index" class="display table table-striped table-bordered"
                                             style="width:100%; text-align:center;">
