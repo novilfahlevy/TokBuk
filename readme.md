@@ -72,3 +72,6 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
 - Farkhanudin
 - Niken Astrid Pradiva Putri
 - Fariz Dwi Januardi
+
+## Credits
+Aplikasi ini dibuat menggunakan framework [Laravel](https://laravel.com) versi 8.14, dan template admin bootstrap [Stisla](https://getstisla.com)
