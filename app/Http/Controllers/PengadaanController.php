@@ -112,7 +112,7 @@ class PengadaanController extends Controller
 		try {
       $jumlahPengadaan = Pengadaan::count() + 2;
       $kodeTerakhir = Pengadaan::latest()->first();
-      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'P00000';
+      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'P00001';
 			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
 
 			$faktur = $request->file('faktur');

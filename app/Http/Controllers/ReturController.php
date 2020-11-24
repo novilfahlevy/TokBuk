@@ -60,7 +60,7 @@ class ReturController extends Controller
 
       $jumlahRetur = Retur::count() + 2;
       $kodeTerakhir = Retur::latest()->first();
-      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T0000';
+      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T0001';
 			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahRetur))) . $jumlahRetur;
 
 			$returBaru = Retur::create([

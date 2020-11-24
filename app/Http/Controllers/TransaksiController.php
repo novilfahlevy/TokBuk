@@ -93,7 +93,7 @@ class TransaksiController extends Controller
 
       $jumlahTransaksi = Transaksi::count() + 2;
       $kodeTerakhir = Transaksi::latest()->first();
-      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T00000';
+      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T00001';
 			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
 
 			$transaksiBaru = Transaksi::create([
