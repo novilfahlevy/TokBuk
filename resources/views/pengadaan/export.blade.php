@@ -22,8 +22,8 @@
         <td>{{ $loop->index + 1 }}</td>
         <td>{{ $pembelianParent->kode }}</td>
         <td>{{ $pembelianParent->tanggal }}</td>
-        <td>{{ $buku->isbn }}</td>
-        <td>{{ $buku->judul }}</td>
+        <td>{{ $buku ? $buku->isbn : '-' }}</td>
+        <td>{{ $buku ? $buku->judul : '-' }}</td>
         <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
         <td>{{ number_format($p->jumlah) }}</td>
         <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>

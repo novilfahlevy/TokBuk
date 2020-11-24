@@ -22,8 +22,8 @@
         <td>{{ $loop->index + 1 }}</td>
         <td>{{ $transaksiParent->kode }}</td>
         <td>{{ $t->created_at }}</td>
-        <td>{{ $buku->isbn }}</td>
-        <td>{{ $buku->judul }}</td>
+        <td>{{ $buku ? $buku->isbn : '-' }}</td>
+        <td>{{ $buku ? $buku->judul : '-' }}</td>
         <td>Rp {{ number_format($t->harga, 2, ',', '.') }}</td>
         <td>{{ $t->diskon ? $t->diskon . '%' : '-' }}</td>
         <td>{{ $t->jumlah }}</td>

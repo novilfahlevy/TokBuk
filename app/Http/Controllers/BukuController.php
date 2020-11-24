@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Buku;
+use App\DetailPengadaan;
+use App\DetailTransaksi;
 use App\Events\UpdateDasborEvent;
 use App\Exports\PengadaanExport;
 use App\Penulis;
@@ -15,6 +17,7 @@ use App\Lokasi;
 use App\Distributor;
 use App\Pengadaan;
 use App\RiwayatAktivitas;
+use Error;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -181,16 +184,28 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
+      DB::beginTransaction();
+      try {
         $buku = Buku::find($id);
         $judul = $buku->judul;
         $sampul = $buku->sampul;
-        if ( $buku->delete() ) {
-            if ( $sampul !== 'sampul.png' ) {
-                Storage::disk('public')->delete('images/buku/' . $sampul);
-            }
-            RiwayatAktivitas::create(['aktivitas' => 'Menghapus buku ' . $judul]);
-            return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Buku', 'type' => 'success']);
+
+        if ( $sampul !== 'sampul.png' ) {
+          Storage::disk('public')->delete('images/buku/' . $sampul);
         }
+        
+        RiwayatAktivitas::create(['aktivitas' => 'Menghapus buku ' . $judul]);
+        DetailTransaksi::where('id_buku', $id)->update(['id_buku' => null]);
+        DetailPengadaan::where('id_buku', $id)->update(['id_buku' => null]);
+
+        $buku->delete() ;
+        DB::commit();
+
+        return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Buku', 'type' => 'success']);
+      } catch ( Exception $e ) {
+        throw new Error($e);
         return redirect()->route('buku')->with(['message' => 'Gagal Menghapus Buku, Silahkan coba lagi', 'type' => 'danger']);
+        DB::rollBack();
+      }
     }
 }

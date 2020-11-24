@@ -17,7 +17,7 @@ class CreateDetailPengadaanTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_pengadaan');
             $table->foreign('id_pengadaan')->references('id')->on('pengadaan');  
-            $table->unsignedBigInteger('id_buku');
+            $table->unsignedBigInteger('id_buku')->nullable();
             $table->foreign('id_buku')->references('id')->on('buku');
             $table->integer('harga');
             $table->integer('jumlah');

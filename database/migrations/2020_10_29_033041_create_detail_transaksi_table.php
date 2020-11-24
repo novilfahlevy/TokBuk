@@ -17,7 +17,7 @@ class CreateDetailTransaksiTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_transaksi');
             $table->foreign('id_transaksi')->references('id')->on('transaksi')->onDelete('cascade');
-            $table->unsignedBigInteger('id_buku');
+            $table->unsignedBigInteger('id_buku')->nullable();
             $table->foreign('id_buku')->references('id')->on('buku');
             $table->integer('jumlah');
             $table->integer('harga');

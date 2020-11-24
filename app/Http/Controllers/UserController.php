@@ -98,6 +98,8 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+      DB::beginTransaction();
+      
       try {
         $user = User::find($id);
         $nama = $user->name;

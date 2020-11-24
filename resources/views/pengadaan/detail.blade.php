@@ -95,7 +95,7 @@ Detail Pengadaan
                       @foreach ($pembelian->detail as $p)
                         <tr>
                           <td>{{ $loop->index + 1 }}</td>
-                          <td>{{ $p->buku->judul }}</td>
+                          <td>{{ $p->buku ? $p->buku->judul : '-' }}</td>
                           <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
                           <td>{{ $p->jumlah }}</td>
                           <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>

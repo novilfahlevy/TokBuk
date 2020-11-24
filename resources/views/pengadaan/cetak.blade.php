@@ -42,9 +42,9 @@
   @foreach ($pembelian->detail as $p)
   <tr>
     <td>
-      {{ $p->buku->judul }}
+      {{ $p->buku ? $p->buku->judul : '-' }}
       <br>
-      {{ $p->buku->isbn }}
+      {{ $p->buku ? $p->buku->isbn : '-' }}
     </td>
       <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
       <td>{{ $p->jumlah }}</td>

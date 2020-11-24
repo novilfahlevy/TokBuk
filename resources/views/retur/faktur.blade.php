@@ -45,8 +45,8 @@
     
     @foreach ($retur->detail as $r)
     <tr>
-      <th>{{ $r->pengadaan->buku->isbn }}</th>
-      <th>{{ $r->pengadaan->buku->judul }}</th>
+      <th>{{ $r->pengadaan->buku ? $r->pengadaan->buku->isbn : '-' }}</th>
+      <th>{{ $r->pengadaan->buku ? $r->pengadaan->buku->judul : '-' }}</th>
       <th>{{ $r->keterangan }}</th>
       <th>Rp {{ number_format($r->dana_pengembalian, 2, ',', '.') }}</th>
       <th>{{ $r->jumlah }}</th>
