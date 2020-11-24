@@ -74,4 +74,4 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
 - Fariz Dwi Januardi
 
 ## Credits
-Aplikasi ini dibuat menggunakan framework [Laravel](https://laravel.com) versi 8.14, dan template admin bootstrap [Stisla](https://getstisla.com)
+Aplikasi ini dibuat menggunakan framework [Laravel](https://laravel.com) versi 8.14, dan template admin bootstrap [Stisla](https://getstisla.com).
