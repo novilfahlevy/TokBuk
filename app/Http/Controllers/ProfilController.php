@@ -18,9 +18,9 @@ class ProfilController extends Controller
 	{
 	  $request->validate([
 			'name' => 'required',
-			'username' => 'unique:users,username,{$id},id,deleted_at,NULL',
+			'username' => 'unique:users,username,{$id},id',
 			'alamat' => 'required',
-			'email' => 'unique:users,email,{$id},id,deleted_at,NULL',
+			'email' => 'unique:users,email,{$id},id',
 			'telepon' => 'required'
 		], [
 			'name.required' => 'Masukan nama lengkap anda',

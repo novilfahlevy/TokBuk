@@ -25,7 +25,6 @@ class CreatePengadaanTable extends Migration
             $table->integer('total_harga');
             $table->integer('bayar');  
             $table->text('keterangan')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

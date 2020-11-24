@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Buku extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'buku';
     protected $fillable = [
         'sampul',
@@ -52,8 +50,4 @@ class Buku extends Model
     {
         return $this->hasMany(DetailPengadaan::class, 'id_buku');
     }
-
-    use SoftDeletes;    
-    protected $dates =['deleted_at'];
-
 }

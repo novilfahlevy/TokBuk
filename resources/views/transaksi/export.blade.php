@@ -15,8 +15,8 @@
   <tbody>
     @foreach ($transaksi as $t)
       @php
-        $transaksiParent = $t->transaksi()->withTrashed()->first();
-        $buku = $t->buku()->withTrashed()->first();
+        $transaksiParent = $t->transaksi;
+        $buku = $t->buku;
       @endphp
       <tr>
         <td>{{ $loop->index + 1 }}</td>

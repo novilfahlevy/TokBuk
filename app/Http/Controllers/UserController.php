@@ -33,9 +33,9 @@ class UserController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:users,username,{$id},id,deleted_at,NULL',
+            'username' => 'required|unique:users,username,{$id},id',
             'posisi' => 'required',
-            'email' => 'required|unique:users,email,{$id},id,deleted_at,NULL',
+            'email' => 'required|unique:users,email,{$id},id',
             'telepon' => 'required',
             'alamat' => 'required',
             'password' => 'required|confirmed|min:6'
@@ -70,9 +70,9 @@ class UserController extends Controller
         
         $validate = $request->validate([
             'name' => 'required',
-            'username' => 'unique:users,username,{$id},id,deleted_at,NULL', 
+            'username' => 'unique:users,username,{$id},id', 
             'posisi' => 'required',
-            'email' => 'unique:users,email,{$id},id,deleted_at,NULL',
+            'email' => 'unique:users,email,{$id},id',
             'alamat' => 'required',
             'telepon' => 'required'
         ]);

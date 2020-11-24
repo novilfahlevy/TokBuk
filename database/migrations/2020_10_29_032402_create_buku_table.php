@@ -30,7 +30,6 @@ class CreateBukuTable extends Migration
             $table->integer('harga')->nullable();
             $table->integer('diskon')->nullable();
             $table->string('jumlah');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

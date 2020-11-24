@@ -84,7 +84,7 @@ Detail Transaksi
                   @foreach ($transaksi->detail as $t)
                     <tr>
                       <th>{{ $loop->index + 1 }}</th>
-                      <th>{{ $t->buku()->withTrashed()->first()->judul }}</th>
+                      <th>{{ $t->buku->judul }}</th>
                       <th>Rp {{ number_format($t->harga, 2, ',', '.') }}</th>
                       <th>{{ $t->jumlah }}</th>
                       <th>{{ $t->diskon ? $t->diskon . '%' : '-' }}</th>

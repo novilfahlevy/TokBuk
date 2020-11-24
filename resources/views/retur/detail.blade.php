@@ -73,7 +73,7 @@ Detail Retur
                   @foreach ($retur->detail as $r)
                     <tr>
                       <th>{{ $loop->index + 1 }}</th>
-                      <th>{{ $r->pengadaan->buku()->withTrashed()->first()->judul }}</th>
+                      <th>{{ $r->pengadaan->buku->judul }}</th>
                       <th>{{ $r->keterangan }}</th>
                       <th>Rp {{ number_format($r->dana_pengembalian, 2, ',', '.') }}</th>
                       <th>{{ $r->jumlah }}</th>

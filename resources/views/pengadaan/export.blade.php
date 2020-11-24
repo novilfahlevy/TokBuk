@@ -15,8 +15,8 @@
   <tbody>
     @foreach ($pembelian as $p)
       @php
-        $pembelianParent = $p->pembelian()->withTrashed()->first();
-        $buku = $p->buku()->withTrashed()->first();
+        $pembelianParent = $p->pembelian;
+        $buku = $p->buku;
       @endphp
       <tr>
         <td>{{ $loop->index + 1 }}</td>

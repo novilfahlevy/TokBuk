@@ -13,9 +13,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pengadaan extends Model
 {
-    // use HasFactory;
-    use SoftDeletes;
-
     protected $table = 'pengadaan';
     protected $fillable = ['kode', 'tanggal', 'id_user', 'id_distributor', 'total_harga', 'bayar', 'faktur', 'keterangan'];
 

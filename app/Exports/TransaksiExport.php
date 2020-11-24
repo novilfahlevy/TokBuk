@@ -24,8 +24,7 @@ class TransaksiExport implements FromView
 	*/
 	public function view(): View
 	{
-		$transaksi = DetailTransaksi::join('transaksi as t', 't.id', '=', 'detail_transaksi.id_transaksi')
-			->whereNull('t.deleted_at');
+		$transaksi = DetailTransaksi::join('transaksi as t', 't.id', '=', 'detail_transaksi.id_transaksi');
 
 		if ( $this->mulai ) {
 			$transaksi->whereDate('t.created_at', '>=', $this->mulai);

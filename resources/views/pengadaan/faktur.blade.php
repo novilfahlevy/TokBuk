@@ -40,8 +40,8 @@
   
   @foreach ($pembelian->detail as $p)
   <tr>
-    <td>{{ $p->buku()->withTrashed()->first()->judul }}<br>
-      {{ $p->buku()->withTrashed()->first()->isbn }}</td>
+    <td>{{ $p->buku->judul }}<br>
+      {{ $p->buku->isbn }}</td>
       <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
       <td>{{ $p->jumlah }}</td>
       <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
