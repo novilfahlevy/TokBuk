@@ -121,6 +121,8 @@
     });
 
     $('[data-tooltip="tooltip"]').tooltip();
+
+    $('select').select2();
   });
 </script>
   
