@@ -101,7 +101,7 @@ Buku
                         $lokasiId = session()->pull('lokasi');
                     @endphp
                     <div class="col-6">
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 d-flex flex-column">
                             <label for="kategori">Kategori</label>
                             <select name="kategori" id="kategori" class="form-control">
                                 <option value="" selected>Semua</option>
@@ -112,7 +112,7 @@ Buku
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 d-flex flex-column">
                             <label for="penerbit">Penerbit</label>
                             <select name="penerbit" id="penerbit" class="form-control">
                                 <option value="" selected>Semua</option>
@@ -123,7 +123,7 @@ Buku
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 d-flex flex-column">
                             <label for="penulis">Penulis</label>
                             <select name="penulis" id="penulis" class="form-control">
                                 <option value="" selected>Semua</option>
@@ -134,7 +134,7 @@ Buku
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 d-flex flex-column">
                             <label for="lokasi">Lokasi</label>
                             <select name="lokasi" id="lokasi" class="form-control">
                                 <option value="" selected>Semua</option>

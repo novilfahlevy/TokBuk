@@ -106,9 +106,9 @@ Pengadaan
                 <div class="form-group mb-0">
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group mb-3">
-                                <label for="distributor">Distributor</label>
-                                <select name="distributor" id="distributor" class="form-control">
+                            <div class="form-group mb-3 d-flex flex-column">
+                                <label for="distributorExport">Distributor</label>
+                                <select name="distributor" id="distributorExport" class="form-control">
                                     <option value="" selected>Semua</option>
                                     @foreach ($distributor as $p)
                                         <option value="{{ $p->id }}" {{ $distributorId == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
@@ -155,7 +155,7 @@ Pengadaan
                 <div class="form-group mb-0">
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3  d-flex flex-column">
                                 <label for="distributor">Distributor</label>
                                 <select name="distributor" id="distributor" class="form-control">
                                     <option value="" selected>Semua</option>
