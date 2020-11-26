@@ -18,15 +18,12 @@
                                         {{ method_field('PUT') }}
                                           <div class="row">
                                             <div class="col-sm-4">
-                                                <div class="card border-dark mb-3" style="max-width: 50rem; height:500px">
-                                                    <div class="card-header"><h4>Sampul Buku</h4></div>
-                                                    <div class="card-body text-dark">
-                                                        <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:315px;" /><br/><br/>
-                                                        <small>Sampul Buku (abaikan jika tidak ingin mengubah)</small>
-                                                        <input type="file" id="inputgambar" name="sampul" class="form-control validate" value="{{$buku->sampul}}"/>
-                                                    </div>
-                                                </div>
-                                                
+                                              <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:350px;" class="img-thumbnail mb-3" />
+                                              {{-- <label for="inputGambar">Sampul Buku (abaikan jika tidak ingin mengubah)</label> --}}
+                                              <input type="file" id="inputgambar" name="sampul" class="validate d-none" />
+                                              <label class="btn btn-success w-100" for="inputgambar">
+                                                Ganti Sampul
+                                              </label>
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="card">
