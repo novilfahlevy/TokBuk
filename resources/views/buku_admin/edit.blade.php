@@ -53,7 +53,7 @@
                                                                 <div class="form-group">
                                                                     <label for="id_kategpri">Kategori</label>
                                                                     <select name="id_kategori" id="id_kategpri" class="form-control" value="{{ old('id_kategori') }}" data-live-search="true"> 
-                                                                        <option value=''>- Pilih -</option>
+                                                                        <option value='' selected disabled>- Pilih -</option>
                                                                         @foreach($kategori as $jen)
                                                                             <option value="{{ $jen['id'] }}" {{$jen->id == $buku->id_kategori ?  'selected' : ''}}> {{$jen->nama}} </option>
                                                                         @endforeach
@@ -75,7 +75,7 @@
                                                                 <div class="form-group">
                                                                     <label for="id_penerbit">Penerbit</label>
                                                                     <select name="id_penerbit" class="form-control" value="{{ old('id_penerbit') }}" data-live-search="true">
-                                                                        <option value=''>- Pilih -</option>
+                                                                        <option value='' selected disabled>- Pilih -</option>
                                                                         @foreach($penerbit as $per)     
                                                                             <option value="{{ $per['id'] }}" {{$per->id == $buku->id_penerbit ?  'selected' : ''}}> {{$per->nama}} </option>
                                                                         @endforeach
@@ -92,7 +92,7 @@
                                                                 <div class="form-group">
                                                                     <label for="id_lokasi">Lokasi</label>
                                                                     <select name="id_lokasi" id="id_lokasi" class="form-control" value="{{ old('id_lokasi') }}" data-live-search="true">
-                                                                        <option value=''>- Pilih -</option>
+                                                                        <option value='' selected disabled>- Pilih -</option>
                                                                         @foreach($lokasi as $lok)     
                                                                             <option value="{{ $lok['id'] }}" {{$lok->id == $buku->id_lokasi ?  'selected' : ''}}> {{$lok->nama}} </option>
                                                                         @endforeach
