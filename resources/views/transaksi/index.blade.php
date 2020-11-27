@@ -157,7 +157,7 @@ Transaksi
                 <div class="modal-footer d-flex justify-content-between pt-4">
                     <a href="{{ route('transaksi') }}" class="btn btn-info">Clear</a>
                     <div>
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                      <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
                       <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
                 </div>
