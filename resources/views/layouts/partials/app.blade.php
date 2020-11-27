@@ -7,9 +7,9 @@
   <title>Tokbuk | @yield('title')</title>
   <script>
     window.BASEURL = "{{ url('/') }}";
-    window.pusher = {
-      appKey: "{{ config('app.pusher.app_key') }}"
-    };
+    // window.pusher = {
+    //   appKey: "{{ config('app.pusher.app_key') }}"
+    // };
   </script>
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicon.png')}}">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -49,14 +49,14 @@
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
   <script>
-    const pusher = new Pusher(window.pusher.appKey, {
-      cluster: 'ap1'
-    });
+    // const pusher = new Pusher(window.pusher.appKey, {
+    //   cluster: 'ap1'
+    // });
 
-    const channelBind = (channelName, event, callback) => {
-      const channel = pusher.subscribe(channelName);
-      channel.bind(event, callback);
-    }
+    // const channelBind = (channelName, event, callback) => {
+    //   const channel = pusher.subscribe(channelName);
+    //   channel.bind(event, callback);
+    // }
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
