@@ -64,7 +64,7 @@
                                                                 <div class="form-group">
                                                                     <label for="id_penulis">Penulis</label>
                                                                     <select name="id_penulis" id="id_penulis" class="form-control" value="{{ old('id_penulis') }}"data-live-search="true">
-                                                                        <option value='' >- Pilih -</option>
+                                                                        <option value='' disabled selected>- Pilih -</option>
                                                                         @foreach($penulis as $pel)
                                                                             <option value="{{ $pel['id'] }}" {{$pel->id == $buku->id_penulis ?  'selected' : ''}}> {{$pel->nama}} </option>
                                                                         @endforeach
