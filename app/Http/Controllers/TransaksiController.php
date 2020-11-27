@@ -41,25 +41,30 @@ class TransaksiController extends Controller
 
 	public function index()
 	{
-		$transaksi = $this->getTransaksi()->orderBy('created_at', 'DESC')->get();
+    $transaksi = $this->getTransaksi()->orderByDesc('transaksi.created_at')->get();
+    
+    if ( $_GET ) {
+      return $this->filter();
+    }
+
 		return view('transaksi.index', compact('transaksi'));
 	}
 
-	public function filter(Request $request)
+	public function filter()
 	{
 		$transaksi = $this->getTransaksi();
 
-		if ( $request->mulai ) {
-			$transaksi->whereDate('transaksi.created_at', '>=', $request->mulai);
+		if ( $mulai = $_GET['mulai'] ) {
+			$transaksi->whereDate('transaksi.created_at', '>=', $mulai);
 		}
 		
-		if ( $request->sampai ) {
-			$transaksi->whereDate('transaksi.created_at', '<=', $request->sampai);
+		if ( $sampai = $_GET['sampai'] ) {
+			$transaksi->whereDate('transaksi.created_at', '<=', $sampai);
 		}
 
-		session($request->except('_token'));
+		session($_GET);
 
-		$transaksi = $transaksi->orderBy('created_at', 'DESC')->get();
+		$transaksi = $transaksi->orderByDesc('transaksi.created_at')->get();
 
 		return view('transaksi.index', compact('transaksi'));
 	}

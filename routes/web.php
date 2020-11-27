@@ -24,7 +24,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::group(['middleware' => 'posisi:Owner,Admin,Operator'], function() {
     //buku
     Route::get('/buku', 'BukuController@index')->name('buku');
-    Route::post('/buku', 'BukuController@filter')->name('buku.filter');
     Route::get('buku/logs', 'BukuController@logs')->name('buku.logs');
     Route::get('buku/{id}/tambah', 'BukuController@tambahjml')->name('buku.tambah');
     Route::get('buku/{id}/detail', 'BukuController@detail')->name('buku.detail');
@@ -72,7 +71,6 @@ Route::group(['middleware' => 'auth'], function() {
 
     //pembelian buku
     Route::get('pengadaan', 'PengadaanController@index')->name('pengadaan');
-    Route::post('pengadaan', 'PengadaanController@filter')->name('pengadaan.filter');
     Route::get('pengadaan/{id}/detail', 'PengadaanController@detail')->name('pengadaan.detail');
     Route::get('pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
     Route::post('pengadaan/store', 'PengadaanController@store')->name('pengadaan.store');
@@ -102,7 +100,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::group(['middleware' => 'posisi:Admin,Kasir,Owner'], function() {
     //transaksi
     Route::get('transaksi', 'TransaksiController@index')->name('transaksi');
-    Route::post('transaksi', 'TransaksiController@filter')->name('transaksi.filter');
     Route::get('transaksi/create', 'TransaksiController@create')->name('transaksi.create');
     Route::post('transaksi/store', 'TransaksiController@store')->name('transaksi.store');
     Route::get('transaksi/edit/{id}', 'TransaksiController@edit')->name('transaksi.edit');

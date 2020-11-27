@@ -42,65 +42,64 @@ class BukuController extends Controller
         $penerbit = $this->penerbit->get();
         $kategori = $this->kategori->get();
         $lokasi = $this->lokasi->get();
+        if ( $_GET ) {
+          return $this->filter(compact('penulis', 'penerbit', 'kategori', 'lokasi'));
+        }
 
         return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
     }
 
-    public function filter(Request $request)
-	{
-		$buku = Buku::select('*');
-        $penulis = $this->penulis->get();
-        $distributor = $this->distributor->get();
-        $penerbit = $this->penerbit->get();
-        $kategori = $this->kategori->get();
-        $lokasi = $this->lokasi->get();
-		
-        if ( $request->kategori ) {
-            $buku->where('id_kategori', $request->kategori);
-        }
+    public function filter($data)
+    {
+      $buku = Buku::select('*');
+      
+      if ( $kategori = $_GET['kategori'] ) {
+          $buku->where('id_kategori', $kategori);
+      }
 
-        if ( $request->penerbit ) {
-            $buku->where('id_penerbit', $request->penerbit);
-        }
+      if ( $penerbit = $_GET['penerbit'] ) {
+          $buku->where('id_penerbit', $penerbit);
+      }
 
-        if ( $request->penulis ) {
-            $buku->where('id_penulis', $request->penulis);
-        }
+      if ( $penulis = $_GET['penulis'] ) {
+          $buku->where('id_penulis', $penulis);
+      }
 
-        if ( $request->distributor ) {
-            $buku->where('id_distributor', $request->distributor);
-        }
+      if ( $lokasi = $_GET['lokasi'] ) {
+          $buku->where('id_lokasi', $lokasi);
+      }
 
-        if ( $request->lokasi ) {
-            $buku->where('id_lokasi', $request->lokasi);
-        }
+      if ( $tahunTerbitDari = $_GET['tahunTerbitDari'] ) {
+          $buku->where('tahun_terbit', '>=', $tahunTerbitDari);
+      }
+      
+      if ( $tahunTerbitSampai = $_GET['tahunTerbitSampai'] ) {
+          $buku->where('tahun_terbit', '<=', $tahunTerbitSampai);
+      }
 
-        if ( $request->tahunTerbitDari ) {
-            $buku->where('tahun_terbit', '>=', $request->tahunTerbitDari);
-        }
-        
-        if ( $request->tahunTerbitSampai ) {
-            $buku->where('tahun_terbit', '<=', $request->tahunTerbitSampai);
-        }
+      if ( ($jumlahDari = $_GET['jumlahDari']) != null ) {
+          $buku->where('jumlah', '>=', (int) $jumlahDari);
+      }
 
-        if ( $request->jumlahDari !== null ) {
-            $buku->where('jumlah', '>=', (int) $request->jumlahDari);
-        }
+      if ( ($jumlahSampai = $_GET['jumlahSampai']) != null ) {
+          $buku->where('jumlah', '<=', (int) $jumlahSampai);
+      }
 
-        if ( $request->jumlahSampai !== null ) {
-            $buku->where('jumlah', '<=', (int) $request->jumlahSampai);
-        }
+      if ( isset($_GET['diskon']) ) {
+          $buku->whereNotNull('diskon')->where('diskon', '>', 0);
+      }
 
-        if ( $request->diskon ) {
-            $buku->whereNotNull('diskon')->where('diskon', '>', 0);
-        }
+      $buku = $buku->get();
+      
+      session($_GET);
 
-        $buku = $buku->get();
-        
-        session($request->except('_token'));
+      $kategori = $data['kategori'];
+      $penulis = $data['penulis'];
+      $penerbit = $data['penerbit'];
+      $lokasi = $data['lokasi'];
 
-		return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi', 'distributor'));
-	}
+      return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
+    }
     
     public function create()
     {

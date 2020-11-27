@@ -141,8 +141,8 @@ Pengadaan
   </div>
 
   <div class="modal" tabindex="-1" role="dialog" id="filterModal">
-    <form action="{{ route('pengadaan.filter') }}" method="POST">
-        @csrf
+    <form action="{{ route('pengadaan') }}" method="GET">
+        {{-- @csrf --}}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -180,9 +180,12 @@ Pengadaan
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Filter</button>
+            <div class="modal-footer d-flex justify-content-between pt-3">
+                <a href="{{ route('pengadaan') }}" class="btn btn-info">Clear</a>
+                <div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
             </div>
             </div>
         </div>

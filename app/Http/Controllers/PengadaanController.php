@@ -46,30 +46,35 @@ class PengadaanController extends Controller
 	public function index()
 	{
 		$pembelian = $this->getPengadaan()->orderByDesc('tanggal')->get();
-		$distributor = Distributor::all();
+    $distributor = Distributor::all();
+    
+    if ( $_GET ) {
+      return $this->filter(compact('distributor'));
+    }
+    
 		return view('pengadaan.index', compact('pembelian', 'distributor'));
 	}
 
-	public function filter(Request $request)
+	public function filter($data)
 	{
 		$pembelian = $this->getPengadaan();
-		$distributor = Distributor::all();
 
-		if ( $request->mulai ) {
-			$pembelian->whereDate('tanggal', '>=', $request->mulai);
+		if ( $mulai = $_GET['mulai'] ) {
+			$pembelian->whereDate('tanggal', '>=', $mulai);
 		}
 		
-		if ( $request->sampai ) {
-			$pembelian->whereDate('tanggal', '<=', $request->sampai);
+		if ( $sampai = $_GET['sampai'] ) {
+			$pembelian->whereDate('tanggal', '<=', $sampai);
 		}
 		
-		if ( $request->distributor ) {
-			$pembelian->where('id_distributor', $request->distributor);
+		if ( $distributor = $_GET['distributor'] ) {
+			$pembelian->where('id_distributor', $distributor);
 		}
 
-		session($request->except('_token'));
+		session($_GET);
 
-		$pembelian = $pembelian->orderBy('tanggal', 'DESC')->get();
+    $pembelian = $pembelian->orderByDesc('tanggal')->get();
+    $distributor = $data['distributor'];
 
 		return view('pengadaan.index', compact('pembelian', 'distributor'));
 	}

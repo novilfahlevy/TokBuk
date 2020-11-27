@@ -81,8 +81,8 @@ Buku
   </div>
 
   <div class="modal" tabindex="-1" role="dialog" id="filterModal">
-    <form action="{{ route('buku.filter') }}" method="POST">
-        @csrf
+    <form action="{{ route('buku') }}" method="GET">
+        {{-- @csrf --}}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -178,9 +178,12 @@ Buku
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Filter</button>
+            <div class="modal-footer d-flex justify-content-between pt-3">
+                <a href="{{ route('buku') }}" class="btn btn-info">Clear</a>
+                <div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
             </div>
             </div>
         </div>

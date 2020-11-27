@@ -126,8 +126,8 @@ Transaksi
   </div>
   
     <div class="modal" tabindex="-1" role="dialog" id="filterModal">
-        <form action="{{ route('transaksi.filter') }}" method="POST">
-            @csrf
+        <form action="{{ route('transaksi') }}" method="GET">
+            {{-- @csrf --}}
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -154,9 +154,12 @@ Transaksi
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                <div class="modal-footer d-flex justify-content-between pt-4">
+                    <a href="{{ route('transaksi') }}" class="btn btn-info">Clear</a>
+                    <div>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
                 </div>
                 </div>
             </div>
