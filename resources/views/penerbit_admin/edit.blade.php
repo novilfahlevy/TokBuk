@@ -41,7 +41,7 @@
                                             <br/>
 
                                             <label for="telepon">Telepon</label>
-                                            <input type="number" class="form-control" id="telepon" name="telepon" value="{{ $penerbit->telepon }}">
+                                            <input type="number" class="form-control" id="telepon" name="telepon" value="{{ $penerbit->telepon }}" min="0">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

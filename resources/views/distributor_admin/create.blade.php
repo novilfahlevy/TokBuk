@@ -36,7 +36,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="telepon">Telepon</label>
-                                                    <input type="number" class="form-control" required id="telepon" name="telepon" value="{{ old('telepon') }}">
+                                                    <input type="number" class="form-control" required id="telepon" name="telepon" value="{{ old('telepon') }}" min="0">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

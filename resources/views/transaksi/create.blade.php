@@ -34,7 +34,7 @@ Tambah Transaksi
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Rp</span>
                       </div>
-                      <input type="number" class="form-control" id="bayar" name="bayar" value="0">
+                      <input type="number" class="form-control" id="bayar" name="bayar" min="0" value="0">
                       @error('bayar')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>

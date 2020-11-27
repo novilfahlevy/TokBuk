@@ -106,7 +106,7 @@ function tambahBuku() {
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Rp</span>
           </div>
-          <input type="number" class="form-control harga-per-buku" value="0">
+          <input type="number" class="form-control harga-per-buku" min="0" value="0">
         </div>
       </th>
       <th class="total-harga">Rp 0</th>

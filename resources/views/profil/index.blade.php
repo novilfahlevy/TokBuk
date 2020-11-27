@@ -72,7 +72,7 @@ Profil
                         </div>
                         <div class="form-group">
                           <label for="telepon">Telepon</label>
-                          <input type="number" class="form-control" id="telepon" name="telepon" value="{{ $user->telepon }}">
+                          <input type="number" class="form-control" id="telepon" name="telepon" value="{{ $user->telepon }}" min="0">
                           @error('telepon')
                             <span class="invalid-feedback d-block" role="alert">
                               <strong>{{ $message }}</strong>

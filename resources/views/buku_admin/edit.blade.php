@@ -85,7 +85,7 @@
                                                             <div class="col-12 col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="tahun_terbit">Tahun Terbit</label>
-                                                                    <input type="number" class="form-control" id="tahun_terbit" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" >
+                                                                    <input type="number" class="form-control" id="tahun_terbit" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" min="0">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-md-6">
@@ -106,7 +106,7 @@
                                                                         <div class="input-group-prepend">
                                                                             <span class="input-group-text" id="basic-addon1">Rp</span>
                                                                         </div>
-                                                                    <input type="number" class="form-control" id="harga" name="harga" value="{{ $buku->harga }}" >
+                                                                    <input type="number" class="form-control" id="harga" name="harga" value="{{ $buku->harga }}" min="0">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -117,7 +117,7 @@
                                                                         <div class="input-group-prepend">
                                                                             <span class="input-group-text" id="basic-addon1">%</span>
                                                                         </div>
-                                                                    <input type="number" class="form-control" id="diskon" name="diskon" value="{{ $buku->diskon }}" >
+                                                                    <input type="number" class="form-control" id="diskon" name="diskon" value="{{ $buku->diskon }}" min="0">
                                                                     </div>
                                                                 </div>
                                                             </div>

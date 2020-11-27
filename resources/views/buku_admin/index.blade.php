@@ -147,13 +147,13 @@ Buku
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="tahunTerbitDari">Tahun terbit dari</label>
-                            <input type="number" id="tahunTerbitDari" name="tahunTerbitDari" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitDari') }}">
+                            <input type="number" id="tahunTerbitDari" name="tahunTerbitDari" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitDari') }}" min="0">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="tahunTerbitSampai">Tahun terbit sampai</label>
-                            <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitSampai') }}">
+                            <input type="number" id="tahunTerbitSampai" name="tahunTerbitSampai" class="form-control" pattern="/0-9/" value="{{ session()->pull('tahunTerbitSampai') }}" min="0">
                         </div>
                     </div>
                     <div class="col-6">

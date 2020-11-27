@@ -51,7 +51,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="telepon">Telepon</label>
-                                                    <input type="number" class="form-control @error('telepon') is-invalid @enderror" required name="telepon" value="{{ old('telepon') }}">
+                                                    <input type="number" class="form-control @error('telepon') is-invalid @enderror" required name="telepon" value="{{ old('telepon') }}" min="0">
                                                     @error('telepon')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

@@ -45,7 +45,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="telepon">Telepon</label>
-                                            <input type="number" class="form-control" id="telepon" required name="telepon" value="{{$distributor->telepon}}">
+                                            <input type="number" class="form-control" id="telepon" required name="telepon" value="{{$distributor->telepon}}" min="0">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
