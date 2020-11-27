@@ -79,7 +79,7 @@
                   </div>
                 </div>
               @endif
-              <div class="col-6">
+              <div class="col-12 col-lg-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>Pendapatan Tahun {{ date('Y') }}</h4>
@@ -89,7 +89,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-lg-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>7 Best Seller Bulan Ini</h4>
