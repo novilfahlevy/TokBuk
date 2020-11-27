@@ -18,7 +18,7 @@
                                         {{ method_field('PUT') }}
                                           <div class="row">
                                             <div class="col-sm-4">
-                                              <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%;height:350px;" class="img-thumbnail mb-3" />
+                                              <img src="{{ asset('images/buku/'.$buku->sampul) }}" id="showgambar" style="width:100%; height:400px; background-size: cover" class="img-thumbnail mb-3" />
                                               {{-- <label for="inputGambar">Sampul Buku (abaikan jika tidak ingin mengubah)</label> --}}
                                               <input type="file" id="inputgambar" name="sampul" class="validate d-none" />
                                               <label class="btn btn-success w-100" for="inputgambar">

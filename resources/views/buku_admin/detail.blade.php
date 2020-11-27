@@ -16,7 +16,7 @@
                         <div class="col-12">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                          <img src="{{ asset('images/buku/'.$buku->sampul) }}" alt="" style="width:100%; height:350px; background-size: cover" class="img-thumbnail">
+                                          <img src="{{ asset('images/buku/'.$buku->sampul) }}" alt="" style="width:100%; height:400px; background-size: cover" class="img-thumbnail">
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="card">
