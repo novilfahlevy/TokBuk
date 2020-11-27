@@ -87,7 +87,7 @@ Transaksi
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="exportModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="exportModal">
     <form action="{{ route('transaksi.export') }}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
@@ -125,7 +125,7 @@ Transaksi
     </form>
   </div>
   
-    <div class="modal" tabindex="-1" role="dialog" id="filterModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="filterModal">
         <form action="{{ route('transaksi') }}" method="GET">
             {{-- @csrf --}}
             <div class="modal-dialog" role="document">
