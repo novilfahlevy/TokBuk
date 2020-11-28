@@ -87,7 +87,7 @@
                                                     <input type="password" class="form-control" required name="password_confirmation" value="{{ old('password_confirmation') }}">
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                     <label for="posisi">Posisi</label>
                                                     <select name="posisi" class="form-control">

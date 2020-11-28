@@ -70,7 +70,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="posisi">Posisi</label>
                                             <select name="posisi" class="form-control">
