@@ -18,8 +18,8 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('dasbor', 'DasborController@chart');
-Route::get('transaksi/buku', 'TransaksiController@getDataBukuApi');
-Route::get('retur/{id}/buku', 'ReturController@getDataBukuApi');
-Route::get('pengadaan/buku', 'PengadaanController@getDataBukuApi');
+Route::get('transaksi/buku', 'Api\TransaksiController@getDataBuku');
+Route::get('retur/{id}/buku', 'Api\ReturController@getDataBuku');
+Route::get('pengadaan/buku', 'Api\PengadaanController@getDataBuku');
 Route::post('laporan/penjualan', 'LaporanController@penjualan');
 Route::post('laporan/pembelian', 'LaporanController@pembelian');

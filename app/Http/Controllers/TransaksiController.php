@@ -158,14 +158,6 @@ class TransaksiController extends Controller
     }
   }
 
-	public function getDataBukuApi() 
-	{
-		return response()->json([
-			'status' => 200,
-			'buku' => Buku::where('jumlah', '>=', 1)->whereNotNull('harga')->get()
-		]);
-	}
-
 	public function destroy($id)
 	{
 		DB::beginTransaction();
