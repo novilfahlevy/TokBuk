@@ -26,7 +26,7 @@ class LaporanController extends Controller
 		return view('laporan.index', compact('akhirBulan'));
 	}
 
-	public function penjualan(Request $request)
+	public function transaksi(Request $request)
 	{
 		$transaksi = Transaksi::whereDate('transaksi.created_at', '>=', $request->dari)->whereDate('transaksi.created_at', '<=', $request->sampai);
 
@@ -46,19 +46,19 @@ class LaporanController extends Controller
 		]);
 	}
 
-	public function pembelian(Request $request)
+	public function pengadaan(Request $request)
 	{
-		$pembelian = Pengadaan::whereDate('pengadaan.tanggal', '>=', $request->dari)->whereDate('pengadaan.tanggal', '<=', $request->sampai);
+		$pengadaan = Pengadaan::whereDate('pengadaan.tanggal', '>=', $request->dari)->whereDate('pengadaan.tanggal', '<=', $request->sampai);
 
-		$totalPembelian = $pembelian->count();
-		$pengeluaran = $pembelian->sum('total_harga');
-		$bukuTerbeli = $pembelian->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
+		$totalPengadaan = $pengadaan->count();
+		$pengeluaran = $pengadaan->sum('total_harga');
+		$bukuTerbeli = $pengadaan->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
       ->select(['pengadaan.id', DB::raw('SUM(dp.jumlah) as buku_terbeli')])
       ->groupBy('pengadaan.id')
       ->first()
       ->buku_terbeli;
       
-    foreach ( $pembelian->get() as $pengadaan ) {
+    foreach ( $pengadaan->get() as $pengadaan ) {
       $retur = $pengadaan->retur;
       if ( $retur = $pengadaan->retur ) {
         $pengeluaran -= $retur->total_dana_pengembalian;
@@ -68,7 +68,7 @@ class LaporanController extends Controller
 
 		return response()->json([
 			'status' => 200,
-			'totalPembelian' => $totalPembelian,
+			'totalPengadaan' => $totalPengadaan,
 			'bukuTerbeli' => (int) $bukuTerbeli,
 			'pengeluaran' => (int) $pengeluaran,
 			'dari' => Carbon::parse($request->dari)->format('d-m-Y'),
@@ -76,7 +76,7 @@ class LaporanController extends Controller
 		]);
 	}
 
-	public function pdfpenjualan($dari, $sampai)
+	public function pdfTransaksi($dari, $sampai)
 	{
 		$transaksi = Transaksi::whereDate('transaksi.created_at', '>=', $dari)->whereDate('transaksi.created_at', '<=', $sampai);
 
@@ -93,12 +93,12 @@ class LaporanController extends Controller
 		return PDF::loadView('transaksi.laporan', compact('totalTransaksi', 'pendapatan', 'bukuTerjual', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_transaksi_' . $dari . '_' . $sampai . '.pdf');
 	}
 
-	public function pdfpembelian($dari, $sampai) {
-		$pembelian = Pengadaan::whereDate('pengadaan.tanggal', '>=', $dari)->whereDate('pengadaan.tanggal', '<=', $sampai);
+	public function pdfPengadaan($dari, $sampai) {
+		$pengadaan = Pengadaan::whereDate('pengadaan.tanggal', '>=', $dari)->whereDate('pengadaan.tanggal', '<=', $sampai);
 
-		$totalPembelian = $pembelian->count();
-		$pengeluaran = $pembelian->sum('total_harga');
-		$bukuTerbeli = $pembelian->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
+		$totalPengadaan = $pengadaan->count();
+		$pengeluaran = $pengadaan->sum('total_harga');
+		$bukuTerbeli = $pengadaan->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
 			->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
 			->first();
 
@@ -106,6 +106,6 @@ class LaporanController extends Controller
 		$sampai = Carbon::parse($sampai)->format('d-m-Y');
 		$pengaturan = Pengaturan::first();
 
-		return PDF::loadView('pengadaan.laporan', compact('totalPembelian', 'pengeluaran', 'bukuTerbeli', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_pembelian_' . $dari . '_' . $sampai . '.pdf');
+		return PDF::loadView('pengadaan.laporan', compact('totalPengadaan', 'pengeluaran', 'bukuTerbeli', 'pengaturan', 'dari', 'sampai'))->setPaper('a4', 'potrait')->download('laporan_pengadaan_' . $dari . '_' . $sampai . '.pdf');
 	}
 }

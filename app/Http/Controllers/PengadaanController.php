@@ -45,38 +45,38 @@ class PengadaanController extends Controller
 
 	public function index()
 	{
-		$pembelian = $this->getPengadaan()->orderByDesc('tanggal')->get();
+		$pengadaan = $this->getPengadaan()->orderByDesc('tanggal')->get();
     $distributor = Distributor::all();
     
     if ( $_GET ) {
       return $this->filter(compact('distributor'));
     }
     
-		return view('pengadaan.index', compact('pembelian', 'distributor'));
+		return view('pengadaan.index', compact('pengadaan', 'distributor'));
 	}
 
 	public function filter($data)
 	{
-		$pembelian = $this->getPengadaan();
+		$pengadaan = $this->getPengadaan();
 
 		if ( $mulai = $_GET['mulai'] ) {
-			$pembelian->whereDate('tanggal', '>=', $mulai);
+			$pengadaan->whereDate('tanggal', '>=', $mulai);
 		}
 		
 		if ( $sampai = $_GET['sampai'] ) {
-			$pembelian->whereDate('tanggal', '<=', $sampai);
+			$pengadaan->whereDate('tanggal', '<=', $sampai);
 		}
 		
 		if ( $distributor = $_GET['distributor'] ) {
-			$pembelian->where('id_distributor', $distributor);
+			$pengadaan->where('id_distributor', $distributor);
 		}
 
 		session($_GET);
 
-    $pembelian = $pembelian->orderByDesc('tanggal')->get();
+    $pengadaan = $pengadaan->orderByDesc('tanggal')->get();
     $distributor = $data['distributor'];
 
-		return view('pengadaan.index', compact('pembelian', 'distributor'));
+		return view('pengadaan.index', compact('pengadaan', 'distributor'));
 	}
 
 	public function create(Request $request)
@@ -88,8 +88,8 @@ class PengadaanController extends Controller
 
 	public function detail($id)
 	{
-    $pembelian = Pengadaan::find($id);
-		return view('pengadaan.detail', compact('pembelian'));
+    $pengadaan = Pengadaan::find($id);
+		return view('pengadaan.detail', compact('pengadaan'));
 	}
 
 	public function store(Request $request)
@@ -229,21 +229,21 @@ class PengadaanController extends Controller
 
 	public function faktur($id)
 	{
-		$pembelian = Pengadaan::find($id);
-		return Storage::download('images/faktur/' . $pembelian->faktur);
+		$pengadaan = Pengadaan::find($id);
+		return Storage::download('images/faktur/' . $pengadaan->faktur);
 	}
 	
 	public function laporan($id)
 	{
-		$pembelian = Pengadaan::find($id);
+		$pengadaan = Pengadaan::find($id);
 		$pengaturan = Pengaturan::first();
-		return PDF::loadView('pengadaan.faktur', compact('pembelian', 'pengaturan'))->download('laporan_' . $pembelian->kode . '.pdf');
+		return PDF::loadView('pengadaan.faktur', compact('pengadaan', 'pengaturan'))->download('laporan_' . $pengadaan->kode . '.pdf');
 	}
   
   public function cetak($id)
   {
-    $pembelian = Pengadaan::find($id);
+    $pengadaan = Pengadaan::find($id);
 		$pengaturan = Pengaturan::first();
-		return view('pengadaan.cetak', compact('pembelian', 'pengaturan'));
+		return view('pengadaan.cetak', compact('pengadaan', 'pengaturan'));
   }
 }

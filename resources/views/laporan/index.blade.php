@@ -18,13 +18,13 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.penjualan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanTransaksi">
+                    <a href="{{ route('laporan.transaksi', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanTransaksi">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
                 </div>
                 <div class="card-body pb-0">
-                  <h6 class="mb-3 text-center" id="waktuLaporanPenjualan"></h6>
+                  <h6 class="mb-3 text-center" id="waktuLaporanTransaksi"></h6>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>
@@ -80,7 +80,7 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Pengadaan</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.pembelian', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanPembelian">
+                    <a href="{{ route('laporan.pengadaan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanPengadaan">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
@@ -93,7 +93,7 @@ Laporan
                         <td width="30%">
                           Total Pengadaan
                         </td>
-                        <td id="totalPembelian">
+                        <td id="totalPengadaan">
                           0
                         </td>
                       </tr>

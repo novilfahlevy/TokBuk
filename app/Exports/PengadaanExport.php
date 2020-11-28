@@ -25,22 +25,22 @@ class PengadaanExport implements FromView
 	*/
 	public function view(): View
 	{
-		$pembelian = DetailPengadaan::join('pengadaan', 'pengadaan.id', '=', 'detail_pengadaan.id_pengadaan');
+		$pengadaan = DetailPengadaan::join('pengadaan', 'pengadaan.id', '=', 'detail_pengadaan.id_pengadaan');
 
 		if ( $this->mulai ) {
-			$pembelian->whereDate('pengadaan.tanggal', '>=', $this->mulai);
+			$pengadaan->whereDate('pengadaan.tanggal', '>=', $this->mulai);
 		}
 
 		if ( $this->sampai ) {
-			$pembelian->whereDate('pengadaan.tanggal', '<=', $this->sampai);
+			$pengadaan->whereDate('pengadaan.tanggal', '<=', $this->sampai);
 		}
 
 		if ( $this->distributor ) {
-			$pembelian->where('pengadaan.id_distributor', $this->distributor);
+			$pengadaan->where('pengadaan.id_distributor', $this->distributor);
 		}
 
-		$pembelian = $pembelian->get();
+		$pengadaan = $pengadaan->get();
 
-		return view('pengadaan.export', compact('pembelian'));
+		return view('pengadaan.export', compact('pengadaan'));
 	}
 }

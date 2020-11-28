@@ -49,7 +49,7 @@ Pengadaan
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($pembelian as $p)
+                                                @foreach ($pengadaan as $p)
                                                 <tr>
                                                     <td scope="row">{{ $loop->index + 1 }}</td>
                                                     <td>{{ $p->kode }}</td>

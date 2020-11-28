@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('lokasi/{id}/update', 'LokasiController@update')->name('lokasi.update');
     Route::delete('lokasi/{id}', 'LokasiController@destroy')->name('lokasi.destroy');
 
-    //pembelian buku
+    //pengadaan buku
     Route::get('pengadaan', 'PengadaanController@index')->name('pengadaan');
     Route::get('pengadaan/{id}/detail', 'PengadaanController@detail')->name('pengadaan.detail');
     Route::get('pengadaan/create', 'PengadaanController@create')->name('pengadaan.create');
@@ -82,8 +82,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     //laporan
     Route::get('laporan', 'LaporanController@index')->name('laporan');
-    Route::get('laporan/penjualan/{dari}/{sampai}', 'LaporanController@pdfpenjualan')->name('laporan.penjualan');
-    Route::get('laporan/pembelian/{dari}/{sampai}', 'LaporanController@pdfpembelian')->name('laporan.pembelian');
+    Route::get('laporan/transaksi/{dari}/{sampai}', 'LaporanController@pdfTransaksi')->name('laporan.transaksi');
+    Route::get('laporan/pengadaan/{dari}/{sampai}', 'LaporanController@pdfPengadaan')->name('laporan.pengadaan');
 
     //retur
     Route::get('retur', 'ReturController@index')->name('retur');

@@ -2,29 +2,29 @@ const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', cur
 
 function ambilDataTransaksi(dari, sampai) {
   $.ajax({
-    url: `${BASEURL}/api/laporan/penjualan`,
+    url: `${BASEURL}/api/laporan/transaksi`,
     method: 'POST',
     data: { dari, sampai },
     error: error => console.log(error),
     success: (data) => {
-      $('#laporanTransaksi').attr('href', `${BASEURL}/laporan/penjualan/${dari}/${sampai}`);
+      $('#laporanTransaksi').attr('href', `${BASEURL}/laporan/transaksi/${dari}/${sampai}`);
       $('#totalTransaksi').text(data.totalTransaksi);
       $('#bukuTerjual').text(data.bukuTerjual);
       $('#totalPendapatan').text(`${format(data.pendapatan)}`);
-      $('#waktuLaporanPenjualan').text(`${data.dari} s.d. ${data.sampai}`)
+      $('#waktuLaporanTransaksi').text(`${data.dari} s.d. ${data.sampai}`)
     }
   });
 }
 
-function ambilDataPembelian(dari, sampai) {
+function ambilDataPengadaan(dari, sampai) {
   $.ajax({
-    url: `${BASEURL}/api/laporan/pembelian`,
+    url: `${BASEURL}/api/laporan/pengadaan`,
     method: 'POST',
     data: { dari, sampai },
     error: error => console.log(error),
     success: (data) => {
-      $('#laporanPembelian').attr('href', `${BASEURL}/laporan/pembelian/${dari}/${sampai}`);
-      $('#totalPembelian').text(data.totalPembelian);
+      $('#laporanPengadaan').attr('href', `${BASEURL}/laporan/pengadaan/${dari}/${sampai}`);
+      $('#totalPengadaan').text(data.totalPengadaan);
       $('#bukuTerbeli').text(data.bukuTerbeli);
       $('#totalPengeluaran').text(`${format(data.pengeluaran)}`);
       $('#waktuLaporanPendapatan').text(`${data.dari} s.d. ${data.sampai}`)
@@ -41,7 +41,7 @@ $('#submitPendapatan').on('click', function() {
 $('#submitPengeluaran').on('click', function() {
   const dari = $('#awalTanggalPengeluaran').val();
   const sampai = $('#akhirTanggalPengeluaran').val();
-  ambilDataPembelian(dari, sampai);
+  ambilDataPengadaan(dari, sampai);
 });
 
 const date = new Date(), y = date.getFullYear(), m = date.getMonth() + 1;
@@ -54,4 +54,4 @@ let sampai = new Date(y, m, 0);
 sampai = `${y}-${m}-${sampai.getDate() > 9 ? sampai.getDate() : `0${sampai.getDate()}`}`;
 
 ambilDataTransaksi(dari, sampai);
-ambilDataPembelian(dari, sampai);
+ambilDataPengadaan(dari, sampai);

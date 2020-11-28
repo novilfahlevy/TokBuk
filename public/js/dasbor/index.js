@@ -3,9 +3,9 @@
 //   $('#bukuTerjual').text(data.transaksi.bukuTerjual);
 //   $('#totalPendapatan').text(`${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.transaksi.pendapatan)}`);
 
-//   $('#totalPembelian').text(data.pembelian.totalPembelian);
-//   $('#bukuTerbeli').text(data.pembelian.bukuTerbeli);
-//   $('#totalPengeluaran').text(`${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.pembelian.pengeluaran)}`);
+//   $('#totalPengadaan').text(data.pengadaan.totalPengadaan);
+//   $('#bukuTerbeli').text(data.pengadaan.bukuTerbeli);
+//   $('#totalPengeluaran').text(`${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.pengadaan.pengeluaran)}`);
 
 //   $('#jumlahBuku').text(
 //     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.jumlahBuku)

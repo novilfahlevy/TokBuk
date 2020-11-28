@@ -4,24 +4,24 @@
 <table style="width: 50%; border-width: 0">
   <tbody>
     <tr>
-      <td><h6>Kode Pembelian</h6></td>
+      <td><h6>Kode Pengadaan</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->kode }}</h6></td>
+      <td><h6>{{ $pengadaan->kode }}</h6></td>
     </tr>
     <tr>
       <td><h6>Tanggal</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->tanggal }}</h6></td>
+      <td><h6>{{ $pengadaan->tanggal }}</h6></td>
     </tr>
     <tr>
       <td><h6>Distributor</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->distributor->nama }}</h6></td>
+      <td><h6>{{ $pengadaan->distributor->nama }}</h6></td>
     </tr>
     <tr>
       <td><h6>Keterangan</h6></td>
       <td><h6>:</h6></td>
-      <td><h6>{{ $pembelian->keterangan ?? '-' }}</h6></td>
+      <td><h6>{{ $pengadaan->keterangan ?? '-' }}</h6></td>
     </tr>
   </tbody>
 </table>
@@ -38,7 +38,7 @@
     <td colspan="4"><hr></td>
   </tr>
   
-  @foreach ($pembelian->detail as $p)
+  @foreach ($pengadaan->detail as $p)
   <tr>
     <td>{{ $p->buku ? $p->buku->judul : '-' }}<br>
       {{ $p->buku ? $p->buku->isbn : '-' }}</td>
@@ -54,15 +54,15 @@
     <tbody>
       <tr>
         <td>Nominal Pembayaran</td>
-        <td>Rp {{ number_format($pembelian->bayar, 2, ',', '.') }}</td>
+        <td>Rp {{ number_format($pengadaan->bayar, 2, ',', '.') }}</td>
       </tr>
       <tr>
         <td >Total Harga</td>
-        <td >Rp {{ number_format($pembelian->total_harga, 2, ',', '.') }}</td>
+        <td >Rp {{ number_format($pengadaan->total_harga, 2, ',', '.') }}</td>
       </tr>
       <tr>
         <td>Kembalian</td>
-        <td>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga, 2, ',', '.') }}</td>
+        <td>Rp {{ number_format($pengadaan->bayar - $pengadaan->total_harga, 2, ',', '.') }}</td>
       </tr>
     </tbody>
   </table>

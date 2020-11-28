@@ -21,5 +21,5 @@ Route::post('dasbor', 'DasborController@chart');
 Route::get('transaksi/buku', 'Api\TransaksiController@getDataBuku');
 Route::get('retur/{id}/buku', 'Api\ReturController@getDataBuku');
 Route::get('pengadaan/buku', 'Api\PengadaanController@getDataBuku');
-Route::post('laporan/penjualan', 'LaporanController@penjualan');
-Route::post('laporan/pembelian', 'LaporanController@pembelian');
+Route::post('laporan/transaksi', 'LaporanController@transaksi');
+Route::post('laporan/pengadaan', 'LaporanController@pengadaan');

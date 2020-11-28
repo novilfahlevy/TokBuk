@@ -30,15 +30,15 @@
     </tr>
 </table>
 <hr>
-<h5 style="text-align: center;">Laporan Pembelian Tanggal {{ $dari }} s.d. {{ $sampai }}</h5><br/>
+<h5 style="text-align: center;">Laporan Pengadaan Tanggal {{ $dari }} s.d. {{ $sampai }}</h5><br/>
 <div class="table-responsive">
     <table class="table table-striped">
       <tr>
         <td width="30%">
           Total Pengadaan
         </td>
-        <td id="totalPembelian">
-          {{ $totalPembelian }}
+        <td id="totalPengadaan">
+          {{ $totalPengadaan }}
         </td>
       </tr>
       <tr>

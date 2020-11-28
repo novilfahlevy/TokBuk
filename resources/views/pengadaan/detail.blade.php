@@ -19,7 +19,7 @@ Detail Pengadaan
               <div class="card-header">
                 <h4>Data Pengadaan</h4>
                 <div class="card-header-form">
-                  <a href="{{ $pembelian->retur ? route('retur.detail', $pembelian->retur->id) : route('retur.create', $pembelian->id) }}" class="btn btn-danger mr-2" data-tooltip="tooltip" title="{{ !$pembelian->retur ? 'Ajukan ' : '' }}Retur">
+                  <a href="{{ $pengadaan->retur ? route('retur.detail', $pengadaan->retur->id) : route('retur.create', $pengadaan->id) }}" class="btn btn-danger mr-2" data-tooltip="tooltip" title="{{ !$pengadaan->retur ? 'Ajukan ' : '' }}Retur">
                     <i class="fas fa-exchange-alt"></i>
                   </a>
                   <div class="dropdown">
@@ -29,13 +29,13 @@ Detail Pengadaan
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Laporan</h6>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{ route('pengadaan.laporan', $pembelian->id) }}">Unduh</a>
-                      <a class="dropdown-item" href="{{ route('pengadaan.cetak', $pembelian->id) }}" target="_blank">Cetak</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.laporan', $pengadaan->id) }}">Unduh</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.cetak', $pengadaan->id) }}" target="_blank">Cetak</a>
                       <div class="my-3"></div>
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{ asset('images/faktur/' . $pembelian->faktur) }}" target="_blank">Lihat</a>
-                      <a class="dropdown-item" href="{{ route('pengadaan.faktur', $pembelian->id) }}">Unduh</a>
+                      <a class="dropdown-item" href="{{ asset('images/faktur/' . $pengadaan->faktur) }}" target="_blank">Lihat</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.faktur', $pengadaan->id) }}">Unduh</a>
                     </div>
                   </div>
                   <a href="{{ route('pengadaan') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
@@ -47,35 +47,35 @@ Detail Pengadaan
                 <div class="row">
                   <div class="col-lg-2">
                     <h6 class="mb-1">Kode</h6>
-                    <p>{{ $pembelian->kode }}</p>
+                    <p>{{ $pengadaan->kode }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Tanggal</h6>
-                    <p>{{ $pembelian->tanggal }}</p>
+                    <p>{{ $pengadaan->tanggal }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Ditangani</h6>
-                    <p>{{ $pembelian->user ? $pembelian->user->name : '-' }}</p>
+                    <p>{{ $pengadaan->user ? $pengadaan->user->name : '-' }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Nominal Pembayaran</h6>
-                    <p>Rp {{ number_format($pembelian->bayar, 2, ',', '.') }}</p>
+                    <p>Rp {{ number_format($pengadaan->bayar, 2, ',', '.') }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Total Harga</h6>
-                    <p>Rp {{ number_format($pembelian->total_harga, 2, ',', '.') }}</p>
+                    <p>Rp {{ number_format($pengadaan->total_harga, 2, ',', '.') }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Kembalian</h6>
-                    <p>Rp {{ number_format($pembelian->bayar - $pembelian->total_harga, 2, ',', '.') }}</p>
+                    <p>Rp {{ number_format($pengadaan->bayar - $pengadaan->total_harga, 2, ',', '.') }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Distributor</h6>
-                    <p>{{ $pembelian->distributor->nama ?? '-' }}</p>
+                    <p>{{ $pengadaan->distributor->nama ?? '-' }}</p>
                   </div>
                   <div class="col-lg-2">
                     <h6 class="mb-1">Keterangan</h6>
-                    <p>{{ $pembelian->keterangan ?? '-' }}</p>
+                    <p>{{ $pengadaan->keterangan ?? '-' }}</p>
                   </div>
                 </div>
                 <hr class="mt-0 mb-3">
@@ -92,7 +92,7 @@ Detail Pengadaan
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($pembelian->detail as $p)
+                      @foreach ($pengadaan->detail as $p)
                         <tr>
                           <td>{{ $loop->index + 1 }}</td>
                           <td>{{ $p->buku ? $p->buku->judul : '-' }}</td>

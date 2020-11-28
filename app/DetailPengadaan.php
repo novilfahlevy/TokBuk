@@ -15,7 +15,7 @@ class DetailPengadaan extends Model
         return $this->hasOne(Buku::class, 'id', 'id_buku');
     }
     
-    public function pembelian()
+    public function pengadaan()
     {
         return $this->belongsTo(Pengadaan::class, 'id_pengadaan', 'id');
     }

@@ -13,15 +13,15 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($pembelian as $p)
+    @foreach ($pengadaan as $p)
       @php
-        $pembelianParent = $p->pembelian;
+        $pengadaanParent = $p->pengadaan;
         $buku = $p->buku;
       @endphp
       <tr>
         <td>{{ $loop->index + 1 }}</td>
-        <td>{{ $pembelianParent->kode }}</td>
-        <td>{{ $pembelianParent->tanggal }}</td>
+        <td>{{ $pengadaanParent->kode }}</td>
+        <td>{{ $pengadaanParent->tanggal }}</td>
         <td>{{ $buku ? $buku->isbn : '-' }}</td>
         <td>{{ $buku ? $buku->judul : '-' }}</td>
         <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>

@@ -4,7 +4,7 @@
     <h4>Laporan Transaksi</h4>
   </div>
   <div class="card-body">
-    <h5 class="mb-3" id="waktuLaporanPenjualan">{{ $waktuMasukan->monthName }} {{ $waktuMasukan->year }}</h5>
+    <h5 class="mb-3" id="waktuLaporanTransaksi">{{ $waktuMasukan->monthName }} {{ $waktuMasukan->year }}</h5>
     <div class="table-responsive">
       <table class="table table-striped">
         <tr>
@@ -68,7 +68,7 @@
     </tr>
 </table>
 <hr>
-<h5 style="text-align: center;">Laporan Penjualan Tanggal {{ $dari }} s.d. {{ $sampai }}</h5><br/>
+<h5 style="text-align: center;">Laporan Transaksi Tanggal {{ $dari }} s.d. {{ $sampai }}</h5><br/>
 <div class="table-responsive">
     <table class="table table-striped">
       <tr>
