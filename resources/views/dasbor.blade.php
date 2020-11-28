@@ -155,7 +155,7 @@
             label: false,
             backgroundColor: 'rgba(71, 195, 99, 0.8)',
             borderColor: '#47c363',
-            data: JSON.parse('{!! json_encode($hasil) !!}')
+            data: JSON.parse('{!! json_encode($chartTransaksi) !!}')
           }],
         },
         options: {
@@ -186,11 +186,11 @@
     var chart = new Chart(bestSeller, {
         type: 'horizontalBar',
         data: {
-          labels: JSON.parse(`{!! json_encode($bestSeller['buku']) !!}`),
+          labels: JSON.parse(`{!! json_encode($chartBestSeller['buku']) !!}`),
           datasets: [{
             backgroundColor: 'rgba(103, 119, 239, 0.8)',
             borderColor: '#6777ef',
-            data: JSON.parse(`{!! json_encode($bestSeller['jumlah']) !!}`)
+            data: JSON.parse(`{!! json_encode($chartBestSeller['jumlah']) !!}`)
           }],
         },
         options: {
