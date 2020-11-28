@@ -121,24 +121,26 @@ function tambahBuku() {
 
   const bukuTr = $(`
     <tr class="buku" data-select-class="${selectClass}" data-buku-id="empty">
-      <th id="number">1</th>
-      <th>
+      <td id="number">1</td>
+      <td>
         <select class="${selectClass} form-control buku-dipilih" name="states" style="width: 300px"></select>
-      </th>
-      <th class="d-flex align-items-center">
-        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 80px">
-        <span class="mx-2">/</span>
-        <span class="jumlah-buku-label"></span>
-      </th>
-      <th>
-        <input type="text" class="form-control keterangan" style="width: 150px">
-      </th>
-      <th class="harga"></th>
-      <th class="total-harga">Rp 0</th>
-      <th>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 100px">
+          <span class="mx-2">/</span>
+          <span class="jumlah-buku-label"></span>
+        </div>
+      </td>
+      <td class="p-3">
+        <textarea class="form-control keterangan" style="width: 300px; height: 100px"></textarea>
+      </td>
+      <td class="harga"></td>
+      <td class="total-harga">Rp 0</td>
+      <td>
         <button type="button" class="btn btn-danger hapus-buku">Hapus</button>
         <span class="id_pengadaan d-none"></span>
-      </th>
+      </td>
     </tr>
   `);
   
@@ -199,7 +201,7 @@ $(document).on('click', function(event) {
 $(document).on('change', function(event) {
   const target = $(event.target);
   if ( target.prop('tagName') === 'INPUT' && target.hasClass('jumlah-buku-input') ) {
-    const tr = target.parent().parent();
+    const tr = target.parent().parent().parent();
     const harga = tr.find('.harga').data('harga');
     const totalHarga = harga * target.val();
     tr.find('.total-harga').text(`${format(totalHarga)}`);

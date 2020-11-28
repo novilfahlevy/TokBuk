@@ -7,18 +7,21 @@ use App\DetailRetur;
 use App\Pengadaan;
 use App\Pengaturan;
 use App\Retur;
-use App\RiwayatAktivitas;
+use App\Traits\RiwayatAktivitas;
 use Barryvdh\DomPDF\Facade as PDF;
 use Error;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReturController extends Controller
 {
-  public function index()
+  use RiwayatAktivitas;
+
+  private function getIndexReturBuilder(): Builder
   {
-    $returs = Retur::join('detail_retur as dr', 'dr.id_retur', '=', 'retur.id')
+    return Retur::join('detail_retur as dr', 'dr.id_retur', '=', 'retur.id')
       ->select([
         'retur.id',
         'retur.kode',
@@ -26,16 +29,20 @@ class ReturController extends Controller
         'retur.total_dana_pengembalian',
         'retur.id_pengadaan',
         DB::raw('SUM(dr.jumlah) as jumlah')
-        ])
-        ->groupBy([
+      ])
+      ->groupBy([
         'retur.id',
         'retur.kode',
         'retur.tanggal',
         'retur.id_pengadaan',
         'retur.total_dana_pengembalian',
       ])
-      ->orderByDesc('retur.tanggal')
-      ->get(); 
+      ->orderByDesc('retur.tanggal');
+  }
+
+  public function index()
+  {
+    $returs = $this->getIndexReturBuilder()->get(); 
     return view('retur.index', compact('returs'));
   }
 
@@ -58,36 +65,20 @@ class ReturController extends Controller
 		try {
       $retur = json_decode($request->retur);
 
-      $jumlahRetur = Retur::count() + 2;
-      $kodeTerakhir = Retur::latest()->first();
-      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T0001';
-			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahRetur))) . $jumlahRetur;
+      $kode = $this->getKodeRetur();
 
 			$returBaru = Retur::create([
         'kode' => $kode,
         'id_pengadaan' => $retur->idPengadaan,
-				'id_user' => auth()->user()->id,
         'total_dana_pengembalian' => $retur->danaPengembalian,
         'tanggal' => $retur->tanggal
 			]);
 
-			foreach ( $retur->buku as $buku ) {
-        $bukuLama = Buku::find($buku->idBuku);
-
-				DetailRetur::create([
-					'id_retur' => $returBaru->id,
-					'id_detail_pengadaan' => $buku->idDetailPengadaan,
-					'dana_pengembalian' => $buku->harga,
-          'jumlah' => $buku->jumlah,
-          'keterangan' => $buku->keterangan
-				]);
-
-				$bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);
-			}
+			$this->createDetailRetur($returBaru->id, $retur->buku);
 
       DB::commit();
       
-      RiwayatAktivitas::create(['aktivitas' => 'Membuat retur ' . $kode]);
+      $this->rekamAktivitas('Membuat retur ' . $kode);
 
 			return redirect()->route('retur.detail', ['id' => $returBaru->id])->with([
 				'message' => 'Retur Berhasil Dibuat.',
@@ -103,6 +94,31 @@ class ReturController extends Controller
 		}
   }
 
+  private function getKodeRetur()
+  {
+    $jumlahRetur = Retur::count() + 2;
+    $kodeTerakhir = Retur::latest()->first();
+    $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T0001';
+    return substr($kodeTerakhir, 0, -count(str_split((string) $jumlahRetur))) . $jumlahRetur;
+  }
+
+  private function createDetailRetur($idReturBaru, $returRequestBuku)
+  {
+    foreach ( $returRequestBuku as $buku ) {
+      $bukuLama = Buku::find($buku->idBuku);
+
+      DetailRetur::create([
+        'id_retur' => $idReturBaru,
+        'id_detail_pengadaan' => $buku->idDetailPengadaan,
+        'dana_pengembalian' => $buku->harga,
+        'jumlah' => $buku->jumlah,
+        'keterangan' => $buku->keterangan
+      ]);
+
+      $bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);
+    }
+  }
+
   public function destroy($id)
   {
     DB::beginTransaction();
@@ -110,17 +126,12 @@ class ReturController extends Controller
       $retur = Retur::find($id);
       $kode = $retur->kode;
 
-			foreach ( $retur->detail as $detail ) {
-				if ( $buku = $detail->pengadaan->buku ) {
-					$buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
-				}
-			}
-
+			$this->kembalikanJumlahBuku($retur->detail);
       $retur->delete();
       
       DB::commit();
       
-      RiwayatAktivitas::create(['aktivitas' => 'Menghapus retur ' . $kode]);
+      $this->rekamAktivitas('Menghapus retur ' . $kode);
 
 			return redirect()->route('retur')->with([
 				'message' => 'Berhasil Menghapus retur',
@@ -133,6 +144,15 @@ class ReturController extends Controller
 				'type' => 'danger'
 			]);
 		}
+  }
+
+  private function kembalikanJumlahBuku($detailRetur)
+  {
+    foreach ( $detailRetur as $detail ) {
+      if ( $buku = $detail->pengadaan->buku ) {
+        $buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
+      }
+    }
   }
 
   public function faktur($id)
