@@ -103,7 +103,7 @@ class ReturController extends Controller
 		}
   }
 
-  public function getAllBuku($id)
+  public function getDataBukuApi($id)
   {
     $buku = Pengadaan::where('pengadaan.id', $id)
       ->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')

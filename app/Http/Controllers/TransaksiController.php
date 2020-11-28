@@ -4,22 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\DetailTransaksi;
-use App\Events\UpdateDasborEvent;
 use App\Exports\TransaksiExport;
 use App\Pengaturan;
-use App\RiwayatAktivitas;
+use App\Traits\RiwayatAktivitas;
 use App\Transaksi;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Error;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\View\View;
 
 class TransaksiController extends Controller
 {
-	public function getTransaksi()
+  use RiwayatAktivitas;
+
+	public function getIndexTransaksiBuilder(): Builder
 	{
 		return Transaksi::join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
 			->select([
@@ -41,18 +43,13 @@ class TransaksiController extends Controller
 
 	public function index()
 	{
-    $transaksi = $this->getTransaksi()->orderByDesc('transaksi.created_at')->get();
-    
-    if ( $_GET ) {
-      return $this->filter();
-    }
-
-		return view('transaksi.index', compact('transaksi'));
+    $transaksi = $this->getIndexTransaksiBuilder()->orderByDesc('transaksi.created_at')->get();
+		return $_GET ? $this->filter() : view('transaksi.index', compact('transaksi'));
 	}
 
-	public function filter()
+	public function filter(): View
 	{
-		$transaksi = $this->getTransaksi();
+    $transaksi = $this->getIndexTransaksiBuilder()->orderByDesc('transaksi.created_at');
 
 		if ( $mulai = $_GET['mulai'] ) {
 			$transaksi->whereDate('transaksi.created_at', '>=', $mulai);
@@ -62,9 +59,8 @@ class TransaksiController extends Controller
 			$transaksi->whereDate('transaksi.created_at', '<=', $sampai);
 		}
 
-		session($_GET);
-
-		$transaksi = $transaksi->orderByDesc('transaksi.created_at')->get();
+    session($_GET);
+    $transaksi = $transaksi->get();
 
 		return view('transaksi.index', compact('transaksi'));
 	}
@@ -85,46 +81,26 @@ class TransaksiController extends Controller
 		DB::beginTransaction();
 
 		try {
-			$bayar = $request->bayar;
-			$transaksi = json_decode($request->transaksi);
+			$nominalPembayaran = $request->bayar;
+      $transaksiRequest = json_decode($request->transaksi);
+      
+      if ( $error = $this->validateTransaksi($nominalPembayaran, $transaksiRequest) ) {
+        return $error;
+      }
 
-			if ( $transaksi->totalHarga <= 0 && !count($transaksi->buku) ) {
-				return redirect()->route('transaksi.create')->withErrors(['bukuDibeli' => 'Mohon pilih paling tidak satu buku yang ingin dibeli']);
-			}
-
-			if ( $bayar < $transaksi->totalHarga ) {
-				return redirect()->route('transaksi.create')->withErrors(['bayar' => 'Nominal pembayaran tidak mencukupi']);
-			}
-
-      $jumlahTransaksi = Transaksi::count() + 2;
-      $kodeTerakhir = Transaksi::latest()->first();
-      $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T00001';
-			$kode = substr($kodeTerakhir, 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+      $kode = $this->getKodeTransaksi();
 
 			$transaksiBaru = Transaksi::create([
 				'kode' => $kode,
-				'id_user' => auth()->user()->id,
-				'bayar' => $bayar,
-				'total_harga' => $transaksi->totalHarga
-			]);
-
-			foreach ( $transaksi->buku as $buku ) {
-				$bukuLama = Buku::find($buku->idBuku);
-
-				DetailTransaksi::create([
-					'id_transaksi' => $transaksiBaru->id,
-					'id_buku' => $buku->idBuku,
-					'jumlah' => $buku->jumlah,
-					'harga' => $bukuLama->harga,
-					'diskon' => $buku->diskon ?? null
-				]);
-
-				$bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);
-			}
+				'bayar' => $nominalPembayaran,
+				'total_harga' => $transaksiRequest->totalHarga
+      ]);
+      
+      $this->createDetailTransaksi($transaksiBaru->id, $transaksiRequest);
 
       DB::commit();
-      
-      RiwayatAktivitas::create(['aktivitas' => 'Membuat transaksi ' . $kode]);
+
+      $this->rekamAktivitas('Membuat transaksi ' . $kode);
 
 			return redirect()->route('transaksi.detail', ['id' => $transaksiBaru->id])->with([
 				'message' => 'Transaksi Berhasil Dibuat.',
@@ -138,9 +114,51 @@ class TransaksiController extends Controller
 				'type' => 'danger'
 			]);
 		}
-	}
+  }
 
-	public function getAllBuku() 
+  private function validateTransaksi($nominalPembayaran, $transaksiRequest)
+  {
+    if ( $transaksiRequest->totalHarga <= 0 && !count($transaksiRequest->buku) ) {
+      return redirect()
+        ->route('transaksi.create')
+        ->withErrors(['bukuDibeli' => 'Mohon pilih paling tidak satu buku yang ingin dibeli']);
+    }
+
+    if ( $nominalPembayaran < $transaksiRequest->totalHarga ) {
+      return redirect()
+        ->route('transaksi.create')
+        ->withErrors(['bayar' => 'Nominal pembayaran tidak mencukupi']);
+    }
+
+    return false;
+  }
+
+  private function getKodeTransaksi()
+  {
+    $kodeTerakhir = Transaksi::latest()->first();
+    $kodeTerakhir = $kodeTerakhir ? $kodeTerakhir->kode : 'T00001';
+    $jumlahTransaksi = Transaksi::count() + 2;
+    return substr($kodeTerakhir, 0, -count(str_split((string) $jumlahTransaksi))) . $jumlahTransaksi;
+  }
+  
+  private function createDetailTransaksi($idTransaksi, $transaksiRequest): void
+  {
+    foreach ( $transaksiRequest->buku as $buku ) {
+      $bukuLama = Buku::find($buku->idBuku);
+
+      DetailTransaksi::create([
+        'id_transaksi' => $idTransaksi,
+        'id_buku' => $buku->idBuku,
+        'jumlah' => $buku->jumlah,
+        'harga' => $bukuLama->harga,
+        'diskon' => $buku->diskon ?? null
+      ]);
+
+      $bukuLama->update(['jumlah' => $bukuLama->jumlah - $buku->jumlah]);
+    }
+  }
+
+	public function getDataBukuApi() 
 	{
 		return response()->json([
 			'status' => 200,
@@ -165,7 +183,7 @@ class TransaksiController extends Controller
       
       DB::commit();
 
-      RiwayatAktivitas::create(['aktivitas' => 'Menghapus transaksi ' . $kode]);
+      $this->rekamAktivitas('Menghapus transaksi ' . $kode);
       
 			return redirect()->route('transaksi')->with([
 				'message' => 'Berhasil Menghapus Transaksi',
