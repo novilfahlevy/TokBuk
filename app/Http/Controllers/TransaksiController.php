@@ -165,12 +165,7 @@ class TransaksiController extends Controller
       $transaksi = Transaksi::find($id);
       $kode = $transaksi->kode;
 
-			foreach ( $transaksi->detail as $detail ) {
-				if ( $buku = $detail->buku ) {
-					$buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
-				}
-			}
-
+			$this->kembalikanJumlahBuku($transaksi);
       $transaksi->delete();
       
       DB::commit();
@@ -188,7 +183,16 @@ class TransaksiController extends Controller
 				'type' => 'danger'
 			]);
 		}
-	}
+  }
+  
+  private function kembalikanJumlahBuku($transaksi)
+  {
+    foreach ( $transaksi->detail as $detail ) {
+      if ( $buku = $detail->buku ) {
+        $buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
+      }
+    }
+  }
 
 	public function export(Request $request)
 	{

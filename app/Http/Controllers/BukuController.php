@@ -7,24 +7,21 @@ use Illuminate\Support\Str;
 use App\Buku;
 use App\DetailPengadaan;
 use App\DetailTransaksi;
-use App\Events\UpdateDasborEvent;
-use App\Exports\PengadaanExport;
 use App\Penulis;
 use App\Penerbit;
 use App\Kategori;
-// use App\Distributor;
 use App\Lokasi;
 use App\Distributor;
-use App\Pengadaan;
-use App\RiwayatAktivitas;
+use App\Traits\RiwayatAktivitas;
 use Error;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
+    use RiwayatAktivitas;
+
     public function __construct(Buku $buku, Penulis $penulis, Distributor $distributor, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
     {
         $this->buku = $buku;
@@ -51,7 +48,7 @@ class BukuController extends Controller
 
     public function filter($data)
     {
-      $buku = Buku::select('*');
+      $buku = $this->buku->select('*');
       
       if ( $kategori = $_GET['kategori'] ) {
           $buku->where('id_kategori', $kategori);
@@ -124,51 +121,51 @@ class BukuController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validate = $request->validate([
-            'sampul' => 'max:2048',
-            'isbn' => 'required',
-            'judul' => 'required',
-            // 'id_penulis' => 'required',
-            // 'id_penerbit' => 'required',
-            // 'id_kategori' => 'required',
-            // 'id_lokasi' => 'required',
-            // 'tahun_terbit' => 'required',
-            // 'harga' => 'required'
+        $request->validate([
+          'sampul' => 'max:2048',
+          'isbn' => 'required',
+          'judul' => 'required'
         ]);
 
         $buku = Buku::where('id', $id);
+        $sampulBaruRequest = $request->file('sampul');
+        $namaSampulLama = $buku->first()->sampul;
 
-        if ( $request->sampul ) {
-            $sampulLama = $buku->first()->sampul;
-            $sampulBaru = $request->file('sampul');
-            $namaBaru = Str::random(20) . '.' . $sampulBaru->getClientOriginalExtension();
-            
-            if ( $sampulLama !== 'sampul.png' ) {
-                Storage::disk('public')->delete('images/buku/' . $sampulLama);
-            }
+        $namaSampulBaru = $this->simpanSampul($sampulBaruRequest, $namaSampulLama);
 
-            $sampulBaru->move(public_path('images/buku/'), $namaBaru);
-          }
-
-          $update = $buku->update([
-            'sampul' => $request->sampul ? $namaBaru : $buku->first()->sampul,
-            'isbn' => $request->isbn,
-            'judul' => $request->judul,
-            'id_penulis' => $request->id_penulis ?? $buku->first()->id_penulis,
-            'id_penerbit' => $request->id_penerbit ?? $buku->first()->id_penerbit,
-            'id_kategori' => $request->id_kategori ?? $buku->first()->id_kategori,
-            'id_lokasi' => $request->id_lokasi ?? $buku->first()->id_lokasi,
-            'tahun_terbit' => $request->tahun_terbit ?? $buku->first()->tahun_terbit,
-            'harga' => $request->harga ?? $buku->first()->harga,
-            'diskon' => $request->diskon ?? $buku->first()->diskon
+        $update = $buku->update([
+          'sampul' => $sampulBaruRequest ? $namaSampulBaru : $namaSampulLama,
+          'isbn' => $request->isbn,
+          'judul' => $request->judul,
+          'id_penulis' => $request->id_penulis ?? $buku->first()->id_penulis,
+          'id_penerbit' => $request->id_penerbit ?? $buku->first()->id_penerbit,
+          'id_kategori' => $request->id_kategori ?? $buku->first()->id_kategori,
+          'id_lokasi' => $request->id_lokasi ?? $buku->first()->id_lokasi,
+          'tahun_terbit' => $request->tahun_terbit ?? $buku->first()->tahun_terbit,
+          'harga' => $request->harga ?? $buku->first()->harga,
+          'diskon' => $request->diskon ?? $buku->first()->diskon
         ]);
 
         if($update == true) {
-            RiwayatAktivitas::create(['aktivitas' => 'Mengedit buku ' . $request->judul]);
+            $this->rekamAktivitas('Mengedit buku ' . $request->judul);
             return redirect()->route('buku.detail', ['id' => $buku->first()->id])->with(['message' => 'Berhasil Mengedit Buku', 'type' => 'success']);
         } else {
             return redirect()->route('buku')->with(['message' => 'Gagal Mengedit Buku', 'type' => 'danger']);
         }
+    }
+
+    private function simpanSampul($sampulBaruRequest, $namaSampulLama)
+    {
+      if ( $sampulBaru = $sampulBaruRequest ) {
+        $namaSampulBaru = Str::random(20) . '.' . $sampulBaru->getClientOriginalExtension();
+        if ( $sampulBaru->move(public_path('images/buku/'), $namaSampulBaru) ) {
+          if ( $namaSampulLama !== 'sampul.png' ) {
+            Storage::disk('public')->delete('images/buku/' . $namaSampulLama);
+          }
+          return $namaSampulBaru;
+        }
+      }
+      return null;
     }
 
     public function detail($id)
@@ -193,11 +190,11 @@ class BukuController extends Controller
           Storage::disk('public')->delete('images/buku/' . $sampul);
         }
         
-        RiwayatAktivitas::create(['aktivitas' => 'Menghapus buku ' . $judul]);
+        $this->rekamAktivitas('Menghapus buku ' . $judul);
         DetailTransaksi::where('id_buku', $id)->update(['id_buku' => null]);
         DetailPengadaan::where('id_buku', $id)->update(['id_buku' => null]);
 
-        $buku->delete() ;
+        $buku->delete();
         DB::commit();
 
         return redirect()->route('buku')->with(['message' => 'Berhasil Menghapus Buku', 'type' => 'success']);
