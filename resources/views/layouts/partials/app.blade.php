@@ -118,7 +118,7 @@
 
     $('[data-tooltip="tooltip"]').tooltip();
 
-    $('select').select2();
+    $('select:not(.no-select2)').select2();
   });
 </script>
   

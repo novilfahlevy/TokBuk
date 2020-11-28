@@ -82,14 +82,14 @@ function tambahBuku() {
 
   const bukuTr = $(`
     <tr class="buku" data-select-class="${selectClass}" data-buku-id="empty" data-status="Baru">
-      <th id="number">1</th>
-      <th>
-        <select required class="form-control status" value="Baru">
+      <td id="number">1</td>
+      <td>
+        <select required class="form-control status no-select2" value="Baru" style="width: 150px">
           <option value="Baru" selected>Baru</option>
           <option value="Penambahan">Penambahan</option>
         </select>
-      </th>
-      <th>
+      </td>
+      <td>
         <div class="d-none penambahan">
           <select class="${selectClass} form-control buku-dipilih" name="states" style="width: 300px"></select>
         </div>
@@ -97,22 +97,22 @@ function tambahBuku() {
           <input type="text" class="form-control form-control-sm mb-2 isbn" placeholder="ISBN" style="width: 200px">
           <input type="text" class="form-control form-control-sm judul" placeholder="Judul" style="width: 200px">
         </div>
-      </th>
-      <th>
-        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 80px">
-      </th>
-      <th class="harga">
-        <div class="input-group">
+      </td>
+      <td>
+        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 100px">
+      </td>
+      <td class="harga">
+        <div class="input-group" style="width: 200px;">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Rp</span>
           </div>
           <input type="number" class="form-control harga-per-buku" min="0" value="0">
         </div>
-      </th>
-      <th class="total-harga">Rp 0</th>
-      <th>
+      </td>
+      <td class="total-harga">Rp 0</td>
+      <td>
         <button type="button" class="btn btn-danger hapus-buku">Hapus</button>
-      </th>
+      </td>
     </tr>
   `);
   

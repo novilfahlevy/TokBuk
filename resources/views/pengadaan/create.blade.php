@@ -98,7 +98,7 @@ Tambah Pengadaan
                       <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-                <div class="table-responsive">
+                <div class="table-responsive" style="overflow-x: scroll">
                   <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
                     <thead>
                       <tr>
@@ -113,8 +113,8 @@ Tambah Pengadaan
                     </thead>
                     <tbody id="bukuContainer"></tbody>
                   </table>
-                  <button type="button" class="btn btn-success" id="tambahBuku">Tambah Buku</button>
                 </div>
+                <button type="button" class="btn btn-success mt-3" id="tambahBuku">Tambah Buku</button>
               </div>
               <button type="submit" class="btn btn-primary">Simpan</button>
             </form>

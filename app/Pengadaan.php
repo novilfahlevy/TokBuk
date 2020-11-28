@@ -39,4 +39,12 @@ class Pengadaan extends Model
     {
         return $this->hasOne(Retur::class, 'id_pengadaan', 'id');
     }
+
+    protected static function boot()
+    {
+      parent::boot();
+      static::creating(function ($query) {
+        $query->id_user = auth()->id();
+      });
+    }
 }

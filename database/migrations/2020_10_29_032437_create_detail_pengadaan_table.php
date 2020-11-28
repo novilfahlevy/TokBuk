@@ -16,7 +16,7 @@ class CreateDetailPengadaanTable extends Migration
         Schema::create('detail_pengadaan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_pengadaan');
-            $table->foreign('id_pengadaan')->references('id')->on('pengadaan');  
+            $table->foreign('id_pengadaan')->references('id')->on('pengadaan')->onDelete('cascade');
             $table->unsignedBigInteger('id_buku')->nullable();
             $table->foreign('id_buku')->references('id')->on('buku');
             $table->integer('harga');
