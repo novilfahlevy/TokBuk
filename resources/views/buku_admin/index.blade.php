@@ -170,9 +170,9 @@ Buku
                     </div>
                     <div class="col-12">
                         <div class="form-group mt-2 mb-0">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-control custom-checkbox" style="cursor: pointer;">
                                 <input type="checkbox" class="custom-control-input" name="diskon" id="diskon" {{ session()->pull('diskon') ? 'checked' : '' }}>
-                                <label class="custom-control-label" for="diskon" style="user-select: none">Diskon</label>
+                                <label class="custom-control-label" for="diskon" style="user-select: none; cursor: pointer;">Diskon</label>
                             </div>
                         </div>
                     </div>
