@@ -16,11 +16,10 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "maatwebsite/excel": "^3.1",
-        "pusher/pusher-php-server": "^4.1",
-        "sentry/sentry-laravel": "^2.1"
-    },
-    "require-dev": {
+        "maatwebsite/excel": "^3.1"
+      },
+      "require-dev": {
+        "sentry/sentry-laravel": "^2.1",
         "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.3.6",
         "fakerphp/faker": "^1.9.1",
