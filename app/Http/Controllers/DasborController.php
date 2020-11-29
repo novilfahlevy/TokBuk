@@ -39,7 +39,7 @@ class DasborController extends Controller
     $this->aktivitasTerakhir = RiwayatAktivitas::latest()->first();
   }
 
-  private function getChartBestSeller(): Array
+  private function getChartBestSeller(): array
   {
     $transaksiBulanIni = Transaksi::whereMonth('transaksi.created_at', $this->now->month);
 
@@ -51,21 +51,21 @@ class DasborController extends Controller
       ->limit(7)
       ->get();
 
-    $bukuBestSeller = $bestSeller->map(function($buku) {
+    $bukuBestSeller = $bestSeller->map(function ($buku) {
       return strlen($buku->judul) > 16 ? substr($buku->judul, 0, 16) . '...' : $buku->judul;
     })
-    ->toArray();
-    
-    $jumlahBestSeller = $bestSeller->map(function($buku) {
+      ->toArray();
+
+    $jumlahBestSeller = $bestSeller->map(function ($buku) {
       return $buku->jumlah;
     })
-    ->toArray();
+      ->toArray();
 
     return [
-      'buku' => collect(range(0, 6))->map(function($i) use ($bukuBestSeller) {
+      'buku' => collect(range(0, 6))->map(function ($i) use ($bukuBestSeller) {
         return isset($bukuBestSeller[$i]) ? $bukuBestSeller[$i] : '-';
       }),
-      'jumlah' => collect(range(0, 6))->map(function($i) use ($jumlahBestSeller) {
+      'jumlah' => collect(range(0, 6))->map(function ($i) use ($jumlahBestSeller) {
         return isset($jumlahBestSeller[$i]) ? $jumlahBestSeller[$i] : 0;
       })
     ];
@@ -82,32 +82,32 @@ class DasborController extends Controller
       ->get();
   }
 
-  private function getChartTransaksi(): Array
+  private function getChartTransaksi(): array
   {
     $chartTransaksi = Transaksi::select([
       DB::raw('SUM(total_harga) AS total_perbulan'),
       DB::raw('MONTH(created_at) AS bulan')
     ])
-    ->whereYear('created_at', $this->now->year)
-    ->groupBy([
+      ->whereYear('created_at', $this->now->year)
+      ->groupBy([
         DB::raw('MONTH(created_at)'),
         'bulan'
-    ])
-    ->orderBy('bulan')
-    ->get()
-    ->toArray();
+      ])
+      ->orderBy('bulan')
+      ->get()
+      ->toArray();
 
     $hasil = [];
 
-    foreach ( range(1, 12) as $bulan ) {
+    foreach (range(1, 12) as $bulan) {
       $bulanAda = false;
-      foreach ( $chartTransaksi as $t ) {
-        if ( $t['bulan'] == $bulan ) {
+      foreach ($chartTransaksi as $t) {
+        if ($t['bulan'] == $bulan) {
           $bulanAda = true;
           $hasil[] = $t['total_perbulan'];
         }
       }
-      if ( !$bulanAda ) $hasil[] = 0;
+      if (!$bulanAda) $hasil[] = 0;
     }
 
     return $hasil;

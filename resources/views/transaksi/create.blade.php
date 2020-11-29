@@ -36,9 +36,9 @@ Tambah Transaksi
                       </div>
                       <input type="number" class="form-control" id="bayar" name="bayar" min="0" value="0">
                       @error('bayar')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="invalid-feedback d-block" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
                       @enderror
                     </div>
                   </div>
@@ -50,9 +50,9 @@ Tambah Transaksi
                   <h6 class="mb-0 mr-2">Total <span id="totalSemuaHarga">0</span></h6>
                 </div>
                 @error('bukuDibeli')
-                  <span class="invalid-feedback d-block my-2" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
+                <span class="invalid-feedback d-block my-2" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
                 @enderror
                 <div class="table-responsive">
                   <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
@@ -68,7 +68,7 @@ Tambah Transaksi
                       </tr>
                     </thead>
                     <tbody id="bukuContainer">
-                      
+
                     </tbody>
                   </table>
                   <button type="button" class="btn btn-success" id="tambahBuku">Tambah Buku</button>
@@ -85,11 +85,11 @@ Tambah Transaksi
 @endsection
 
 @push('js')
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="{{ asset('js/transaksi/create.js') }}"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="{{ asset('js/transaksi/create.js') }}"></script>
 @endpush
 
 @push('css')
-  <link rel="stylesheet" href="{{ asset('css/transaksi/custom.css') }}">
+<link rel="stylesheet" href="{{ asset('css/transaksi/custom.css') }}">
 @endpush

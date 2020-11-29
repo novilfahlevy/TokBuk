@@ -37,9 +37,9 @@ Tambah Pengadaan
                         </div>
                         <input type="number" class="form-control" id="hargaBeli" name="hargaBeli" min="0" value="0">
                         @error('hargaBeli')
-                          <span class="invalid-feedback d-block" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
+                        <span class="invalid-feedback d-block" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                       </div>
                     </div>
@@ -47,23 +47,25 @@ Tambah Pengadaan
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="idDistributor">Distributor</label>
-                      <select required name="idDistributor" class="form-control" value="{{ old('idDistributor') }}" data-live-search="true" required>
+                      <select required name="idDistributor" class="form-control" value="{{ old('idDistributor') }}"
+                        data-live-search="true" required>
                         <option value='' disabled selected>- Pilih -</option>
                         @foreach($distributor as $pem)
-                          <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
+                        <option value="{{ $pem['id'] }}"> {{$pem->nama}} </option>
                         @endforeach
                       </select>
                       @error('idDistributor')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="invalid-feedback d-block" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
                       @enderror
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="tanggal">Tanggal</label>
-                      <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
+                      <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}"
+                        required>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -74,16 +76,17 @@ Tambah Pengadaan
                         <label class="custom-file-label" for="faktur">Masukan faktur</label>
                       </div>
                       @error('faktur')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="invalid-feedback d-block" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
                       @enderror
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="form-group mb-0">
                       <label for="keterangan">Keterangan</label>
-                      <textarea type="text" class="form-control" name="keterangan" value="{{ old('keterangan') }}" style="height:80px;"></textarea>
+                      <textarea type="text" class="form-control" name="keterangan" value="{{ old('keterangan') }}"
+                        style="height:80px;"></textarea>
                     </div>
                   </div>
                 </div>
@@ -94,9 +97,9 @@ Tambah Pengadaan
                   <h6 class="mb-0 mr-2">Total <span id="totalSemuaHarga">0</span></h6>
                 </div>
                 @error('bukuDibeli')
-                  <span class="invalid-feedback d-block my-2" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
+                <span class="invalid-feedback d-block my-2" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
                 @enderror
                 <div class="table-responsive" style="overflow-x: scroll">
                   <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
@@ -127,11 +130,11 @@ Tambah Pengadaan
 @endsection
 
 @push('js')
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="{{ asset('js/pengadaan/create.js') }}"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="{{ asset('js/pengadaan/create.js') }}"></script>
 @endpush
 
 @push('css')
-  <link rel="stylesheet" href="{{ asset('css/transaksi/custom.css') }}">
+<link rel="stylesheet" href="{{ asset('css/transaksi/custom.css') }}">
 @endpush

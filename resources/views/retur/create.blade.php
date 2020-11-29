@@ -18,7 +18,8 @@ Tambah Retur
           <div class="card-header">
             <h4>Form Pengajuan Retur</h4>
             <div class="card-header-form">
-              <a href="{{ route('pengadaan.detail', $pengadaan->id) }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
+              <a href="{{ route('pengadaan.detail', $pengadaan->id) }}" class="btn btn-primary" data-tooltip="tooltip"
+                title="Kembali">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </div>
@@ -39,7 +40,8 @@ Tambah Retur
                 <div class="col-12">
                   <div class="form-group">
                     <label for="tanggal">Tanggal</label>
-                    <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
+                    <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}"
+                      required>
                   </div>
                 </div>
               </div>
@@ -49,9 +51,9 @@ Tambah Retur
                   <h6 class="mb-0 mr-2">Total <span id="totalSemuaHarga">0</span></h6>
                 </div>
                 @error('bukuDibeli')
-                  <span class="invalid-feedback d-block my-2" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
+                <span class="invalid-feedback d-block my-2" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
                 @enderror
                 <div class="table-responsive">
                   <table class="display table table-striped table-bordered" style="width:100%; text-align:center;">
@@ -67,13 +69,14 @@ Tambah Retur
                       </tr>
                     </thead>
                     <tbody id="bukuContainer">
-                      
+
                     </tbody>
                   </table>
                 </div>
                 <button type="button" class="btn btn-success mt-2" id="tambahBuku">Tambah Buku</button>
               </div>
-              <p>* Pastikan buku yang ingin diretur masih dalam keadaan sama seperti saat baru dibeli melalui pengadaan.</p>
+              <p>* Pastikan buku yang ingin diretur masih dalam keadaan sama seperti saat baru dibeli melalui pengadaan.
+              </p>
               <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
           </div>
@@ -85,11 +88,11 @@ Tambah Retur
 @endsection
 
 @push('js')
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="{{ asset('js/retur/create.js') }}"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="{{ asset('js/retur/create.js') }}"></script>
 @endpush
 
 @push('css')
-  <link rel="stylesheet" href="{{ asset('css/transaksi/custom.css') }}">
+<link rel="stylesheet" href="{{ asset('css/transaksi/custom.css') }}">
 @endpush

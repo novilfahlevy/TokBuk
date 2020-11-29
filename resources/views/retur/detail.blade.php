@@ -17,11 +17,13 @@ Detail Retur
           <div class="card-header">
             <h4>Data Retur</h4>
             <div class="card-header-form">
-              <a href="{{ route('pengadaan.detail', $retur->pengadaan->id) }}" class="btn btn-warning mr-2" data-tooltip="tooltip" title="Pengadaan">
+              <a href="{{ route('pengadaan.detail', $retur->pengadaan->id) }}" class="btn btn-warning mr-2"
+                data-tooltip="tooltip" title="Pengadaan">
                 <i class="fas fa-truck-loading"></i>
               </a>
               <div class="dropdown">
-                <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-file-invoice"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -71,14 +73,14 @@ Detail Retur
                 </thead>
                 <tbody>
                   @foreach ($retur->detail as $r)
-                    <tr>
-                      <th>{{ $loop->index + 1 }}</th>
-                      <th>{{ $r->pengadaan->buku ? $r->pengadaan->buku->judul : '-' }}</th>
-                      <th>{{ $r->keterangan }}</th>
-                      <th>Rp {{ number_format($r->dana_pengembalian, 2, ',', '.') }}</th>
-                      <th>{{ $r->jumlah }}</th>
-                      <th>Rp {{ number_format($r->dana_pengembalian * $r->jumlah, 2, ',', '.') }}</th>
-                    </tr>
+                  <tr>
+                    <th>{{ $loop->index + 1 }}</th>
+                    <th>{{ $r->pengadaan->buku ? $r->pengadaan->buku->judul : '-' }}</th>
+                    <th>{{ $r->keterangan }}</th>
+                    <th>Rp {{ number_format($r->dana_pengembalian, 2, ',', '.') }}</th>
+                    <th>{{ $r->jumlah }}</th>
+                    <th>Rp {{ number_format($r->dana_pengembalian * $r->jumlah, 2, ',', '.') }}</th>
+                  </tr>
                   @endforeach
                 </tbody>
               </table>

@@ -18,7 +18,8 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Transaksi</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.transaksi', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanTransaksi">
+                    <a href="{{ route('laporan.transaksi', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}"
+                      class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanTransaksi">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
@@ -65,7 +66,8 @@ Laporan
                     <div class="col-6">
                       <div class="form-group mb-0">
                         <label for="akhirTanggalPendapatan">Sampai</label>
-                        <input type="date" class="form-control" id="akhirTanggalPendapatan" value="{{ date('Y-m') }}-{{ $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan }}">
+                        <input type="date" class="form-control" id="akhirTanggalPendapatan"
+                          value="{{ date('Y-m') }}-{{ $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan }}">
                       </div>
                     </div>
                     <div class="col-12">
@@ -80,7 +82,8 @@ Laporan
                 <div class="card-header">
                   <h4>Laporan Pengadaan</h4>
                   <div class="card-header-form">
-                    <a href="{{ route('laporan.pengadaan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}" class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanPengadaan">
+                    <a href="{{ route('laporan.pengadaan', ['dari' => date('Y-m') . '-01', 'sampai' => date('Y-m-') . $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan]) }}"
+                      class="btn btn-success mr-2" data-tooltip="tooltip" title="Unduh Laporan" id="laporanPengadaan">
                       <i class="fas fa-file-download"></i>
                     </a>
                   </div>
@@ -121,13 +124,15 @@ Laporan
                     <div class="col-6">
                       <div class="form-group mb-0">
                         <label for="awalTanggalPengeluaran">Dari</label>
-                        <input type="date" class="form-control" id="awalTanggalPengeluaran" value="{{ date('Y-m') }}-01">
+                        <input type="date" class="form-control" id="awalTanggalPengeluaran"
+                          value="{{ date('Y-m') }}-01">
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group mb-0">
                         <label for="akhirTanggalPengeluaran">Sampai</label>
-                        <input type="date" class="form-control" id="akhirTanggalPengeluaran" value="{{ date('Y-m') }}-{{ $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan }}">
+                        <input type="date" class="form-control" id="akhirTanggalPengeluaran"
+                          value="{{ date('Y-m') }}-{{ $akhirBulan > 9 ? $akhirBulan : '0' . $akhirBulan }}">
                       </div>
                     </div>
                     <div class="col-12">
@@ -146,5 +151,5 @@ Laporan
 @endsection
 
 @push('js')
-  <script src="{{ asset('js/laporan/index.js') }}"></script>
+<script src="{{ asset('js/laporan/index.js') }}"></script>
 @endpush

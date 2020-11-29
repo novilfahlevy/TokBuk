@@ -19,22 +19,27 @@ Detail Pengadaan
               <div class="card-header">
                 <h4>Data Pengadaan</h4>
                 <div class="card-header-form">
-                  <a href="{{ $pengadaan->retur ? route('retur.detail', $pengadaan->retur->id) : route('retur.create', $pengadaan->id) }}" class="btn btn-danger mr-2" data-tooltip="tooltip" title="{{ !$pengadaan->retur ? 'Ajukan ' : '' }}Retur">
+                  <a href="{{ $pengadaan->retur ? route('retur.detail', $pengadaan->retur->id) : route('retur.create', $pengadaan->id) }}"
+                    class="btn btn-danger mr-2" data-tooltip="tooltip"
+                    title="{{ !$pengadaan->retur ? 'Ajukan ' : '' }}Retur">
                     <i class="fas fa-exchange-alt"></i>
                   </a>
                   <div class="dropdown">
-                    <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-file-invoice"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Laporan</h6>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ route('pengadaan.laporan', $pengadaan->id) }}">Unduh</a>
-                      <a class="dropdown-item" href="{{ route('pengadaan.cetak', $pengadaan->id) }}" target="_blank">Cetak</a>
+                      <a class="dropdown-item" href="{{ route('pengadaan.cetak', $pengadaan->id) }}"
+                        target="_blank">Cetak</a>
                       <div class="my-3"></div>
                       <h6 class="dropdown-header pl-3 pt-1 pb-0">Faktur</h6>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{ asset('images/faktur/' . $pengadaan->faktur) }}" target="_blank">Lihat</a>
+                      <a class="dropdown-item" href="{{ asset('images/faktur/' . $pengadaan->faktur) }}"
+                        target="_blank">Lihat</a>
                       <a class="dropdown-item" href="{{ route('pengadaan.faktur', $pengadaan->id) }}">Unduh</a>
                     </div>
                   </div>
@@ -93,13 +98,13 @@ Detail Pengadaan
                     </thead>
                     <tbody>
                       @foreach ($pengadaan->detail as $p)
-                        <tr>
-                          <td>{{ $loop->index + 1 }}</td>
-                          <td>{{ $p->buku ? $p->buku->judul : '-' }}</td>
-                          <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
-                          <td>{{ $p->jumlah }}</td>
-                          <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
-                        </tr>
+                      <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $p->buku ? $p->buku->judul : '-' }}</td>
+                        <td>Rp {{ number_format($p->harga, 2, ',', '.') }}</td>
+                        <td>{{ $p->jumlah }}</td>
+                        <td>Rp {{ number_format($p->harga * $p->jumlah, 2, ',', '.') }}</td>
+                      </tr>
                       @endforeach
                     </tbody>
                   </table>

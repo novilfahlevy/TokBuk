@@ -42,7 +42,7 @@ class ReturController extends Controller
 
   public function index()
   {
-    $returs = $this->getIndexReturBuilder()->get(); 
+    $returs = $this->getIndexReturBuilder()->get();
     return view('retur.index', compact('returs'));
   }
 
@@ -61,37 +61,37 @@ class ReturController extends Controller
   public function store(Request $request, $id)
   {
     DB::beginTransaction();
-    
-		try {
+
+    try {
       $retur = json_decode($request->retur);
 
       $kode = $this->getKodeRetur();
 
-			$returBaru = Retur::create([
+      $returBaru = Retur::create([
         'kode' => $kode,
         'id_pengadaan' => $retur->idPengadaan,
         'total_dana_pengembalian' => $retur->danaPengembalian,
         'tanggal' => $retur->tanggal
-			]);
+      ]);
 
-			$this->createDetailRetur($returBaru->id, $retur->buku);
+      $this->createDetailRetur($returBaru->id, $retur->buku);
 
       DB::commit();
-      
+
       $this->rekamAktivitas('Membuat retur ' . $kode);
 
-			return redirect()->route('retur.detail', ['id' => $returBaru->id])->with([
-				'message' => 'Retur Berhasil Dibuat.',
-				'type' => 'success'
-			]);
-		} catch ( Exception $e ) {
-			DB::rollBack();
-			throw new Error($e);
-			return redirect()->route('retur.create')->with([
-				'message' => 'Gagal Membuat Retur, Silahkan Coba Lagi.',
-				'type' => 'danger'
-			]);
-		}
+      return redirect()->route('retur.detail', ['id' => $returBaru->id])->with([
+        'message' => 'Retur Berhasil Dibuat.',
+        'type' => 'success'
+      ]);
+    } catch (Exception $e) {
+      DB::rollBack();
+      throw new Error($e);
+      return redirect()->route('retur.create')->with([
+        'message' => 'Gagal Membuat Retur, Silahkan Coba Lagi.',
+        'type' => 'danger'
+      ]);
+    }
   }
 
   private function getKodeRetur()
@@ -104,7 +104,7 @@ class ReturController extends Controller
 
   private function createDetailRetur($idReturBaru, $returRequestBuku)
   {
-    foreach ( $returRequestBuku as $buku ) {
+    foreach ($returRequestBuku as $buku) {
       $bukuLama = Buku::find($buku->idBuku);
 
       DetailRetur::create([
@@ -122,50 +122,50 @@ class ReturController extends Controller
   public function destroy($id)
   {
     DB::beginTransaction();
-		try {
+    try {
       $retur = Retur::find($id);
       $kode = $retur->kode;
 
-			$this->kembalikanJumlahBuku($retur->detail);
+      $this->kembalikanJumlahBuku($retur->detail);
       $retur->delete();
-      
+
       DB::commit();
-      
+
       $this->rekamAktivitas('Menghapus retur ' . $kode);
 
-			return redirect()->route('retur')->with([
-				'message' => 'Berhasil Menghapus retur',
-				'type' => 'success'
-			]);
-		} catch ( Exception $e ) {
-			DB::rollBack();
-			return redirect()->route('retur')->with([
-				'message' => 'Gagal Menghapus retur',
-				'type' => 'danger'
-			]);
-		}
+      return redirect()->route('retur')->with([
+        'message' => 'Berhasil Menghapus retur',
+        'type' => 'success'
+      ]);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return redirect()->route('retur')->with([
+        'message' => 'Gagal Menghapus retur',
+        'type' => 'danger'
+      ]);
+    }
   }
 
   private function kembalikanJumlahBuku($detailRetur)
   {
-    foreach ( $detailRetur as $detail ) {
-      if ( $buku = $detail->pengadaan->buku ) {
+    foreach ($detailRetur as $detail) {
+      if ($buku = $detail->pengadaan->buku) {
         $buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
       }
     }
   }
 
   public function faktur($id)
-	{
+  {
     $retur = Retur::find($id);
     $pengaturan = Pengaturan::first();
-		return PDF::loadView('retur.faktur', compact('retur', 'pengaturan'))->download('faktur_' . $retur->kode . '.pdf');
+    return PDF::loadView('retur.faktur', compact('retur', 'pengaturan'))->download('faktur_' . $retur->kode . '.pdf');
   }
 
   public function cetak($id)
-	{
+  {
     $retur = Retur::find($id);
     $pengaturan = Pengaturan::first();
-		return view ('retur.cetak', compact('retur', 'pengaturan'));
+    return view('retur.cetak', compact('retur', 'pengaturan'));
   }
 }

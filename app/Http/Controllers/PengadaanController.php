@@ -22,9 +22,9 @@ class PengadaanController extends Controller
 {
   use RiwayatAktivitas;
 
-	private function getPengadaanBuilder(): Builder
-	{
-		return Pengadaan::join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
+  private function getPengadaanBuilder(): Builder
+  {
+    return Pengadaan::join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
       ->select([
         'pengadaan.id',
         'pengadaan.kode',
@@ -43,126 +43,126 @@ class PengadaanController extends Controller
         'pengadaan.total_harga'
       ])
       ->orderByDesc(DB::raw('CAST(pengadaan.tanggal as date)'));
-	}
+  }
 
-	public function index()
-	{
-		$pengadaan = $this->getPengadaanBuilder()->get();
+  public function index()
+  {
+    $pengadaan = $this->getPengadaanBuilder()->get();
     $distributor = Distributor::all();
-    
-    if ( $_GET ) {
+
+    if ($_GET) {
       return $this->filter(compact('distributor'));
     }
-    
-		return view('pengadaan.index', compact('pengadaan', 'distributor'));
-	}
 
-	public function filter($data)
-	{
-		$pengadaan = $this->getPengadaanBuilder();
+    return view('pengadaan.index', compact('pengadaan', 'distributor'));
+  }
 
-		if ( $mulai = $_GET['mulai'] ) {
-			$pengadaan->whereDate('tanggal', '>=', $mulai);
-		}
-		
-		if ( $sampai = $_GET['sampai'] ) {
-			$pengadaan->whereDate('tanggal', '<=', $sampai);
-		}
-		
-		if ( $distributor = $_GET['distributor'] ) {
-			$pengadaan->where('id_distributor', $distributor);
-		}
+  public function filter($data)
+  {
+    $pengadaan = $this->getPengadaanBuilder();
 
-		session($_GET);
+    if ($mulai = $_GET['mulai']) {
+      $pengadaan->whereDate('tanggal', '>=', $mulai);
+    }
+
+    if ($sampai = $_GET['sampai']) {
+      $pengadaan->whereDate('tanggal', '<=', $sampai);
+    }
+
+    if ($distributor = $_GET['distributor']) {
+      $pengadaan->where('id_distributor', $distributor);
+    }
+
+    session($_GET);
 
     $pengadaan = $pengadaan->get();
     $distributor = $data['distributor'];
 
-		return view('pengadaan.index', compact('pengadaan', 'distributor'));
-	}
+    return view('pengadaan.index', compact('pengadaan', 'distributor'));
+  }
 
-	public function create(Request $request)
-	{
-		$distributor = Distributor::all();
+  public function create(Request $request)
+  {
+    $distributor = Distributor::all();
 
-		return view('pengadaan.create', compact('distributor'));
-	}
+    return view('pengadaan.create', compact('distributor'));
+  }
 
-	public function detail($id)
-	{
+  public function detail($id)
+  {
     $pengadaan = Pengadaan::find($id);
-		return view('pengadaan.detail', compact('pengadaan'));
-	}
+    return view('pengadaan.detail', compact('pengadaan'));
+  }
 
-	public function store(Request $request)
-	{
+  public function store(Request $request)
+  {
     $this->validatePengadaan($request);
 
-		$hargaBeliRequest = $request->hargaBeli;
-		$bukuYangDibeliRequest = json_decode($request->bukuYangDibeli);
-		$idDistributorRequest = $request->idDistributor;
+    $hargaBeliRequest = $request->hargaBeli;
+    $bukuYangDibeliRequest = json_decode($request->bukuYangDibeli);
+    $idDistributorRequest = $request->idDistributor;
 
-		if ( $hargaBeliRequest < $bukuYangDibeliRequest->totalHarga ) {
-			return redirect()->route('pengadaan.create')->withErrors(['hargaBeli' => 'Nominal pembayaran untuk membeli pasokan buku dibawah kurang']);
-		}
+    if ($hargaBeliRequest < $bukuYangDibeliRequest->totalHarga) {
+      return redirect()->route('pengadaan.create')->withErrors(['hargaBeli' => 'Nominal pembayaran untuk membeli pasokan buku dibawah kurang']);
+    }
 
-		DB::beginTransaction();
+    DB::beginTransaction();
 
-		try {
+    try {
       $kode = $this->getKodePengadaan();
 
-			$fakturRequest = $request->file('faktur');
-			$namaFaktur = $kode . '.' . $fakturRequest->getClientOriginalExtension();
+      $fakturRequest = $request->file('faktur');
+      $namaFaktur = $kode . '.' . $fakturRequest->getClientOriginalExtension();
 
-			Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($fakturRequest));
+      Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($fakturRequest));
 
-			$pengadaan = Pengadaan::create([
-				'kode' => $kode,
-				'tanggal' => $request->tanggal,
-				'faktur' => $namaFaktur,
-				'id_distributor' => (int) $idDistributorRequest,
-				'total_harga' => $bukuYangDibeliRequest->totalHarga,
-				'bayar' => $hargaBeliRequest,
-				'keterangan' => $request->keterangan
+      $pengadaan = Pengadaan::create([
+        'kode' => $kode,
+        'tanggal' => $request->tanggal,
+        'faktur' => $namaFaktur,
+        'id_distributor' => (int) $idDistributorRequest,
+        'total_harga' => $bukuYangDibeliRequest->totalHarga,
+        'bayar' => $hargaBeliRequest,
+        'keterangan' => $request->keterangan
       ]);
-      
+
       $this->createDetailPengadaan($pengadaan->id, $bukuYangDibeliRequest);
 
       DB::commit();
-      
+
       $this->rekamAktivitas('Membuat pengadaan ' . $kode);
 
-			return redirect()->route('pengadaan.detail', ['id' => $pengadaan->id])->with([
-				'type' => 'success',
-				'message' => 'Pengadaan Berhasil Dilakukan.'
-			]);
-		} catch ( Exception $e ) {
-			DB::rollBack();
-			throw new Error($e);
-			return redirect()->route('pengadaan.create')->with([
-				'type' => 'danger',
-				'message' => 'Gagal Melakukan Pengadaan, Silahkan coba lagi.'
-			]);
-		}
+      return redirect()->route('pengadaan.detail', ['id' => $pengadaan->id])->with([
+        'type' => 'success',
+        'message' => 'Pengadaan Berhasil Dilakukan.'
+      ]);
+    } catch (Exception $e) {
+      DB::rollBack();
+      throw new Error($e);
+      return redirect()->route('pengadaan.create')->with([
+        'type' => 'danger',
+        'message' => 'Gagal Melakukan Pengadaan, Silahkan coba lagi.'
+      ]);
+    }
   }
 
   private function validatePengadaan(Request $request)
   {
     $request->validate([
-			'faktur' => 'max:2048',
-			'hargaBeli' => 'required',
-			'idDistributor' => 'required'
-		], [
-			'faktur.max' => 'Ukuran file terlalu besar, maksimal 2 MB',
-			'hargaBeli.required' => 'Mohon masukan harga beli untuk pengadaan ini',
-			'idDistributor.required' => 'Mohon pilih distributor'
-		]);
+      'faktur' => 'max:2048',
+      'hargaBeli' => 'required',
+      'idDistributor' => 'required'
+    ], [
+      'faktur.max' => 'Ukuran file terlalu besar, maksimal 2 MB',
+      'hargaBeli.required' => 'Mohon masukan harga beli untuk pengadaan ini',
+      'idDistributor.required' => 'Mohon pilih distributor'
+    ]);
   }
 
   private function createDetailPengadaan($idPengadaan, $bukuYangDibeliRequest)
   {
-    foreach ( $bukuYangDibeliRequest->buku as $buku ) {
-      if ( $buku->status === 'Baru' ) {
+    foreach ($bukuYangDibeliRequest->buku as $buku) {
+      if ($buku->status === 'Baru') {
         $bukuBaru = Buku::create([
           'sampul' => 'sampul.png',
           'isbn' => $buku->isbn,
@@ -189,7 +189,7 @@ class PengadaanController extends Controller
       }
     }
   }
-  
+
   private function getKodePengadaan()
   {
     $jumlahPengadaan = Pengadaan::count() + 2;
@@ -198,40 +198,40 @@ class PengadaanController extends Controller
     return substr($kodeTerakhir, 0, -count(str_split((string) $jumlahPengadaan))) . $jumlahPengadaan;
   }
 
-	public function destroy($id)
-	{
-		DB::beginTransaction();
-		try {
+  public function destroy($id)
+  {
+    DB::beginTransaction();
+    try {
       $pengadaan = Pengadaan::find($id);
       $kode = $pengadaan->kode;
 
-			$this->kembalikanJumlahBuku($pengadaan->detail);
-			$pengadaan->delete();
+      $this->kembalikanJumlahBuku($pengadaan->detail);
+      $pengadaan->delete();
 
       DB::commit();
-      
+
       $this->rekamAktivitas('Menghapus pengadaan ' . $kode);
-			
-			return redirect()->route('pengadaan')->with([
-				'message' => 'Berhasil Menghapus Pengadaan',
-				'type' => 'success'
-			]);
-		} catch ( Exception $e ) {
-			DB::rollBack();
-			throw new Error($e);
-			return redirect()->route('pengadaan')->with([
-				'message' => 'Gagal Menghapus Pengadaan',
-				'type' => 'danger'
-			]);
-		}
+
+      return redirect()->route('pengadaan')->with([
+        'message' => 'Berhasil Menghapus Pengadaan',
+        'type' => 'success'
+      ]);
+    } catch (Exception $e) {
+      DB::rollBack();
+      throw new Error($e);
+      return redirect()->route('pengadaan')->with([
+        'message' => 'Gagal Menghapus Pengadaan',
+        'type' => 'danger'
+      ]);
+    }
   }
-  
+
   private function kembalikanJumlahBuku($detailPengadaan)
   {
-    foreach ( $detailPengadaan as $detailPengadaan ) {
+    foreach ($detailPengadaan as $detailPengadaan) {
       $buku = Buku::find($detailPengadaan->id_buku);
-      if ( !!$buku ) {
-        if ( $buku->jumlah < $detailPengadaan->jumlah ) {
+      if (!!$buku) {
+        if ($buku->jumlah < $detailPengadaan->jumlah) {
           $buku->update(['jumlah' => 0]);
         } else {
           $buku->update(['jumlah' => $buku->jumlah - $detailPengadaan->jumlah]);
@@ -240,28 +240,28 @@ class PengadaanController extends Controller
     }
   }
 
-	public function export(Request $request)
-	{
-		return Excel::download(new PengadaanExport($request->mulai, $request->sampai, $request->distributor), 'pengadaan.xlsx');
-	}
+  public function export(Request $request)
+  {
+    return Excel::download(new PengadaanExport($request->mulai, $request->sampai, $request->distributor), 'pengadaan.xlsx');
+  }
 
-	public function faktur($id)
-	{
-		$pengadaan = Pengadaan::find($id);
-		return Storage::download('images/faktur/' . $pengadaan->faktur);
-	}
-	
-	public function laporan($id)
-	{
-		$pengadaan = Pengadaan::find($id);
-		$pengaturan = Pengaturan::first();
-		return PDF::loadView('pengadaan.faktur', compact('pengadaan', 'pengaturan'))->download('laporan_' . $pengadaan->kode . '.pdf');
-	}
-  
+  public function faktur($id)
+  {
+    $pengadaan = Pengadaan::find($id);
+    return Storage::download('images/faktur/' . $pengadaan->faktur);
+  }
+
+  public function laporan($id)
+  {
+    $pengadaan = Pengadaan::find($id);
+    $pengaturan = Pengaturan::first();
+    return PDF::loadView('pengadaan.faktur', compact('pengadaan', 'pengaturan'))->download('laporan_' . $pengadaan->kode . '.pdf');
+  }
+
   public function cetak($id)
   {
     $pengadaan = Pengadaan::find($id);
-		$pengaturan = Pengaturan::first();
-		return view('pengadaan.cetak', compact('pengadaan', 'pengaturan'));
+    $pengaturan = Pengaturan::first();
+    return view('pengadaan.cetak', compact('pengadaan', 'pengaturan'));
   }
 }

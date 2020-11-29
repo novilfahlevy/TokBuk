@@ -18,20 +18,25 @@ Detail Transaksi
             <h4>Data Transaksi</h4>
             <div class="card-header-form">
               @if ( session()->has('message') )
-                <a href="{{ route('transaksi.create') }}" class="btn btn-warning mr-2" data-tooltip="tooltip" title="Buat Transaksi Lagi" id="buatTransaksiLagi">
-                  <i class="fas fa-plus"></i>
-                </a>
-                <script>window.onload = function() { document.getElementById('buatTransaksiLagi').focus(); }</script>
+              <a href="{{ route('transaksi.create') }}" class="btn btn-warning mr-2" data-tooltip="tooltip"
+                title="Buat Transaksi Lagi" id="buatTransaksiLagi">
+                <i class="fas fa-plus"></i>
+              </a>
+              <script>
+                window.onload = function() { document.getElementById('buatTransaksiLagi').focus(); }
+              </script>
               @endif
               <div class="dropdown">
-                <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-file-invoice"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                   <h6 class="dropdown-header pl-3 pt-1 pb-0">Nota</h6>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ route('transaksi.nota', $transaksi->id) }}">Unduh</a>
-                  <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}" target="_blank">Cetak</a>
+                  <a class="dropdown-item" href="{{ route('transaksi.cetak', $transaksi->id) }}"
+                    target="_blank">Cetak</a>
                 </div>
               </div>
               <a href="{{ route('transaksi') }}" class="btn btn-primary" data-tooltip="tooltip" title="Kembali">
@@ -82,14 +87,16 @@ Detail Transaksi
                 </thead>
                 <tbody>
                   @foreach ($transaksi->detail as $t)
-                    <tr>
-                      <th>{{ $loop->index + 1 }}</th>
-                      <th>{{ $t->buku ? $t->buku->judul : '-' }}</th>
-                      <th>Rp {{ number_format($t->harga, 2, ',', '.') }}</th>
-                      <th>{{ $t->jumlah }}</th>
-                      <th>{{ $t->diskon ? $t->diskon . '%' : '-' }}</th>
-                      <th>Rp {{ number_format($t->jumlah * ($t->diskon ? $t->harga - (($t->harga / 100) * $t->diskon) : $t->harga), 2, ',', '.') }}</th>
-                    </tr>
+                  <tr>
+                    <th>{{ $loop->index + 1 }}</th>
+                    <th>{{ $t->buku ? $t->buku->judul : '-' }}</th>
+                    <th>Rp {{ number_format($t->harga, 2, ',', '.') }}</th>
+                    <th>{{ $t->jumlah }}</th>
+                    <th>{{ $t->diskon ? $t->diskon . '%' : '-' }}</th>
+                    <th>Rp
+                      {{ number_format($t->jumlah * ($t->diskon ? $t->harga - (($t->harga / 100) * $t->diskon) : $t->harga), 2, ',', '.') }}
+                    </th>
+                  </tr>
                   @endforeach
                 </tbody>
               </table>
