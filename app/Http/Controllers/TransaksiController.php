@@ -38,18 +38,19 @@ class TransaksiController extends Controller
         'transaksi.total_harga',
         'transaksi.bayar',
         'transaksi.id',
-      ]);
+      ])
+      ->orderByDesc('transaksi.created_at');
   }
 
   public function index()
   {
-    $transaksi = $this->getIndexTransaksiBuilder()->orderByDesc('transaksi.created_at')->get();
+    $transaksi = $this->getIndexTransaksiBuilder()->get();
     return $_GET ? $this->filter() : view('transaksi.index', compact('transaksi'));
   }
 
   public function filter(): View
   {
-    $transaksi = $this->getIndexTransaksiBuilder()->orderByDesc('transaksi.created_at');
+    $transaksi = $this->getIndexTransaksiBuilder();
 
     if ($mulai = $_GET['mulai']) {
       $transaksi->whereDate('transaksi.created_at', '>=', $mulai);
