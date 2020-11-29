@@ -3,6 +3,7 @@
 use Database\Seeders\PengadaanTableSeeder;
 use Database\Seeders\PengaturanTableSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
     $this->call(UsersTableSeeder::class);
     $this->call(PengaturanTableSeeder::class);
 
-    if (env('APP_ENV') !== 'production') {
+    if ( !App::environment('production') ) {
       $this->call(PenulisTableSeeder::class);
       $this->call(PenerbitTableSeeder::class);
       $this->call(KategoriTableSeeder::class);
