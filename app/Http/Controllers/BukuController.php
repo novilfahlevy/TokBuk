@@ -24,7 +24,7 @@ class BukuController extends Controller
 
   public function __construct(Buku $buku, Penulis $penulis, Distributor $distributor, Penerbit $penerbit, Kategori $kategori, Lokasi $lokasi)
   {
-    $this->buku = $buku;
+    $this->buku = $buku->with('kategori');
     $this->penulis = $penulis;
     $this->distributor = $distributor;
     $this->penerbit = $penerbit;
