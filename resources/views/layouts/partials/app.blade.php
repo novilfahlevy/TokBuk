@@ -93,40 +93,40 @@
 
   <script>
     $(function(){ 
-    function deleteWithForm($form) {
-      Swal.fire({
-        title: 'Apakah anda yakin ingin menghapus data tersebut?',
-        text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus!'
-      })
-      .then((result) => {
-        if (result.value) {
-          $form.submit();
+      function deleteWithForm($form) {
+        Swal.fire({
+          title: 'Apakah anda yakin ingin menghapus data tersebut?',
+          text: "Data tersebut kemungkinan berhubungan dengan data lainnya, pastikan anda benar-benar yakin ingin menghapus data tersebut.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Hapus!'
+        })
+        .then((result) => {
+          if (result.value) {
+            $form.submit();
+          }
+        });
+      }
+
+      $(document).on('click', function(event) {
+        if ( (event.target.tagName === 'BUTTON' && $(event.target).parent().hasClass('delete_form')) ) {
+          event.preventDefault();
+          deleteWithForm($(event.target).parent());
+          return;
+        }
+
+        if ( (event.target.tagName === 'I' && $(event.target).parent().hasClass('btn-delete')) ) {
+          event.preventDefault();
+          deleteWithForm($(event.target).parent().parent());
+          return;
         }
       });
-    }
 
-    $(document).on('click', function(event) {
-      if ( (event.target.tagName === 'BUTTON' && $(event.target).parent().hasClass('delete_form')) ) {
-        event.preventDefault();
-        deleteWithForm($(event.target).parent());
-        return;
-      }
-
-      if ( (event.target.tagName === 'I' && $(event.target).parent().hasClass('btn-delete')) ) {
-        event.preventDefault();
-        deleteWithForm($(event.target).parent().parent());
-        return;
-      }
+      $('[data-tooltip="tooltip"]').tooltip();
+      $('select:not(.no-select2)').select2();
     });
-
-    $('[data-tooltip="tooltip"]').tooltip();
-    $('select:not(.no-select2)').select2();
-  });
   </script>
 
   @yield('js')

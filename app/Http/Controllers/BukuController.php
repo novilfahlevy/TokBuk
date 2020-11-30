@@ -171,11 +171,7 @@ class BukuController extends Controller
   public function detail($id)
   {
     $buku = Buku::where('id', $id)->first();
-    $penulis = Penulis::where('id', $id)->first();
-    $penerbit = Penerbit::where('id', $id)->first();
-    $kategori = Kategori::where('id', $id)->first();
-    $lokasi = Lokasi::where('id', $id)->first();
-    return view('buku_admin.detail', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
+    return view('buku_admin.detail', compact('buku'));
   }
 
   public function destroy($id)

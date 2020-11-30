@@ -163,7 +163,7 @@ class TransaksiController extends Controller
   {
     DB::beginTransaction();
     try {
-      $transaksi = Transaksi::find($id);
+      $transaksi = Transaksi::find($id)-;
       $kode = $transaksi->kode;
 
       $this->kembalikanJumlahBuku($transaksi);
