@@ -19,12 +19,9 @@ Detail Transaksi
             <div class="card-header-form">
               @if ( session()->has('message') )
               <a href="{{ route('transaksi.create') }}" class="btn btn-warning mr-2" data-tooltip="tooltip"
-                title="Buat Transaksi Lagi" id="buatTransaksiLagi">
+                title="Buat Transaksi Lagi" id="buatTransaksiLagi" autofocus>
                 <i class="fas fa-plus"></i>
               </a>
-              <script>
-                window.onload = function() { document.getElementById('buatTransaksiLagi').focus(); }
-              </script>
               @endif
               <div class="dropdown">
                 <button class="btn btn-success mr-2 dropdown-toggle" type="button" id="dropdownMenuButton"
