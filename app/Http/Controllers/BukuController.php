@@ -98,22 +98,12 @@ class BukuController extends Controller
     return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
   }
 
-  public function create()
-  {
-    $penulis = Penulis::all();
-    $penerbit = Penerbit::all();
-    $kategori = Kategori::all();
-    $Distributor = Distributor::all();
-    $lokasi = Lokasi::all();
-    return view('buku_admin.create', compact('penulis', 'penerbit', 'kategori', 'Distributor', 'lokasi'));
-  }
-
   public function edit($id)
   {
-    $penulis = Penulis::all();
-    $penerbit = Penerbit::all();
-    $kategori = Kategori::all();
-    $lokasi = Lokasi::all();
+    $penulis = $this->penulis->get();
+    $penerbit = $this->penerbit->get();
+    $kategori = $this->kategori->get();
+    $lokasi = $this->lokasi->get();
     $buku = Buku::where('id', $id)->first();
 
     return view('buku_admin.edit', compact('penulis', 'penerbit', 'kategori',  'buku', 'lokasi'));
