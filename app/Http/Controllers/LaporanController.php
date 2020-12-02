@@ -56,7 +56,7 @@ class LaporanController extends Controller
       ->select(['pengadaan.id', DB::raw('SUM(dp.jumlah) as buku_terbeli')])
       ->groupBy('pengadaan.id')
       ->first()
-      ->buku_terbeli;
+      ->buku_terbeli ?? 0;
 
     foreach ($pengadaan->get() as $pengadaan) {
       $retur = $pengadaan->retur;
