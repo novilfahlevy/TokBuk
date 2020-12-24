@@ -39,7 +39,7 @@ Kategori
                       </button>
                     </div>
                     <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data"
-                      class="needs-validation" novalidate="">
+                      >
                       <div class="modal-body pb-2">
                         {{ csrf_field() }}
                         <div class="form-group mb-0">
@@ -99,7 +99,7 @@ Kategori
                                 </button>
                               </div>
                               <form action="{{ route('kategori.update', ['id' => $j->id]) }}" method="POST"
-                                enctype="multipart/form-data" class="needs-validation" novalidate="">
+                                enctype="multipart/form-data" >
                                 <div class="modal-body pb-2">
                                   {{ csrf_field() }}
                                   {{ method_field('PUT') }}

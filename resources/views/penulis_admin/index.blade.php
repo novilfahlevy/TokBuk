@@ -33,7 +33,7 @@ Penulis
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <form action="{{ route('penulis.store') }}" method="POST" enctype="multipart/form-data"
-                      class="needs-validation" novalidate="">
+                      >
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Penulis</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -101,7 +101,7 @@ Penulis
                                 </button>
                               </div>
                               <form action="{{ route('penulis.update', ['id' => $p->id]) }}" method="POST"
-                                enctype="multipart/form-data" class="needs-validation" novalidate="">
+                                enctype="multipart/form-data" >
                                 <div class="modal-body pb-2">
                                   {{ csrf_field() }}
                                   {{ method_field('PUT') }}

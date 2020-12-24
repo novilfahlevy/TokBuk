@@ -23,7 +23,7 @@ Edit Distributor
           </div>
           <div class="card-body">
             <form action="{{ route('distributor.update', ['id' => $distributor->id]) }}" method="POST"
-              enctype="multipart/form-data" class="needs-validation" novalidate="">
+              enctype="multipart/form-data" >
               {{ csrf_field() }}
               {{ method_field('PUT') }}
               <div class="row">

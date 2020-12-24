@@ -23,7 +23,7 @@ Edit Pengguna
           </div>
           <div class="card-body">
             <form action="{{ route('user.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data"
-              class="needs-validation" novalidate="">
+              >
               {{ csrf_field() }}
               {{ method_field('PUT') }}
               <div class="row">

@@ -23,7 +23,7 @@ Tambah Distributor
           </div>
           <div class="card-body">
             <form action="{{ route('distributor.store') }}" method="POST" enctype="multipart/form-data"
-              class="needs-validation" novalidate="">
+              >
               {{ csrf_field() }}
               <div class="row">
                 <div class="col-md-6">

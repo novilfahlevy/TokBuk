@@ -20,7 +20,7 @@ Ubah Nama Penulis
             <h6>Bila ada tanda <span class="text-danger">*</span> Input tidak boleh dikosongkan.</h6>
             <br><br>
             <form action="{{ route('penulis.update', ['id' => $penulis->id]) }}" method="POST"
-              enctype="multipart/form-data" class="needs-validation" novalidate="">
+              enctype="multipart/form-data" >
               {{ csrf_field() }}
               {{ method_field('PUT') }}
               <div class="row">

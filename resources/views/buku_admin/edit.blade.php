@@ -13,7 +13,7 @@ Edit Buku
       </div>
       <div class="section-body">
         <form action="{{ route('buku.update', ['id' => $buku->id]) }}" method="POST" enctype="multipart/form-data"
-          class="needs-validation" novalidate="">
+          >
           {{ csrf_field() }}
           {{ method_field('PUT') }}
           <div class="row">

@@ -20,7 +20,7 @@ Tambah Kategori
             <h6>Bila ada tanda <span class="text-danger">*</span> Input tidak boleh dikosongkan.</h6>
             <br><br>
             <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data"
-              class="needs-validation" novalidate="">
+              >
               {{ csrf_field() }}
               <div class="row">
                 <div class="col-md-6">

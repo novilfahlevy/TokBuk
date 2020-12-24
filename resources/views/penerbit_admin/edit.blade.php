@@ -23,7 +23,7 @@ Edit Penerbit
           </div>
           <div class="card-body">
             <form action="{{ route('penerbit.update', ['id' => $penerbit->id]) }}" method="POST"
-              enctype="multipart/form-data" class="needs-validation" novalidate="">
+              enctype="multipart/form-data" >
               {{ csrf_field() }}
               {{ method_field('PUT') }}
               <div class="row">
