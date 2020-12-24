@@ -1,8 +1,9 @@
-/**
- *
- * You can write your JS code here, DO NOT touch the default style file
- * because it will make it harder for you to update.
- *
- */
+$('form').submit(function() {
+  $button = $(this).find('button[type=submit]');
+  $button.prop('disabled', true);
 
-"use strict";
+  switch ( $button.text().trim() ) {
+    case 'Login' : $button.text('Login...'); break;
+    case 'Kirim' : $button.text('Mengirim...'); break;
+  }
+});

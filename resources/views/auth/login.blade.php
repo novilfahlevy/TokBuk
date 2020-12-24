@@ -68,7 +68,7 @@
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      {{ __('Login') }}
+                      Login
                     </button>
                   </div>
                 </form>

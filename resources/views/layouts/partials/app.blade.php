@@ -82,8 +82,23 @@
   <script src={{asset('assets/js/sweetalert2.all.min.js')}}></script>
   {{-- <script src="{{asset('js/style.js')}}"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+  <script>
+    $('form').submit(function() {
+      $button = $(this).find('button[type=submit]');
+      $button.prop('disabled', true);
+
+      switch ( $button.text() ) {
+        case 'Simpan' : $button.text('Menyimpan...'); break;
+        case 'Simpan Perubahan' : $button.text('Menyimpan Perubahan...'); break;
+        case 'Ganti Password' : $button.text('Mengganti Password...'); break;
+      }
+    });
+  </script>
+
   @stack('js')
   @stack('css')
+
   <script>
     $(function () {
         $("#table-index").DataTable();
@@ -123,7 +138,7 @@
           return;
         }
       });
-
+      
       $('[data-tooltip="tooltip"]').tooltip();
       $('select:not(.no-select2)').select2();
     });
