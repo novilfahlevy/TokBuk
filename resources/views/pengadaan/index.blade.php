@@ -187,7 +187,7 @@ Pengadaan
           </div>
         </div>
         <div class="modal-footer d-flex justify-content-between pt-3">
-          <a href="{{ route('pengadaan') }}" class="btn btn-info">Clear</a>
+          <a href="{{ route('pengadaan') }}" class="btn btn-info">Bersihkan</a>
           <div>
             <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
             <button type="submit" class="btn btn-primary">Filter</button>
