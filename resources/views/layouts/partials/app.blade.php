@@ -93,7 +93,6 @@
         case 'Simpan Perubahan' : $button.text('Menyimpan Perubahan...'); break;
         case 'Ganti Password' : $button.text('Mengganti Password...'); break;
         case 'Filter' : $button.text('Memfilter...'); break;
-        case 'Bersihkan' : $button.text('Membersihkan...'); break;
       }
     });
   </script>
