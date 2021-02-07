@@ -77,8 +77,8 @@ class DasborController extends Controller
       ->join('pengadaan as pb', 'dpb.id_pengadaan', '=', 'pb.id')
       ->select(['buku.isbn', 'buku.judul', 'buku.jumlah', DB::raw('DATE_FORMAT(MAX(pb.tanggal), "%d-%m-%Y") as tanggal')])
       ->where('buku.jumlah', '<=', $this->batasanStok)
-      ->orderByDesc('pb.tanggal')
       ->groupBy(['buku.isbn', 'buku.judul', 'buku.jumlah'])
+      ->orderByDesc('pb.tanggal')
       ->get();
   }
 
