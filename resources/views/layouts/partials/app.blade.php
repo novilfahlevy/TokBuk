@@ -82,6 +82,7 @@
   <script src={{asset('assets/js/sweetalert2.all.min.js')}}></script>
   {{-- <script src="{{asset('js/style.js')}}"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+  <script src={{asset('js/helpers.js')}}></script>
 
   <script>
     $('form').submit(function() {

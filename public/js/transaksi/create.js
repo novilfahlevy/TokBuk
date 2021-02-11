@@ -1,210 +1,108 @@
-const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+$(window).keydown(function(event) {
+  // Shortcuts
+  const key = event.which || event.keyCode;
 
-let jumlahBuku = 0;
-let bukuCache = [];
-let bukuPilihan = [];
-
-const appendBukuPilihan = idBuku => bukuPilihan.push(idBuku);
-const removeBukuPilihan = idBuku => {
- if ( idBuku !== 'empty' ) {
-  bukuPilihan = bukuPilihan.filter(id => id !== idBuku);
- }
-};
-
-function setDisableTambahBuku() {
-  $('button#tambahBuku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length >= jumlahBuku);
-}
-
-function setDisableHapusBuku() {
-  $('button.hapus-buku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length <= 1);
-}
-
-function uniqueClass(length) {
-  var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
-function fillJsSelect2Options(selectClass, initCallback) {
-  initJsSelect2(selectClass, {
-    templateSelection: function(data) {
-      const buku = JSON.parse(atob(data.id));
-      const tr = $(`tr[data-select-class=${selectClass}]`);
-      const diskon = buku.diskon;
-      const hargaDiskon = !!diskon ? buku.harga - ((buku.harga / 100) * diskon) : buku.harga;
-
-      tr.data('buku-id', buku.id);
-
-      tr.find('.harga').text(`${format(buku.harga)}`);
-      tr.find('.harga').data('harga', buku.harga);
-
-      tr.find('.jumlah-buku-input').attr('max', buku.jumlah);
-      tr.find('.jumlah-buku-input').val(1);
-
-      tr.find('.jumlah-buku-label').text(buku.jumlah);
-      tr.find('.jumlah-buku-label').data('jumlah', buku.jumlah);
-
-      tr.find('.diskon').text(diskon ? `${diskon}%` : '-');
-      tr.find('.diskon').data('diskon', diskon || '');
-
-      tr.find('.total-harga').text(`${format(hargaDiskon)}`);
-      tr.find('.total-harga').data('total-harga', hargaDiskon);
-
-      $('#totalSemuaHarga').text(format(getTotalHarga()));
-
-      appendBukuPilihan(buku.id);
-
-      return data.text;
-    },
-    templateResult: function(data) {
-      if ( data.id ) {
-        const buku = JSON.parse(atob(data.id));
-        return $(`
-          <span class="d-flex align-items-center">
-            <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
-            <div class="d-flex flex-column">
-              ${buku.judul.slice(0, 28)}${buku.judul.length > 28 ? '...' : ''}
-              <span>${format(buku.harga)}</span>
-            </div>
-          </span>
-        `);
-      }
-    }
-  });
-  initCallback();
-}
-
-function getAllBooks(selectClass) {
-  if ( bukuCache.length ) {
-    fillJsSelect2Options(selectClass, () => {
-      bukuCache.forEach(option => {
-        const idBuku = JSON.parse(atob($(option).attr('value'))).id;
-        $(`.${selectClass}`).append(option);
-        // if ( !bukuPilihan.includes(idBuku) ) {
-        //   $(`.${selectClass}`).append(option);
-        // }
-      });
-    });
+  if ( disableCtryKeys(event, 83) ) {
     return;
   }
 
-  $.ajax({
-    method: 'GET',
-    url: `${BASEURL}/api/transaksi/buku`,
-    success: function(data) {
-      fillJsSelect2Options(selectClass, () => {
-        data.buku.map(buku => {
-          const data = btoa(JSON.stringify(buku));
-          const option = `<option value="${data}">${buku.judul}</option>`;
-          $(`.${selectClass}`).append(option);
-          bukuCache.push(option);;
-        });
-        jumlahBuku = data.buku.length;
-      });
-    },
-    error: function(error) {
-      console.log(error);
+  if ( event.ctrlKey ) {
+    switch ( key ) {
+      // Ctrl + B untuk focus ke input isbn (barcode)
+      case 66 :
+        $('input#isbn').focus();
+      break;
+
+      // Ctrl + Enter untuk submit transaksi
+      case 13 :
+        $('form#formTransaksi').submit();
+      break;
     }
+  }
+});
+
+const $bukuContainer = $('tbody#bukuContainer');
+let bukuPesanan = [];
+
+function updatePesananBuku() {
+  $bukuContainer.empty();
+  let total = 0;
+
+  bukuPesanan.forEach((buku, i) => {
+    total += buku.subTotal;
+
+    // Install extensi 'ES6 String HTML' untuk vscode
+    $bukuContainer.append( /*html*/ `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${buku.judul}</td>
+        <td>${buku.jumlah}</td>
+        <td>${format(buku.harga)}</td>
+        <td>${buku.diskon ? '% ' + buku.diskon : '-'}</td>
+        <td>${format(buku.subTotal)}</td>
+        <td>
+          <button class="btn btn-danger hapus" type="button" data-id="${buku.idBuku}">Hapus</button>
+        </td>
+      </tr>
+    `);
+
   });
-}
-
-function initNumbers() {
-  const trs = $('#bukuContainer tr:not(.deleted)');
-  trs.toArray().forEach((tr, i) => $(tr).find('#number').text(i + 1));
-}
-
-function tambahBuku() {
-  const selectClass = uniqueClass(32);
-
-  const bukuTr = $(`
-    <tr class="buku" data-select-class="${selectClass}" data-buku-id="empty">
-      <th id="number">1</th>
-      <th>
-        <select class="${selectClass} form-control buku-dipilih" name="states" style="width: 300px"></select>
-      </th>
-      <th class="d-flex align-items-center">
-        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 80px">
-        <span class="mx-2">/</span>
-        <span class="jumlah-buku-label"></span>
-      </th>
-      <th class="harga"></th>
-      <th class="diskon"></th>
-      <th class="total-harga">Rp 0</th>
-      <th>
-        <button type="button" class="btn btn-danger hapus-buku">Hapus</button>
-      </th>
-    </tr>
-  `);
   
-  $('#bukuContainer').append(bukuTr);
-
-  initNumbers();
-  getAllBooks(selectClass);
+  $('#totalSemuaHarga').text(format(total));
 }
 
-$('button#tambahBuku').on('click', tambahBuku);
+$('input#isbn').keyup(function(event) {
+  const $self = $(this);
+  const isbn = $self.val();
 
-$('form#formTransaksi').on('submit', function(event) {
-  $('#hasilRespon').val(JSON.stringify(getAllBooksData()));
+  if ( isbn.length > 8 && event.keyCode != 17 ) {
+    $.ajax({
+      method: 'GET',
+      url: `${BASEURL}/api/transaksi/${isbn}/buku`,
+      success: function({ status, buku }) {
+        if ( status == 200 ) {
+          const { id: idBuku, judul, harga, diskon = null } = buku;
+          const bukuSudahDipesan = bukuPesanan.find(buku => buku.idBuku == idBuku);
+          const jumlah = bukuSudahDipesan ? bukuSudahDipesan.jumlah + 1 : 1;
+
+          const totalHarga = harga * jumlah;
+          const subTotal = diskon ? (totalHarga - ((totalHarga / 100) * diskon)) : totalHarga;
+
+          if ( bukuSudahDipesan ) {
+            const cloneBukuPesanan = [ ...bukuPesanan ];
+            const indexBukuPesanan = cloneBukuPesanan.indexOf(bukuSudahDipesan);
+
+            cloneBukuPesanan[indexBukuPesanan].jumlah = jumlah;
+            cloneBukuPesanan[indexBukuPesanan].subTotal = subTotal;
+            bukuPesanan = cloneBukuPesanan;
+          } else {
+            bukuPesanan.push({ idBuku, judul, jumlah, harga, diskon, subTotal });
+          }
+
+          updatePesananBuku();
+
+          $self.val('');
+          $self.focus();
+        }
+      }
+    });
+  }
+});
+
+$bukuContainer.click(function(event) {
+  const $target = $(event.target);
+  if ( $target.hasClass('hapus') ) {
+    bukuPesanan = bukuPesanan.filter(buku => buku.idBuku != $target.data('id'));
+    updatePesananBuku();
+    console.log(bukuPesanan);
+  }
+});
+
+$('form#formTransaksi').submit(function() {
+  $('#hasilRespon').val(JSON.stringify({
+    totalHarga: bukuPesanan.reduce((total, { subTotal }) => total += subTotal, 0),
+    buku: bukuPesanan
+  }));
+
   $(this).submit();
 });
-
-function getAllBooksData() {
-  const buku = $('#bukuContainer tr:not(.deleted)');
-  let totalHarga = 0;
-  const semuaBuku = buku.toArray().map(buku => {
-    totalHarga += $(buku).find('.total-harga').data('total-harga');
-    return {
-      idBuku: $(buku).data('buku-id'),
-      jumlah: parseInt($(buku).find('.jumlah-buku-input').val(), 10),
-      harga: $(buku).find('.total-harga').data('total-harga'),
-      diskon: $(buku).find('.diskon').data('diskon') || null
-    }
-  });
-
-  return {
-    totalHarga,
-    buku: semuaBuku
-  }
-}
-
-function getTotalHarga() {
-  return $('#bukuContainer tr:not(.deleted)').toArray().reduce((total, buku) => {
-    return total += $(buku).find('.total-harga').data('total-harga');
-  }, 0);
-}
-
-// Propogate Event
-
-$(document).on('click', function(event) {
-  const target = $(event.target);
-  if ( target.prop('tagName') === 'BUTTON' && target.hasClass('hapus-buku') ) {
-    const tr = target.parent().parent();
-    tr.addClass('deleted');
-    $('#totalSemuaHarga').text(format(getTotalHarga()));
-    initNumbers();
-    removeBukuPilihan(tr.data('buku-id'));
-  }
-});
-
-$(document).on('change', function(event) {
-  const target = $(event.target);
-  if ( target.prop('tagName') === 'INPUT' && target.hasClass('jumlah-buku-input') ) {
-    const tr = target.parent().parent();
-    const diskon = tr.find('.diskon').data('diskon');
-    const harga = tr.find('.harga').data('harga');
-    const totalHarga = parseInt(!!diskon ? (harga - ((harga / 100) * diskon)) : harga, 10) * target.val();
-    tr.find('.total-harga').text(`${format(totalHarga)}`);
-    tr.find('.total-harga').data('total-harga', totalHarga);
-    $('#totalSemuaHarga').text(format(getTotalHarga()));
-  }
-});
-
-tambahBuku();
-setInterval(setDisableTambahBuku, 100);
-setInterval(setDisableHapusBuku, 100);
