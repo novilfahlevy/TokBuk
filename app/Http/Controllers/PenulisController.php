@@ -19,7 +19,7 @@ class PenulisController extends Controller
   public function index()
   {
     $penulis = $this->penulis->get();
-    return view('penulis_admin.index', compact('penulis'));
+    return view('penulis.index', compact('penulis'));
   }
 
   public function store(Request $request)

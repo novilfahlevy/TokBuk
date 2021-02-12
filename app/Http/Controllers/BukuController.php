@@ -43,7 +43,7 @@ class BukuController extends Controller
       return $this->filter(compact('penulis', 'penerbit', 'kategori', 'lokasi'));
     }
 
-    return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
+    return view('buku.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
   }
 
   public function filter($data)
@@ -95,7 +95,7 @@ class BukuController extends Controller
     $penerbit = $data['penerbit'];
     $lokasi = $data['lokasi'];
 
-    return view('buku_admin.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
+    return view('buku.index', compact('buku', 'penulis', 'penerbit', 'kategori', 'lokasi'));
   }
 
   public function edit($id)
@@ -106,7 +106,7 @@ class BukuController extends Controller
     $lokasi = $this->lokasi->get();
     $buku = Buku::where('id', $id)->first();
 
-    return view('buku_admin.edit', compact('penulis', 'penerbit', 'kategori',  'buku', 'lokasi'));
+    return view('buku.edit', compact('penulis', 'penerbit', 'kategori',  'buku', 'lokasi'));
   }
 
   public function update(Request $request, $id)
@@ -161,7 +161,7 @@ class BukuController extends Controller
   public function detail($id)
   {
     $buku = Buku::where('id', $id)->first();
-    return view('buku_admin.detail', compact('buku'));
+    return view('buku.detail', compact('buku'));
   }
 
   public function destroy($id)

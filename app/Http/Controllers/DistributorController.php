@@ -20,12 +20,12 @@ class DistributorController extends Controller
   public function index()
   {
     $distributor = $this->Distributor->get();
-    return view('distributor_admin.index', compact('distributor'));
+    return view('distributor.index', compact('distributor'));
   }
 
   public function create()
   {
-    return view('distributor_admin.create');
+    return view('distributor.create');
   }
 
   public function store(Request $request)
@@ -57,7 +57,7 @@ class DistributorController extends Controller
   public function edit($id)
   {
     $distributor = Distributor::where('id', $id)->first();
-    return view('distributor_admin.edit', compact('distributor'));
+    return view('distributor.edit', compact('distributor'));
   }
 
   public function update(Request $request, $id)

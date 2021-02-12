@@ -18,12 +18,12 @@ class PenerbitController extends Controller
   public function index()
   {
     $penerbit = $this->penerbit->get();
-    return view('penerbit_admin.index', compact('penerbit'));
+    return view('penerbit.index', compact('penerbit'));
   }
 
   public function create()
   {
-    return view('penerbit_admin.create');
+    return view('penerbit.create');
   }
 
   public function store(Request $request)
@@ -52,7 +52,7 @@ class PenerbitController extends Controller
   public function edit($id)
   {
     $penerbit = Penerbit::where('id', $id)->first();
-    return view('penerbit_admin.edit', compact('penerbit'));
+    return view('penerbit.edit', compact('penerbit'));
   }
 
   public function update(Request $request, $id)

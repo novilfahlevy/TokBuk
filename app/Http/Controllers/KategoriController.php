@@ -19,7 +19,7 @@ class KategoriController extends Controller
   public function index()
   {
     $kategori = $this->Kategori->get();
-    return view('kategori_admin.index', compact('kategori'));
+    return view('kategori.index', compact('kategori'));
   }
 
   public function store(Request $request)
