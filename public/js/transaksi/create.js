@@ -138,6 +138,9 @@ $tambahManualInput.keyup(delayEvent(function() {
   if ( keyword ) {
     $self.attr('disabled', true);
 
+    // Salin ISBN (belum selesai)
+    // <i class="fas fa-copy ml-2 salin-isbn" style="user-select: none; cursor: pointer;" data-isbn="${isbn}" data-tooltip="tooltip"></i>
+
     $.ajax({
       method: 'GET',
       url: `${BASEURL}/api/transaksi/keyword/${keyword}`,
@@ -150,7 +153,7 @@ $tambahManualInput.keyup(delayEvent(function() {
                 <img src="${BASEURL}/images/buku/${sampul}" alt="" style="width:20%; height:150px; background-size: cover">
                 <div class="w-100">
                   <h4>${judul.length <= 30 ? judul : judul.slice(0, 30) + '...'}</h4>
-                  <p class="mb-0">ISBN: ${isbn} <i class="fas fa-copy ml-2 salin-isbn" style="user-select: none; cursor: pointer;" data-isbn="${isbn}" data-tooltip="tooltip"></i></p>
+                  <p class="mb-0">ISBN: ${isbn}</p>
                   <p class="mb-0">Penulis: ${penulis}</p>
                   <p class="mb-0">Penerbit: ${penerbit}</p>
                   <p class="mb-0">Jumlah: ${jumlah}</p>
@@ -185,16 +188,12 @@ $tambahManualContainer.click(function(event) {
     });
   }
 
-  if ( $target.hasClass('salin-isbn') ) {
-    const $copy = $('input#copy');
-    $copy.val(isbn);
-    $copy.select();
-    document.execCommand('copy');
-    // if ( document.execCommand('copy') ) {
-    //   $target.attr('title', 'ISBN berhasil disalin');
-    //   $target.tooltip();
-    // };
-  }
+  // if ( $target.hasClass('salin-isbn') ) {
+  //   const $copy = $('input#copy');
+  //   $copy.val(isbn);
+  //   $copy.select();
+  //   document.execCommand('copy');
+  // }
 });
 
 // Reset form modal 'tambah manual' ketika modal diclose
