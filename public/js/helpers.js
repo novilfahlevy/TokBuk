@@ -2,7 +2,7 @@ const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select
 const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
 
 function disableCtryKeys(event, ...keys) {
-  const key = event.which || event.which;
+  const key = event.which || event.keyCode;
 
   if ( event.ctrlKey && keys.includes(key) ) {
     switch ( key ) {

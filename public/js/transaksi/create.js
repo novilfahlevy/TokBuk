@@ -173,7 +173,7 @@ $tambahManualInput.keyup(delayEvent(function() {
       }
     });
   }
-}, 2000));
+}, 1000));
 
 // Event delegasi untuk list buku 'tambah manual'
 $tambahManualContainer.click(function(event) {
