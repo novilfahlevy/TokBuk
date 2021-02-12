@@ -1,5 +1,11 @@
+const $bukuContainer = $('tbody#bukuContainer');
+const $tambahManualContainer = $('#bukuTambahManual');
+const $tambahManualModal = $('#tambahManualModal');
+const $tambahManualInput = $('input#buku');
+let bukuPesanan = [];
+
+// Daftar shortcuts
 $(window).keydown(function(event) {
-  // Shortcuts
   const key = event.which || event.keyCode;
 
   if ( disableCtryKeys(event, 83) ) {
@@ -17,13 +23,57 @@ $(window).keydown(function(event) {
       case 13 :
         $('form#formTransaksi').submit();
       break;
+        
+      // Ctrl + M untuk trigger modal secara manual
+      case 77 :
+        $tambahManualModal.modal({ show: true });
+        $tambahManualModal.on('shown.bs.modal', function() {
+          const $self = $(this);
+          $self.find('input#buku').focus();
+        });
+      break;
     }
   }
 });
 
-const $bukuContainer = $('tbody#bukuContainer');
-let bukuPesanan = [];
+// Fungsi untuk menambah buku ke daftar pesanan
+function tambahPesananBuku(isbn, callback = null) {
+  $.ajax({
+    method: 'GET',
+    url: `${BASEURL}/api/transaksi/isbn/${isbn}`,
+    success: function({ status, buku }) {
+      if ( status == 200 ) {
+        const { id: idBuku, judul, harga, diskon = null } = buku;
+        const bukuSudahDipesan = bukuPesanan.find(buku => buku.idBuku == idBuku);
+        const jumlah = bukuSudahDipesan ? bukuSudahDipesan.jumlah + 1 : 1;
 
+        const totalHarga = harga * jumlah;
+        const subTotal = diskon ? (totalHarga - ((totalHarga / 100) * diskon)) : totalHarga;
+
+        if ( bukuSudahDipesan ) {
+          const cloneBukuPesanan = [ ...bukuPesanan ];
+          const indexBukuPesanan = cloneBukuPesanan.indexOf(bukuSudahDipesan);
+
+          cloneBukuPesanan[indexBukuPesanan].jumlah = jumlah;
+          cloneBukuPesanan[indexBukuPesanan].subTotal = subTotal;
+          bukuPesanan = cloneBukuPesanan;
+        } else {
+          bukuPesanan.push({ idBuku, judul, jumlah, harga, diskon, subTotal });
+        }
+
+        updatePesananBuku();
+
+        if ( callback ) callback(status);
+      }
+      if ( callback ) callback(404);
+    },
+    error: function() {
+      if ( callback ) callback(400);
+    }
+  });
+}
+
+// Fungsi untuk menampilkan pesanan buku dan mengupdate segala yang terkait dengan pesanan buku
 function updatePesananBuku() {
   $bukuContainer.empty();
   let total = 0;
@@ -51,46 +101,27 @@ function updatePesananBuku() {
   $('#totalSemuaHarga').text(format(total));
 }
 
+// Cari dan tambah pesanan buku berdasarkan ISBN (menggunakan barcode scan)
 $('input#isbn').keyup(function(event) {
   const $self = $(this);
   const isbn = $self.val();
 
+  // Untuk berjaga-jaga, panjang isbn harus lebih dari 8
   if ( isbn.length > 8 && event.keyCode != 17 ) {
-    $.ajax({
-      method: 'GET',
-      url: `${BASEURL}/api/transaksi/${isbn}/buku`,
-      success: function({ status, buku }) {
-        if ( status == 200 ) {
-          const { id: idBuku, judul, harga, diskon = null } = buku;
-          const bukuSudahDipesan = bukuPesanan.find(buku => buku.idBuku == idBuku);
-          const jumlah = bukuSudahDipesan ? bukuSudahDipesan.jumlah + 1 : 1;
-
-          const totalHarga = harga * jumlah;
-          const subTotal = diskon ? (totalHarga - ((totalHarga / 100) * diskon)) : totalHarga;
-
-          if ( bukuSudahDipesan ) {
-            const cloneBukuPesanan = [ ...bukuPesanan ];
-            const indexBukuPesanan = cloneBukuPesanan.indexOf(bukuSudahDipesan);
-
-            cloneBukuPesanan[indexBukuPesanan].jumlah = jumlah;
-            cloneBukuPesanan[indexBukuPesanan].subTotal = subTotal;
-            bukuPesanan = cloneBukuPesanan;
-          } else {
-            bukuPesanan.push({ idBuku, judul, jumlah, harga, diskon, subTotal });
-          }
-
-          updatePesananBuku();
-
-          $self.val('');
-          $self.focus();
-        }
-      }
+    tambahPesananBuku(isbn, function() {
+      $self.attr('disabled', true);
+      $self.val('');
+      $self.attr('disabled', false);
+      $self.focus();
     });
   }
 });
 
+// Event delegasi pada buku container
 $bukuContainer.click(function(event) {
   const $target = $(event.target);
+
+  // Hapus buku dari pesanan
   if ( $target.hasClass('hapus') ) {
     bukuPesanan = bukuPesanan.filter(buku => buku.idBuku != $target.data('id'));
     updatePesananBuku();
@@ -98,6 +129,81 @@ $bukuContainer.click(function(event) {
   }
 });
 
+// Event keyup untuk mencari daftar buku berdasarkan keyword (isbn, judul, penulis, penerbit)
+// menggunakan delay event (bisa dilihat di helpers.js)
+$tambahManualInput.keyup(delayEvent(function() {
+  const $self = $(this);
+  const keyword = $self.val();
+
+  if ( keyword ) {
+    $self.attr('disabled', true);
+
+    $.ajax({
+      method: 'GET',
+      url: `${BASEURL}/api/transaksi/keyword/${keyword}`,
+      success: function({ status, buku }) {
+        if ( status == 200 ) {
+          $tambahManualContainer.empty();
+          buku.forEach(({ isbn, judul, penulis, penerbit, jumlah, sampul }) => {
+            $tambahManualContainer.append(/*html*/ `
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <img src="${BASEURL}/images/buku/${sampul}" alt="" style="width:20%; height:150px; background-size: cover">
+                <div class="w-100">
+                  <h4>${judul.length <= 30 ? judul : judul.slice(0, 30) + '...'}</h4>
+                  <p class="mb-0">ISBN: ${isbn} <i class="fas fa-copy ml-2 salin-isbn" style="user-select: none; cursor: pointer;" data-isbn="${isbn}" data-tooltip="tooltip"></i></p>
+                  <p class="mb-0">Penulis: ${penulis}</p>
+                  <p class="mb-0">Penerbit: ${penerbit}</p>
+                  <p class="mb-0">Jumlah: ${jumlah}</p>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-success btn-sm tambah" data-isbn="${isbn}">Tambah</button>
+                </div>
+              </div>
+            `);
+          });
+        }
+        $self.attr('disabled', false);
+      },
+      error: function() {
+        $tambahManualContainer.empty();
+        $self.attr('disabled', false);
+      }
+    });
+  }
+}, 2000));
+
+// Event delegasi untuk list buku 'tambah manual'
+$tambahManualContainer.click(function(event) {
+  const $target = $(event.target);
+  const isbn = $target.data('isbn');
+
+  // Tambah buku dalam pesanan
+  if ( $target.hasClass('tambah') ) {
+    $target.attr('disabled', true);
+    tambahPesananBuku(isbn, function() {
+      $target.attr('disabled', false);
+    });
+  }
+
+  if ( $target.hasClass('salin-isbn') ) {
+    const $copy = $('input#copy');
+    $copy.val(isbn);
+    $copy.select();
+    document.execCommand('copy');
+    // if ( document.execCommand('copy') ) {
+    //   $target.attr('title', 'ISBN berhasil disalin');
+    //   $target.tooltip();
+    // };
+  }
+});
+
+// Reset form modal 'tambah manual' ketika modal diclose
+$tambahManualModal.on('hide.bs.modal', function() {
+  $tambahManualInput.val('');
+  $tambahManualContainer.empty();
+});
+
+// Submit hasil akhir dari respon transaksi
 $('form#formTransaksi').submit(function() {
   $('#hasilRespon').val(JSON.stringify({
     totalHarga: bukuPesanan.reduce((total, { subTotal }) => total += subTotal, 0),

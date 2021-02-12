@@ -14,3 +14,15 @@ function disableCtryKeys(event, ...keys) {
     }
   }
 }
+
+function delayEvent(callback, time) {
+  let timer = 0;
+  return function() {
+    const self = this;
+    const args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      callback.apply(self, args);
+    }, time);
+  }
+}

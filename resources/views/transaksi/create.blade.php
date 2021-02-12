@@ -45,13 +45,18 @@ Tambah Transaksi
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="isbn">ISBN</label>
+                    <label for="isbn">ISBN (Ctrl + B, disarankan dengan scan barcode)</label>
                     <input type="text" class="form-control" id="isbn" name="isbn">
                     @error('isbn')
                     <span class="invalid-feedback d-block" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#tambahManualModal">Tambah Manual</button>
                   </div>
                 </div>
               </div>
@@ -89,6 +94,39 @@ Tambah Transaksi
       </div>
     </section>
   </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="tambahManualModal">
+  <form action="" method="GET" id="formTambahManual">
+    {{-- @csrf --}}
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Buku Secara Manual</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pb-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="buku">Buku</label>
+                <input type="text" class="form-control" id="buku" name="buku" placeholder="Cari buku berdasarkan ISBN, judul, penulis, atau penerbit">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="list-group" id="bukuTambahManual"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
+          <button type="submit" type="submit" class="btn btn-primary">Tambah</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 @endsection
 

@@ -148,7 +148,7 @@
 
   @yield('js')
 
-
+  <input type="text" id="copy" hidden>
 </body>
 
 </html>
