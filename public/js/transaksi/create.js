@@ -21,7 +21,8 @@ $(window).keydown(function(event) {
 
       // Ctrl + Enter untuk submit transaksi
       case 13 :
-        $('form#formTransaksi').submit();
+        updateFinalRespon();
+        $('form#formTransaksi')[0].submit();
       break;
         
       // Ctrl + M untuk trigger modal secara manual
@@ -35,6 +36,14 @@ $(window).keydown(function(event) {
     }
   }
 });
+
+// Set value hasilRespon dengan respon untuk backend
+function updateFinalRespon() {
+  $('#hasilRespon').val(JSON.stringify({
+    totalHarga: bukuPesanan.reduce((total, { subTotal }) => total += subTotal, 0),
+    buku: bukuPesanan
+  }));
+}
 
 // Fungsi untuk menambah buku ke daftar pesanan
 function tambahPesananBuku(isbn, callback = null) {
@@ -204,10 +213,6 @@ $tambahManualModal.on('hide.bs.modal', function() {
 
 // Submit hasil akhir dari respon transaksi
 $('form#formTransaksi').submit(function() {
-  $('#hasilRespon').val(JSON.stringify({
-    totalHarga: bukuPesanan.reduce((total, { subTotal }) => total += subTotal, 0),
-    buku: bukuPesanan
-  }));
-
-  $(this).submit();
+  updateFinalRespon();
+  $(this)[0].submit();
 });

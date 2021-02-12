@@ -85,17 +85,17 @@
   <script src={{asset('js/helpers.js')}}></script>
 
   <script>
-    $('form').submit(function() {
-      $button = $(this).find('button[type=submit]');
-      $button.prop('disabled', true);
+    // $('form').submit(function() {
+    //   $button = $(this).find('button[type=submit]');
+    //   $button.prop('disabled', true);
 
-      switch ( $button.text() ) {
-        case 'Simpan' : $button.text('Menyimpan...'); break;
-        case 'Simpan Perubahan' : $button.text('Menyimpan Perubahan...'); break;
-        case 'Ganti Password' : $button.text('Mengganti Password...'); break;
-        case 'Filter' : $button.text('Memfilter...'); break;
-      }
-    });
+    //   switch ( $button.text() ) {
+    //     case 'Simpan' : $button.text('Menyimpan...'); break;
+    //     case 'Simpan Perubahan' : $button.text('Menyimpan Perubahan...'); break;
+    //     case 'Ganti Password' : $button.text('Mengganti Password...'); break;
+    //     case 'Filter' : $button.text('Memfilter...'); break;
+    //   }
+    // });
   </script>
 
   @stack('js')
