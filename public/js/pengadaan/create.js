@@ -1,6 +1,3 @@
-const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
-
 let bukuCache = [];
 
 function uniqueClass(length) {
