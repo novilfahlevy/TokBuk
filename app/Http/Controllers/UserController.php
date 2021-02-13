@@ -21,12 +21,12 @@ class UserController extends Controller
   public function index()
   {
     $users = $this->user->orderBy(DB::raw('CASE WHEN id = ' . auth()->user()->id . ' THEN 0 ELSE 1 END'))->get();
-    return view('user_admin.index', compact('users'));
+    return view('user.index', compact('users'));
   }
 
   public function create()
   {
-    return view('user_admin.create');
+    return view('user.create');
   }
 
   public function store(Request $request)
@@ -62,7 +62,7 @@ class UserController extends Controller
   public function edit($id)
   {
     $user = User::where('id', $id)->first();
-    return view('user_admin.edit', compact('user'));
+    return view('user.edit', compact('user'));
   }
 
   public function update(Request $request, $id)

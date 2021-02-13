@@ -82,19 +82,20 @@
   <script src={{asset('assets/js/sweetalert2.all.min.js')}}></script>
   {{-- <script src="{{asset('js/style.js')}}"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+  <script src={{asset('js/helpers.js')}}></script>
 
   <script>
-    $('form').submit(function() {
-      $button = $(this).find('button[type=submit]');
-      $button.prop('disabled', true);
+    // $('form').submit(function() {
+    //   $button = $(this).find('button[type=submit]');
+    //   $button.prop('disabled', true);
 
-      switch ( $button.text() ) {
-        case 'Simpan' : $button.text('Menyimpan...'); break;
-        case 'Simpan Perubahan' : $button.text('Menyimpan Perubahan...'); break;
-        case 'Ganti Password' : $button.text('Mengganti Password...'); break;
-        case 'Filter' : $button.text('Memfilter...'); break;
-      }
-    });
+    //   switch ( $button.text() ) {
+    //     case 'Simpan' : $button.text('Menyimpan...'); break;
+    //     case 'Simpan Perubahan' : $button.text('Menyimpan Perubahan...'); break;
+    //     case 'Ganti Password' : $button.text('Mengganti Password...'); break;
+    //     case 'Filter' : $button.text('Memfilter...'); break;
+    //   }
+    // });
   </script>
 
   @stack('js')
@@ -147,7 +148,7 @@
 
   @yield('js')
 
-
+  <input type="text" id="copy" hidden>
 </body>
 
 </html>

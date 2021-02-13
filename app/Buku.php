@@ -21,6 +21,7 @@ class Buku extends Model
         'harga',
         'jumlah'
     ];
+
     public function penulis()
     {
         return $this->belongsTo(Penulis::class, 'id_penulis');

@@ -27,7 +27,7 @@ Tambah Transaksi
               @csrf
               <input type="hidden" id="hasilRespon" name="transaksi" hidden>
               <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                   <div class="form-group">
                     <label for="bayar">Nominal Pembayaran</label>
                     <div class="input-group mb-3">
@@ -43,11 +43,27 @@ Tambah Transaksi
                     </div>
                   </div>
                 </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="isbn">ISBN (Ctrl + B, disarankan dengan scan barcode)</label>
+                    <input type="text" class="form-control" id="isbn" name="isbn">
+                    @error('isbn')
+                    <span class="invalid-feedback d-block" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#tambahManualModal">Tambah Manual</button>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between align-items-center">
                   <label for="buku" class="mb-2">Buku yang ingin dibeli</label>
-                  <h6 class="mb-0 mr-2">Total <span id="totalSemuaHarga">0</span></h6>
+                  <h6 class="mb-0 mr-2">Total <span id="totalSemuaHarga">Rp 0,00</span></h6>
                 </div>
                 @error('bukuDibeli')
                 <span class="invalid-feedback d-block my-2" role="alert">
@@ -67,11 +83,8 @@ Tambah Transaksi
                         <th scope="col"></th>
                       </tr>
                     </thead>
-                    <tbody id="bukuContainer">
-
-                    </tbody>
+                    <tbody id="bukuContainer"></tbody>
                   </table>
-                  <button type="button" class="btn btn-success" id="tambahBuku">Tambah Buku</button>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Simpan</button>
@@ -81,6 +94,38 @@ Tambah Transaksi
       </div>
     </section>
   </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="tambahManualModal">
+  <form action="" method="GET" id="formTambahManual">
+    {{-- @csrf --}}
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Buku Secara Manual</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pb-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="buku">Buku</label>
+                <input type="text" class="form-control" id="buku" name="buku" placeholder="Cari buku berdasarkan ISBN, judul, penulis, atau penerbit">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="list-group" id="bukuTambahManual"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 @endsection
 

@@ -1,210 +1,223 @@
-const initJsSelect2 = (selectClass, options = {}) => $(`.${selectClass}`).select2(options);
-const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+const $bukuContainer = $('tbody#bukuContainer');
+const $tambahManualContainer = $('#bukuTambahManual');
+const $tambahManualModal = $('#tambahManualModal');
+const $tambahManualInput = $('input#buku');
+let bukuPesanan = [];
 
-let jumlahBuku = 0;
-let bukuCache = [];
-let bukuPilihan = [];
+// Daftar shortcuts
+$(window).keydown(function(event) {
+  const key = event.which || event.keyCode;
 
-const appendBukuPilihan = idBuku => bukuPilihan.push(idBuku);
-const removeBukuPilihan = idBuku => {
- if ( idBuku !== 'empty' ) {
-  bukuPilihan = bukuPilihan.filter(id => id !== idBuku);
- }
-};
-
-function setDisableTambahBuku() {
-  $('button#tambahBuku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length >= jumlahBuku);
-}
-
-function setDisableHapusBuku() {
-  $('button.hapus-buku').attr('disabled', $('#bukuContainer tr:not(.deleted)').toArray().length <= 1);
-}
-
-function uniqueClass(length) {
-  var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
-function fillJsSelect2Options(selectClass, initCallback) {
-  initJsSelect2(selectClass, {
-    templateSelection: function(data) {
-      const buku = JSON.parse(atob(data.id));
-      const tr = $(`tr[data-select-class=${selectClass}]`);
-      const diskon = buku.diskon;
-      const hargaDiskon = !!diskon ? buku.harga - ((buku.harga / 100) * diskon) : buku.harga;
-
-      tr.data('buku-id', buku.id);
-
-      tr.find('.harga').text(`${format(buku.harga)}`);
-      tr.find('.harga').data('harga', buku.harga);
-
-      tr.find('.jumlah-buku-input').attr('max', buku.jumlah);
-      tr.find('.jumlah-buku-input').val(1);
-
-      tr.find('.jumlah-buku-label').text(buku.jumlah);
-      tr.find('.jumlah-buku-label').data('jumlah', buku.jumlah);
-
-      tr.find('.diskon').text(diskon ? `${diskon}%` : '-');
-      tr.find('.diskon').data('diskon', diskon || '');
-
-      tr.find('.total-harga').text(`${format(hargaDiskon)}`);
-      tr.find('.total-harga').data('total-harga', hargaDiskon);
-
-      $('#totalSemuaHarga').text(format(getTotalHarga()));
-
-      appendBukuPilihan(buku.id);
-
-      return data.text;
-    },
-    templateResult: function(data) {
-      if ( data.id ) {
-        const buku = JSON.parse(atob(data.id));
-        return $(`
-          <span class="d-flex align-items-center">
-            <img src="${BASEURL}/images/buku/${buku.sampul}" width="50" height="50" class="mr-3" />
-            <div class="d-flex flex-column">
-              ${buku.judul.slice(0, 28)}${buku.judul.length > 28 ? '...' : ''}
-              <span>${format(buku.harga)}</span>
-            </div>
-          </span>
-        `);
-      }
-    }
-  });
-  initCallback();
-}
-
-function getAllBooks(selectClass) {
-  if ( bukuCache.length ) {
-    fillJsSelect2Options(selectClass, () => {
-      bukuCache.forEach(option => {
-        const idBuku = JSON.parse(atob($(option).attr('value'))).id;
-        $(`.${selectClass}`).append(option);
-        // if ( !bukuPilihan.includes(idBuku) ) {
-        //   $(`.${selectClass}`).append(option);
-        // }
-      });
-    });
+  if ( disableCtryKeys(event, 83) ) {
     return;
   }
 
+  if ( event.ctrlKey ) {
+    switch ( key ) {
+      // Ctrl + B untuk focus ke input isbn (barcode)
+      case 66 :
+        $('input#isbn').focus();
+      break;
+
+      // Ctrl + Enter untuk submit transaksi
+      case 13 :
+        updateFinalRespon();
+        $('form#formTransaksi')[0].submit();
+      break;
+        
+      // Ctrl + M untuk trigger modal secara manual
+      case 77 :
+        $tambahManualModal.modal({ show: true });
+        $tambahManualModal.on('shown.bs.modal', function() {
+          const $self = $(this);
+          $self.find('input#buku').focus();
+        });
+      break;
+    }
+  }
+});
+
+// Set value hasilRespon dengan respon untuk backend
+function updateFinalRespon() {
+  $('#hasilRespon').val(JSON.stringify({
+    totalHarga: bukuPesanan.reduce((total, { subTotal }) => total += subTotal, 0),
+    buku: bukuPesanan
+  }));
+}
+
+// Fungsi untuk menambah buku ke daftar pesanan
+function tambahPesananBuku(isbn, callback = null) {
   $.ajax({
     method: 'GET',
-    url: `${BASEURL}/api/transaksi/buku`,
-    success: function(data) {
-      fillJsSelect2Options(selectClass, () => {
-        data.buku.map(buku => {
-          const data = btoa(JSON.stringify(buku));
-          const option = `<option value="${data}">${buku.judul}</option>`;
-          $(`.${selectClass}`).append(option);
-          bukuCache.push(option);;
-        });
-        jumlahBuku = data.buku.length;
-      });
+    url: `${BASEURL}/api/transaksi/isbn/${isbn}`,
+    success: function({ status, buku }) {
+      if ( status == 200 ) {
+        const { id: idBuku, judul, harga, diskon = null } = buku;
+        const bukuSudahDipesan = bukuPesanan.find(buku => buku.idBuku == idBuku);
+        const jumlah = bukuSudahDipesan ? bukuSudahDipesan.jumlah + 1 : 1;
+
+        const totalHarga = harga * jumlah;
+        const subTotal = diskon ? (totalHarga - ((totalHarga / 100) * diskon)) : totalHarga;
+
+        if ( bukuSudahDipesan ) {
+          const cloneBukuPesanan = [ ...bukuPesanan ];
+          const indexBukuPesanan = cloneBukuPesanan.indexOf(bukuSudahDipesan);
+
+          cloneBukuPesanan[indexBukuPesanan].jumlah = jumlah;
+          cloneBukuPesanan[indexBukuPesanan].subTotal = subTotal;
+          bukuPesanan = cloneBukuPesanan;
+        } else {
+          bukuPesanan.push({ idBuku, judul, jumlah, harga, diskon, subTotal });
+        }
+
+        updatePesananBuku();
+
+        if ( callback ) callback(status);
+      } else {
+        if ( callback ) callback(404);
+      }
     },
-    error: function(error) {
-      console.log(error);
+    error: function() {
+      if ( callback ) callback(400);
     }
   });
 }
 
-function initNumbers() {
-  const trs = $('#bukuContainer tr:not(.deleted)');
-  trs.toArray().forEach((tr, i) => $(tr).find('#number').text(i + 1));
-}
+// Fungsi untuk menampilkan pesanan buku dan mengupdate segala yang terkait dengan pesanan buku
+function updatePesananBuku() {
+  $bukuContainer.empty();
+  let total = 0;
 
-function tambahBuku() {
-  const selectClass = uniqueClass(32);
+  bukuPesanan.forEach((buku, i) => {
+    total += buku.subTotal;
 
-  const bukuTr = $(`
-    <tr class="buku" data-select-class="${selectClass}" data-buku-id="empty">
-      <th id="number">1</th>
-      <th>
-        <select class="${selectClass} form-control buku-dipilih" name="states" style="width: 300px"></select>
-      </th>
-      <th class="d-flex align-items-center">
-        <input type="number" class="form-control jumlah-buku-input" min="1" value="1" style="width: 80px">
-        <span class="mx-2">/</span>
-        <span class="jumlah-buku-label"></span>
-      </th>
-      <th class="harga"></th>
-      <th class="diskon"></th>
-      <th class="total-harga">Rp 0</th>
-      <th>
-        <button type="button" class="btn btn-danger hapus-buku">Hapus</button>
-      </th>
-    </tr>
-  `);
+    // Install extensi 'ES6 String HTML' untuk vscode
+    $bukuContainer.append( /*html*/ `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${buku.judul}</td>
+        <td>${buku.jumlah}</td>
+        <td>${format(buku.harga)}</td>
+        <td>${buku.diskon ? '% ' + buku.diskon : '-'}</td>
+        <td>${format(buku.subTotal)}</td>
+        <td>
+          <button class="btn btn-danger hapus" type="button" data-id="${buku.idBuku}">Hapus</button>
+        </td>
+      </tr>
+    `);
+
+  });
   
-  $('#bukuContainer').append(bukuTr);
-
-  initNumbers();
-  getAllBooks(selectClass);
+  $('#totalSemuaHarga').text(format(total));
 }
 
-$('button#tambahBuku').on('click', tambahBuku);
+// Cari dan tambah pesanan buku berdasarkan ISBN (menggunakan barcode scan)
+$('input#isbn').keyup(delayEvent(function(event) {
+  const $self = $(this);
+  const isbn = $self.val();
 
-$('form#formTransaksi').on('submit', function(event) {
-  $('#hasilRespon').val(JSON.stringify(getAllBooksData()));
-  $(this).submit();
-});
-
-function getAllBooksData() {
-  const buku = $('#bukuContainer tr:not(.deleted)');
-  let totalHarga = 0;
-  const semuaBuku = buku.toArray().map(buku => {
-    totalHarga += $(buku).find('.total-harga').data('total-harga');
-    return {
-      idBuku: $(buku).data('buku-id'),
-      jumlah: parseInt($(buku).find('.jumlah-buku-input').val(), 10),
-      harga: $(buku).find('.total-harga').data('total-harga'),
-      diskon: $(buku).find('.diskon').data('diskon') || null
-    }
-  });
-
-  return {
-    totalHarga,
-    buku: semuaBuku
+  if ( isbn ) {
+    $self.attr('disabled', true);
+  
+    tambahPesananBuku(isbn, function() {
+      $self.val('');
+      $self.attr('disabled', false);
+      $self.focus();
+    });
   }
-}
+}, 500));
 
-function getTotalHarga() {
-  return $('#bukuContainer tr:not(.deleted)').toArray().reduce((total, buku) => {
-    return total += $(buku).find('.total-harga').data('total-harga');
-  }, 0);
-}
+// Event delegasi pada buku container
+$bukuContainer.click(function(event) {
+  const $target = $(event.target);
 
-// Propogate Event
-
-$(document).on('click', function(event) {
-  const target = $(event.target);
-  if ( target.prop('tagName') === 'BUTTON' && target.hasClass('hapus-buku') ) {
-    const tr = target.parent().parent();
-    tr.addClass('deleted');
-    $('#totalSemuaHarga').text(format(getTotalHarga()));
-    initNumbers();
-    removeBukuPilihan(tr.data('buku-id'));
+  // Hapus buku dari pesanan
+  if ( $target.hasClass('hapus') ) {
+    bukuPesanan = bukuPesanan.filter(buku => buku.idBuku != $target.data('id'));
+    updatePesananBuku();
   }
 });
 
-$(document).on('change', function(event) {
-  const target = $(event.target);
-  if ( target.prop('tagName') === 'INPUT' && target.hasClass('jumlah-buku-input') ) {
-    const tr = target.parent().parent();
-    const diskon = tr.find('.diskon').data('diskon');
-    const harga = tr.find('.harga').data('harga');
-    const totalHarga = parseInt(!!diskon ? (harga - ((harga / 100) * diskon)) : harga, 10) * target.val();
-    tr.find('.total-harga').text(`${format(totalHarga)}`);
-    tr.find('.total-harga').data('total-harga', totalHarga);
-    $('#totalSemuaHarga').text(format(getTotalHarga()));
+// Event keyup untuk mencari daftar buku berdasarkan keyword (isbn, judul, penulis, penerbit)
+// menggunakan delay event (bisa dilihat di helpers.js)
+$tambahManualInput.keyup(delayEvent(function() {
+  const $self = $(this);
+  const keyword = $self.val();
+
+  if ( keyword ) {
+    $self.attr('disabled', true);
+
+    // Salin ISBN (belum selesai)
+    // <i class="fas fa-copy ml-2 salin-isbn" style="user-select: none; cursor: pointer;" data-isbn="${isbn}" data-tooltip="tooltip"></i>
+
+    $.ajax({
+      method: 'GET',
+      url: `${BASEURL}/api/transaksi/keyword/${keyword}`,
+      success: function({ status, buku }) {
+        if ( status == 200 ) {
+          $tambahManualContainer.empty();
+          buku.forEach(({ id, isbn, judul, penulis, penerbit, jumlah, sampul }) => {
+            let jumlahDipesan = bukuPesanan.find(buku => buku.idBuku == id);
+                jumlahDipesan = jumlahDipesan ? jumlahDipesan.jumlah : 0;
+            $tambahManualContainer.append(/*html*/ `
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <img src="${BASEURL}/images/buku/${sampul}" alt="" style="width:20%; height:150px; background-size: cover">
+                <div class="w-100">
+                  <h4>${judul.length <= 30 ? judul : judul.slice(0, 30) + '...'}</h4>
+                  <p class="mb-0">ISBN: ${isbn}</p>
+                  <p class="mb-0">Penulis: ${penulis}</p>
+                  <p class="mb-0">Penerbit: ${penerbit}</p>
+                  <p class="mb-0">Jumlah: ${jumlah}</p>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-success btn-sm tambah" data-isbn="${isbn}" data-jumlah-dipesan="${jumlahDipesan}">Tambah${jumlahDipesan ? ' (' + jumlahDipesan + ')' : ''}</button>
+                </div>
+              </div>
+            `);
+          });
+        }
+        $self.attr('disabled', false);
+      },
+      error: function() {
+        $tambahManualContainer.empty();
+        $self.attr('disabled', false);
+      }
+    });
   }
+}, 1000));
+
+// Event delegasi untuk list buku 'tambah manual'
+$tambahManualContainer.click(function(event) {
+  const $target = $(event.target);
+  const isbn = $target.data('isbn');
+
+  // Tambah buku dalam pesanan
+  if ( $target.hasClass('tambah') ) {
+    $target.attr('disabled', true);
+    tambahPesananBuku(isbn, function() {
+      const jumlahDipesan = $target.data('jumlah-dipesan') + 1;
+      $target.attr('disabled', false);
+      $target.data('jumlah-dipesan', jumlahDipesan);
+      $target.text(`Tambah (${jumlahDipesan})`);
+    });
+  }
+
+  // if ( $target.hasClass('salin-isbn') ) {
+  //   const $copy = $('input#copy');
+  //   $copy.val(isbn);
+  //   $copy.select();
+  //   document.execCommand('copy');
+  // }
 });
 
-tambahBuku();
-setInterval(setDisableTambahBuku, 100);
-setInterval(setDisableHapusBuku, 100);
+// Reset form modal 'tambah manual' ketika modal diclose
+$tambahManualModal.on('hide.bs.modal', function() {
+  $tambahManualInput.val('');
+  $tambahManualContainer.empty();
+});
+
+// Submit hasil akhir dari respon transaksi
+$('form#formTransaksi').submit(function() {
+  updateFinalRespon();
+  $(this)[0].submit();
+});
