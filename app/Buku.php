@@ -19,7 +19,8 @@ class Buku extends Model
         // 'id_distributor',
         'id_lokasi',
         'harga',
-        'jumlah'
+        'jumlah',
+        'barcode'
     ];
 
     public function penulis()

@@ -29,7 +29,7 @@ Tambah Transaksi
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="bayar">Nominal Pembayaran</label>
+                    <label for="bayar">Nominal Pembayaran (Ctrl + i)</label>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Rp</span>
@@ -56,7 +56,7 @@ Tambah Transaksi
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#tambahManualModal">Tambah Manual</button>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#tambahManualModal">Tambah Manual (Ctrl + M)</button>
                   </div>
                 </div>
               </div>
@@ -87,7 +87,7 @@ Tambah Transaksi
                   </table>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button type="submit" class="btn btn-primary">Simpan (Ctrl + Enter)</button>
             </form>
           </div>
         </div>

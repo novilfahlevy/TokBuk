@@ -15,11 +15,11 @@
                     <div class="row">
                         <div class="col-sm-4">
                           <img src="{{ asset('images/buku/'.$buku->sampul) }}" alt="" style="width:100%; height:400px; background-size: cover" class="img-thumbnail mb-3">
-                          {{-- @if ($buku->barcode_1d || $buku->barcode_2d)
+                          {{-- @if ( $buku->barcode )
                             <div class="card">
                                 <div class="card-body">
                                     @php
-                                        $barcodeImage = "data:image/png;base64," . DNS1D::getBarcodePNG($buku->barcode_1d ?? $barcode_2d, 'C39+', 1, 99, [0, 0, 0], true);
+                                        $barcodeImage = "data:image/png;base64," . DNS1D::getBarcodePNG($buku->barcode 'C39+', 1, 99, [0, 0, 0], true);
                                     @endphp
                                     <img src="<?= // $barcodeImage; ?>" class="img-thumbnail">
                                     <hr class="my-2">

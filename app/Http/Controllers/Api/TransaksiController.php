@@ -10,9 +10,7 @@ class TransaksiController extends Controller
   public function getBukuByBarcode($barcodeOrISBN) 
 	{
 		// Pencarian buku selain menggunakan barcode bisa menggunakan ISBN
-		$book = Buku::where('isbn', $barcodeOrISBN)
-			->orWhere('barcode_1d', $barcodeOrISBN)
-			->orWhere('barcode_2d', $barcodeOrISBN);
+		$book = Buku::where('isbn', $barcodeOrISBN)->orWhere('barcode', $barcodeOrISBN);
 
 		return response()->json([
 			'status' => $book->count() ? 200 : 404,

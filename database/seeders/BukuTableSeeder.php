@@ -22,8 +22,7 @@ class BukuTableSeeder extends Seeder
       'id_lokasi' => 1,
       'harga' => 80000,
       'jumlah' => 100,
-      'barcode_1d' => '978-601-8520-93-1',
-      'barcode_2d' => '978-601-8520-93-1'
+      'barcode' => '978-601-8520-93-1'
     ]);
 
     App\Buku::create([
@@ -37,8 +36,7 @@ class BukuTableSeeder extends Seeder
       'id_lokasi' => 4,
       'harga' => 30000,
       'jumlah' => 100,
-      'barcode_1d' => '958-602-8121-93-3',
-      'barcode_2d' => '958-602-8121-93-3'
+      'barcode' => '958-602-8121-93-3'
     ]);
 
     App\Buku::create([
@@ -52,8 +50,7 @@ class BukuTableSeeder extends Seeder
       'id_lokasi' => 4,
       'harga' => 90000,
       'jumlah' => 100,
-      'barcode_1d' => '921-332-8519-93-3',
-      'barcode_2d' => '921-332-8519-93-3'
+      'barcode' => '921-332-8519-93-3'
     ]);
 
     App\Buku::create([
@@ -67,8 +64,7 @@ class BukuTableSeeder extends Seeder
       'id_lokasi' => 3,
       'harga' => 15000,
       'jumlah' => 100,
-      'barcode_1d' => '918-692-5419-32-3',
-      'barcode_2d' => '918-692-5419-32-3'
+      'barcode' => '918-692-5419-32-3'
     ]);
 
     App\Buku::create([
@@ -82,8 +78,7 @@ class BukuTableSeeder extends Seeder
       'id_lokasi' => 1,
       'harga' => 85000,
       'jumlah' => 100,
-      'barcode_1d' => '998-611-8329-66-3',
-      'barcode_2d' => '998-611-8329-66-3'
+      'barcode' => '998-611-8329-66-3'
     ]);
 
     App\Buku::create([
@@ -97,8 +92,7 @@ class BukuTableSeeder extends Seeder
       'id_lokasi' => 1,
       'harga' => 90000,
       'jumlah' => 100,
-      'barcode_1d' => '933-323-8898-32-4',
-      'barcode_2d' => '933-323-8898-32-4'
+      'barcode' => '933-323-8898-32-4'
     ]);
   }
 }

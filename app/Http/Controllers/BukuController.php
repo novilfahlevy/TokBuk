@@ -134,8 +134,7 @@ class BukuController extends Controller
       'tahun_terbit' => $request->tahun_terbit ?? $buku->first()->tahun_terbit,
       'harga' => $request->harga ?? $buku->first()->harga,
       'diskon' => $request->diskon,
-      'barcode_1d' => $request->barcode_1d,
-      'barcode_2d' => $request->barcode_2d
+      'barcode' => $request->barcode
     ]);
 
     if ($update == true) {

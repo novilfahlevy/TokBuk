@@ -52,7 +52,7 @@ Buku
                           <td>{{$b->jumlah}}</td>
                           <td>Rp. {{number_format($b->harga, 2, ',', '.')}}</td>
                           <td>
-                            @if ( $b->barcode_1d || $b->barcode_2d )
+                            @if ( $b->barcode )
                               <span class="badge badge-success">
                                 Barcode sudah terpasang
                               </span>

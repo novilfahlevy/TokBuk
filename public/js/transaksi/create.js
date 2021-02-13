@@ -33,6 +33,10 @@ $(window).keydown(function(event) {
           $self.find('input#buku').focus();
         });
       break;
+
+      case 73 :
+        $('input#bayar').focus();
+      break;
     }
   }
 });
