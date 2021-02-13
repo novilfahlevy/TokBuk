@@ -135,7 +135,6 @@ $bukuContainer.click(function(event) {
   if ( $target.hasClass('hapus') ) {
     bukuPesanan = bukuPesanan.filter(buku => buku.idBuku != $target.data('id'));
     updatePesananBuku();
-    console.log(bukuPesanan);
   }
 });
 
