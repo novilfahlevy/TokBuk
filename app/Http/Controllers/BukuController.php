@@ -133,9 +133,9 @@ class BukuController extends Controller
       'id_lokasi' => $request->id_lokasi ?? $buku->first()->id_lokasi,
       'tahun_terbit' => $request->tahun_terbit ?? $buku->first()->tahun_terbit,
       'harga' => $request->harga ?? $buku->first()->harga,
-      'diskon' => $request->diskon ?? $buku->first()->diskon,
-      'barcode_1d' => $request->barcode_1d ?? $buku->first()->barcode_1d,
-      'barcode_2d' => $request->barcode_2d ?? $buku->first()->barcode_2d
+      'diskon' => $request->diskon,
+      'barcode_1d' => $request->barcode_1d,
+      'barcode_2d' => $request->barcode_2d
     ]);
 
     if ($update == true) {
