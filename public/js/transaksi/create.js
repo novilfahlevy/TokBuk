@@ -46,10 +46,10 @@ function updateFinalRespon() {
 }
 
 // Fungsi untuk menambah buku ke daftar pesanan
-function tambahPesananBuku(isbn, callback = null) {
+function tambahPesananBuku(barcode, callback = null) {
   $.ajax({
     method: 'GET',
-    url: `${BASEURL}/api/transaksi/isbn/${isbn}`,
+    url: `${BASEURL}/api/transaksi/barcode/${barcode}`,
     success: function({ status, buku }) {
       if ( status == 200 ) {
         const { id: idBuku, judul, harga, diskon = null } = buku;

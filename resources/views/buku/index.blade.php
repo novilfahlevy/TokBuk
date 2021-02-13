@@ -37,9 +37,9 @@ Buku
                           <th>No</th>
                           <th>ISBN</th>
                           <th>Judul Buku</th>
-                          <th>Kategori</th>
                           <th>Jumlah</th>
                           <th>Harga</th>
+                          <th>Barcode</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -49,9 +49,19 @@ Buku
                           <td>{{$loop->index+1}}</td>
                           <td>{{$b->isbn}}</td>
                           <td>{{$b->judul}}</td>
-                          <td>{{$b->kategori ? $b->kategori->nama : '-'}}</td>
                           <td>{{$b->jumlah}}</td>
                           <td>Rp. {{number_format($b->harga, 2, ',', '.')}}</td>
+                          <td>
+                            @if ( $b->barcode_1d || $b->barcode_2d )
+                              <span class="badge badge-success">
+                                Barcode sudah terpasang
+                              </span>
+                            @else
+                              <span class="badge badge-danger">
+                                Barcode belum terpasang
+                              </span>
+                            @endif
+                          </td>
                           <td>
                             <div class="btn-group">
                               <a href="{{ route( 'buku.detail' ,['id' => $b->id]) }}"

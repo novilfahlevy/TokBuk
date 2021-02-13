@@ -133,6 +133,18 @@ Edit Buku
                         </div>
                       </div>
                     </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="barcode_1d">Barcode 1D</label>
+                        <input type="text" class="form-control" id="barcode_1d" name="barcode_1d" value="{{ $buku->barcode_1d }}">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="barcode_2d">Barcode 2D</label>
+                        <input type="text" class="form-control" id="barcode_2d" name="barcode_2d" value="{{ $buku->barcode_2d }}">
+                      </div>
+                    </div>
                     <div class="col-12">
                       <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                     </div>

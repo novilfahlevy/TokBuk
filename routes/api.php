@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('dasbor', 'DasborController@chart');
-Route::get('transaksi/isbn/{isbn}', 'Api\TransaksiController@getBukuByIsbn');
+Route::get('transaksi/barcode/{barcode}', 'Api\TransaksiController@getBukuByBarcode');
 Route::get('transaksi/keyword/{keyword}', 'Api\TransaksiController@getBukuByKeyword');
 Route::get('retur/{id}/buku', 'Api\ReturController@getDataBuku');
 Route::get('pengadaan/buku', 'Api\PengadaanController@getDataBuku');

@@ -7,9 +7,13 @@ use App\Http\Controllers\Controller;
 
 class TransaksiController extends Controller
 {
-  public function getBukuByIsbn($isbn) 
+  public function getBukuByBarcode($barcodeOrISBN) 
 	{
-		$book = Buku::where('isbn', $isbn);
+		// Pencarian buku selain menggunakan barcode bisa menggunakan ISBN
+		$book = Buku::where('isbn', $barcodeOrISBN)
+			->orWhere('barcode_1d', $barcodeOrISBN)
+			->orWhere('barcode_2d', $barcodeOrISBN);
+
 		return response()->json([
 			'status' => $book->count() ? 200 : 404,
 			'buku' => $book->first()
