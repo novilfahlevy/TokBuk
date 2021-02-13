@@ -73,7 +73,9 @@ function tambahPesananBuku(isbn, callback = null) {
         updatePesananBuku();
 
         if ( callback ) callback(status);
-      } else callback(404);
+      } else {
+        if ( callback ) callback(404);
+      }
     },
     error: function() {
       if ( callback ) callback(400);
@@ -110,20 +112,20 @@ function updatePesananBuku() {
 }
 
 // Cari dan tambah pesanan buku berdasarkan ISBN (menggunakan barcode scan)
-$('input#isbn').keyup(function(event) {
+$('input#isbn').keyup(delayEvent(function(event) {
   const $self = $(this);
   const isbn = $self.val();
 
-  // Untuk berjaga-jaga, panjang isbn harus lebih dari 8
-  if ( isbn.length > 8 && event.keyCode != 17 ) {
+  if ( isbn ) {
+    $self.attr('disabled', true);
+  
     tambahPesananBuku(isbn, function() {
-      $self.attr('disabled', true);
       $self.val('');
       $self.attr('disabled', false);
       $self.focus();
     });
   }
-});
+}, 500));
 
 // Event delegasi pada buku container
 $bukuContainer.click(function(event) {
