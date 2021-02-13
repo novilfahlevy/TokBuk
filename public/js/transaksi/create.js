@@ -195,7 +195,6 @@ $tambahManualContainer.click(function(event) {
     $target.attr('disabled', true);
     tambahPesananBuku(isbn, function() {
       const jumlahDipesan = $target.data('jumlah-dipesan') + 1;
-      console.log(jumlahDipesan);
       $target.attr('disabled', false);
       $target.data('jumlah-dipesan', jumlahDipesan);
       $target.text(`Tambah (${jumlahDipesan})`);
