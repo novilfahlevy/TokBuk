@@ -73,8 +73,7 @@ function tambahPesananBuku(isbn, callback = null) {
         updatePesananBuku();
 
         if ( callback ) callback(status);
-      }
-      if ( callback ) callback(404);
+      } else callback(404);
     },
     error: function() {
       if ( callback ) callback(400);
@@ -156,7 +155,9 @@ $tambahManualInput.keyup(delayEvent(function() {
       success: function({ status, buku }) {
         if ( status == 200 ) {
           $tambahManualContainer.empty();
-          buku.forEach(({ isbn, judul, penulis, penerbit, jumlah, sampul }) => {
+          buku.forEach(({ id, isbn, judul, penulis, penerbit, jumlah, sampul }) => {
+            let jumlahDipesan = bukuPesanan.find(buku => buku.idBuku == id);
+                jumlahDipesan = jumlahDipesan ? jumlahDipesan.jumlah : 0;
             $tambahManualContainer.append(/*html*/ `
               <div class="list-group-item d-flex justify-content-between align-items-center">
                 <img src="${BASEURL}/images/buku/${sampul}" alt="" style="width:20%; height:150px; background-size: cover">
@@ -168,7 +169,7 @@ $tambahManualInput.keyup(delayEvent(function() {
                   <p class="mb-0">Jumlah: ${jumlah}</p>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-success btn-sm tambah" data-isbn="${isbn}">Tambah</button>
+                  <button type="button" class="btn btn-success btn-sm tambah" data-isbn="${isbn}" data-jumlah-dipesan="${jumlahDipesan}">Tambah${jumlahDipesan ? ' (' + jumlahDipesan + ')' : ''}</button>
                 </div>
               </div>
             `);
@@ -193,7 +194,11 @@ $tambahManualContainer.click(function(event) {
   if ( $target.hasClass('tambah') ) {
     $target.attr('disabled', true);
     tambahPesananBuku(isbn, function() {
+      const jumlahDipesan = $target.data('jumlah-dipesan') + 1;
+      console.log(jumlahDipesan);
       $target.attr('disabled', false);
+      $target.data('jumlah-dipesan', jumlahDipesan);
+      $target.text(`Tambah (${jumlahDipesan})`);
     });
   }
 

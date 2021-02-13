@@ -19,6 +19,7 @@ class TransaksiController extends Controller
   public function getBukuByKeyword($keyword) 
 	{
 		$book = Buku::select([
+			'buku.id as id',
 			'buku.isbn as isbn',
 			'buku.judul as judul',
 			'penulis.nama as penulis',
