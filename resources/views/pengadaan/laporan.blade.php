@@ -46,7 +46,7 @@
         Jumlah Buku Yang Dibeli
       </td>
       <td id="bukuTerbeli">
-        {{$bukuTerbeli->buku_terbeli ? $bukuTerbeli->buku_terbeli : '0'  }}
+        {{$bukuTerbeli ? $bukuTerbeli : '0'  }}
       </td>
     </tr>
     <tr>

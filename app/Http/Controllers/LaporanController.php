@@ -51,7 +51,10 @@ class LaporanController extends Controller
     $pengeluaran = $pengadaan->sum('total_harga');
     $bukuTerbeli = $pengadaan->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
       ->select(DB::raw('SUM(dp.jumlah) as buku_terbeli'))
-      ->first();
+      ->get()
+      ->reduce(function($total, $jumlah) {
+        return $total + $jumlah->buku_terbeli;
+      });
 
     $dari = Carbon::parse($dari)->format('d-m-Y');
     $sampai = Carbon::parse($sampai)->format('d-m-Y');

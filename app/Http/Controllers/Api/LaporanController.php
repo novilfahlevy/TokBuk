@@ -43,8 +43,10 @@ class LaporanController extends Controller
     $bukuTerbeli = $pengadaan->join('detail_pengadaan as dp', 'dp.id_pengadaan', '=', 'pengadaan.id')
       ->select(['pengadaan.id', DB::raw('SUM(dp.jumlah) as buku_terbeli')])
       ->groupBy('pengadaan.id')
-      ->first()
-      ->buku_terbeli ?? 0;
+      ->get()
+      ->reduce(function($total, $jumlah) {
+        return $total + $jumlah->buku_terbeli;
+      });
 
     foreach ($pengadaan->get() as $pengadaan) {
       $retur = $pengadaan->retur;
