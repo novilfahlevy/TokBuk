@@ -62,7 +62,7 @@ Pengadaan
                           <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
                           <td>
                             <div class="badge badge-{{ $p->faktur ? 'success' : 'warning' }}">
-                              {{ $p->faktur ? 'Faktur sudah diunggah' : 'Belum ada faktur' }}
+                              {{ $p->faktur ? 'Sudah diunggah' : 'Belum diunggah' }}
                             </div>
                           </td>
                           <td>

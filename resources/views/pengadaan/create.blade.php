@@ -13,6 +13,10 @@ Tambah Pengadaan
       </div>
       <div class="section-body">
         @include('layouts.flash-alert')
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle mr-2"></i>
+          Jumlah buku yang sudah terdata di aplikasi tidak akan bertambah saat dibuat pengadaan <b>jika faktur belum diunggah</b>
+        </div>
         <div class="card">
           <div class="card-header">
             <h4>Form Tambah Pengadaan</h4>

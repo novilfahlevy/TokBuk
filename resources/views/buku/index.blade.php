@@ -13,6 +13,10 @@ Buku
       <div class="section-body">
         <div class="content-body table">
           @include('layouts.flash-alert')
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle mr-2"></i>
+            Kelengkapan data sebuah buku berdasarkan: <b>ISBN</b>, <b>sampul</b>, <b>judul</b>, <b>kategori</b>, <b>penulis</b>, <b>penerbit</b>, <b>tahun terbit</b>, <b>lokasi</b>, <b>harga</b>, dan <b>barcode</b>
+          </div>
           <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
               <div class="card">
@@ -54,11 +58,11 @@ Buku
                           <td>
                             @if ( $b->sampul != 'sampul.png' && $b->tahun_terbit && $b->id_penulis && $b->id_penerbit && $b->id_kategori && $b->id_lokasi && $b->harga && $b->barcode )
                               <span class="badge badge-success">
-                                Data sudah lengkap
+                                Lengkap
                               </span>
                             @else
                               <span class="badge badge-warning">
-                                Data belum lengkap
+                                Belum lengkap
                               </span>
                             @endif
                           </td>

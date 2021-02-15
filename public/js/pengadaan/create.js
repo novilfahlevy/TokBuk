@@ -76,10 +76,14 @@ $tambahBukuForm.submit(function(event) {
       $isbn.focus();
       $isbn.val('');
       $judul.val('');
+      $judul.attr('disabled', false);
       $jumlah.val(1);
       $harga.val(0);
       $subTotal.val(0);
       $barcode.val('');
+      $barcode.attr('disabled', false);
+
+      $tambahBukuForm.find('#isbnInfo').hide();
 
       error('hide');
     } else {
@@ -104,8 +108,21 @@ $tambahBukuForm.find('#isbn').change(delayEvent(function() {
     $.ajax({
       method: 'GET',
       url: `${BASEURL}/api/pengadaan/isbn/${isbn}`,
-      success: function({ status }) {
-        status == 200 ? $isbnInfo.show() : $isbnInfo.hide();
+      success: function({ status, judul, barcode }) {
+        if ( status == 200 ) {
+          $isbnInfo.show();
+          $tambahBukuForm.find('input#judul').attr('disabled', true);
+          $tambahBukuForm.find('input#judul').val(judul);
+
+          if ( barcode ) {
+            $tambahBukuForm.find('input#barcode').attr('disabled', true);
+          }
+        } else {
+          $isbnInfo.hide();
+          $tambahBukuForm.find('input#barcode').attr('disabled', false);
+          $tambahBukuForm.find('input#judul').attr('disabled', false);
+          $tambahBukuForm.find('input#judul').val('');
+        }
       },
       error: function() {
         $isbnInfo.hide();

@@ -18,8 +18,13 @@ class PengadaanController extends Controller
 
 	public function cekIsbn($isbn)
 	{
+		$buku = Buku::where('isbn', $isbn);
+		$bukuSudahAda = $buku->count();
+
 		return response()->json([
-			'status' => Buku::where('isbn', $isbn)->count() ? 200 : 404
+			'status' => $bukuSudahAda ? 200 : 404,
+			'judul' => $bukuSudahAda ? $buku->first()->judul : null,
+			'barcode' => $bukuSudahAda ? !!$buku->first()->barcode : false
 		]);
 	}
 }

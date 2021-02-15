@@ -1,5 +1,3 @@
-const format = number => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
-
 function ambilDataTransaksi(dari, sampai) {
   $.ajax({
     url: `${BASEURL}/api/laporan/transaksi`,

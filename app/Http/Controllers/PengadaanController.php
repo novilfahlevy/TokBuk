@@ -138,7 +138,7 @@ class PengadaanController extends Controller
         'keterangan' => $request->keterangan
       ]);
 
-      $this->createDetailPengadaan($pengadaan->id, $bukuYangDibeliRequest);
+      $this->createDetailPengadaan($pengadaan, $bukuYangDibeliRequest);
 
       DB::commit();
 
@@ -171,7 +171,7 @@ class PengadaanController extends Controller
     ]);
   }
 
-  private function createDetailPengadaan($idPengadaan, $bukuYangDibeliRequest)
+  private function createDetailPengadaan($pengadaan, $bukuYangDibeliRequest)
   {
     foreach ($bukuYangDibeliRequest->buku as $buku) {
       $bukuLama = Buku::where('isbn', $buku->isbn);
@@ -185,20 +185,22 @@ class PengadaanController extends Controller
         ]);
 
         DetailPengadaan::create([
-          'id_pengadaan' => $idPengadaan,
+          'id_pengadaan' => $pengadaan->id,
           'id_buku' => $bukuBaru->id,
           'harga' => (int) $buku->harga,
           'jumlah' => $buku->jumlah
         ]);
       } else {
         DetailPengadaan::create([
-          'id_pengadaan' => $idPengadaan,
-          'id_buku' => $bukuLama->first()->idBuku,
+          'id_pengadaan' => $pengadaan->id,
+          'id_buku' => $bukuLama->first()->id,
           'harga' => (int) $buku->harga,
           'jumlah' => $buku->jumlah
         ]);
 
-        $bukuLama->update(['jumlah' => $bukuLama->first()->jumlah + $buku->jumlah]);
+        if ( $pengadaan->faktur ) {
+          $bukuLama->update(['jumlah' => $bukuLama->first()->jumlah + $buku->jumlah]);
+        }
       }
     }
   }
@@ -218,7 +220,10 @@ class PengadaanController extends Controller
       $pengadaan = Pengadaan::find($id);
       $kode = $pengadaan->kode;
 
-      $this->kembalikanJumlahBuku($pengadaan->detail);
+      if ( $pengadaan->faktur ) {
+        Storage::disk('public')->delete('images/faktur/' . $pengadaan->faktur);
+        $this->kembalikanJumlahBuku($pengadaan->detail);
+      }
       $pengadaan->delete();
 
       DB::commit();
@@ -241,13 +246,13 @@ class PengadaanController extends Controller
 
   private function kembalikanJumlahBuku($detailPengadaan)
   {
-    foreach ($detailPengadaan as $detailPengadaan) {
-      $buku = Buku::find($detailPengadaan->id_buku);
+    foreach ($detailPengadaan as $detail) {
+      $buku = Buku::find($detail->id_buku);
       if (!!$buku) {
-        if ($buku->jumlah < $detailPengadaan->jumlah) {
+        if ($buku->jumlah < $detail->jumlah) {
           $buku->update(['jumlah' => 0]);
         } else {
-          $buku->update(['jumlah' => $buku->jumlah - $detailPengadaan->jumlah]);
+          $buku->update(['jumlah' => $buku->jumlah - $detail->jumlah]);
         }
       }
     }
@@ -280,31 +285,46 @@ class PengadaanController extends Controller
 
   public function unggahFaktur(Request $request, $id)
   {
-    $pengadaan = Pengadaan::find($id);
+    DB::beginTransaction();
 
-    if ( $pengadaan ) {
-      $faktur = $request->file('faktur');
-      
-      if ( $faktur ) {
-        $namaFaktur = $pengadaan->kode . '.' . $faktur->getClientOriginalExtension();
-        Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
-        
-        if ( $pengadaan->update(['faktur' => $namaFaktur]) ) {
-          return redirect()
-            ->route('pengadaan.detail', ['id' => $pengadaan->id])
-            ->with([
-              'type' => 'success',
-              'message' => 'Faktur Berhasil Diunggah'
-            ]);
+    try {
+      $pengadaan = Pengadaan::find($id);
+
+      if ( $pengadaan ) {
+        $faktur = $request->file('faktur');
+
+        if ( $faktur ) {
+          $namaFaktur = $pengadaan->kode . '.' . $faktur->getClientOriginalExtension();
+          Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
+          
+          if ( $pengadaan->update(['faktur' => $namaFaktur]) ) {
+            foreach ( $pengadaan->detail as $detail ) {
+              $buku = Buku::find($detail->id_buku);
+              if ( !!$buku ) {
+                $buku->update(['jumlah' => $buku->jumlah + $detail->jumlah]);
+              }
+            }
+
+            DB::commit();
+
+            return redirect()
+              ->route('pengadaan.detail', ['id' => $pengadaan->id])
+              ->with([
+                'type' => 'success',
+                'message' => 'Faktur Berhasil Diunggah'
+              ]);
+          }
         }
       }
+    } catch ( Exception $error ) {
+      DB::rollBack();
+      throw new Error($error);
+      return redirect()
+        ->route('pengadaan.detail', ['id' => $pengadaan->id])
+        ->with([
+          'type' => 'danger',
+          'message' => 'Gagal mengunggah faktur, silakan coba lagi'
+        ]);
     }
-
-    return redirect()
-      ->route('pengadaan.detail', ['id' => $pengadaan->id])
-      ->with([
-        'type' => 'danger',
-        'message' => 'Gagal mengunggah faktur, silakan coba lagi'
-      ]);
   }
 }
