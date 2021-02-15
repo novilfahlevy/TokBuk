@@ -43,11 +43,11 @@ Pengadaan
                         <tr>
                           <th scope="col">No</th>
                           <th>Kode</th>
-                          <th>Distributor</th>
                           <th>Tanggal</th>
                           <th>Nominal Pembayaran</th>
                           <th>Jumlah Buku</th>
                           <th>Harga</th>
+                          <th>Faktur</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
@@ -56,11 +56,15 @@ Pengadaan
                         <tr>
                           <td scope="row">{{ $loop->index + 1 }}</td>
                           <td>{{ $p->kode }}</td>
-                          <td>{{ $p->distributor ? $p->distributor->nama : '-' }}</td>
                           <td>{{ $p->tanggal }}</td>
                           <td>Rp {{ number_format($p->bayar, 2, ',', '.') }}</td>
                           <td>{{ $p->jumlah_buku }}</td>
                           <td>Rp {{ number_format($p->total_harga, 2, ',', '.') }}</td>
+                          <td>
+                            <div class="badge badge-{{ $p->faktur ? 'success' : 'warning' }}">
+                              {{ $p->faktur ? 'Faktur sudah diunggah' : 'Belum ada faktur' }}
+                            </div>
+                          </td>
                           <td>
                             <div class="btn-group">
                               <a href="{{ route('pengadaan.detail', $p->id) }}"
@@ -158,7 +162,7 @@ Pengadaan
           <div class="form-group mb-0">
             <div class="row">
               <div class="col-12">
-                <div class="form-group mb-3  d-flex flex-column">
+                <div class="form-group mb-3 d-flex flex-column">
                   <label for="distributor">Distributor</label>
                   <select name="distributor" id="distributor" class="form-control">
                     <option value="" selected>Semua</option>
@@ -181,6 +185,15 @@ Pengadaan
                   <label for="sampai">Sampai tanggal</label>
                   <input type="date" class="form-control" id="sampai" name="sampai"
                     value="{{ session()->pull('sampai') }}">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group mb-3 d-flex flex-column">
+                  <label for="faktur">Faktur</label>
+                  <select name="faktur" id="faktur" class="form-control">
+                    <option value="Sudah Diunggah" selected>Sudah Diunggah</option>
+                    <option value="Belum Diunggah">Belum Diunggah</option>
+                  </select>
                 </div>
               </div>
             </div>

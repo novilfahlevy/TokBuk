@@ -121,7 +121,7 @@ Tambah Transaksi
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
         </div>
       </div>
     </div>

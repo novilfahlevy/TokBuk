@@ -39,7 +39,7 @@ Buku
                           <th>Judul Buku</th>
                           <th>Jumlah</th>
                           <th>Harga</th>
-                          <th>Barcode</th>
+                          <th>Kelengkapan Data</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -52,13 +52,13 @@ Buku
                           <td>{{$b->jumlah}}</td>
                           <td>Rp. {{number_format($b->harga, 2, ',', '.')}}</td>
                           <td>
-                            @if ( $b->barcode )
+                            @if ( $b->sampul != 'sampul.png' && $b->tahun_terbit && $b->id_penulis && $b->id_penerbit && $b->id_kategori && $b->id_lokasi && $b->harga && $b->barcode )
                               <span class="badge badge-success">
-                                Barcode sudah terpasang
+                                Data sudah lengkap
                               </span>
                             @else
-                              <span class="badge badge-danger">
-                                Barcode belum terpasang
+                              <span class="badge badge-warning">
+                                Data belum lengkap
                               </span>
                             @endif
                           </td>
@@ -179,17 +179,26 @@ Buku
               </div>
             </div>
             <div class="col-6">
-              <div class="form-group mb-2">
+              <div class="form-group mb-3">
                 <label for="tahunTerbitDari">Jumlah dari</label>
                 <input type="number" id="jumlahDari" name="jumlahDari" class="form-control" pattern="/0-9/"
                   value="{{ session()->pull('jumlahDari') }}" min="0">
               </div>
             </div>
             <div class="col-6">
-              <div class="form-group mb-2">
+              <div class="form-group mb-3">
                 <label for="jumlahSampai">Jumlah sampai</label>
                 <input type="number" id="jumlahSampai" name="jumlahSampai" class="form-control" pattern="/0-9/"
                   value="{{ session()->pull('jumlahSampai') }}" min="0">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group mb-2 d-flex flex-column">
+                <label for="kelengkapanData">Kelengkapan Data</label>
+                <select name="kelengkapanData" id="kelengkapanData" class="form-control">
+                  <option value="lengkap" selected>Lengkap</option>
+                  <option value="belumLengkap">Belum Lengkap</option>
+                </select>
               </div>
             </div>
             <div class="col-12">

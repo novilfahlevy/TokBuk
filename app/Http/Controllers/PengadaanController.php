@@ -18,6 +18,8 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 
+use function React\Promise\reduce;
+
 class PengadaanController extends Controller
 {
   use RiwayatAktivitas;
@@ -32,14 +34,16 @@ class PengadaanController extends Controller
         'pengadaan.id_distributor',
         'pengadaan.bayar',
         'pengadaan.total_harga',
+        'pengadaan.faktur',
         DB::raw('SUM(dp.jumlah) as jumlah_buku')
-      ])
-      ->groupBy([
+        ])
+        ->groupBy([
         'pengadaan.id',
         'pengadaan.kode',
         'pengadaan.tanggal',
         'pengadaan.id_distributor',
         'pengadaan.bayar',
+        'pengadaan.faktur',
         'pengadaan.total_harga'
       ])
       ->orderByDesc(DB::raw('CAST(pengadaan.tanggal as date)'));
@@ -61,16 +65,24 @@ class PengadaanController extends Controller
   {
     $pengadaan = $this->getPengadaanBuilder();
 
-    if ($mulai = $_GET['mulai']) {
+    if ( $mulai = $_GET['mulai'] ) {
       $pengadaan->whereDate('tanggal', '>=', $mulai);
     }
 
-    if ($sampai = $_GET['sampai']) {
+    if ( $sampai = $_GET['sampai'] ) {
       $pengadaan->whereDate('tanggal', '<=', $sampai);
     }
 
-    if ($distributor = $_GET['distributor']) {
+    if ( $distributor = $_GET['distributor'] ) {
       $pengadaan->where('id_distributor', $distributor);
+    }
+
+    if ( $faktur = $_GET['faktur'] ) {
+      if ( $faktur == 'Sudah Diunggah' ) {
+        $pengadaan->whereNotNull('faktur');
+      } else {
+        $pengadaan->whereNull('faktur');
+      }
     }
 
     session($_GET);
@@ -84,7 +96,6 @@ class PengadaanController extends Controller
   public function create(Request $request)
   {
     $distributor = Distributor::all();
-
     return view('pengadaan.create', compact('distributor'));
   }
 
@@ -110,16 +121,17 @@ class PengadaanController extends Controller
 
     try {
       $kode = $this->getKodePengadaan();
-
-      $fakturRequest = $request->file('faktur');
-      $namaFaktur = $kode . '.' . $fakturRequest->getClientOriginalExtension();
-
-      Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($fakturRequest));
+      $faktur = $request->file('faktur');
+      
+      if ( $faktur ) {
+        $namaFaktur = $kode . '.' . $faktur->getClientOriginalExtension();
+        Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
+      }
 
       $pengadaan = Pengadaan::create([
         'kode' => $kode,
         'tanggal' => $request->tanggal,
-        'faktur' => $namaFaktur,
+        'faktur' => $faktur ? $namaFaktur : null,
         'id_distributor' => (int) $idDistributorRequest,
         'total_harga' => $bukuYangDibeliRequest->totalHarga,
         'bayar' => $hargaBeliRequest,
@@ -162,7 +174,9 @@ class PengadaanController extends Controller
   private function createDetailPengadaan($idPengadaan, $bukuYangDibeliRequest)
   {
     foreach ($bukuYangDibeliRequest->buku as $buku) {
-      if ($buku->status === 'Baru') {
+      $bukuLama = Buku::where('isbn', $buku->isbn);
+
+      if ( !$bukuLama->count() ) {
         $bukuBaru = Buku::create([
           'sampul' => 'sampul.png',
           'isbn' => $buku->isbn,
@@ -179,13 +193,12 @@ class PengadaanController extends Controller
       } else {
         DetailPengadaan::create([
           'id_pengadaan' => $idPengadaan,
-          'id_buku' => $buku->idBuku,
+          'id_buku' => $bukuLama->first()->idBuku,
           'harga' => (int) $buku->harga,
           'jumlah' => $buku->jumlah
         ]);
 
-        $bukuLama = Buku::find($buku->idBuku);
-        $bukuLama->update(['jumlah' => $bukuLama->jumlah + $buku->jumlah]);
+        $bukuLama->update(['jumlah' => $bukuLama->first()->jumlah + $buku->jumlah]);
       }
     }
   }
@@ -263,5 +276,35 @@ class PengadaanController extends Controller
     $pengadaan = Pengadaan::find($id);
     $pengaturan = Pengaturan::first();
     return view('pengadaan.cetak', compact('pengadaan', 'pengaturan'));
+  }
+
+  public function unggahFaktur(Request $request, $id)
+  {
+    $pengadaan = Pengadaan::find($id);
+
+    if ( $pengadaan ) {
+      $faktur = $request->file('faktur');
+      
+      if ( $faktur ) {
+        $namaFaktur = $pengadaan->kode . '.' . $faktur->getClientOriginalExtension();
+        Storage::disk('public')->put('images/faktur/' . $namaFaktur, file_get_contents($faktur));
+        
+        if ( $pengadaan->update(['faktur' => $namaFaktur]) ) {
+          return redirect()
+            ->route('pengadaan.detail', ['id' => $pengadaan->id])
+            ->with([
+              'type' => 'success',
+              'message' => 'Faktur Berhasil Diunggah'
+            ]);
+        }
+      }
+    }
+
+    return redirect()
+      ->route('pengadaan.detail', ['id' => $pengadaan->id])
+      ->with([
+        'type' => 'danger',
+        'message' => 'Gagal mengunggah faktur, silakan coba lagi'
+      ]);
   }
 }

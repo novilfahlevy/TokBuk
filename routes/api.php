@@ -22,5 +22,6 @@ Route::get('transaksi/barcode/{barcode}', 'Api\TransaksiController@getBukuByBarc
 Route::get('transaksi/keyword/{keyword}', 'Api\TransaksiController@getBukuByKeyword');
 Route::get('retur/{id}/buku', 'Api\ReturController@getDataBuku');
 Route::get('pengadaan/buku', 'Api\PengadaanController@getDataBuku');
+Route::get('pengadaan/isbn/{isbn}', 'Api\PengadaanController@cekIsbn');
 Route::post('laporan/transaksi', 'Api\LaporanController@transaksi');
 Route::post('laporan/pengadaan', 'Api\LaporanController@pengadaan');

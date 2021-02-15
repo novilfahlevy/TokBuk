@@ -15,4 +15,11 @@ class PengadaanController extends Controller
 			'buku' => Buku::get()
 		]);
   }
+
+	public function cekIsbn($isbn)
+	{
+		return response()->json([
+			'status' => Buku::where('isbn', $isbn)->count() ? 200 : 404
+		]);
+	}
 }

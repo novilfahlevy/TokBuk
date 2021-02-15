@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('pengadaan/laporan/{id}', 'PengadaanController@laporan')->name('pengadaan.laporan');
     Route::delete('pengadaan/{id}', 'PengadaanController@destroy')->name('pengadaan.destroy');
     Route::get('pengadaan/cetak/{id}', 'PengadaanController@cetak')->name('pengadaan.cetak');
+    Route::post('pengadaan/faktur/{id}', 'PengadaanController@unggahFaktur')->name('pengadaan.unggah-faktur');
 
     //laporan
     Route::get('laporan', 'LaporanController@index')->name('laporan');

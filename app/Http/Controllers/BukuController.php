@@ -86,6 +86,30 @@ class BukuController extends Controller
       $buku->whereNotNull('diskon')->where('diskon', '>', 0);
     }
 
+    if (($kelengkapanData = $_GET['kelengkapanData']) != null) {
+      if ( $kelengkapanData == 'lengkap' ) {
+        $buku->where('sampul', '!=', 'sampul.png')
+          ->whereNotNull('tahun_terbit')
+          ->whereNotNull('id_penulis')
+          ->whereNotNull('id_penerbit')
+          ->whereNotNull('id_kategori')
+          ->whereNotNull('id_lokasi')
+          ->whereNotNull('harga')
+          ->where('harga', '>', 0)
+          ->whereNotNull('barcode');
+        } else {
+        $buku->where('sampul', 'sampul.png')
+          ->orWhereNull('tahun_terbit')
+          ->orWhereNull('id_penulis')
+          ->orWhereNull('id_penerbit')
+          ->orWhereNull('id_kategori')
+          ->orWhereNull('id_lokasi')
+          ->orWhereNull('harga')
+          ->orWhere('harga', '<=', 0)
+          ->orWhereNull('barcode');
+      }
+    }
+
     $buku = $buku->get();
 
     session($_GET);
