@@ -97,7 +97,7 @@ $tambahBukuForm.submit(function(event) {
 });
 
 // Cek buku apakah sudah tersedia atau belum dengan ISBN
-$tambahBukuForm.find('#isbn').change(delayEvent(function() {
+$tambahBukuForm.find('#isbn').keyup(delayEvent(function() {
   const $self = $(this);
   const $isbnInfo = $tambahBukuForm.find('#isbnInfo');
   const isbn = $self.val();
