@@ -43,6 +43,18 @@ function updateFinalRespon() {
   }));
 }
 
+// Nama faktur saat dipilih
+$('#faktur').change(function() {
+  const file = this.files;
+  if (file && file[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#namaFileFaktur').text(file[0].name);
+    }
+    reader.readAsDataURL(file[0]);
+  }
+});
+
 // Fokus ke input ISBN saat modal 'tambah buku' terbuka
 $tambahBukuModal.on('shown.bs.modal', function() {
   $(this).find('#isbn').focus();
@@ -101,8 +113,12 @@ $tambahBukuForm.find('#isbn').keyup(delayEvent(function() {
   const $self = $(this);
   const $isbnInfo = $tambahBukuForm.find('#isbnInfo');
   const isbn = $self.val();
-
-  $isbnInfo.hide();
+  const resetForm = () => {
+    $isbnInfo.hide();
+    $tambahBukuForm.find('input#barcode').attr('disabled', false);
+    $tambahBukuForm.find('input#judul').attr('disabled', false);
+    $tambahBukuForm.find('input#judul').val('');
+  };
   
   if ( isbn ) {
     $.ajax({
@@ -118,18 +134,17 @@ $tambahBukuForm.find('#isbn').keyup(delayEvent(function() {
             $tambahBukuForm.find('input#barcode').attr('disabled', true);
           }
         } else {
-          $isbnInfo.hide();
-          $tambahBukuForm.find('input#barcode').attr('disabled', false);
-          $tambahBukuForm.find('input#judul').attr('disabled', false);
-          $tambahBukuForm.find('input#judul').val('');
+          resetForm();
         }
       },
       error: function() {
         $isbnInfo.hide();
       }
     });
+  } else {
+    resetForm();
   }
-}, 100));
+}, 500));
 
 // Kalkulasi sub total
 $tambahBukuForm.find('#harga').keyup(function() {

@@ -15,7 +15,7 @@ Tambah Pengadaan
         @include('layouts.flash-alert')
         <div class="alert alert-info">
           <i class="fas fa-info-circle mr-2"></i>
-          Jumlah buku yang sudah terdata di aplikasi tidak akan bertambah saat dibuat pengadaan <b>jika faktur belum diunggah</b>
+          Jumlah buku yang sudah terdata di aplikasi tidak akan bertambah <b>jika faktur belum diunggah</b>
         </div>
         <div class="card">
           <div class="card-header">
@@ -67,7 +67,7 @@ Tambah Pengadaan
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="tanggal">Tanggal</label>
+                      <label for="tanggal">Tanggal Diterima</label>
                       <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}"
                         required>
                     </div>
@@ -77,7 +77,7 @@ Tambah Pengadaan
                       <label for="faktur">Faktur</label>
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" name="faktur" id="faktur">
-                        <label class="custom-file-label" for="faktur">Masukan faktur</label>
+                        <label class="custom-file-label" for="faktur" id="namaFileFaktur">Masukan faktur</label>
                       </div>
                       @error('faktur')
                       <span class="invalid-feedback d-block" role="alert">
