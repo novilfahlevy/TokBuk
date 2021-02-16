@@ -49,13 +49,13 @@ Pengguna
                         <td>{{$u->email}}</td>
                         <td>
                           @if ($u->posisi == "Admin")
-                          <span class="badge badge-warning">{{$u->posisi}}</span>
+                          <span class="badge badge-warning w-100">{{$u->posisi}}</span>
                           @elseif($u->posisi == "Operator")
-                          <span class="badge badge-primary">{{$u->posisi}}</span>
+                          <span class="badge badge-primary w-100">{{$u->posisi}}</span>
                           @elseif($u->posisi == "Owner")
-                          <span class="badge badge-danger">{{$u->posisi}}</span>
+                          <span class="badge badge-danger w-100">{{$u->posisi}}</span>
                           @else
-                          <span class="badge badge-success">{{$u->posisi}}</span>
+                          <span class="badge badge-success w-100">{{$u->posisi}}</span>
                           @endif
                         </td>
                         <td>

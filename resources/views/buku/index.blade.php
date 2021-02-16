@@ -57,11 +57,11 @@ Buku
                           <td>Rp. {{number_format($b->harga, 2, ',', '.')}}</td>
                           <td>
                             @if ( $b->sampul != 'sampul.png' && $b->tahun_terbit && $b->id_penulis && $b->id_penerbit && $b->id_kategori && $b->id_lokasi && $b->harga && $b->barcode )
-                              <span class="badge badge-success">
+                              <span class="badge badge-success w-100">
                                 Lengkap
                               </span>
                             @else
-                              <span class="badge badge-warning">
+                              <span class="badge badge-warning w-100">
                                 Belum lengkap
                               </span>
                             @endif
