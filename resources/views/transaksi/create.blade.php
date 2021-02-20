@@ -45,7 +45,7 @@ Tambah Transaksi
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="isbn">ISBN (Ctrl + B, disarankan dengan scan barcode)</label>
+                    <label for="isbn">Barcode (Ctrl + B)</label>
                     <input type="text" class="form-control" id="isbn" name="isbn">
                     @error('isbn')
                     <span class="invalid-feedback d-block" role="alert">
