@@ -69,7 +69,7 @@ class ReturController extends Controller
 
       $returBaru = Retur::create([
         'kode' => $kode,
-        'id_pengadaan' => $retur->idPengadaan,
+        'id_pengadaan' => $id,
         'total_dana_pengembalian' => $retur->danaPengembalian,
         'tanggal' => $retur->tanggal
       ]);

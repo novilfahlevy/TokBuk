@@ -73,7 +73,7 @@ Tambah Retur
                     </tbody>
                   </table>
                 </div>
-                <button type="button" class="btn btn-success mt-2" id="tambahBuku">Tambah Buku</button>
+                <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#tambahBukuBaruModal">Tambah Buku</button>
               </div>
               <p>* Pastikan buku yang ingin diretur masih dalam keadaan sama seperti saat baru dibeli melalui pengadaan.
               </p>
@@ -84,6 +84,79 @@ Tambah Retur
       </div>
     </section>
   </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="tambahBukuBaruModal">
+  <form action="" method="GET" id="formTambahBukuBaru">
+    {{-- @csrf --}}
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Buku Baru</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pb-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="alert alert-danger" style="display: none;" id="error"></div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Contoh: 978-601-8520-93-1">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="judul">Judul</label>
+                <input type="text" class="form-control" id="judul" name="judul" disabled>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="keterangan">Keterangan</label>
+                <textarea class="form-control" id="keterangan" name="keterangan" style="height: 100px"></textarea>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="jumlah">Jumlah</label>
+                <input type="number" class="form-control" id="jumlah" name="jumlah" min="1" value="1">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="harga">Harga</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Rp</span>
+                  </div>
+                  <input type="number" class="form-control" id="harga" name="harga" min="0" value="0">
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="subTotal">Sub Total</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Rp</span>
+                  </div>
+                  <input type="text" class="form-control" id="subTotal" name="subTotal" value="0" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-success">Tambah</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 @endsection
 
