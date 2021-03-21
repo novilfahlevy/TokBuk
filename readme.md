@@ -24,9 +24,10 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
 2. Copy file *.env.example* dan paste menjadi *.env*
 
 3. Variabel-variabel yang harus diisi di file *.env* antara lain
-    - DB_DATABASE
+    - DB_HOST (*localhost* atau 127.0.0.1 untuk di lokal)
     - DB_USERNAME
     - DB_PASSWORD
+    - DB_DATABASE
     - SENTRY_LARAVEL_DSN (opsional, jika menggunakan sentry)
     - SENTRY_TRACES_SAMPLE_RATE (opsional, jika menggunakan sentry)
 
