@@ -6,7 +6,7 @@
 
 TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner toko buku manapun untuk <b>mencatat atau merekam riwayat pengadaan stok buku dari distributor</b>, <b>retur atau pengembalian barang dari pengadaan</b>, <b>layanan kasir untuk pembelian buku oleh pelanggan</b>, dan <b>mengelola lokasi atau tata letak buku</b>.
 
-Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.herokuapp.com.
+Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.herokuapp.com. Dan sebagai tambahan informasi kami menggunakan [freemysqlhosting.net](https://www.freemysqlhosting.net) sebagai database hosting dari aplikasi ini.
 
 ## Bahan atau software yang diperlukan
 - [Composer](https://getcomposer.org)
