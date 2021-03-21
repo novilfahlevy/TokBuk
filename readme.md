@@ -12,7 +12,7 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
 - [Composer](https://getcomposer.org)
 - [Git](https://git-scm.com/downloads)
 - [XAMPP](https://www.apachefriends.org/download.html)
-- [Sentry](https://docs.sentry.io/platforms/php/guides/laravel/) (opsional, jika ingin melakukan error tracking)
+- [Sentry](https://docs.sentry.io/platforms/php/guides/laravel/) (opsional, jika ingin melakukan *error tracking*)
 
 ## Instalasi
 1. Clone repo ini dengan menggunakan perintah
