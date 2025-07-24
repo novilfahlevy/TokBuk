@@ -6,12 +6,9 @@
 
 TokBuk adalah aplikasi pengelolaan toko buku yang dapat digunakan oleh owner toko buku manapun untuk <b>mencatat atau merekam riwayat pengadaan stok buku dari distributor</b>, <b>retur atau pengembalian barang dari pengadaan</b>, <b>layanan kasir untuk pembelian buku oleh pelanggan</b>, dan <b>mengelola lokasi atau tata letak buku</b>.
 
-Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.herokuapp.com. Dan sebagai tambahan informasi kami menggunakan [Heroku](https://heroku.com) sebagai platform hosting berbasis cloud dan [freemysqlhosting.net](https://www.freemysqlhosting.net) sebagai database hosting dari aplikasi ini.
-
 ## Bahan atau software yang diperlukan
-- [Composer](https://getcomposer.org)
-- [Git](https://git-scm.com/downloads)
-- [XAMPP](https://www.apachefriends.org/download.html)
+- [MariaDB 10.5](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.5.29&os=windows&cpu=x86_64&pkg=zip&mirror=citrahost).
+- [PHP 7.4](https://windows.php.net/downloads/releases/).
 - [Sentry](https://docs.sentry.io/platforms/php/guides/laravel/) (opsional, jika ingin melakukan *error tracking*)
 
 ## Instalasi
@@ -65,14 +62,9 @@ Jika ingin mencoba demonya secara online, dapat dilakukan di https://tokbuk3.her
 
     Ada beberapa akun lainnya yang dapat dilihat di menu pengguna, semua akun menggunakan password *123123* (kemungkinan ada password yang diganti).
 
-## Kontributor (Kelompok 3)
+## Kontributor
 - [Muhammad Novil Fahlevy](https://github.com/novilfahlevy)
 - [Alisanabela Nasrun](https://github.com/alisanabela13)
-- Yudha Indra Permana
-- Roofi Ali Raditya
-- Farkhanudin
-- Niken Astrid Pradiva Putri
-- Fariz Dwi Januardi
 
 ## Credits
 Aplikasi ini dibuat menggunakan framework [Laravel](https://laravel.com) versi 8.14, dan template admin bootstrap [Stisla](https://getstisla.com).
